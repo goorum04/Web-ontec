@@ -1,150 +1,26 @@
 <!DOCTYPE html>
 <html lang="ca" data-mood="acid" data-voice="editorial" data-intensity="cinematic">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ontec — Solucions</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script type="text/babel" src="components.jsx"></script>
-  <style>html,body{background:#000;}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solucions | Ontec — IT Security, Videoconferencia, Automatitzacio a Andorra</title>
+  <meta name="description" content="Solucions tecnologiques avancades: IT Security, Comunicacions, Automatitzacio KNX, Audiovisuals i Videoconferencia professional a Andorra.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ontecandorra.com/solucions.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ontecandorra.com/solucions.html">
+  <meta property="og:title" content="Solucions | Ontec Andorra">
+  <meta property="og:description" content="IT Security, Comunicacions, Automatitzacio i Audiovisuals a Andorra.">
+  <meta property="og:image" content="https://ontecandorra.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
-const { useState } = React;
-
-const SOLS = [
-  {
-    id:'it-security', tag:'01', icon:<Icons.Shield/>, title:'IT Security',
-    tagline:'Protecció 360° per a la teva infraestructura',
-    img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&q=80&auto=format&fit=crop',
-    desc:"Dissenyem i implementem solucions de seguretat informàtica integrals per a empreses de qualsevol mida. Desde la protecció perimetral fins a la resposta a incidents, cobrim tot el cicle de vida de la ciberseguretat.",
-    features:['Firewall NGFW','SIEM & Monitoring','Zero Trust Network Access','Backup & Disaster Recovery','Gestió de vulnerabilitats','Auditories de seguretat'],
-    brands:['Fortinet','Palo Alto Networks','Cisco','Veeam','CrowdStrike'],
-    cases:["Protecció de la xarxa corporativa d'un hotel de 5 estrelles","Implementació de SIEM per a una empresa financera","Migració a arquitectura Zero Trust per a una clínica"],
-  },
-  {
-    id:'comunicacions', tag:'02', icon:<Icons.Wifi/>, title:'Comunicacions',
-    tagline:"Connectivitat d'alt rendiment per a qualsevol escenari",
-    img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1400&q=80&auto=format&fit=crop',
-    desc:"Dissenyem xarxes robustes i d'alt rendiment per a entorns empresarials, hotelers i industrials. Des del cablejat estructurat fins a solucions WiFi 6E, garantim la connectivitat que el teu negoci necessita.",
-    features:['WiFi Enterprise (WiFi 6/6E)','Cablejat estructurat Cat6A/Cat8','Fibra òptica monomode i multimodo','VoIP i centraletes IP','SD-WAN','Xarxes privades LTE/5G'],
-    brands:['Ubiquiti','Cisco Meraki','HPE Aruba','Yealink','Fortinet'],
-    cases:["Xarxa WiFi de cobertura total en un hotel de muntanya","Migració a VoIP per a una empresa de 150 empleats","Desplegament de fibra òptica en un polígon industrial"],
-  },
-  {
-    id:'automatitzacio', tag:'03', icon:<Icons.Cpu/>, title:'Automatització',
-    tagline:'Edificis intel·ligents, estalvi real',
-    img:'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1400&q=80&auto=format&fit=crop',
-    desc:"Integrem sistemes de domòtica i automatització en edificis residencials i comercials. Controleu il·luminació, climatització, persianes, seguretat i energia des d'una sola interfície, guanyant confort i reduint costos.",
-    features:['Domòtica KNX','Control HVAC i climatització',"Gestió d'il·luminació DALI",'Sistemes de seguretat integrats','Energies renovables i monitoratge','Integració IoT i voice control'],
-    brands:['KNX','Lutron','Control4','Somfy','ABB','Jung'],
-    cases:["Automatització completa d'un xalet de luxe a Andorra la Vella","Control energètic d'un edifici d'oficines","Smart home per a un apartament turístic de gamma alta"],
-  },
-  {
-    id:'audiovisuals', tag:'04', icon:<Icons.Screen/>, title:'Audiovisuals',
-    tagline:'Experiències A/V professionals a cada espai',
-    img:'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1400&q=80&auto=format&fit=crop',
-    desc:"Projectem i instal·lem sistemes audiovisuals professionals per a sales de reunions, espais de conferència, hotels, restaurants i locals comercials. Integrem àudio, vídeo i control en una solució unificada.",
-    features:['Sales de reunió i videoconferència','Digital Signage i pantallas LED','Distribució A/V matricial','Sistemes de so ambiental','Telepresència professional','Control centralitzat Crestron/AMX'],
-    brands:['Crestron','Sony','Samsung','QSC','Biamp','Shure'],
-    cases:["Sala de juntes per a un despatx d'advocats","Sistema de senyalització digital en un centre comercial","Instal·lació A/V en un hotel de conferències"],
-  },
-];
-
-function SolucionsPage() {
-  const [active, setActive] = useState(0);
-  const s = SOLS[active];
-  return (
-    <PageShell activePage="Solucions">
-      <PageHero kicker="Solucions" img="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop"
-        title={<>Les nostres àrees<br/>d'especialització</>}
-        sub="Quatre solucions tecnològiques, una empresa. Ontec cobreix tot el cicle d'un projecte tecnològic, des del disseny fins al manteniment." />
-
-      {/* Tab nav */}
-      <div style={{ background:'rgba(0,0,0,.82)', borderBottom:'1px solid var(--line)', position:'sticky', top:74, zIndex:100, backdropFilter:'blur(16px)' }}>
-        <div className="wrap-wide" style={{ display:'flex', gap:0, overflowX:'auto' }}>
-          {SOLS.map((sol,i)=>(
-            <button key={i} onClick={()=>setActive(i)}
-              style={{ display:'flex', alignItems:'center', gap:11, padding:'20px 26px', background:'transparent', border:'none', cursor:'pointer', whiteSpace:'nowrap',
-                borderBottom: active===i?'2px solid var(--accent)':'2px solid transparent', color:active===i?'var(--accent)':'var(--mut)',
-                fontFamily:'var(--mono)', fontSize:12, letterSpacing:'.1em', textTransform:'uppercase', transition:'all .18s', marginBottom:'-1px' }}>
-              <span style={{ opacity:active===i?1:.5 }}>{sol.icon}</span>{sol.title}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div key={active} className="wrap-wide" style={{ padding:'80px 40px' }}>
-        {/* feature image band */}
-        <Reveal className="mcard" as="div" style={{ height:340, marginBottom:64, borderRadius:20 }}>
-          <Cine src={s.img} alt={s.title} style={{ position:'absolute', inset:0 }}/>
-          <div className="mc-shade"/>
-          <div style={{ position:'relative', zIndex:1, height:'100%', display:'flex', flexDirection:'column', justifyContent:'flex-end', padding:'40px 44px' }}>
-            <div style={{ fontFamily:'var(--mono)', fontSize:12, color:'var(--accent)', letterSpacing:'.14em', marginBottom:12 }}>{s.tag} / {s.title.toUpperCase()}</div>
-            <h2 className="disp" style={{ fontSize:'clamp(30px,4vw,60px)', maxWidth:780 }}>{s.tagline}</h2>
-          </div>
-        </Reveal>
-
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 360px', gap:64, alignItems:'start' }} className="sol-grid">
-          <div>
-            <Reveal><p style={{ fontSize:18, color:'var(--mut)', lineHeight:1.85, marginBottom:56 }}>{s.desc}</p></Reveal>
-
-            <Reveal><div className="kicker" style={{ color:'var(--faint)', marginBottom:22 }}>Característiques</div></Reveal>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:10, marginBottom:64 }} className="feat-grid">
-              {s.features.map((f,i)=>(
-                <Reveal key={f} delay={(i%2)*60}>
-                  <div style={{ display:'flex', alignItems:'center', gap:13, padding:'16px 20px', background:A(7), border:`1px solid ${A(20)}`, borderRadius:12 }}>
-                    <span style={{ color:'var(--accent)', flexShrink:0 }}><Icons.Check/></span>
-                    <span style={{ fontSize:14.5, color:'var(--ink)', fontWeight:500 }}>{f}</span>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal><div className="kicker" style={{ color:'var(--faint)', marginBottom:22 }}>Casos d'ús</div></Reveal>
-            <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-              {s.cases.map((c,i)=>(
-                <Reveal key={i} delay={i*60}>
-                  <div style={{ display:'flex', alignItems:'flex-start', gap:18, padding:'22px 24px', background:'var(--panel)', border:'1px solid var(--line)', borderRadius:14 }}>
-                    <span style={{ fontFamily:'var(--mono)', fontSize:12, color:'var(--accent)', marginTop:2 }}>0{i+1}</span>
-                    <span style={{ fontSize:15.5, color:'var(--mut)', lineHeight:1.6 }}>{c}</span>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div style={{ display:'flex', flexDirection:'column', gap:16, position:'sticky', top:150 }}>
-            <div style={{ background:'var(--panel)', border:`1px solid ${A(22)}`, borderRadius:16, padding:'28px 30px' }}>
-              <div className="kicker" style={{ color:'var(--faint)', marginBottom:18 }}>Fabricants partners</div>
-              <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
-                {s.brands.map(b=>(<span key={b} style={{ padding:'7px 13px', background:'rgba(255,255,255,.04)', border:'1px solid var(--line)', borderRadius:999, fontSize:12.5, color:'var(--mut)', fontWeight:600 }}>{b}</span>))}
-              </div>
-            </div>
-            <div style={{ background:'var(--panel)', border:'1px solid var(--line)', borderRadius:16, padding:'28px 30px' }}>
-              <div className="kicker" style={{ color:'var(--faint)', marginBottom:16 }}>Inclòs al servei</div>
-              {["Anàlisi de necessitats","Disseny de la solució","Instal·lació i configuració","Formació a l'equip","Suport i manteniment"].map(it=>(
-                <div key={it} style={{ display:'flex', alignItems:'center', gap:11, padding:'10px 0', borderBottom:'1px solid var(--line-soft)', fontSize:14, color:'var(--mut)' }}>
-                  <span style={{ color:'var(--accent)' }}><Icons.Check/></span>{it}
-                </div>
-              ))}
-            </div>
-            <a href="contacta.html" className="btn btn-primary" style={{ justifyContent:'center' }}>Sol·licita informació <Icons.UpRight s={15}/></a>
-          </div>
-        </div>
-      </div>
-      <style>{`@media(max-width:880px){.sol-grid{grid-template-columns:1fr!important;}.feat-grid{grid-template-columns:1fr!important;}}`}</style>
-    </PageShell>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<SolucionsPage/>);
-</script>
+<script src="vendor/react.js"></script>
+  <script src="vendor/react-dom.js"></script>
+  <script src="solucions.page.js"></script>
 </body>
 </html>
