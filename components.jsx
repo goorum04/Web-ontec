@@ -55,8 +55,8 @@ section{position:relative;}
 section:not(:first-of-type){scroll-margin-top:74px;}
 
 .disp{font-family:var(--disp);font-weight:var(--dweight);letter-spacing:var(--dtrack);
-  text-transform:var(--case);line-height:var(--dleading);color:var(--ink);text-wrap:balance;}
-.disp em,.ital{font-style:var(--ditalic);font-weight:inherit;}
+  text-transform:var(--case);line-height:var(--dleading);color:var(--ink);text-wrap:balance;transition:color .25s;}
+.disp em,.ital{font-style:var(--ditalic);font-weight:inherit;color:var(--accent);}
 .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut);}
 .eyebrow{display:inline-flex;align-items:center;gap:11px;font-family:var(--mono);font-size:11px;
   letter-spacing:.2em;text-transform:uppercase;color:var(--mut);}
@@ -103,6 +103,11 @@ section:not(:first-of-type){scroll-margin-top:74px;}
 @keyframes mq{to{transform:translateX(-50%);}}
 @keyframes fadeInUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:none;}}
 .fade-in-up{animation:fadeInUp .6s cubic-bezier(.2,.7,.3,1) backwards;}
+@keyframes iconFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+svg{transition:transform .3s cubic-bezier(.2,.7,.3,1), color .25s, filter .25s;}
+a svg{color:var(--accent);}
+a:hover svg{transform:scale(1.1) translateY(-2px);filter:drop-shadow(0 0 8px ${A(50)});}
+button:focus,input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:2px;}
 
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
