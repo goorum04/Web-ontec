@@ -1,0 +1,90 @@
+const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic"};
+const PARTNERS = [
+  {name:'Fortinet',cat:'Ciberseguretat',desc:"Lider mundial en seguretat de xarxa de nova generacio."},
+  {name:'Cisco',cat:'Xarxa & Video',desc:"Infraestructura de xarxa i solucions de col laboracio."},
+  {name:'Ubiquiti',cat:'Xarxa WiFi',desc:"Xarxes WiFi professionals per a entorns exigents."},
+  {name:'KNX',cat:'Domotica',desc:"Estandard internacional per a automatitzacio d'edificis."},
+  {name:'Crestron',cat:'Control AV',desc:"Sistemes de control AV per a sales executives."},
+  {name:'HPE Aruba',cat:'Xarxa',desc:"Solucions d'xarxa empresarial d'alta disponibilitat."},
+  {name:'Palo Alto',cat:'Seguretat',desc:"Plataforma de ciberseguretat Zero Trust."},
+  {name:'Lutron',cat:'Llum & Persianes',desc:"Control de llum i persianes de precisio."},
+  {name:'Samsung',cat:'Pantalles',desc:"Pantalles professionals per a entorns comercials."},
+  {name:'Sony',cat:'AV Pro',desc:"Cameras PTZ i solucions audiovisuals professionals."},
+  {name:'QSC',cat:'Audio',desc:"Processament d'audio professional per a grans espais."},
+  {name:'Shure',cat:'Microfonos',desc:"Microfonos i sistemes de conferencia de referencia."},
+];
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  useEffect(()=>{
+    const r=document.documentElement;
+    r.setAttribute('data-mood',t.mood);r.setAttribute('data-voice',t.voice);r.setAttribute('data-intensity',t.intensity);
+  },[t.mood,t.voice,t.intensity]);
+  return (
+    <PageShell activePage="Empresa">
+      <PageHero kicker="Empresa · Des de 2016" title="Tecnologia amb proposit" sub="Som distribuidors i integradors especialitzats en sistemes tecnologics avancats per a empreses i professionals a Andorra." img="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1800&q=80&auto=format&fit=crop"/>
+      <section style={{padding:'100px 0'}}>
+        <div className="wrap-wide">
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="about-grid">
+            <Reveal>
+              <SectionLabel>Qui som</SectionLabel>
+              <h2 className="disp" style={{fontSize:'clamp(36px,5vw,72px)',marginBottom:28}}>8 anys integrant tecnologia a Andorra</h2>
+              <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:20}}>
+                Des de 2016, Ontec ha estat el soci tecnologic de referencia per a empreses, arquitectes,
+                ingenieries i dissenyadors d'interiors que necessiten solucions avancades d'IT Security,
+                comunicacions, automatitzacio i audiovisuals.
+              </p>
+              <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:40}}>
+                L'equip d'Ontec combina experiencia tecnica profunda amb una visio clara: la tecnologia ha
+                d'integrar-se de forma invisible i fiable en cada projecte. Per aixo treballem amb els millors
+                fabricants del mon i oferim suport local rapid.
+              </p>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}}>
+                {[['200+','Projectes lliurats'],['8+','Anys d\'experiencia'],['12','Partners certificats'],['99.9%','Uptime garantit']].map(([n,l])=>(
+                  <div key={n} style={{background:'var(--panel)',border:'1px solid var(--line)',borderRadius:14,padding:'22px'}}>
+                    <div className="disp" style={{fontSize:'clamp(28px,4vw,44px)',color:'var(--accent)'}}>{n}</div>
+                    <div style={{fontFamily:'var(--mono)',fontSize:10.5,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--mut)',marginTop:6}}>{l}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <div style={{borderRadius:20,overflow:'hidden',border:'1px solid var(--line)'}}>
+                <Cine src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Equip Ontec" style={{height:500}}/>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+        <style>{`.about-grid{@media(max-width:860px){grid-template-columns:1fr!important;gap:48px!important;}}`}</style>
+      </section>
+      <section id="partners" style={{padding:'80px 0 120px',borderTop:'1px solid var(--line)'}}>
+        <div className="wrap-wide">
+          <Reveal style={{marginBottom:56,textAlign:'center'}}>
+            <SectionLabel>Partners</SectionLabel>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,80px)'}}>Els millors fabricants<br/>del mon</h2>
+          </Reveal>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}} className="partners-grid">
+            {PARTNERS.map((p,i)=>(
+              <Reveal key={p.name} delay={i*40}>
+                <div style={{background:'var(--panel)',border:'1px solid var(--line)',borderRadius:16,padding:'28px',transition:'border-color .2s,transform .3s cubic-bezier(.2,.7,.3,1)'}}
+                  onMouseEnter={e=>{e.currentTarget.style.borderColor=A(35);e.currentTarget.style.transform='translateY(-4px)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--line)';e.currentTarget.style.transform='none';}}>
+                  <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
+                    <div style={{fontFamily:'var(--disp)',fontWeight:800,fontSize:22,color:'var(--ink)',letterSpacing:'-0.02em'}}>{p.name}</div>
+                    <Tag>{p.cat}</Tag>
+                  </div>
+                  <p style={{fontSize:14,color:'var(--mut)',lineHeight:1.6}}>{p.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <style>{`@media(max-width:860px){.partners-grid{grid-template-columns:1fr!important;}} @media(max-width:1200px){.partners-grid{grid-template-columns:repeat(2,1fr)!important;}}`}</style>
+      </section>
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Mood"/><TweakRadio label="Mood" value={t.mood} options={[{value:'acid',label:'Acid'},{value:'ice',label:'Ice'},{value:'flare',label:'Flare'},{value:'mono',label:'Mono'}]} onChange={v=>setTweak('mood',v)}/>
+        <TweakSection label="Voice"/><TweakRadio label="Voice" value={t.voice} options={[{value:'editorial',label:'Editorial'},{value:'modern',label:'Modern'},{value:'soft',label:'Soft'}]} onChange={v=>setTweak('voice',v)}/>
+      </TweaksPanel>
+    </PageShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);

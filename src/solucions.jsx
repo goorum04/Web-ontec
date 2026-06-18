@@ -1,0 +1,96 @@
+const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic"};
+
+const SOLS_FULL = [
+  {
+    id:'it-security', n:'01', title:'IT Security', icon:<Icons.Shield/>,
+    img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&auto=format&fit=crop',
+    sub:'Proteccio integral de la infraestructura digital',
+    desc:"La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, incloent un tecnic certificat per l'INCIBE.",
+    features:['Firewall NGFW Fortinet & Palo Alto','VPN i acces remot segur','Zero Trust Network Access','Monitorat SOC 24/7','Auditories de seguretat','Deteccio i resposta (EDR/XDR)'],
+    partners:['Fortinet','Palo Alto Networks','Cisco']
+  },
+  {
+    id:'comunicacions', n:'02', title:'Comunicacions', icon:<Icons.Wifi/>,
+    img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80&auto=format&fit=crop',
+    sub:"Connectivitat d'alt rendiment per a qualsevol entorn",
+    desc:"Dissenyem i despleguem infraestructures de comunicacions empresarials d'alta disponibilitat: xarxes WiFi, commutadors gestionats, sistemes de videoconferencia i telefonia IP.",
+    features:['WiFi 6/6E empresarial Ubiquiti & Aruba','Commutadors gestionats HPE Aruba','Videoconferencia Cisco Webex & Teams','Telefonia IP i VOIP','Fibra optica i cablatge estructurat','SD-WAN i gestio centralitzada'],
+    partners:['Ubiquiti','Cisco','HPE Aruba']
+  },
+  {
+    id:'automatitzacio', n:'03', title:'Automatitzacio', icon:<Icons.Cpu/>,
+    img:'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1200&q=80&auto=format&fit=crop',
+    sub:"Sistemes intel ligents per a edificis i llars",
+    desc:"Integrem sistemes de domotica i BMS (Building Management Systems) amb l'estandard internacional KNX i solucions Crestron per a control total de llum, persianes, clima i seguretat.",
+    features:['Domotica KNX per a edificis i llars','Control centralitzat Crestron','Il luminacio Lutron DALI/KNX','Gestio de clima i HVAC','Seguretat i control d\'acces','Integracio amb plataformes IoT'],
+    partners:['KNX','Crestron','Lutron']
+  },
+  {
+    id:'audiovisuals', n:'04', title:'Audiovisuals & Videoconferencia', icon:<Icons.Video/>,
+    img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
+    sub:'Sistemes AV professionals i videoconferencia d\'alt nivell',
+    desc:"Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a la Batllia d'Andorra per a connexions institucionals internacionals.",
+    features:['Sales de videoconferencia Cisco Webex','Cameras PTZ Sony professionals','Pantalles interactives Samsung','Sistemes d\'audio QSC & Shure','Sistemes de presentacio wireless','Cas d\'exit: la Batllia d\'Andorra'],
+    partners:['Cisco','Sony','Samsung','QSC','Shure']
+  },
+];
+function SolucioSection({s, reverse=false}) {
+  return (
+    <section id={s.id} style={{padding:'100px 0',borderBottom:'1px solid var(--line)'}}>
+      <div className="wrap-wide">
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center',direction:reverse?'rtl':'ltr'}} className="sol-grid">
+          <Reveal style={{direction:'ltr'}}>
+            <SectionLabel>{s.n} — {s.title}</SectionLabel>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,72px)',marginBottom:16}}>{s.title}</h2>
+            <p style={{fontSize:15,color:'var(--accent)',fontFamily:'var(--mono)',letterSpacing:'.04em',marginBottom:20}}>{s.sub}</p>
+            <p style={{fontSize:16,color:'var(--mut)',lineHeight:1.8,marginBottom:28}}>{s.desc}</p>
+            <ul style={{listStyle:'none',marginBottom:36}}>
+              {s.features.map((f,i)=>(
+                <li key={i} style={{display:'flex',alignItems:'center',gap:12,padding:'8px 0',borderBottom:'1px solid var(--line-soft)',fontSize:15,color:'var(--ink)'}}>
+                  <span style={{color:'var(--accent)',flexShrink:0}}><Icons.Check/></span>{f}
+                </li>
+              ))}
+            </ul>
+            <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:32}}>
+              {s.partners.map(p=><Tag key={p}>{p}</Tag>)}
+            </div>
+            <a href="contacta.html" className="btn btn-primary">Sol licitar pressupost <Icons.UpRight s={15}/></a>
+          </Reveal>
+          <Reveal delay={120} style={{direction:'ltr'}}>
+            <div style={{borderRadius:20,overflow:'hidden',border:'1px solid var(--line)'}}>
+              <Cine src={s.img} alt={s.title} style={{height:480}}/>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+      <style>{`.sol-grid{@media(max-width:860px){grid-template-columns:1fr!important;direction:ltr!important;}}`}</style>
+    </section>
+  );
+}
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  useEffect(()=>{
+    const r=document.documentElement;
+    r.setAttribute('data-mood',t.mood);r.setAttribute('data-voice',t.voice);r.setAttribute('data-intensity',t.intensity);
+  },[t.mood,t.voice,t.intensity]);
+  return (
+    <PageShell activePage="Solucions">
+      <PageHero kicker="Solucions · 4 arees" title="Tecnologia que funciona" sub="IT Security, Comunicacions, Automatitzacio i Audiovisuals. Quatre arees especialitzades, un sol integrador de confianca." img="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1800&q=80&auto=format&fit=crop"/>
+      {SOLS_FULL.map((s,i)=><SolucioSection key={s.id} s={s} reverse={i%2===1}/>)}
+      <section style={{padding:'100px 0',textAlign:'center'}}>
+        <div className="wrap">
+          <Reveal>
+            <div className="kicker" style={{display:'flex',justifyContent:'center',marginBottom:20}}>Comencem?</div>
+            <h2 className="disp" style={{fontSize:'clamp(40px,6vw,96px)',marginBottom:28}}>Tens un projecte?</h2>
+            <p style={{fontSize:18,color:'var(--mut)',lineHeight:1.7,maxWidth:520,margin:'0 auto 36px'}}>Explica'ns les teves necessitats i prepararem una proposta a mida.</p>
+            <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
+              <a href="contacta.html" className="btn btn-primary">Contacta ara <Icons.UpRight s={15}/></a>
+              <a href="tel:+37688559" className="btn btn-ghost"><Icons.Phone/> +376 88 55 99</a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </PageShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
