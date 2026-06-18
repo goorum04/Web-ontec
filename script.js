@@ -1,13 +1,13 @@
 (function () {
   "use strict";
 
-  /* Any footer */
-  var yearEl = document.getElementById("footerYear");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  /* Any al footer */
+  var fy = document.getElementById("fy");
+  if (fy) fy.textContent = new Date().getFullYear();
 
-  /* ===== Menú mòbil ===== */
-  var ham = document.getElementById("hamburger");
-  var nav = document.getElementById("mainNav");
+  /* ── Menú mòbil ── */
+  var ham = document.getElementById("navHam");
+  var nav = document.getElementById("navLinks");
   if (ham && nav) {
     ham.addEventListener("click", function () {
       var open = nav.classList.toggle("open");
@@ -15,7 +15,7 @@
       ham.setAttribute("aria-expanded", String(open));
     });
     nav.addEventListener("click", function (e) {
-      if (e.target.closest("a[href]")) {
+      if (e.target.tagName === "A") {
         nav.classList.remove("open");
         ham.classList.remove("open");
         ham.setAttribute("aria-expanded", "false");
@@ -23,105 +23,75 @@
     });
   }
 
-  /* ===== Submenús (botó) ===== */
-  document.querySelectorAll(".nav-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var expanded = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", String(!expanded));
-    });
-  });
-
-  /* ===== Reveal on scroll ===== */
-  var revealEls = document.querySelectorAll(".reveal");
-  if (typeof IntersectionObserver !== "undefined") {
-    var revealIO = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            /* Delay per a fills consecutius */
-            var siblings = entry.target.parentElement
-              ? Array.from(entry.target.parentElement.querySelectorAll(".reveal"))
-              : [];
-            var idx = siblings.indexOf(entry.target);
-            entry.target.style.transitionDelay = (idx * 0.07) + "s";
-            entry.target.classList.add("in");
-            revealIO.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -30px 0px" }
-    );
-    revealEls.forEach(function (el) { revealIO.observe(el); });
+  /* ── Reveal on scroll ── */
+  var els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var siblings = Array.from(
+          entry.target.parentElement
+            ? entry.target.parentElement.querySelectorAll(":scope > .reveal")
+            : []
+        );
+        var idx = siblings.indexOf(entry.target);
+        if (idx > 0) entry.target.style.transitionDelay = (idx * 0.08) + "s";
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -24px 0px" });
+    els.forEach(function (el) { io.observe(el); });
   } else {
-    revealEls.forEach(function (el) { el.classList.add("in"); });
+    els.forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ===== Contadors animats ===== */
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  /* ── Terminal animation ── */
+  var termBody = document.getElementById("terminalBody");
+  if (termBody) {
+    var lines = [
+      { delay: 600,  text: "> carregant mòduls…",       color: "var(--mut)" },
+      { delay: 1100, text: "✓ IT Security",              color: "var(--accent)" },
+      { delay: 1500, text: "✓ Comunicacions",            color: "var(--accent)" },
+      { delay: 1900, text: "✓ Automatització",           color: "var(--accent)" },
+      { delay: 2300, text: "✓ Audiovisuals",             color: "var(--accent)" },
+      { delay: 2700, text: "✓ Videoconferència",         color: "var(--accent)" },
+      { delay: 3200, text: "> sistema llest · Andorra",  color: "var(--mut)" },
+    ];
+    var cursor = document.createElement("span");
+    cursor.className = "t-cursor";
+    termBody.appendChild(cursor);
 
-  function runCounter(el) {
-    var target = parseInt(el.getAttribute("data-count") || "0", 10);
-    var duration = 1600;
-    var start = null;
-    function step(ts) {
-      if (!start) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      el.textContent = Math.round(easeOut(p) * target);
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  var counters = document.querySelectorAll(".stat-n[data-count]");
-  if (typeof IntersectionObserver !== "undefined" && counters.length) {
-    var cntIO = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            runCounter(entry.target);
-            cntIO.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    counters.forEach(function (el) { cntIO.observe(el); });
-  } else {
-    counters.forEach(function (el) {
-      el.textContent = el.getAttribute("data-count") || "0";
+    lines.forEach(function (l) {
+      setTimeout(function () {
+        var d = document.createElement("div");
+        d.className = "t-line";
+        d.style.color = l.color;
+        d.textContent = l.text;
+        termBody.insertBefore(d, cursor);
+      }, l.delay);
     });
   }
 
-  /* ===== Header scrolled ===== */
-  var header = document.querySelector(".site-header");
-  if (header) {
-    function onScroll() {
-      header.classList.toggle("scrolled", window.scrollY > 24);
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  }
+  /* ── Marquee (JS duplicate fallback) ── */
+  /* CSS animation handles it, nothing needed */
 
-  /* ===== Formulari de contacte ===== */
+  /* ── Formulari ── */
   window.Ontec = window.Ontec || {};
   window.Ontec.submit = function (e) {
     e.preventDefault();
     var form = e.target;
-    var msg = document.getElementById("formMsg");
+    var msg  = document.getElementById("cfMsg");
+    var nom  = (form.nom  || form.cnom  || { value: "" }).value.trim();
+    var mail = (form.email || form.cemail || { value: "" }).value.trim();
+    var text = (form.missatge || form.cmissatge || { value: "" }).value.trim();
 
-    /* Validació bàsica */
-    var nom = form.nom.value.trim();
-    var email = form.email.value.trim();
-    var missatge = form.missatge.value.trim();
-    if (!nom || !email || !missatge) {
-      if (msg) { msg.style.color = "#fca5a5"; msg.textContent = "Si us plau, omple tots els camps obligatoris."; }
+    if (!nom || !mail || !text) {
+      if (msg) { msg.style.color = "#ff5f57"; msg.textContent = "Si us plau, omple tots els camps obligatoris."; }
       return false;
     }
-
-    /* Simulació d'enviament */
     if (msg) {
-      msg.style.color = "#86efac";
-      msg.textContent = "Gràcies! Hem rebut la teva consulta i ens posarem en contacte aviat.";
+      msg.style.color = "var(--accent)";
+      msg.textContent = "✓ Gràcies! Hem rebut la teva consulta i ens posarem en contacte aviat.";
     }
     form.reset();
     return false;
