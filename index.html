@@ -56,9 +56,6 @@ function Hero() {
           </div>
         </div>
       </div>
-      <div style={{position:'absolute',right:'max(40px,calc((100vw - 1680px)/2 + 40px))',top:'30%',zIndex:3,animation:'floaty 7s ease-in-out infinite'}} className="hero-status">
-        <StatusCard/>
-      </div>
       {[{top:96,left:40},{top:96,right:40},{bottom:120,left:40}].map((p,i)=>(
         <div key={i} style={{position:'absolute',width:16,height:16,zIndex:2,
           borderTop:i<2?`1px solid ${A(45)}`:'none',borderBottom:i>=2?`1px solid ${A(45)}`:'none',
