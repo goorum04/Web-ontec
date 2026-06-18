@@ -1,26 +1,121 @@
 <!DOCTYPE html>
 <html lang="ca" data-mood="acid" data-voice="editorial" data-intensity="cinematic">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empresa | Ontec — Sistemes tecnologics a Andorra</title>
-  <meta name="description" content="Coneix Ontec: distribuidors i integradors de sistemes tecnologics avancats a Andorra des de 2016. Partners certificats Fortinet, Cisco, Ubiquiti, KNX i mes.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ontecandorra.com/empresa.html">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ontecandorra.com/empresa.html">
-  <meta property="og:title" content="Empresa | Ontec Andorra">
-  <meta property="og:description" content="Distribuidors i integradors de sistemes tecnologics avancats a Andorra des de 2016.">
-  <meta property="og:image" content="https://ontecandorra.com/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontec — Empresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <style>html,body{background:#000;}</style>
 </head>
 <body>
 <div id="root"></div>
-<script src="vendor/react.js"></script>
-  <script src="vendor/react-dom.js"></script>
-  <script src="empresa.page.js"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const VALUES = [
+  { n:'01', t:'Creixement',    d:'Proporcionem totes les eines i els mitjans al nostre abast per posar en marxa el teu projecte i fer-lo créixer.' },
+  { n:'02', t:'Sostenibilitat', d:"Cuidem l'estalvi energètic fent servir automatismes i domòtica amb els últims productes del sector." },
+  { n:'03', t:'Rendiment',     d:'Xarxes WiFi, cablejat ethernet o fibra òptica. Traiem el màxim de les xarxes que desenvolupem.' },
+  { n:'04', t:'Proximitat',    d:"Posa'ns a prova. Tracta amb nosaltres i descobreix com és de senzill trobar solucions i ser resolutius." },
+  { n:'05', t:'Dedicació',     d:"Ens agrada el que fem i això es nota. Des dels tècnics que passen cable fins a l'enginyer de telecomunicacions." },
+  { n:'06', t:'Suport',        d:'Equip en constant formació, certificat pels nostres proveïdors, per donar solucions a qualsevol incidència.' },
+];
+
+const PARTNERS = ['Fortinet','Cisco','Ubiquiti','KNX','Crestron','HPE Aruba','Palo Alto Networks','Lutron','Samsung','Sony','QSC','Biamp','Shure','Yealink','Control4','Somfy','ABB'];
+
+function EmpresaPage() {
+  const [openV, setOpenV] = useState(0);
+  return (
+    <PageShell activePage="Empresa">
+      <PageHero kicker="Empresa · Andorra des de 2016" img="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80&auto=format&fit=crop"
+        title={<>Tecnologia del<br/>dia de demà</>}
+        sub="Ontec és una empresa andorrana especialitzada en la distribució i integració de sistemes tecnològics avançats. Des de 2016 ajudem empreses, arquitectures, ingenierías i instal·ladors." />
+
+      {/* Intro split */}
+      <section className="wrap-wide" style={{ padding:'90px 40px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:64, alignItems:'center' }} className="emp-split">
+          <Reveal>
+            <p style={{ fontSize:'clamp(20px,2.2vw,30px)', lineHeight:1.5, color:'var(--ink)', fontFamily:'var(--disp)', fontWeight:600, letterSpacing:'-0.02em' }}>
+              Més que un distribuïdor, som el vostre <span style={{ color:'var(--accent)' }}>soci tecnològic</span>. Ens impliquem en cada projecte com si fos el nostre.
+            </p>
+            <p style={{ marginTop:26, fontSize:16, color:'var(--mut)', lineHeight:1.8 }}>El nostre compromís és evolucionar contínuament per assolir els reptes tecnològics actuals i oferir-te les millors solucions, amb les millors garanties d'èxit.</p>
+          </Reveal>
+          <Reveal delay={120} className="mcard" as="div" style={{ height:380, borderRadius:20 }}>
+            <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop" alt="" style={{ position:'absolute', inset:0 }}/>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section style={{ borderTop:'1px solid var(--line)', borderBottom:'1px solid var(--line)' }}>
+        <div className="wrap-wide" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)' }} >
+          {[['2016','Any de fundació'],['200+','Projectes completats'],['4',"Àrees d'especialitat"],['100%','Clients satisfets']].map(([n,l],i)=>(
+            <Reveal key={n} delay={i*70} style={{ padding:'48px 28px', borderRight:i<3?'1px solid var(--line-soft)':'none' }}>
+              <div className="disp" style={{ fontSize:'clamp(34px,4vw,62px)', color:'var(--accent)' }}>{n}</div>
+              <div style={{ marginTop:6, fontFamily:'var(--mono)', fontSize:11, letterSpacing:'.1em', textTransform:'uppercase', color:'var(--mut)' }}>{l}</div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="wrap-wide" style={{ padding:'110px 40px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'360px 1fr', gap:72, alignItems:'start' }} className="val-grid">
+          <div style={{ position:'sticky', top:100 }}>
+            <SectionLabel>Valors</SectionLabel>
+            <h2 className="disp" style={{ fontSize:'clamp(36px,4.4vw,72px)' }}>Qui som i<br/>per a qui<br/>treballem</h2>
+          </div>
+          <div>
+            {VALUES.map((v,i)=>(
+              <div key={i} style={{ borderBottom:'1px solid var(--line)' }}>
+                <button onClick={()=>setOpenV(openV===i?null:i)}
+                  style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', padding:'26px 0', background:'transparent', border:'none', cursor:'pointer', color:openV===i?'var(--ink)':'var(--mut)', textAlign:'left' }}>
+                  <div style={{ display:'flex', alignItems:'baseline', gap:24 }}>
+                    <span style={{ fontFamily:'var(--mono)', fontSize:11, color:openV===i?'var(--accent)':'var(--faint)', letterSpacing:'.08em' }}>{v.n}</span>
+                    <span className="disp" style={{ fontSize:'clamp(22px,2.6vw,34px)' }}>{v.t}</span>
+                  </div>
+                  <span style={{ color:openV===i?'var(--accent)':'var(--faint)', transition:'transform .25s, color .2s', transform:openV===i?'rotate(45deg)':'none', display:'inline-block' }}><Icons.Plus/></span>
+                </button>
+                <div style={{ maxHeight:openV===i?120:0, overflow:'hidden', transition:'max-height .35s ease' }}>
+                  <p style={{ paddingBottom:24, paddingLeft:35, fontSize:16, color:'var(--mut)', lineHeight:1.75, maxWidth:560 }}>{v.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners */}
+      <section id="partners" style={{ borderTop:'1px solid var(--line)', background:'var(--panel)', padding:'100px 0 60px' }}>
+        <div className="wrap-wide">
+          <Reveal>
+            <SectionLabel>Partners</SectionLabel>
+            <h2 className="disp" style={{ fontSize:'clamp(36px,4.4vw,72px)', marginBottom:18 }}>Fabricants certificats</h2>
+            <p style={{ fontSize:16, color:'var(--mut)', lineHeight:1.7, maxWidth:560, marginBottom:48 }}>Treballem directament amb els millors fabricants del sector per garantir les millors condicions, el suport tècnic i la formació continua del nostre equip.</p>
+          </Reveal>
+          <div style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
+            {PARTNERS.map((p,i)=>(
+              <Reveal key={p} delay={(i%6)*40}>
+                <div style={{ padding:'12px 22px', background:'rgba(255,255,255,.03)', border:'1px solid var(--line)', borderRadius:999, fontSize:14, color:'var(--mut)', fontWeight:600, transition:'all .2s', cursor:'default' }}
+                  onMouseEnter={e=>{e.currentTarget.style.background=A(12);e.currentTarget.style.borderColor=A(35);e.currentTarget.style.color='var(--accent)';}}
+                  onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,255,255,.03)';e.currentTarget.style.borderColor='var(--line)';e.currentTarget.style.color='var(--mut)';}}>
+                  {p}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+      <style>{`@media(max-width:880px){.emp-split,.val-grid{grid-template-columns:1fr!important;gap:40px!important;}section .wrap-wide{}}@media(max-width:680px){#partners .wrap-wide{}}`}</style>
+    </PageShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<EmpresaPage/>);
+</script>
 </body>
 </html>

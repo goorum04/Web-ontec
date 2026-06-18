@@ -1,26 +1,284 @@
 <!DOCTYPE html>
 <html lang="ca" data-mood="acid" data-voice="editorial" data-intensity="cinematic">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Ontec — Actualitat tecnologica a Andorra</title>
-  <meta name="description" content="Articles i noticies sobre IT Security, videoconferencia, domotica i tecnologia avancada. El blog de referencia tecnologica a Andorra.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ontecandorra.com/blog.html">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ontecandorra.com/blog.html">
-  <meta property="og:title" content="Blog | Ontec — Actualitat tecnologica a Andorra">
-  <meta property="og:description" content="Articles i noticies sobre IT Security, videoconferencia, domotica i tecnologia avancada. El blog de referencia tecnologica a Andorra.">
-  <meta property="og:image" content="https://ontecandorra.com/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ontec — Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <style>html,body{background:#08090a;}</style>
 </head>
 <body>
 <div id="root"></div>
-<script src="vendor/react.js"></script>
-  <script src="vendor/react-dom.js"></script>
-  <script src="blog.page.js"></script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+/* ════════ Articles ════════ */
+const ARTICLES = [
+  {
+    slug:'fibra-optica-baqueira-beret', date:'13 oct. 2022', cat:'Comunicacions', read:'5 min',
+    img:'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=1400&q=80&auto=format&fit=crop',
+    title:'Fusió de fibra òptica al telecadira de Baqueira-Beret',
+    excerpt:"Vam executar la fusió de la fibra del nou telecadira garantint connectivitat i videovigilància en un entorn d'alta muntanya.",
+    lede:"A més de 2.000 metres d'altitud, amb neu, gel i temperatures extremes, la fibra òptica és l'única manera fiable de portar comunicacions i videovigilància fins a la cota més alta d'una estació d'esquí.",
+    body:[
+      { p:"Quan l'estació de Baqueira-Beret va instal·lar un nou telecadira, calia estendre la xarxa de comunicacions fins a l'estació superior: càmeres de videovigilància, control de l'equip i telefonia d'emergència havien de funcionar sense interrupcions durant tota la temporada. L'equip d'Ontec es va encarregar de la fusió de la fibra òptica de tota la instal·lació." },
+      { h:"Per què fibra i no coure" },
+      { p:"A distàncies de centenars de metres i en presència de maquinària elèctrica, el cable de coure pateix atenuació i interferències electromagnètiques. La fibra òptica monomode, en canvi, transporta el senyal amb pèrdues mínimes al llarg de quilòmetres i és completament immune a les interferències — un factor crític al costat dels motors i variadors de freqüència d'un telecadira." },
+      { p:"A més, la fibra suporta amb folgança l'ample de banda que demanen diverses càmeres IP d'alta resolució transmetent simultàniament, amb marge per a futures ampliacions sense tornar a estendre cable." },
+      { h:"L'art de la fusió" },
+      { p:"La fusió consisteix a unir dos extrems de fibra alineant nuclis de nou micres amb una precisió de fraccions de micra i fonent-los amb un arc elèctric. Cada empalmament es mesura: una pèrdua per sobre de 0,1 dB obliga a refer la unió. En un entorn de muntanya, amb fred i humitat, mantenir net l'equip i protegir les fusions dins de caixes estanques és tan important com la fusió en si." },
+      { q:"Una xarxa de muntanya no es jutja el dia que s'instal·la, sinó la nit de tempesta en què tot ha de seguir funcionant." },
+      { h:"Certificació i posada en marxa" },
+      { p:"Un cop acabades les fusions, vam certificar tot el traçat amb un reflectòmetre òptic (OTDR), que detecta cada empalmament, connector i possible microcurvatura al llarg de la línia. Només amb el certificat de pèrdues dins de tolerància es dóna per bona la instal·lació i s'hi connecten els equips actius." },
+      { p:"El resultat: una dorsal de fibra preparada per a anys de servei, capaç de sostenir videovigilància, control i comunicacions de seguretat fins i tot en les condicions més dures de l'hivern pirinenc." },
+    ],
+  },
+  {
+    slug:'domotica-knx-edificis-premium', date:'maig 2016', cat:'Domòtica', read:'6 min',
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80&auto=format&fit=crop',
+    title:"La domòtica KNX arriba als edificis premium d'Andorra",
+    excerpt:"Com integrem il·luminació, clima, persianes i seguretat sota un únic estàndard obert i escalable.",
+    lede:"KNX és l'estàndard mundial per a l'automatització d'edificis. No és una marca: és un protocol obert que permet que dispositius de centenars de fabricants parlin el mateix idioma sobre un mateix bus.",
+    body:[
+      { p:"Als projectes residencials i corporatius d'alta gamma, el client ja no vol un comandament per cada cosa. Vol que la llar o l'edifici responguin com un sistema únic: que la llum, la calefacció, les persianes i la seguretat treballin coordinades i es controlin des d'una pantalla o el mòbil. Aquí és on KNX marca la diferència." },
+      { h:"Un bus, no un cervell central" },
+      { p:"A diferència dels sistemes propietaris, KNX és descentralitzat: cada dispositiu (un detector de presència, un actuador de persiana, un termòstat) té la seva pròpia intel·ligència i es comunica amb la resta a través d'un bus de dos fils. Si un element falla, la resta segueix funcionant. Aquesta robustesa és la raó per la qual KNX és l'opció preferida en projectes on la fiabilitat no és negociable." },
+      { h:"Interoperabilitat real" },
+      { p:"En ser un estàndard obert i certificat, KNX evita el bloqueig amb un únic fabricant. Podem triar el millor termòstat d'una marca, els millors actuadors d'una altra i una pantalla de control d'una tercera, amb la garantia que tot s'integrarà. Per al client això significa llibertat avui i capacitat d'ampliar demà." },
+      { q:"La millor domòtica és la que no es nota: la casa simplement fa el que ha de fer, quan ho ha de fer." },
+      { h:"Escenes i eficiència" },
+      { p:"Sobre aquesta base programem escenes — 'sortir de casa', 'nit', 'cinema' — que amb una sola ordre ajusten desenes de paràmetres. I com que el sistema coneix la presència, la llum natural i la temperatura de cada estança, pot apagar, abaixar persianes o moderar la climatització automàticament, amb un estalvi energètic notable." },
+      { p:"En els edificis premium d'Andorra, on conviuen exigència estètica i tècnica, KNX permet que la tecnologia s'integri de manera discreta en el disseny i creixi amb l'edifici durant tota la seva vida útil." },
+    ],
+  },
+  {
+    slug:'zero-trust-pimes', date:'2024', cat:'IT Security', read:'7 min',
+    img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&q=80&auto=format&fit=crop',
+    title:'Zero Trust: el nou paradigma de seguretat per a pimes',
+    excerpt:"Per què el model 'confia però verifica' ha mort i com adoptar 'mai confiïs, verifica sempre' sense ser una gran empresa.",
+    lede:"Durant dècades la seguretat informàtica es va construir com un castell: una muralla forta (el firewall perimetral) i confiança total per a tothom que ja era a dins. Aquest model ja no aguanta.",
+    body:[
+      { p:"El teletreball, el núvol i els dispositius mòbils han dissolt el perímetre. Avui els empleats es connecten des de casa, les aplicacions viuen a internet i un sol equip compromès dins de la xarxa pot obrir la porta a tot. Zero Trust parteix d'una premissa incòmoda però realista: cap usuari ni dispositiu és de confiança pel simple fet d'estar 'dins'." },
+      { h:"Els tres principis" },
+      { p:"Primer, verificar explícitament: cada accés s'autentica i s'autoritza segons identitat, dispositiu, ubicació i context. Segon, mínim privilegi: cada persona accedeix només al que necessita per treballar, ni un recurs més. Tercer, assumir la bretxa: es dissenya el sistema partint de la base que un atacant ja podria ser a dins, i es limita fins on pot arribar." },
+      { h:"ZTNA en comptes de VPN" },
+      { p:"La VPN tradicional, un cop establerta, sol donar accés a tota la xarxa. L'accés de xarxa Zero Trust (ZTNA) fa el contrari: connecta l'usuari únicament amb l'aplicació concreta que té autoritzada, sense exposar la resta. Si les credencials es filtren, el dany queda contingut." },
+      { q:"No es tracta de comprar un producte, sinó d'adoptar una manera de pensar: cada connexió s'ha de guanyar la confiança, cada vegada." },
+      { h:"Per on comença una pime" },
+      { ul:["Activar l'autenticació multifactor (MFA) a tots els comptes crítics — és la mesura amb més impacte i menys cost.","Inventariar dispositius i aplicar mínim privilegi per rols.","Segmentar la xarxa per limitar el moviment lateral d'un atacant.","Substituir la VPN plana per ZTNA en els accessos remots.","Monitorar i registrar accessos per detectar comportaments anòmals."] },
+      { p:"Zero Trust no és exclusiu de les grans corporacions. Amb les eines actuals, una pime andorrana pot desplegar-lo per fases, prioritzant l'MFA i la segmentació, i elevar dràsticament la seva resiliència davant del ransomware i el robatori de credencials." },
+    ],
+  },
+  {
+    slug:'wifi-6e-empresarial', date:'2024', cat:'Comunicacions', read:'5 min',
+    img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1400&q=80&auto=format&fit=crop',
+    title:'WiFi 6E: la revolució silenciosa de la connectivitat empresarial',
+    excerpt:"Una banda nova de 6 GHz, gairebé buida, que canvia les regles del joc en entorns saturats.",
+    lede:"El WiFi 6E no és una millora incremental: obre una autopista completament nova de 6 GHz, lliure dels dispositius antics que saturaven les bandes de 2,4 i 5 GHz.",
+    body:[
+      { p:"En hotels, oficines obertes i espais amb centenars de dispositius connectats, el problema rarament és la velocitat màxima: és la congestió. Massa equips competint pel mateix espai radioelèctric. WiFi 6E ataca precisament aquest coll d'ampolla." },
+      { h:"Una banda neta de 6 GHz" },
+      { p:"La nova banda afegeix fins a 1.200 MHz d'espectre addicional i permet múltiples canals amples de 160 MHz sense solapaments. Com que només hi poden operar dispositius 6E i posteriors, no hi ha equips antics generant interferències: el resultat és menys latència i molta més capacitat real per a cada usuari." },
+      { h:"OFDMA i WPA3" },
+      { p:"Tecnologies com OFDMA permeten que un sol punt d'accés atengui molts dispositius alhora, repartint el canal de manera eficient en comptes de servir-los un per un. I el xifratge WPA3, obligatori a 6 GHz, eleva el llindar de seguretat de totes les connexions des del primer moment." },
+      { q:"On abans calia limitar el nombre de connexions per mantenir la qualitat, ara l'espai radioelèctric deixa de ser el factor limitant." },
+      { h:"Quan té sentit" },
+      { p:"WiFi 6E brilla en entorns de densitat alta: sales de congressos, hotels, campus corporatius o espais de coworking. En un disseny ben fet — amb un emplaçament correcte dels punts d'accés i cablejat de prou capacitat fins a cadascun — l'experiència de l'usuari fa un salt evident." },
+      { p:"A Ontec dissenyem la xarxa sencera, no només triem el punt d'accés: estudi de cobertura, capacitat del cablejat, segmentació i seguretat, perquè la inversió en 6E es tradueixi en rendiment real." },
+    ],
+  },
+  {
+    slug:'sales-reunions-hibrides', date:'2024', cat:'Audiovisuals', read:'6 min',
+    img:'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1400&q=80&auto=format&fit=crop',
+    title:'Sales de reunions híbrides: com dissenyar-les bé',
+    excerpt:"L'equitat entre els qui són a la sala i els qui es connecten en remot comença per l'àudio, no per la pantalla.",
+    lede:"Una sala híbrida ben dissenyada fa que ningú noti qui és present i qui es connecta des de fora. Una de mal dissenyada converteix el remot en un convidat de segona.",
+    body:[
+      { p:"Amb el treball híbrid consolidat, la sala de reunions ha deixat de ser una taula amb una pantalla. Ara és un sistema audiovisual complet que ha de garantir que les persones connectades en remot sentin, vegin i participin en igualtat de condicions amb les que són a la sala." },
+      { h:"L'àudio primer" },
+      { p:"El 80% de la frustració en remot ve del so. Micròfons de sostre amb cancel·lació d'eco, processament de veu i una bona acústica de sala importen més que cap altra cosa. Si la veu no arriba neta, la millor càmera 4K del món no salvarà la reunió." },
+      { h:"Càmera amb enquadrament intel·ligent" },
+      { p:"Les càmeres modernes detecten qui parla i l'enquadren automàticament, o reparteixen la sala en finestres individuals perquè cada participant tingui presència pròpia a la pantalla del remot. Així s'evita el clàssic pla general on no es distingeix qui diu què." },
+      { q:"La sala híbrida es jutja des de l'altra banda de la pantalla: si el remot participa sense esforç, està ben feta." },
+      { h:"Control senzill, resultat professional" },
+      { p:"Tota aquesta tecnologia ha de poder-se engegar amb un sol toc. Integrem el sistema amb un panell de control únic — sovint Crestron o equivalent — que encén la sala, inicia la videoconferència i ajusta àudio i pantalles sense que ningú hagi de buscar comandaments ni cables." },
+      { p:"El nostre enfocament parteix de l'ús real de la sala i de les eines de videoconferència que ja fa servir l'empresa (Teams, Zoom, Meet), per dissenyar una solució a mida que funcioni el primer dia i cada dia." },
+    ],
+  },
+  {
+    slug:'estalvi-energetic-domotica', date:'2024', cat:'Automatització', read:'6 min',
+    img:'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1400&q=80&auto=format&fit=crop',
+    title:"L'estalvi energètic real amb domòtica: més enllà del màrqueting",
+    excerpt:"Quant s'estalvia de veritat automatitzant un edifici, i d'on surt cada percentatge.",
+    lede:"Es parla d'estalvis del 20% al 40% amb domòtica. La xifra és real, però no surt de la màgia: surt de deixar d'escalfar, il·luminar i ventilar espais buits.",
+    body:[
+      { p:"La major part del malbaratament energètic d'un edifici no ve d'equips ineficients, sinó d'equips funcionant quan no calen: llums enceses en sales buides, calefacció a ple rendiment de matinada, climatització lluitant contra finestres obertes. L'automatització ataca exactament aquest malbaratament." },
+      { h:"Presència i llum natural" },
+      { p:"Els detectors de presència apaguen llum i moderen el clima quan una estança queda buida. Els sensors de lluminositat regulen la il·luminació artificial segons la llum natural disponible — en una sala ben orientada, això sol pot reduir el consum d'enllumenat de manera molt notable." },
+      { h:"Climatització programada per ús real" },
+      { p:"En comptes d'una consigna fixa tot el dia, el sistema ajusta la temperatura segons l'horari d'ocupació, la previsió meteorològica i la inèrcia tèrmica de l'edifici. Escalfar just abans que arribi la gent i deixar de fer-ho abans que marxin estalvia hores de funcionament cada dia." },
+      { q:"No es tracta de viure amb menys confort, sinó de no pagar pel confort d'estances que no fa servir ningú." },
+      { h:"El que no es mesura no s'estalvia" },
+      { p:"La monitorització és la peça que tanca el cercle. En veure el consum desglossat per zones i sistemes en temps real, es detecten anomalies — un equip que no s'apaga, una zona que consumeix de més — i s'afinen els paràmetres mes a mes. L'estalvi no és un esdeveniment, és un procés." },
+      { p:"En els projectes que integrem, l'estalvi energètic es paga sol amb el temps i, a més, millora el confort i allarga la vida dels equips. La domòtica deixa de ser un luxe per convertir-se en una inversió rendible." },
+    ],
+  },
+];
+const CATS = ['Tots','Comunicacions','IT Security','Domòtica','Automatització','Audiovisuals'];
+const bySlug = (s) => ARTICLES.find(a => a.slug === s);
+
+/* ════════ Body renderer ════════ */
+function ArticleBody({ blocks }) {
+  return (
+    <div>
+      {blocks.map((b, i) => {
+        if (b.h) return <h2 key={i} className="disp" style={{ fontSize:'clamp(26px,2.6vw,38px)', margin:'48px 0 18px' }}>{b.h}</h2>;
+        if (b.q) return (
+          <blockquote key={i} style={{ margin:'44px 0', paddingLeft:30, borderLeft:'2px solid var(--accent)' }}>
+            <p className="disp" style={{ fontSize:'clamp(22px,2.2vw,30px)', lineHeight:1.4, fontStyle:'var(--ditalic)' }}>{b.q}</p>
+          </blockquote>
+        );
+        if (b.ul) return (
+          <ul key={i} style={{ margin:'8px 0', listStyle:'none', display:'flex', flexDirection:'column', gap:14 }}>
+            {b.ul.map((li, j) => (
+              <li key={j} style={{ display:'flex', gap:14, alignItems:'flex-start', fontSize:17, color:'var(--mut)', lineHeight:1.7 }}>
+                <span style={{ color:'var(--accent)', marginTop:5, flexShrink:0 }}><Icons.Check/></span>{li}
+              </li>
+            ))}
+          </ul>
+        );
+        return <p key={i} style={{ fontSize:17.5, color:'var(--mut)', lineHeight:1.85, marginBottom:18 }}>{b.p}</p>;
+      })}
+    </div>
+  );
+}
+
+/* ════════ Single article ════════ */
+function Article({ a, go }) {
+  useEffect(() => { window.scrollTo(0, 0); }, [a.slug]);
+  const related = ARTICLES.filter(x => x.slug !== a.slug).slice(0, 3);
+  return (
+    <>
+      <PageHero kicker={a.cat} index={a.read} img={a.img} title={a.title} />
+      <article className="wrap" style={{ maxWidth:820, padding:'70px 40px 40px' }}>
+        <a href="#" onClick={(e)=>{e.preventDefault();go('');}} className="linkline" style={{ display:'inline-flex', alignItems:'center', gap:8, fontFamily:'var(--mono)', fontSize:11, letterSpacing:'.1em', textTransform:'uppercase', marginBottom:40 }}>
+          <span style={{ display:'inline-flex', transform:'rotate(180deg)' }}><Icons.Arrow s={13}/></span> Tots els articles
+        </a>
+        <div style={{ display:'flex', alignItems:'center', gap:14, paddingBottom:26, marginBottom:14, borderBottom:'1px solid var(--line)', flexWrap:'wrap' }}>
+          <Tag>{a.cat}</Tag>
+          <span style={{ fontFamily:'var(--mono)', fontSize:11, color:'var(--faint)' }}>{a.date}</span>
+          <span style={{ fontFamily:'var(--mono)', fontSize:11, color:'var(--faint)' }}>· {a.read} de lectura</span>
+          <span style={{ marginLeft:'auto', fontFamily:'var(--mono)', fontSize:11, color:'var(--faint)' }}>Per Equip Ontec</span>
+        </div>
+        <p className="disp" style={{ fontSize:'clamp(22px,2.3vw,30px)', lineHeight:1.45, margin:'30px 0 40px' }}>{a.lede}</p>
+        <ArticleBody blocks={a.body} />
+
+        <div style={{ marginTop:64, padding:'40px 0', borderTop:'1px solid var(--line)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:20 }}>
+          <div>
+            <div className="kicker" style={{ marginBottom:8 }}>Tens un projecte similar?</div>
+            <div className="disp" style={{ fontSize:24 }}>En parlem.</div>
+          </div>
+          <a href="contacta.html" className="btn btn-primary">Contacta amb Ontec <Icons.UpRight s={14}/></a>
+        </div>
+      </article>
+
+      <section style={{ borderTop:'1px solid var(--line)', padding:'80px 0 120px' }}>
+        <div className="wrap-wide">
+          <SectionLabel index="—">Continua llegint</SectionLabel>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:18 }} className="blog-grid">
+            {related.map((p) => <Card key={p.slug} p={p} go={go} />)}
+          </div>
+        </div>
+        <style>{`@media(max-width:860px){.blog-grid{grid-template-columns:1fr!important;}}`}</style>
+      </section>
+    </>
+  );
+}
+
+/* ════════ Card ════════ */
+function Card({ p, go, big }) {
+  const onClick = (e) => { e.preventDefault(); go(p.slug); };
+  if (big) return (
+    <a href={'#'+p.slug} onClick={onClick} className="mcard bigcard" style={{ display:'grid', gridTemplateColumns:'1.1fr 1fr', minHeight:400 }}>
+      <div style={{ position:'relative', minHeight:320 }}><Cine src={p.img} alt="" style={{ position:'absolute', inset:0 }}/></div>
+      <div style={{ padding:'52px 56px', display:'flex', flexDirection:'column', justifyContent:'center' }} className="big-body">
+        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:22 }}>
+          <Tag>{p.cat}</Tag>
+          <span style={{ fontFamily:'var(--mono)', fontSize:11, color:'var(--faint)' }}>{p.date} · {p.read}</span>
+        </div>
+        <h2 className="disp" style={{ fontSize:'clamp(28px,3vw,46px)', marginBottom:18 }}>{p.title}</h2>
+        <p style={{ fontSize:16, color:'var(--mut)', lineHeight:1.75, marginBottom:28 }}>{p.excerpt}</p>
+        <span style={{ display:'inline-flex', alignItems:'center', gap:8, color:'var(--accent)', fontFamily:'var(--mono)', fontSize:11.5, letterSpacing:'.12em', textTransform:'uppercase' }}>Llegir article <Icons.UpRight s={14}/></span>
+      </div>
+    </a>
+  );
+  return (
+    <a href={'#'+p.slug} onClick={onClick} className="mcard" style={{ display:'block' }}>
+      <Cine src={p.img} alt="" style={{ height:220 }}/>
+      <div style={{ padding:'26px 28px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:16 }}>
+          <Tag>{p.cat}</Tag>
+          <span style={{ fontFamily:'var(--mono)', fontSize:10.5, color:'var(--faint)' }}>{p.read}</span>
+        </div>
+        <h3 className="disp" style={{ fontSize:23, lineHeight:1.28, marginBottom:12 }}>{p.title}</h3>
+        <p style={{ fontSize:14, color:'var(--mut)', lineHeight:1.65 }}>{p.excerpt}</p>
+      </div>
+    </a>
+  );
+}
+
+/* ════════ List ════════ */
+function BlogList({ go }) {
+  const [cat, setCat] = useState('Tots');
+  const filtered = cat === 'Tots' ? ARTICLES : ARTICLES.filter(p => p.cat === cat);
+  const [feat, ...rest] = filtered;
+  return (
+    <>
+      <PageHero kicker="Blog" index="—" img="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=2000&q=80&auto=format&fit=crop"
+        title={<>Notícies i <em>coneixement</em> tècnic</>}
+        sub="Articles tècnics, casos reals i actualitat del sector escrits per l'equip d'Ontec." />
+      <div className="wrap-wide" style={{ padding:'64px 40px 120px' }}>
+        <div style={{ display:'flex', gap:8, marginBottom:54, flexWrap:'wrap' }}>
+          {CATS.map(c=>(
+            <button key={c} onClick={()=>setCat(c)}
+              style={{ padding:'10px 18px', background:cat===c?'var(--accent)':'transparent', border:`1px solid ${cat===c?'var(--accent)':'var(--line)'}`, borderRadius:2,
+                fontFamily:'var(--mono)', fontSize:11, letterSpacing:'.08em', textTransform:'uppercase', color:cat===c?'var(--accent-ink)':'var(--mut)', fontWeight:700, cursor:'pointer', transition:'all .15s' }}>
+              {c}
+            </button>
+          ))}
+        </div>
+        {feat && <div style={{ marginBottom:18 }}><Card p={feat} go={go} big /></div>}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:18 }} className="blog-grid">
+          {rest.map((p) => <Card key={p.slug} p={p} go={go} />)}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.blog-grid{grid-template-columns:1fr!important;}.bigcard{grid-template-columns:1fr!important;}.big-body{padding:34px 30px!important;}}`}</style>
+    </>
+  );
+}
+
+/* ════════ Root w/ hash routing ════════ */
+function BlogPage() {
+  const [slug, setSlug] = useState(location.hash.slice(1));
+  useEffect(() => {
+    const fn = () => setSlug(location.hash.slice(1));
+    window.addEventListener('hashchange', fn);
+    return () => window.removeEventListener('hashchange', fn);
+  }, []);
+  const go = (s) => { if (s) { location.hash = '#'+s; } else { history.replaceState(null,'',location.pathname); setSlug(''); } };
+  const a = bySlug(slug);
+  return (
+    <PageShell activePage="Blog">
+      {a ? <Article a={a} go={go} /> : <BlogList go={go} />}
+    </PageShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<BlogPage/>);
+</script>
 </body>
 </html>
