@@ -30,6 +30,20 @@ function HeroAreas() {
 
 /* ── Hero ── */
 function Hero() {
+  const eyebrowRef = useRef(null);
+  const h1Ref = useRef(null);
+  const pRef = useRef(null);
+  const ctaRef = useRef(null);
+  const areasRef = useRef(null);
+  useEffect(() => {
+    if (typeof gsap === 'undefined') return;
+    const tl = gsap.timeline({ delay: 0.2 });
+    tl.fromTo(eyebrowRef.current, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
+      .fromTo(h1Ref.current, { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1.15, ease: 'power3.out' }, '-=0.38')
+      .fromTo(pRef.current, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out' }, '-=0.55')
+      .fromTo(ctaRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out' }, '-=0.5')
+      .fromTo(areasRef.current, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.9, ease: 'power2.out' }, '-=0.72');
+  }, []);
   return (
     <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'flex-end',overflow:'hidden',background:'var(--panel-dark)'}}>
       <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Infraestructura tecnològica" shade={false} parallax style={{position:'absolute',inset:0}}/>
@@ -37,23 +51,23 @@ function Hero() {
       <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,rgba(8,18,12,.82) 0%,rgba(8,18,12,.4) 48%,transparent 82%)'}}/>
       <div className="wrap-wide" style={{position:'relative',zIndex:2,width:'100%',paddingBottom:96,paddingTop:150,display:'flex',justifyContent:'space-between',alignItems:'flex-end',gap:48,flexWrap:'wrap'}}>
         <div style={{maxWidth:760}}>
-          <div className="eyebrow" style={{marginBottom:26,color:'rgba(255,255,255,.8)'}}>
+          <div ref={eyebrowRef} className="eyebrow" style={{marginBottom:26,color:'rgba(255,255,255,.8)'}}>
             <span style={{width:22,height:2,background:'var(--accent-2)'}}/>
             Andorra · Distribució tecnològica des de 2016
           </div>
-          <h1 className="disp" style={{color:'#fff',fontSize:'clamp(44px,6.6vw,104px)',lineHeight:1.02}}>
+          <h1 ref={h1Ref} className="disp" style={{color:'#fff',fontSize:'clamp(44px,6.6vw,104px)',lineHeight:1.02}}>
             Sistemes tecnològics<br/><span style={{color:'var(--accent-2)'}}>avançats</span>
           </h1>
-          <p style={{marginTop:30,fontSize:'clamp(16px,1.5vw,20px)',color:'rgba(255,255,255,.76)',lineHeight:1.7,maxWidth:560}}>
+          <p ref={pRef} style={{marginTop:30,fontSize:'clamp(16px,1.5vw,20px)',color:'rgba(255,255,255,.76)',lineHeight:1.7,maxWidth:560}}>
             Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses,
             arquitectures, enginyeries i instal·ladors a Andorra.
           </p>
-          <div style={{display:'flex',gap:14,marginTop:40,flexWrap:'wrap'}}>
+          <div ref={ctaRef} style={{display:'flex',gap:14,marginTop:40,flexWrap:'wrap'}}>
             <a href="solucions.html" className="btn btn-primary">Veure solucions <Icons.UpRight s={15}/></a>
             <a href="contacta.html" className="btn btn-light">Parla amb un expert</a>
           </div>
         </div>
-        <div className="hero-areas"><HeroAreas/></div>
+        <div ref={areasRef} className="hero-areas"><HeroAreas/></div>
       </div>
       <style>{`@media(max-width:1100px){.hero-areas{display:none;}}`}</style>
     </section>

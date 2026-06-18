@@ -10,6 +10,9 @@ const {
   useEffect,
   useRef
 } = React;
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 const GLOBAL_CSS = `
 :root{
@@ -150,6 +153,26 @@ function CountUp({
   const [val, setVal] = useState(0);
   const ref = useRef(null);
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      const obj = {
+        count: 0
+      };
+      gsap.to(obj, {
+        count: to,
+        duration: dur / 1000,
+        ease: 'power2.out',
+        onUpdate: () => setVal(obj.count),
+        onComplete: () => setVal(to),
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true
+        }
+      });
+      return;
+    }
     let raf,
       start,
       done = false;
@@ -175,7 +198,7 @@ function CountUp({
     }, {
       threshold: .5
     });
-    if (ref.current) io.observe(ref.current);
+    io.observe(el);
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
@@ -243,6 +266,40 @@ function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      if (clip) {
+        gsap.fromTo(el, {
+          clipPath: 'inset(0 100% 0 0)'
+        }, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 1.1,
+          delay: delay / 1000,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        });
+      } else {
+        gsap.fromTo(el, {
+          opacity: 0,
+          y: 26
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          delay: delay / 1000,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        });
+      }
+      return;
+    }
     if (typeof IntersectionObserver === 'undefined') {
       el.classList.add('in');
       return;
@@ -1153,6 +1210,44 @@ function PageHero({
   img,
   align = 'left'
 }) {
+  const kickerRef = useRef(null);
+  const titleRef = useRef(null);
+  const subRef = useRef(null);
+  useEffect(() => {
+    if (typeof gsap === 'undefined') return;
+    const tl = gsap.timeline({
+      delay: 0.15
+    });
+    tl.fromTo(kickerRef.current, {
+      opacity: 0,
+      y: 14
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power2.out'
+    });
+    tl.fromTo(titleRef.current, {
+      opacity: 0,
+      y: 36
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1.05,
+      ease: 'power3.out'
+    }, '-=0.4');
+    if (subRef.current) {
+      tl.fromTo(subRef.current, {
+        opacity: 0,
+        y: 22
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '-=0.55');
+    }
+  }, []);
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -1193,6 +1288,7 @@ function PageHero({
       textAlign: align
     }
   }, /*#__PURE__*/React.createElement("div", {
+    ref: kickerRef,
     className: "eyebrow",
     style: {
       marginBottom: 22,
@@ -1206,6 +1302,7 @@ function PageHero({
       background: 'var(--accent-2)'
     }
   }), kicker), /*#__PURE__*/React.createElement("h1", {
+    ref: titleRef,
     className: "disp",
     style: {
       color: '#fff',
@@ -1214,6 +1311,7 @@ function PageHero({
       margin: align === 'center' ? '0 auto' : 0
     }
   }, title), sub && /*#__PURE__*/React.createElement("p", {
+    ref: subRef,
     style: {
       marginTop: 24,
       fontSize: 'clamp(16px,1.4vw,19px)',
@@ -1916,6 +2014,58 @@ function HeroAreas() {
 
 /* ── Hero ── */
 function Hero() {
+  const eyebrowRef = useRef(null);
+  const h1Ref = useRef(null);
+  const pRef = useRef(null);
+  const ctaRef = useRef(null);
+  const areasRef = useRef(null);
+  useEffect(() => {
+    if (typeof gsap === 'undefined') return;
+    const tl = gsap.timeline({
+      delay: 0.2
+    });
+    tl.fromTo(eyebrowRef.current, {
+      opacity: 0,
+      y: 18
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power2.out'
+    }).fromTo(h1Ref.current, {
+      opacity: 0,
+      y: 44
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1.15,
+      ease: 'power3.out'
+    }, '-=0.38').fromTo(pRef.current, {
+      opacity: 0,
+      y: 26
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.85,
+      ease: 'power2.out'
+    }, '-=0.55').fromTo(ctaRef.current, {
+      opacity: 0,
+      y: 20
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.75,
+      ease: 'power2.out'
+    }, '-=0.5').fromTo(areasRef.current, {
+      opacity: 0,
+      x: 36
+    }, {
+      opacity: 1,
+      x: 0,
+      duration: 0.9,
+      ease: 'power2.out'
+    }, '-=0.72');
+  }, []);
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -1965,6 +2115,7 @@ function Hero() {
       maxWidth: 760
     }
   }, /*#__PURE__*/React.createElement("div", {
+    ref: eyebrowRef,
     className: "eyebrow",
     style: {
       marginBottom: 26,
@@ -1977,6 +2128,7 @@ function Hero() {
       background: 'var(--accent-2)'
     }
   }), "Andorra · Distribució tecnològica des de 2016"), /*#__PURE__*/React.createElement("h1", {
+    ref: h1Ref,
     className: "disp",
     style: {
       color: '#fff',
@@ -1988,6 +2140,7 @@ function Hero() {
       color: 'var(--accent-2)'
     }
   }, "avançats")), /*#__PURE__*/React.createElement("p", {
+    ref: pRef,
     style: {
       marginTop: 30,
       fontSize: 'clamp(16px,1.5vw,20px)',
@@ -1996,6 +2149,7 @@ function Hero() {
       maxWidth: 560
     }
   }, "Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses, arquitectures, enginyeries i instal·ladors a Andorra."), /*#__PURE__*/React.createElement("div", {
+    ref: ctaRef,
     style: {
       display: 'flex',
       gap: 14,
@@ -2011,6 +2165,7 @@ function Hero() {
     href: "contacta.html",
     className: "btn btn-light"
   }, "Parla amb un expert"))), /*#__PURE__*/React.createElement("div", {
+    ref: areasRef,
     className: "hero-areas"
   }, /*#__PURE__*/React.createElement(HeroAreas, null))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:1100px){.hero-areas{display:none;}}`));
 }

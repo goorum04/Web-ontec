@@ -7,6 +7,10 @@
 
 const { useState, useEffect, useRef } = React;
 
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const A = (p) => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 
 const GLOBAL_CSS = `
@@ -119,6 +123,17 @@ function CountUp({ to, suffix = '', prefix = '', dur = 1600, decimals = 0, class
   const [val, setVal] = useState(0);
   const ref = useRef(null);
   useEffect(() => {
+    const el = ref.current; if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      const obj = { count: 0 };
+      gsap.to(obj, {
+        count: to, duration: dur / 1000, ease: 'power2.out',
+        onUpdate: () => setVal(obj.count),
+        onComplete: () => setVal(to),
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+      });
+      return;
+    }
     let raf, start, done = false;
     if (typeof IntersectionObserver === 'undefined') { setVal(to); return; }
     const io = new IntersectionObserver((es) => {
@@ -130,7 +145,7 @@ function CountUp({ to, suffix = '', prefix = '', dur = 1600, decimals = 0, class
         }
       });
     }, { threshold: .5 });
-    if (ref.current) io.observe(ref.current);
+    io.observe(el);
     return () => { cancelAnimationFrame(raf); io.disconnect(); };
   }, [to]);
   return <span ref={ref} className={className} style={style}>{prefix}{val.toFixed(decimals)}{suffix}</span>;
@@ -157,6 +172,24 @@ function Reveal({ children, delay = 0, as = 'div', clip = false, style = {}, cla
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current; if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      if (clip) {
+        gsap.fromTo(el,
+          { clipPath: 'inset(0 100% 0 0)' },
+          { clipPath: 'inset(0 0% 0 0)', duration: 1.1, delay: delay / 1000, ease: 'power3.inOut',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+          }
+        );
+      } else {
+        gsap.fromTo(el,
+          { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.85, delay: delay / 1000, ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+          }
+        );
+      }
+      return;
+    }
     if (typeof IntersectionObserver === 'undefined') { el.classList.add('in'); return; }
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => { if (e.isIntersecting) { el.classList.add('in'); io.unobserve(el); } });
@@ -403,20 +436,32 @@ function Cine({ src, alt = '', style = {}, shade = false, parallax = false, chil
 }
 
 function PageHero({ kicker, title, sub, img, align = 'left' }) {
+  const kickerRef = useRef(null);
+  const titleRef = useRef(null);
+  const subRef = useRef(null);
+  useEffect(() => {
+    if (typeof gsap === 'undefined') return;
+    const tl = gsap.timeline({ delay: 0.15 });
+    tl.fromTo(kickerRef.current, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+    tl.fromTo(titleRef.current, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 1.05, ease: 'power3.out' }, '-=0.4');
+    if (subRef.current) {
+      tl.fromTo(subRef.current, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.55');
+    }
+  }, []);
   return (
     <section style={{ position: 'relative', minHeight: 'min(72vh,640px)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden', background: 'var(--panel-dark)' }}>
       <Cine src={img} alt="" parallax style={{ position: 'absolute', inset: 0 }} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,18,12,.6) 0%,rgba(8,18,12,.35) 38%,rgba(8,18,12,.8) 100%)' }} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,rgba(8,18,12,.85) 0%,rgba(8,18,12,.4) 50%,transparent 90%)' }} />
       <div className="wrap-wide" style={{ position: 'relative', zIndex: 2, width: '100%', paddingTop: 150, paddingBottom: 80, textAlign: align }}>
-        <div className="eyebrow" style={{ marginBottom: 22, color: 'rgba(255,255,255,.78)', justifyContent: align === 'center' ? 'center' : 'flex-start' }}>
+        <div ref={kickerRef} className="eyebrow" style={{ marginBottom: 22, color: 'rgba(255,255,255,.78)', justifyContent: align === 'center' ? 'center' : 'flex-start' }}>
           <span style={{ width: 22, height: 2, background: 'var(--accent-2)' }} />
           {kicker}
         </div>
-        <h1 className="disp" style={{ color: '#fff', fontSize: 'clamp(40px,6vw,92px)', maxWidth: 1080, margin: align === 'center' ? '0 auto' : 0 }}>
+        <h1 ref={titleRef} className="disp" style={{ color: '#fff', fontSize: 'clamp(40px,6vw,92px)', maxWidth: 1080, margin: align === 'center' ? '0 auto' : 0 }}>
           {title}
         </h1>
-        {sub && <p style={{ marginTop: 24, fontSize: 'clamp(16px,1.4vw,19px)', color: 'rgba(255,255,255,.74)', lineHeight: 1.7, maxWidth: 600, margin: align === 'center' ? '24px auto 0' : '24px 0 0' }}>{sub}</p>}
+        {sub && <p ref={subRef} style={{ marginTop: 24, fontSize: 'clamp(16px,1.4vw,19px)', color: 'rgba(255,255,255,.74)', lineHeight: 1.7, maxWidth: 600, margin: align === 'center' ? '24px auto 0' : '24px 0 0' }}>{sub}</p>}
       </div>
     </section>
   );

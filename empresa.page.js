@@ -10,6 +10,9 @@ const {
   useEffect,
   useRef
 } = React;
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 const GLOBAL_CSS = `
 :root{
@@ -150,6 +153,26 @@ function CountUp({
   const [val, setVal] = useState(0);
   const ref = useRef(null);
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      const obj = {
+        count: 0
+      };
+      gsap.to(obj, {
+        count: to,
+        duration: dur / 1000,
+        ease: 'power2.out',
+        onUpdate: () => setVal(obj.count),
+        onComplete: () => setVal(to),
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true
+        }
+      });
+      return;
+    }
     let raf,
       start,
       done = false;
@@ -175,7 +198,7 @@ function CountUp({
     }, {
       threshold: .5
     });
-    if (ref.current) io.observe(ref.current);
+    io.observe(el);
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
@@ -243,6 +266,40 @@ function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      if (clip) {
+        gsap.fromTo(el, {
+          clipPath: 'inset(0 100% 0 0)'
+        }, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 1.1,
+          delay: delay / 1000,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        });
+      } else {
+        gsap.fromTo(el, {
+          opacity: 0,
+          y: 26
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          delay: delay / 1000,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none'
+          }
+        });
+      }
+      return;
+    }
     if (typeof IntersectionObserver === 'undefined') {
       el.classList.add('in');
       return;
@@ -1153,6 +1210,44 @@ function PageHero({
   img,
   align = 'left'
 }) {
+  const kickerRef = useRef(null);
+  const titleRef = useRef(null);
+  const subRef = useRef(null);
+  useEffect(() => {
+    if (typeof gsap === 'undefined') return;
+    const tl = gsap.timeline({
+      delay: 0.15
+    });
+    tl.fromTo(kickerRef.current, {
+      opacity: 0,
+      y: 14
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power2.out'
+    });
+    tl.fromTo(titleRef.current, {
+      opacity: 0,
+      y: 36
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1.05,
+      ease: 'power3.out'
+    }, '-=0.4');
+    if (subRef.current) {
+      tl.fromTo(subRef.current, {
+        opacity: 0,
+        y: 22
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, '-=0.55');
+    }
+  }, []);
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -1193,6 +1288,7 @@ function PageHero({
       textAlign: align
     }
   }, /*#__PURE__*/React.createElement("div", {
+    ref: kickerRef,
     className: "eyebrow",
     style: {
       marginBottom: 22,
@@ -1206,6 +1302,7 @@ function PageHero({
       background: 'var(--accent-2)'
     }
   }), kicker), /*#__PURE__*/React.createElement("h1", {
+    ref: titleRef,
     className: "disp",
     style: {
       color: '#fff',
@@ -1214,6 +1311,7 @@ function PageHero({
       margin: align === 'center' ? '0 auto' : 0
     }
   }, title), sub && /*#__PURE__*/React.createElement("p", {
+    ref: subRef,
     style: {
       marginTop: 24,
       fontSize: 'clamp(16px,1.4vw,19px)',
