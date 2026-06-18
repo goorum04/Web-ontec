@@ -59,11 +59,13 @@ a{color:inherit;}
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;
   font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;
-  padding:15px 26px;border-radius:2px;border:1px solid transparent;transition:transform .3s cubic-bezier(.2,.7,.3,1),background .25s,color .25s,border-color .25s;}
-.btn-primary{background:var(--accent);color:var(--accent-ink);}
-.btn-primary:hover{transform:translateY(-2px);}
+  padding:15px 26px;border-radius:2px;border:1px solid transparent;transition:transform .3s cubic-bezier(.2,.7,.3,1),background .25s,color .25s,border-color .25s,box-shadow .25s;}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 rgba(69,224,127,.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(69,224,127,.25),0 0 20px rgba(69,224,127,.3);}
+.btn-primary:active{transform:translateY(-1px);}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
-.btn-ghost:hover{border-color:var(--ink);background:rgba(236,235,227,.04);}
+.btn-ghost:hover{border-color:var(--accent);background:${A(4)};color:var(--accent);transform:translateX(2px);}
+.btn-ghost:active{transform:translateX(0);}
 
 /* reveal on scroll */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s cubic-bezier(.2,.7,.3,1),transform 1s cubic-bezier(.2,.7,.3,1);}
@@ -83,8 +85,8 @@ a{color:inherit;}
 
 /* media card */
 .mcard{position:relative;overflow:hidden;border-radius:3px;border:1px solid var(--line);background:var(--panel);
-  text-decoration:none;display:block;transition:border-color .4s,transform .5s cubic-bezier(.2,.7,.3,1);}
-.mcard:hover{border-color:${A(45)};}
+  text-decoration:none;display:block;transition:border-color .4s,transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s;box-shadow:0 4px 12px rgba(0,0,0,.3);}
+.mcard:hover{border-color:${A(45)};transform:translateY(-8px);box-shadow:0 24px 48px rgba(69,224,127,.15),0 8px 20px rgba(0,0,0,.4);}
 .mcard .mc-img,.mcard img{transition:transform 1s cubic-bezier(.2,.7,.3,1);}
 .mcard:hover img{transform:scale(var(--zoom));}
 .mc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.3) 42%,rgba(8,9,10,.94) 100%);}
@@ -103,13 +105,19 @@ a{color:inherit;}
 .kb{animation:kenburns 26s ease-in-out infinite alternate;will-change:transform;}
 @keyframes heroslide{0%{opacity:0;}4%{opacity:1;}22%{opacity:1;}27%{opacity:0;}100%{opacity:0;}}
 .heroslide{position:absolute;inset:0;opacity:0;animation:heroslide 32s linear infinite;will-change:opacity;}
-@media (prefers-reduced-motion:reduce){.kb{animation:none;}.heroslide{animation:none;}.heroslide:first-child{opacity:1;}}
+@keyframes textIn{0%{opacity:0;transform:translateY(12px);}100%{opacity:1;transform:none;}}
+.disp,.kicker,.eyebrow{animation:textIn .8s cubic-bezier(.2,.7,.3,1) both;}
+.reveal.in .disp{animation:textIn 1s cubic-bezier(.2,.7,.3,1) both;}
+@media (prefers-reduced-motion:reduce){.kb{animation:none;}.heroslide{animation:none;}.heroslide:first-child{opacity:1;}.disp,.kicker,.eyebrow{animation:none;}}
 .heromedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;}
 .heromedia video.ready{opacity:1;}
 
-.linkline{position:relative;text-decoration:none;color:var(--mut);transition:color .25s;}
-.linkline:hover{color:var(--ink);}
-.hover-row{transition:background .3s,padding .3s,color .25s;}
+.linkline{position:relative;text-decoration:none;color:var(--mut);transition:color .25s;display:inline-block;}
+.linkline::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s cubic-bezier(.2,.7,.3,1);}
+.linkline:hover{color:var(--accent);}
+.linkline:hover::after{width:100%;}
+.hover-row{transition:background .3s,padding .3s,color .25s,box-shadow .3s;border-radius:2px;}
+.hover-row:hover{background:${A(6)};box-shadow:inset 0 0 0 1px ${A(20)};}
 
 /* ── custom cursor (premium): canvas trail + dot + lerped ring ── */
 .cursor-canvas{position:fixed;inset:0;pointer-events:none;z-index:9998;}
