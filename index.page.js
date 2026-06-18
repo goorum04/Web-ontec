@@ -2076,8 +2076,8 @@ function Hero() {
       background: 'var(--panel-dark)'
     }
   }, /*#__PURE__*/React.createElement(Cine, {
-    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop",
-    alt: "Infraestructura tecnològica",
+    src: "https://images.unsplash.com/photo-1546616722-2b46187dd255?w=2000&q=80&auto=format&fit=crop",
+    alt: "Muntanyes d'Andorra",
     shade: false,
     parallax: true,
     style: {
@@ -2243,7 +2243,7 @@ const SOLS = [{
   n: '01',
   icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
   desc: 'Protecció integral de la infraestructura digital.',
-  img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1100&q=80&auto=format&fit=crop'
+  img: 'https://images.unsplash.com/photo-1611917436955-d21c1999520c?w=1100&q=80&auto=format&fit=crop'
 }, {
   t: 'Comunicacions',
   href: 'solucions.html#comunicacions',
@@ -2455,8 +2455,8 @@ function CaseBatllia() {
       marginBottom: 18
     }
   }, /*#__PURE__*/React.createElement(Cine, {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop",
-    alt: "Sala de videoconferència la Batllia",
+    src: "https://images.unsplash.com/photo-1634141428610-1781a3862a9b?w=900&q=80&auto=format&fit=crop",
+    alt: "Andorra la Vella",
     style: {
       height: 320
     }

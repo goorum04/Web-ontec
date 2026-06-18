@@ -46,7 +46,7 @@ function Hero() {
   }, []);
   return (
     <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'flex-end',overflow:'hidden',background:'var(--panel-dark)'}}>
-      <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Infraestructura tecnològica" shade={false} parallax style={{position:'absolute',inset:0}}/>
+      <Cine src="https://images.unsplash.com/photo-1546616722-2b46187dd255?w=2000&q=80&auto=format&fit=crop" alt="Muntanyes d'Andorra" shade={false} parallax style={{position:'absolute',inset:0}}/>
       <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(8,18,12,.62) 0%,rgba(8,18,12,.34) 32%,rgba(8,18,12,.78) 100%)'}}/>
       <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,rgba(8,18,12,.82) 0%,rgba(8,18,12,.4) 48%,transparent 82%)'}}/>
       <div className="wrap-wide" style={{position:'relative',zIndex:2,width:'100%',paddingBottom:96,paddingTop:150,display:'flex',justifyContent:'space-between',alignItems:'flex-end',gap:48,flexWrap:'wrap'}}>
@@ -101,7 +101,7 @@ function StatBand() {
 }
 
 const SOLS=[
-  {t:'IT Security',href:'solucions.html#it-security',n:'01',icon:<Icons.Shield/>,desc:'Protecció integral de la infraestructura digital.',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1100&q=80&auto=format&fit=crop'},
+  {t:'IT Security',href:'solucions.html#it-security',n:'01',icon:<Icons.Shield/>,desc:'Protecció integral de la infraestructura digital.',img:'https://images.unsplash.com/photo-1611917436955-d21c1999520c?w=1100&q=80&auto=format&fit=crop'},
   {t:'Comunicacions',href:'solucions.html#comunicacions',n:'02',icon:<Icons.Wifi/>,desc:"Connectivitat d'alt rendiment per a qualsevol entorn.",img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1100&q=80&auto=format&fit=crop'},
   {t:'Automatització',href:'solucions.html#automatitzacio',n:'03',icon:<Icons.Cpu/>,desc:"Sistemes intel·ligents per a edificis i llars.",img:'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1100&q=80&auto=format&fit=crop'},
   {t:'Audiovisuals',href:'solucions.html#audiovisuals',n:'04',icon:<Icons.Screen/>,desc:'Sistemes A/V professionals per a qualsevol espai.',img:'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1100&q=80&auto=format&fit=crop'},
@@ -167,7 +167,7 @@ function CaseBatllia() {
             <Reveal delay={120}>
               <Tilt max={7}>
                 <div className="glowborder" style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
-                  <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferència la Batllia" style={{height:320}}/>
+                  <Cine src="https://images.unsplash.com/photo-1634141428610-1781a3862a9b?w=900&q=80&auto=format&fit=crop" alt="Andorra la Vella" style={{height:320}}/>
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
