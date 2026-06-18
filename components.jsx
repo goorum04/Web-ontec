@@ -110,6 +110,17 @@ a{color:inherit;}
 .linkline{position:relative;text-decoration:none;color:var(--mut);transition:color .25s;}
 .linkline:hover{color:var(--ink);}
 .hover-row{transition:background .3s,padding .3s,color .25s;}
+
+/* ── custom cursor (premium): canvas trail + dot + lerped ring ── */
+.cursor-canvas{position:fixed;inset:0;pointer-events:none;z-index:9998;}
+.cursor-ring,.cursor-dot2{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;
+  mix-blend-mode:difference;will-change:transform;}
+.cursor-dot2{width:6px;height:6px;margin:-3px 0 0 -3px;background:#fff;}
+.cursor-ring{width:36px;height:36px;margin:-18px 0 0 -18px;border:1px solid rgba(255,255,255,.85);
+  transition:opacity .3s ease;}
+@media (hover:hover) and (pointer:fine){ html.has-cursor, html.has-cursor *{cursor:none !important;} }
+@media (hover:none),(pointer:coarse){ .cursor-canvas,.cursor-ring,.cursor-dot2{display:none!important;} }
+@media (prefers-reduced-motion:reduce){ .cursor-canvas{display:none!important;} }
 `;
 
 /* ── Reveal: scroll-triggered fade/slide wrapper ── */
@@ -369,11 +380,126 @@ function PageHero({ kicker, title, sub, img, align = 'left', index }) {
   );
 }
 
+/* ── Premium cursor system (canvas trail + lerped ring + velocity particles) ── */
+function usePremiumCursor() {
+  const canvasRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
+  const ringRef = useRef(null);
+  const dotRef = useRef(null);
+  const ringPosRef = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
+  const particlesRef = useRef([]);
+  const ctxRef = useRef(null);
+  const rafRef = useRef(null);
+
+  useEffect(() => {
+    const canv = document.getElementById('cursor-canvas');
+    const ring = document.getElementById('cursor-ring');
+    const dot = document.getElementById('cursor-dot');
+    if (!canv || !ring || !dot) return;
+
+    canvasRef.current = canv;
+    ringRef.current = ring;
+    dotRef.current = dot;
+    const ctx = canv.getContext('2d');
+    ctxRef.current = ctx;
+
+    // resize canvas to match window
+    const resize = () => {
+      canv.width = window.innerWidth;
+      canv.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles = [];
+
+    const mousemove = (e) => {
+      const { clientX: x, clientY: y } = e;
+      const prev = mouseRef.current;
+      mouseRef.current = { x, y, vx: x - prev.x, vy: y - prev.y };
+      ringPosRef.current.tx = x;
+      ringPosRef.current.ty = y;
+
+      // spawn particles on movement
+      const speed = Math.sqrt(prev.vx ** 2 + prev.vy ** 2);
+      if (speed > 1) {
+        for (let i = 0; i < 2; i++) {
+          particles.push({
+            x: x + (Math.random() - 0.5) * 8,
+            y: y + (Math.random() - 0.5) * 8,
+            vx: (Math.random() - 0.5) * 3,
+            vy: (Math.random() - 0.5) * 3 - 1.5,
+            life: 1,
+            size: Math.random() * 2 + 1,
+          });
+        }
+      }
+      particlesRef.current = particles;
+    };
+
+    const animate = () => {
+      const w = canv.width, h = canv.height;
+      ctx.clearRect(0, 0, w, h);
+
+      // update and draw particles
+      const alive = [];
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.15; // gravity
+        p.life -= 0.02;
+
+        if (p.life > 0) {
+          ctx.fillStyle = `rgba(69,224,127,${p.life * 0.6})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          alive.push(p);
+        }
+      }
+      particlesRef.current = alive;
+
+      // lerp ring to target position
+      const { x: px, y: py, tx, ty } = ringPosRef.current;
+      ringPosRef.current.x = px + (tx - px) * 0.15;
+      ringPosRef.current.y = py + (ty - py) * 0.15;
+
+      // position ring & dot
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ringPosRef.current.x}px, ${ringPosRef.current.y}px)`;
+      }
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${mouseRef.current.x}px, ${mouseRef.current.y}px)`;
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('mousemove', mousemove);
+    const raf = requestAnimationFrame(animate);
+    rafRef.current = raf;
+
+    // add cursor class to html for display
+    document.documentElement.classList.add('has-cursor');
+
+    return () => {
+      window.removeEventListener('mousemove', mousemove);
+      window.removeEventListener('resize', resize);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      document.documentElement.classList.remove('has-cursor');
+    };
+  }, []);
+}
+
 /* ── Page shell ── */
 function PageShell({ activePage, children }) {
+  usePremiumCursor();
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg)' }}>
       <style>{GLOBAL_CSS}</style>
+      <canvas id="cursor-canvas" className="cursor-canvas" />
+      <div id="cursor-ring" className="cursor-ring" />
+      <div id="cursor-dot" className="cursor-dot2" />
       <div className="atmos" /><div className="scan" />
       <Nav activePage={activePage} />
       <main style={{ flex: 1 }}>{children}</main>
