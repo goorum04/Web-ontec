@@ -1,38 +1,28 @@
-/* ── Terminal status card ── */
-function StatusCard() {
-  const lines = [
-    { t:0,    text:'$ ontec --init sistema', c:'#fff' },
-    { t:600,  text:'> carregant mòduls…', c:'var(--mut)' },
-    { t:1050, text:'✓ IT Security', c:'var(--accent)' },
-    { t:1400, text:'✓ Comunicacions', c:'var(--accent)' },
-    { t:1750, text:'✓ Automatització', c:'var(--accent)' },
-    { t:2100, text:'✓ Audiovisuals', c:'var(--accent)' },
-    { t:2450, text:'✓ Videoconferència', c:'var(--accent)' },
-    { t:2900, text:'> sistema llest · Andorra', c:'var(--mut)' },
+/* ── Hero areas card (replaces the old terminal card) ── */
+function HeroAreas() {
+  const areas=[
+    {icon:<Icons.Shield/>,t:'IT Security'},
+    {icon:<Icons.Wifi/>,t:'Comunicacions'},
+    {icon:<Icons.Cpu/>,t:'Automatització'},
+    {icon:<Icons.Video/>,t:'Audiovisuals'},
   ];
-  const [vis,setVis]=useState(0);
-  const [cur,setCur]=useState(true);
-  useEffect(()=>{
-    const ids=lines.map((l,i)=>setTimeout(()=>setVis(v=>Math.max(v,i+1)),l.t));
-    const b=setInterval(()=>setCur(v=>!v),530);
-    return()=>{ ids.forEach(clearTimeout);clearInterval(b); };
-  },[]);
   return (
-    <div className="glowborder" style={{width:360,maxWidth:'90vw',borderRadius:16,overflow:'hidden',border:'1px solid var(--line)',background:'rgba(7,7,8,.66)',backdropFilter:'blur(18px)',WebkitBackdropFilter:'blur(18px)',boxShadow:'0 30px 90px rgba(0,0,0,.7)'}}>
-      <div style={{display:'flex',alignItems:'center',gap:8,padding:'12px 16px',borderBottom:'1px solid var(--line-soft)'}}>
-        <div style={{display:'flex',gap:6}}>{['#ff5f57','#ffbd2e','#28c840'].map(c=><div key={c} style={{width:9,height:9,borderRadius:'50%',background:c,opacity:.85}}/>)}</div>
-        <span style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--faint)',letterSpacing:'.08em',marginLeft:6}}>ontec://status</span>
-        <div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:7}}>
-          <span style={{position:'relative',width:7,height:7}}>
-            <span style={{position:'absolute',inset:0,borderRadius:'50%',background:'var(--accent)'}}/>
-            <span style={{position:'absolute',inset:0,borderRadius:'50%',background:'var(--accent)',animation:'pulse-ring 2s ease-out infinite'}}/>
-          </span>
-          <span style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--accent)',letterSpacing:'.1em'}}>LIVE</span>
-        </div>
+    <div style={{width:340,maxWidth:'90vw',borderRadius:16,overflow:'hidden',
+      border:'1px solid rgba(255,255,255,.14)',background:'rgba(16,33,26,.55)',
+      backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)',boxShadow:'0 24px 70px rgba(0,0,0,.4)'}}>
+      <div style={{padding:'18px 22px',borderBottom:'1px solid rgba(255,255,255,.1)'}}>
+        <div style={{fontFamily:'var(--mono)',fontSize:10.5,letterSpacing:'.16em',textTransform:'uppercase',color:'var(--accent-2)'}}>Àrees de servei</div>
+        <div style={{marginTop:6,fontFamily:'var(--disp)',fontWeight:700,fontSize:19,color:'#fff'}}>Un sol integrador</div>
       </div>
-      <div style={{padding:'18px 20px',minHeight:200,fontFamily:'var(--mono)',fontSize:12.5,lineHeight:2}}>
-        {lines.slice(0,vis).map((l,i)=><div key={i} style={{color:l.c}}>{l.text}</div>)}
-        {vis<lines.length && <span style={{display:'inline-block',width:7,height:14,background:'var(--accent)',opacity:cur?1:0,verticalAlign:'middle'}}/>}
+      <div style={{padding:'10px 12px'}}>
+        {areas.map((a)=>(
+          <div key={a.t} style={{display:'flex',alignItems:'center',gap:14,padding:'13px 12px',borderRadius:10}}>
+            <span style={{width:38,height:38,borderRadius:9,display:'flex',alignItems:'center',justifyContent:'center',
+              color:'var(--accent-2)',background:'rgba(142,198,63,.12)',border:'1px solid rgba(142,198,63,.22)',flexShrink:0}}>{a.icon}</span>
+            <span style={{fontSize:15,color:'rgba(255,255,255,.92)',fontWeight:500}}>{a.t}</span>
+            <span style={{marginLeft:'auto',color:'var(--accent-2)'}}><Icons.Check/></span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -41,40 +31,31 @@ function StatusCard() {
 /* ── Hero ── */
 function Hero() {
   return (
-    <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'flex-end',overflow:'hidden'}}>
-      <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Infraestructura tecnològica" shade={false} style={{position:'absolute',inset:0}}/>
-      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.38) 30%,rgba(0,0,0,.62) 62%,#000 100%)'}}/>
-      <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 42%,transparent 80%)'}}/>
-      <div style={{position:'absolute',inset:0,backgroundImage:`linear-gradient(${A(7)} 1px,transparent 1px),linear-gradient(90deg,${A(7)} 1px,transparent 1px)`,backgroundSize:'88px 88px',maskImage:'radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent)',animation:'gridmove 6s linear infinite'}}/>
-      <ParticleField style={{opacity:.85}}/>
-      <div style={{position:'absolute',left:0,right:0,top:0,height:1,background:`linear-gradient(90deg,transparent,${A(45)},transparent)`,animation:'scanline 8s linear infinite'}}/>
-      <div className="wrap-wide" style={{position:'relative',zIndex:2,width:'100%',paddingBottom:90,paddingTop:140}}>
-        <div style={{maxWidth:1120}}>
-          <div className="reveal in eyebrow" style={{marginBottom:26}}>
-            <span style={{width:7,height:7,borderRadius:'50%',background:'var(--accent)',boxShadow:'0 0 10px var(--accent)'}}/>
+    <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'flex-end',overflow:'hidden',background:'var(--panel-dark)'}}>
+      <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Infraestructura tecnològica" shade={false} parallax style={{position:'absolute',inset:0}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(8,18,12,.62) 0%,rgba(8,18,12,.34) 32%,rgba(8,18,12,.78) 100%)'}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,rgba(8,18,12,.82) 0%,rgba(8,18,12,.4) 48%,transparent 82%)'}}/>
+      <div className="wrap-wide" style={{position:'relative',zIndex:2,width:'100%',paddingBottom:96,paddingTop:150,display:'flex',justifyContent:'space-between',alignItems:'flex-end',gap:48,flexWrap:'wrap'}}>
+        <div style={{maxWidth:760}}>
+          <div className="eyebrow" style={{marginBottom:26,color:'rgba(255,255,255,.8)'}}>
+            <span style={{width:22,height:2,background:'var(--accent-2)'}}/>
             Andorra · Distribució tecnològica des de 2016
           </div>
-          <h1 className="disp glow-text" style={{fontSize:'clamp(50px,7.8vw,128px)',lineHeight:.9}}>
-            <Scramble text="Sistemes"/><br/><Scramble text="tecnològics" delay={120}/><br/><span style={{color:'var(--accent)'}}><Scramble text="avançats" delay={240}/></span>
+          <h1 className="disp" style={{color:'#fff',fontSize:'clamp(44px,6.6vw,104px)',lineHeight:1.02}}>
+            Sistemes tecnològics<br/><span style={{color:'var(--accent-2)'}}>avançats</span>
           </h1>
-          <p style={{marginTop:34,fontSize:'clamp(16px,1.5vw,21px)',color:'var(--mut)',lineHeight:1.7,maxWidth:580}}>
+          <p style={{marginTop:30,fontSize:'clamp(16px,1.5vw,20px)',color:'rgba(255,255,255,.76)',lineHeight:1.7,maxWidth:560}}>
             Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses,
-            arquitectures, ingenierías i instal·ladors a Andorra.
+            arquitectures, enginyeries i instal·ladors a Andorra.
           </p>
-          <div style={{display:'flex',gap:14,marginTop:42,flexWrap:'wrap'}}>
-            <Magnetic><a href="solucions.html" className="btn btn-primary">Veure solucions <Icons.UpRight s={15}/></a></Magnetic>
-            <Magnetic><a href="contacta.html" className="btn btn-ghost">Parla amb un expert</a></Magnetic>
+          <div style={{display:'flex',gap:14,marginTop:40,flexWrap:'wrap'}}>
+            <a href="solucions.html" className="btn btn-primary">Veure solucions <Icons.UpRight s={15}/></a>
+            <a href="contacta.html" className="btn btn-light">Parla amb un expert</a>
           </div>
         </div>
+        <div className="hero-areas"><HeroAreas/></div>
       </div>
-      <div style={{position:'absolute',right:'max(40px,calc((100vw - 1680px)/2 + 40px))',top:'28%',zIndex:3,animation:'floaty 7s ease-in-out infinite'}} className="hero-status">
-        <StatusCard/>
-      </div>
-      <div style={{position:'absolute',bottom:34,left:'50%',transform:'translateX(-50%)',zIndex:3,display:'flex',flexDirection:'column',alignItems:'center',gap:8,opacity:.6}}>
-        <span style={{fontFamily:'var(--mono)',fontSize:9.5,letterSpacing:'.2em',textTransform:'uppercase',color:'var(--mut)'}}>Scroll</span>
-        <span style={{width:1,height:38,background:`linear-gradient(180deg,var(--accent),transparent)`}}/>
-      </div>
-      <style>{`@media(max-width:1100px){.hero-status{display:none;}}`}</style>
+      <style>{`@media(max-width:1100px){.hero-areas{display:none;}}`}</style>
     </section>
   );
 }
@@ -89,11 +70,11 @@ function StatBand() {
     {to:4,pre:'< ',suf:'h',l:'Temps de resposta'},
   ];
   return (
-    <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'rgba(8,8,9,.5)'}}>
+    <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'var(--panel)'}}>
       <div className="wrap-wide stat-wrap" style={{display:'grid',gridTemplateColumns:`repeat(${stats.length},1fr)`,gap:0}}>
         {stats.map((s,i)=>(
-          <Reveal key={i} delay={i*70} style={{padding:'46px 28px',borderRight:i<stats.length-1?'1px solid var(--line-soft)':'none'}}>
-            <div className="disp glow-text" style={{fontSize:'clamp(34px,4vw,64px)',color:'var(--accent)'}}>
+          <Reveal key={i} delay={i*70} style={{padding:'46px 28px',borderRight:i<stats.length-1?'1px solid var(--line)':'none'}}>
+            <div className="disp" style={{fontSize:'clamp(34px,4vw,64px)',color:'var(--accent-deep)'}}>
               <CountUp to={s.to} suffix={s.suf} prefix={s.pre||''} decimals={s.dec||0}/>
             </div>
             <div style={{marginTop:8,fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--mut)'}}>{s.l}</div>
@@ -128,13 +109,13 @@ function SolutionsGallery() {
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.4) 45%,rgba(0,0,0,.92) 100%)'}}/>
                   <div style={{position:'relative',zIndex:1,height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between',padding:'30px 32px'}}>
                     <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
-                      <div style={{width:54,height:54,borderRadius:13,background:A(16),border:`1px solid ${A(34)}`,backdropFilter:'blur(8px)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',boxShadow:`0 0 30px ${A(25)}`}}>{s.icon}</div>
-                      <span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--mut)',letterSpacing:'.1em'}}>{s.n}</span>
+                      <div style={{width:54,height:54,borderRadius:12,background:'rgba(142,198,63,.16)',border:'1px solid rgba(142,198,63,.3)',backdropFilter:'blur(8px)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent-2)'}}>{s.icon}</div>
+                      <span style={{fontFamily:'var(--mono)',fontSize:11,color:'rgba(255,255,255,.6)',letterSpacing:'.1em'}}>{s.n}</span>
                     </div>
                     <div>
-                      <h3 className="disp" style={{fontSize:'clamp(28px,3vw,42px)',marginBottom:10}}>{s.t}</h3>
-                      <p style={{fontSize:14.5,color:'rgba(255,255,255,.66)',lineHeight:1.6,maxWidth:360}}>{s.desc}</p>
-                      <div style={{marginTop:18,display:'inline-flex',alignItems:'center',gap:8,fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--accent)'}}>Explorar <Icons.Arrow s={13}/></div>
+                      <h3 className="disp" style={{fontSize:'clamp(28px,3vw,42px)',color:'#fff',marginBottom:10}}>{s.t}</h3>
+                      <p style={{fontSize:14.5,color:'rgba(255,255,255,.7)',lineHeight:1.6,maxWidth:360}}>{s.desc}</p>
+                      <div style={{marginTop:18,display:'inline-flex',alignItems:'center',gap:8,fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--accent-2)'}}>Explorar <Icons.Arrow s={13}/></div>
                     </div>
                   </div>
                 </a>
@@ -151,13 +132,12 @@ function SolutionsGallery() {
 function CaseBatllia() {
   const specs=[['Sistema','Videoconferència HD'],['Ubicació',"la Batllia d'Andorra"],['Equipament','Cisco Webex + Sony PTZ'],['Cobertura','3 sales de reunions'],['Integració','MS Teams / Zoom'],['Suport','24/7 garantit']];
   return (
-    <section style={{position:'relative',padding:'120px 0',background:'rgba(11,11,12,.7)',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',overflow:'hidden'}}>
-      <div style={{position:'absolute',top:'-30%',right:'-10%',width:600,height:600,background:`radial-gradient(circle,${A(10)},transparent 70%)`,filter:'blur(40px)',pointerEvents:'none'}}/>
+    <section style={{position:'relative',padding:'120px 0',background:'var(--panel)',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',overflow:'hidden'}}>
       <div className="wrap-wide" style={{position:'relative'}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="case-grid">
           <Reveal>
             <SectionLabel>Cas d'èxit</SectionLabel>
-            <h2 className="disp glow-text" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>La Batllia<br/>d'Andorra</h2>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>La Batllia<br/>d'Andorra</h2>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:24}}>
               Instal·lació integral del sistema de videoconferència professional per als espais institucionals
               de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions
@@ -177,10 +157,10 @@ function CaseBatllia() {
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
-                      <div className="kicker" style={{marginBottom:4}}>Projecte completat</div>
-                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'var(--ink)'}}>La Batllia d'Andorra</div>
+                      <div style={{fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.2em',textTransform:'uppercase',color:'var(--accent-2)',marginBottom:4}}>Projecte completat</div>
+                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'#fff'}}>La Batllia d'Andorra</div>
                     </div>
-                    <div style={{width:44,height:44,borderRadius:'50%',background:A(20),border:`1px solid ${A(40)}`,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)'}}><Icons.Video/></div>
+                    <div style={{width:44,height:44,borderRadius:'50%',background:'rgba(142,198,63,.2)',border:'1px solid rgba(142,198,63,.4)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent-2)'}}><Icons.Video/></div>
                   </div>
                 </div>
               </Tilt>
@@ -277,9 +257,9 @@ function CiberseguretatIncibe() {
 function PartnersMarquee() {
   const partners=['Fortinet','Cisco','Ubiquiti','KNX','Crestron','HPE Aruba','Palo Alto','Lutron','Samsung','Sony','QSC','Shure'];
   return (
-    <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'rgba(11,11,12,.6)'}}>
+    <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'var(--panel)'}}>
       <div className="wrap" style={{paddingTop:28,paddingBottom:14}}>
-        <div className="kicker" style={{color:'var(--faint)',textAlign:'center'}}>Fabricants i partners certificats</div>
+        <div className="kicker" style={{textAlign:'center'}}>Fabricants i partners certificats</div>
       </div>
       <div style={{paddingBottom:30}}><Marquee items={partners}/></div>
     </section>
@@ -358,21 +338,19 @@ function BlogPreview() {
 
 function CtaBig() {
   return (
-    <section style={{position:'relative',overflow:'hidden',borderTop:'1px solid var(--line)'}}>
+    <section style={{position:'relative',overflow:'hidden',background:'var(--panel-dark)'}}>
       <Cine src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80&auto=format&fit=crop" alt="" shade={false} parallax style={{position:'absolute',inset:0}}/>
-      <div style={{position:'absolute',inset:0,background:`linear-gradient(180deg,#000 0%,${A(8)} 50%,#000 100%)`}}/>
-      <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse 60% 80% at 50% 50%,rgba(0,0,0,.2),#000)'}}/>
-      <ParticleField style={{opacity:.5}}/>
-      <div className="wrap" style={{position:'relative',zIndex:1,padding:'150px 40px',textAlign:'center'}}>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(8,18,12,.86) 0%,rgba(8,18,12,.7) 50%,rgba(8,18,12,.9) 100%)'}}/>
+      <div className="wrap" style={{position:'relative',zIndex:1,padding:'140px 40px',textAlign:'center'}}>
         <Reveal>
-          <div className="kicker" style={{justifyContent:'center',display:'flex',marginBottom:22}}>Comencem?</div>
-          <h2 className="disp glow-text" style={{fontSize:'clamp(44px,8vw,140px)'}}>Tens un projecte<br/>en ment?</h2>
-          <p style={{margin:'28px auto 0',maxWidth:540,fontSize:18,color:'var(--mut)',lineHeight:1.7}}>
+          <div className="kicker" style={{justifyContent:'center',display:'flex',marginBottom:22,color:'var(--accent-2)'}}>Comencem?</div>
+          <h2 className="disp" style={{color:'#fff',fontSize:'clamp(40px,7vw,112px)'}}>Tens un projecte<br/>en ment?</h2>
+          <p style={{margin:'28px auto 0',maxWidth:540,fontSize:18,color:'rgba(255,255,255,.76)',lineHeight:1.7}}>
             Explica'ns les teves necessitats i trobarem la millor solució tecnològica per al teu projecte.
           </p>
           <div style={{display:'flex',gap:14,marginTop:42,justifyContent:'center',flexWrap:'wrap'}}>
-            <Magnetic><a href="contacta.html" className="btn btn-primary">Contacta ara <Icons.UpRight s={15}/></a></Magnetic>
-            <Magnetic><a href="tel:+37688559" className="btn btn-ghost"><Icons.Phone/> +376 88 55 99</a></Magnetic>
+            <a href="contacta.html" className="btn btn-primary">Contacta ara <Icons.UpRight s={15}/></a>
+            <a href="tel:+37688559" className="btn btn-light"><Icons.Phone/> +376 88 55 99</a>
           </div>
         </Reveal>
       </div>

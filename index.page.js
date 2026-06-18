@@ -1,8 +1,8 @@
 // ════════════════════════════════════════════════════════════════════════════
-// Ontec — shared design system (cinematic / high-impact)
-// Tokens + global motion (aurora, particles, cursor spotlight, scroll progress)
-// + Reveal, Scramble, CountUp, MagneticButton, TiltCard, Marquee, Icons,
-//   Tag, SectionLabel, Nav, Footer, Cine, PageHero, PageShell.
+// Ontec — shared design system (corporate / professional)
+// Light, trustworthy palette built on the real logo green. No neon, no
+// particles, no scanlines. Moderate motion only: scroll reveals, count-ups,
+// soft image zoom and discreet hover states.
 // ════════════════════════════════════════════════════════════════════════════
 
 const {
@@ -13,131 +13,84 @@ const {
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 const GLOBAL_CSS = `
 :root{
-  --bg:#000; --panel:#0b0b0c; --panel-2:#101011;
-  --ink:#f4f5f3; --mut:rgba(244,245,243,.54); --faint:rgba(244,245,243,.3);
-  --line:rgba(255,255,255,.10); --line-soft:rgba(255,255,255,.06);
-  --accent:#39ff6e; --accent-ink:#04130a;
+  --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
+  --ink:#13211b; --mut:rgba(19,33,27,.64); --faint:rgba(19,33,27,.42);
+  --line:rgba(19,33,27,.12); --line-soft:rgba(19,33,27,.07);
+  --accent:#4f9e2f; --accent-2:#8ec63f; --accent-deep:#3a7a22; --accent-ink:#ffffff;
   --disp:'Archivo',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'Space Mono',monospace;
-  --case:uppercase; --dtrack:-0.035em; --dweight:840;
-  --glow:1; --grain:.5; --zoom:1.07; --marquee:38s; --scan:0;
-  --mx:50vw; --my:50vh;
+  --dtrack:-0.025em; --dweight:800;
+  --zoom:1.06; --marquee:48s;
 }
-[data-mood="acid"]  { --accent:#39ff6e; --accent-ink:#04130a; }
-[data-mood="ice"]   { --accent:#41dfff; --accent-ink:#03161c; }
-[data-mood="flare"] { --accent:#ff5836; --accent-ink:#190603; }
-[data-mood="mono"]  { --accent:#f4f5f3; --accent-ink:#000; }
-[data-voice="editorial"]{ --case:uppercase; --dweight:900; --dtrack:-0.04em; }
-[data-voice="modern"]   { --case:none;      --dweight:780; --dtrack:-0.03em; }
-[data-voice="soft"]     { --case:none;      --dweight:640; --dtrack:-0.018em; --disp:'Space Grotesk',sans-serif; }
-[data-intensity="calm"]     { --glow:.35; --grain:.12; --zoom:1.03; --marquee:64s; --scan:0; }
-[data-intensity="cinematic"]{ --glow:1;   --grain:.5;  --zoom:1.07; --marquee:38s; --scan:0; }
-[data-intensity="hyper"]    { --glow:1.6; --grain:.85; --zoom:1.14; --marquee:18s; --scan:1; }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 ::selection{background:var(--accent);color:var(--accent-ink);}
-::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#000;}
-::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--panel);}
+::-webkit-scrollbar-thumb{background:rgba(19,33,27,.22);border-radius:5px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent);}
 input,textarea,button,select{font-family:var(--body);}
 a{color:inherit;}
 
-.wrap{max-width:1320px;margin:0 auto;padding:0 40px;}
-.wrap-wide{max-width:1680px;margin:0 auto;padding:0 40px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+.wrap-wide{max-width:1440px;margin:0 auto;padding:0 40px;}
 
 .disp{font-family:var(--disp);font-weight:var(--dweight);letter-spacing:var(--dtrack);
-  text-transform:var(--case);line-height:.96;color:var(--ink);text-wrap:balance;}
-.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);}
+  text-transform:none;line-height:1.04;color:var(--ink);text-wrap:balance;}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep);}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--mut);}
-.glow-text{text-shadow:0 0 40px ${A(35)};}
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mut);}
+.glow-text{}
 
 /* buttons */
 .btn{position:relative;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;
-  font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;
-  padding:15px 26px;border-radius:999px;border:1px solid transparent;overflow:hidden;
-  transition:transform .25s cubic-bezier(.2,.7,.3,1),background .2s,color .2s,box-shadow .25s,border-color .2s;}
-.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 0 var(--accent);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 50px ${A(50)},0 0 0 1px ${A(60)};}
-.btn-primary::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);transition:left .6s ease;}
-.btn-primary:hover::after{left:140%;}
-.btn-ghost{background:rgba(255,255,255,.02);color:var(--ink);border-color:var(--line);}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 40px ${A(18)};}
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  padding:15px 26px;border-radius:10px;border:1px solid transparent;
+  transition:transform .2s ease,background .2s,color .2s,box-shadow .25s,border-color .2s;}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 18px ${A(28)};}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:0 12px 30px ${A(40)};}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep);transform:translateY(-2px);}
+.btn-light{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.34);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.btn-light:hover{background:#fff;color:var(--accent-deep);border-color:#fff;transform:translateY(-2px);}
 
 /* reveal on scroll */
-.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.3,1),transform 1s cubic-bezier(.2,.7,.3,1);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1);}
 .reveal.in{opacity:1;transform:none;}
-.reveal-clip{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);}
+.reveal-clip{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1);}
 .reveal-clip.in{clip-path:inset(0 0 0 0);}
 @media (prefers-reduced-motion:reduce){.reveal,.reveal-clip{opacity:1;transform:none;clip-path:none;transition:none;}}
 
-/* fixed atmosphere layers */
-.fx-aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:calc(.9*var(--glow));
-  background:
-    radial-gradient(38% 44% at 18% 22%, ${A(22)}, transparent 60%),
-    radial-gradient(34% 40% at 82% 14%, ${A(14)}, transparent 60%),
-    radial-gradient(46% 50% at 70% 88%, ${A(16)}, transparent 62%),
-    radial-gradient(40% 44% at 26% 82%, ${A(10)}, transparent 60%);
-  filter:blur(30px);animation:aurora 22s ease-in-out infinite alternate;}
-@keyframes aurora{0%{transform:translate3d(-2%,-1%,0) scale(1.02) rotate(0deg);}
-  50%{transform:translate3d(3%,2%,0) scale(1.08) rotate(2deg);}
-  100%{transform:translate3d(-1%,3%,0) scale(1.04) rotate(-1deg);}}
-.fx-spot{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;
-  background:radial-gradient(420px 420px at var(--mx) var(--my), ${A(12)}, transparent 70%);
-  opacity:calc(.9*var(--glow));transition:background .08s linear;}
-.atmos{position:fixed;inset:0;pointer-events:none;z-index:60;mix-blend-mode:overlay;
-  opacity:calc(.5 * var(--grain));
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");}
-.scan{position:fixed;inset:0;pointer-events:none;z-index:61;opacity:calc(.4 * var(--scan));
-  background:repeating-linear-gradient(to bottom,transparent 0 2px, rgba(0,0,0,.5) 2px 3px);}
-.scan-on{opacity:.18!important;}
-.fx-vignette{position:fixed;inset:0;pointer-events:none;z-index:59;
-  background:radial-gradient(ellipse 120% 80% at 50% 40%, transparent 55%, rgba(0,0,0,.55) 100%);}
-
 /* scroll progress */
-.prog{position:fixed;top:0;left:0;height:2px;z-index:300;background:linear-gradient(90deg,${A(50)},var(--accent));
-  box-shadow:0 0 14px var(--accent);transform-origin:0 50%;}
+.prog{position:fixed;top:0;left:0;height:3px;z-index:300;background:var(--accent);transform-origin:0 50%;}
 
 /* media card */
-.mcard{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:var(--panel);
-  text-decoration:none;display:block;transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s;}
-.mcard:hover{border-color:${A(55)};transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 1px ${A(30)};}
+.mcard{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--bg);
+  text-decoration:none;display:block;box-shadow:0 1px 2px rgba(19,33,27,.04);
+  transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s;}
+.mcard:hover{border-color:${A(45)};transform:translateY(-5px);box-shadow:0 22px 48px rgba(19,33,27,.12);}
 .mcard .mc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.2,.7,.3,1),opacity .4s;}
+  transition:transform .8s cubic-bezier(.2,.7,.3,1);}
 .mcard:hover .mc-img{transform:scale(var(--zoom));}
-.mc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.35) 45%,rgba(0,0,0,.92) 100%);}
+.mc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,12,.05) 0%,rgba(8,18,12,.35) 45%,rgba(8,18,12,.9) 100%);}
 
-/* animated gradient border */
+/* (legacy hooks kept as no-ops so existing markup stays valid) */
 .glowborder{position:relative;}
-.glowborder::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;
-  background:conic-gradient(from var(--ang,0deg), transparent 0 55%, ${A(80)} 75%, transparent 90%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:spinang 4s linear infinite;}
-.glowborder:hover::before{opacity:1;}
-@keyframes spinang{to{--ang:360deg;}}
-@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
 
 /* marquee */
 .mq{display:flex;overflow:hidden;user-select:none;}
 .mq-track{display:flex;flex-shrink:0;gap:0;align-items:center;animation:mq var(--marquee) linear infinite;}
 .mq:hover .mq-track{animation-play-state:paused;}
 @keyframes mq{to{transform:translateX(-50%);}}
-
-@keyframes scanline{0%{transform:translateY(-100vh);}100%{transform:translateY(220vh);}}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-@keyframes pulse-ring{0%{transform:scale(1);opacity:.6;}100%{transform:scale(2.2);opacity:0;}}
-@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes gridmove{to{background-position:88px 88px;}}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
 .linkline{position:relative;text-decoration:none;color:var(--mut);transition:color .2s;}
-.linkline::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.linkline::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1.5px;background:var(--accent);transition:width .3s;}
 .linkline:hover{color:var(--ink);}
 .linkline:hover::after{width:100%;}
 
-@media(max-width:640px){.wrap,.wrap-wide{padding:0 20px;}.fx-spot{display:none;}}
-@media(hover:none){.fx-spot{display:none;}}
+@media(max-width:640px){.wrap,.wrap-wide{padding:0 20px;}}
 `;
 
 /* ── Scroll progress bar ── */
@@ -166,193 +119,22 @@ function ScrollProgress() {
   });
 }
 
-/* ── Cursor spotlight tracker (sets CSS vars) ── */
+/* ── Legacy effect components, neutralised (kept for API compatibility) ── */
 function CursorFX() {
-  useEffect(() => {
-    let raf = 0,
-      x = innerWidth / 2,
-      y = innerHeight / 2;
-    const onMove = e => {
-      x = e.clientX;
-      y = e.clientY;
-      if (!raf) raf = requestAnimationFrame(() => {
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      });
-    };
-    window.addEventListener('pointermove', onMove);
-    return () => window.removeEventListener('pointermove', onMove);
-  }, []);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "fx-spot"
-  });
+  return null;
 }
-
-/* ── Particle network canvas (tech mesh) ── */
-function ParticleField({
-  density = 0.00009,
-  style = {}
-}) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const cv = ref.current;
-    if (!cv) return;
-    const ctx = cv.getContext('2d');
-    let w,
-      h,
-      pts = [],
-      raf,
-      mouse = {
-        x: -999,
-        y: -999
-      };
-    const accent = () => getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39ff6e';
-    let col = accent();
-    const resize = () => {
-      const r = cv.getBoundingClientRect();
-      w = cv.width = r.width * devicePixelRatio;
-      h = cv.height = r.height * devicePixelRatio;
-      const n = Math.min(120, Math.max(28, Math.floor(r.width * r.height * density)));
-      pts = Array.from({
-        length: n
-      }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - .5) * .25 * devicePixelRatio,
-        vy: (Math.random() - .5) * .25 * devicePixelRatio
-      }));
-      col = accent();
-    };
-    const hex = h2 => {
-      const m = h2.replace('#', '');
-      const b = m.length === 3 ? m.split('').map(c => c + c).join('') : m;
-      return [parseInt(b.slice(0, 2), 16), parseInt(b.slice(2, 4), 16), parseInt(b.slice(4, 6), 16)];
-    };
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      const [r, g, b] = hex(col.startsWith('#') ? col : '#39ff6e');
-      const mx = mouse.x * devicePixelRatio,
-        my = mouse.y * devicePixelRatio;
-      for (const p of pts) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-      }
-      const max = 130 * devicePixelRatio;
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x,
-            dy = pts[i].y - pts[j].y;
-          const d = Math.hypot(dx, dy);
-          if (d < max) {
-            ctx.strokeStyle = `rgba(${r},${g},${b},${(1 - d / max) * .16})`;
-            ctx.lineWidth = devicePixelRatio;
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.stroke();
-          }
-        }
-        const dmx = pts[i].x - mx,
-          dmy = pts[i].y - my,
-          dm = Math.hypot(dmx, dmy);
-        if (dm < 180 * devicePixelRatio) {
-          ctx.strokeStyle = `rgba(${r},${g},${b},${(1 - dm / (180 * devicePixelRatio)) * .5})`;
-          ctx.lineWidth = devicePixelRatio;
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(mx, my);
-          ctx.stroke();
-        }
-        ctx.fillStyle = `rgba(${r},${g},${b},.7)`;
-        ctx.beginPath();
-        ctx.arc(pts[i].x, pts[i].y, 1.4 * devicePixelRatio, 0, 7);
-        ctx.fill();
-      }
-      raf = requestAnimationFrame(draw);
-    };
-    const onMove = e => {
-      const r = cv.getBoundingClientRect();
-      mouse.x = e.clientX - r.left;
-      mouse.y = e.clientY - r.top;
-    };
-    resize();
-    draw();
-    window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', onMove);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('pointermove', onMove);
-    };
-  }, [density]);
-  return /*#__PURE__*/React.createElement("canvas", {
-    ref: ref,
-    style: {
-      position: 'absolute',
-      inset: 0,
-      width: '100%',
-      height: '100%',
-      display: 'block',
-      ...style
-    }
-  });
+function ParticleField() {
+  return null;
 }
-
-/* ── Scramble / decode text ── */
 function Scramble({
   text,
   className = '',
-  style = {},
-  speed = 28,
-  delay = 0
+  style = {}
 }) {
-  const [out, setOut] = useState(text);
-  const ref = useRef(null);
-  useEffect(() => {
-    const chars = '!<>-_\\/[]{}=+*^?#01';
-    let frame = 0,
-      raf,
-      started = false;
-    const run = () => {
-      const total = text.length;
-      const reveal = Math.floor(frame / 1.6);
-      let s = '';
-      for (let i = 0; i < total; i++) {
-        if (text[i] === ' ' || text[i] === '\n') {
-          s += text[i];
-          continue;
-        }
-        s += i < reveal ? text[i] : chars[Math.floor(Math.random() * chars.length)];
-      }
-      setOut(s);
-      frame++;
-      if (reveal <= total) raf = setTimeout(run, speed);else setOut(text);
-    };
-    const io = new IntersectionObserver(es => {
-      es.forEach(e => {
-        if (e.isIntersecting && !started) {
-          started = true;
-          setTimeout(run, delay);
-          io.disconnect();
-        }
-      });
-    }, {
-      threshold: .4
-    });
-    if (ref.current) io.observe(ref.current);
-    return () => {
-      clearTimeout(raf);
-      io.disconnect();
-    };
-  }, [text]);
   return /*#__PURE__*/React.createElement("span", {
-    ref: ref,
     className: className,
     style: style
-  }, out);
+  }, text);
 }
 
 /* ── CountUp ── */
@@ -371,6 +153,10 @@ function CountUp({
     let raf,
       start,
       done = false;
+    if (typeof IntersectionObserver === 'undefined') {
+      setVal(to);
+      return;
+    }
     const io = new IntersectionObserver(es => {
       es.forEach(e => {
         if (e.isIntersecting && !done) {
@@ -402,10 +188,10 @@ function CountUp({
   }, prefix, val.toFixed(decimals), suffix);
 }
 
-/* ── Magnetic button wrapper ── */
+/* ── Magnetic button wrapper (subtle) ── */
 function Magnetic({
   children,
-  strength = 0.35,
+  strength = 0.18,
   style = {}
 }) {
   const ref = useRef(null);
@@ -432,35 +218,15 @@ function Magnetic({
   }, children);
 }
 
-/* ── Tilt 3D card ── */
+/* ── Tilt (kept as plain wrapper — no 3D rotation, corporate look) ── */
 function Tilt({
   children,
-  max = 8,
   className = '',
   style = {}
 }) {
-  const ref = useRef(null);
-  const onMove = e => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - .5,
-      py = (e.clientY - r.top) / r.height - .5;
-    el.style.transform = `perspective(900px) rotateY(${px * max}deg) rotateX(${-py * max}deg)`;
-  };
-  const reset = () => {
-    if (ref.current) ref.current.style.transform = 'perspective(900px) rotateY(0) rotateX(0)';
-  };
   return /*#__PURE__*/React.createElement("div", {
-    ref: ref,
-    onMouseMove: onMove,
-    onMouseLeave: reset,
     className: className,
-    style: {
-      transition: 'transform .4s cubic-bezier(.2,.7,.3,1)',
-      transformStyle: 'preserve-3d',
-      ...style
-    }
+    style: style
   }, children);
 }
 
@@ -477,6 +243,10 @@ function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      el.classList.add('in');
+      return;
+    }
     const io = new IntersectionObserver(es => {
       es.forEach(e => {
         if (e.isIntersecting) {
@@ -505,7 +275,7 @@ function Reveal({
 /* ── Marquee ── */
 function Marquee({
   items,
-  sep = '✦',
+  sep = '·',
   big = false
 }) {
   const row = k => /*#__PURE__*/React.createElement("div", {
@@ -523,17 +293,17 @@ function Marquee({
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: big ? 'var(--disp)' : 'var(--mono)',
-      fontWeight: big ? 'var(--dweight)' : 400,
-      textTransform: big ? 'var(--case)' : 'uppercase',
+      fontWeight: big ? 700 : 400,
+      textTransform: big ? 'none' : 'uppercase',
       letterSpacing: big ? 'var(--dtrack)' : '.14em',
-      fontSize: big ? 'clamp(28px,4vw,58px)' : 12.5,
+      fontSize: big ? 'clamp(22px,3vw,40px)' : 12.5,
       color: big ? 'var(--ink)' : 'var(--mut)'
     }
   }, it), /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--accent)',
-      fontSize: big ? 22 : 11,
-      opacity: .8
+      fontSize: big ? 18 : 11,
+      opacity: .7
     }
   }, sep))));
   return /*#__PURE__*/React.createElement("div", {
@@ -905,12 +675,12 @@ function Tag({
       gap: 6,
       fontFamily: 'var(--mono)',
       fontSize: 10.5,
-      letterSpacing: '.14em',
+      letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: 'var(--accent)',
-      background: A(11),
-      border: `1px solid ${A(28)}`,
-      borderRadius: 999,
+      color: 'var(--accent-deep)',
+      background: A(10),
+      border: `1px solid ${A(24)}`,
+      borderRadius: 8,
       padding: '5px 12px'
     }
   }, children);
@@ -927,18 +697,17 @@ function SectionLabel({
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: 7,
-      height: 7,
-      borderRadius: '50%',
-      background: 'var(--accent)',
-      boxShadow: `0 0 12px var(--accent)`
+      width: 22,
+      height: 2,
+      background: 'var(--accent)'
     }
   }), /*#__PURE__*/React.createElement("span", {
     className: "kicker"
   }, children));
 }
 function OntecLogo({
-  height = 30
+  height = 30,
+  color = 'currentColor'
 }) {
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -946,34 +715,23 @@ function OntecLogo({
       alignItems: 'center',
       gap: 11
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/ontec-logo.png",
+    alt: "Ontec",
+    height: height,
     style: {
-      width: height,
       height,
-      background: 'var(--accent)',
-      borderRadius: Math.round(height * 0.22),
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexShrink: 0,
-      boxShadow: `0 0 22px ${A(45)}`
+      width: 'auto',
+      display: 'block',
+      flexShrink: 0
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontWeight: 700,
-      fontSize: Math.round(height * 0.38),
-      color: 'var(--accent-ink)',
-      lineHeight: 1
-    }
-  }, "ON")), /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--disp)',
       fontWeight: 800,
-      fontSize: Math.round(height * 0.62),
-      color: 'var(--ink)',
-      letterSpacing: '-0.03em',
-      textTransform: 'uppercase'
+      fontSize: Math.round(height * 0.6),
+      color,
+      letterSpacing: '-0.02em'
     }
   }, "Ontec"));
 }
@@ -1035,16 +793,21 @@ function Nav({
     fn();
     return () => window.removeEventListener('scroll', fn);
   }, []);
+  const solid = scrolled || mob; // solid white bar
+  const lightText = !solid; // over the dark hero → light text
+  const textMut = lightText ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const textInk = lightText ? '#ffffff' : 'var(--ink)';
+  const activeCol = lightText ? 'var(--accent-2)' : 'var(--accent-deep)';
   const linkBase = {
     display: 'block',
-    padding: '9px 14px',
+    padding: '9px 13px',
     fontFamily: 'var(--mono)',
     fontSize: 11.5,
-    letterSpacing: '.12em',
+    letterSpacing: '.1em',
     textTransform: 'uppercase',
     textDecoration: 'none',
-    borderRadius: 999,
-    transition: 'color .15s, background .15s'
+    borderRadius: 8,
+    transition: 'color .15s'
   };
   return /*#__PURE__*/React.createElement("nav", {
     style: {
@@ -1053,11 +816,11 @@ function Nav({
       left: 0,
       right: 0,
       zIndex: 200,
-      transition: 'all .35s',
-      background: scrolled || mob ? 'rgba(0,0,0,.72)' : 'transparent',
-      borderBottom: `1px solid ${scrolled || mob ? 'var(--line)' : 'transparent'}`,
-      backdropFilter: scrolled || mob ? 'blur(20px) saturate(150%)' : 'none',
-      WebkitBackdropFilter: scrolled || mob ? 'blur(20px) saturate(150%)' : 'none'
+      transition: 'all .3s',
+      background: solid ? 'rgba(255,255,255,.86)' : 'transparent',
+      borderBottom: `1px solid ${solid ? 'var(--line)' : 'transparent'}`,
+      backdropFilter: solid ? 'blur(18px) saturate(150%)' : 'none',
+      WebkitBackdropFilter: solid ? 'blur(18px) saturate(150%)' : 'none'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap",
@@ -1072,6 +835,7 @@ function Nav({
       display: 'flex',
       alignItems: 'center',
       textDecoration: 'none',
+      color: textInk,
       marginRight: 40,
       flexShrink: 0
     }
@@ -1095,13 +859,13 @@ function Nav({
     href: item.href,
     style: {
       ...linkBase,
-      color: activePage === item.label ? 'var(--accent)' : 'var(--mut)'
+      color: activePage === item.label ? activeCol : textMut
     },
     onMouseEnter: e => {
-      if (activePage !== item.label) e.currentTarget.style.color = 'var(--ink)';
+      if (activePage !== item.label) e.currentTarget.style.color = textInk;
     },
     onMouseLeave: e => {
-      e.currentTarget.style.color = activePage === item.label ? 'var(--accent)' : 'var(--mut)';
+      e.currentTarget.style.color = activePage === item.label ? activeCol : textMut;
     }
   }, item.label), item.children && drop === item.label && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -1109,12 +873,11 @@ function Nav({
       top: '100%',
       left: 0,
       minWidth: 220,
-      background: 'rgba(8,8,9,.96)',
+      background: '#ffffff',
       border: '1px solid var(--line)',
-      borderRadius: 14,
+      borderRadius: 12,
       padding: '8px',
-      backdropFilter: 'blur(20px)',
-      boxShadow: '0 24px 60px rgba(0,0,0,.7)'
+      boxShadow: '0 24px 60px rgba(19,33,27,.16)'
     }
   }, item.children.map(ch => /*#__PURE__*/React.createElement("a", {
     key: ch.label,
@@ -1125,12 +888,12 @@ function Nav({
       color: 'var(--mut)',
       fontSize: 13,
       textDecoration: 'none',
-      borderRadius: 9,
+      borderRadius: 8,
       transition: 'color .12s, background .12s'
     },
     onMouseEnter: e => {
-      e.currentTarget.style.color = 'var(--accent)';
-      e.currentTarget.style.background = A(10);
+      e.currentTarget.style.color = 'var(--accent-deep)';
+      e.currentTarget.style.background = A(8);
     },
     onMouseLeave: e => {
       e.currentTarget.style.color = 'var(--mut)';
@@ -1139,7 +902,7 @@ function Nav({
   }, ch.label)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 14,
+      gap: 16,
       alignItems: 'center',
       flexShrink: 0
     },
@@ -1149,17 +912,17 @@ function Nav({
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 11.5,
-      color: 'var(--faint)',
+      color: textMut,
       textDecoration: 'none',
       letterSpacing: '.04em'
     }
-  }, "+376 88 55 99"), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
       padding: '11px 20px'
     }
-  }, "Contacta"))), /*#__PURE__*/React.createElement("button", {
+  }, "Contacta")), /*#__PURE__*/React.createElement("button", {
     onClick: () => setMob(!mob),
     className: "nav-mob",
     style: {
@@ -1167,14 +930,14 @@ function Nav({
       marginLeft: 'auto',
       background: 'transparent',
       border: 'none',
-      color: 'var(--ink)',
+      color: textInk,
       cursor: 'pointer'
     },
     "aria-label": "Menu",
     "aria-expanded": mob
   }, mob ? /*#__PURE__*/React.createElement(Icons.X, null) : /*#__PURE__*/React.createElement(Icons.Menu, null))), mob && /*#__PURE__*/React.createElement("div", {
     style: {
-      background: 'rgba(0,0,0,.96)',
+      background: '#ffffff',
       borderTop: '1px solid var(--line)',
       padding: '14px 40px 28px'
     }
@@ -1185,7 +948,8 @@ function Nav({
     style: {
       display: 'block',
       padding: '14px 0',
-      fontSize: 26,
+      fontSize: 24,
+      color: 'var(--ink)',
       textDecoration: 'none',
       borderBottom: '1px solid var(--line-soft)'
     }
@@ -1204,13 +968,13 @@ function Footer() {
     style: {
       position: 'relative',
       zIndex: 2,
-      borderTop: '1px solid var(--line)',
-      background: 'rgba(0,0,0,.6)',
+      background: 'var(--panel-dark)',
+      color: '#eef1ea',
       overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      borderBottom: '1px solid var(--line-soft)',
+      borderBottom: '1px solid rgba(255,255,255,.08)',
       padding: '26px 0'
     }
   }, /*#__PURE__*/React.createElement(Marquee, {
@@ -1229,13 +993,18 @@ function Footer() {
       alignItems: 'start'
     },
     className: "ft-grid"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(OntecLogo, {
-    height: 34
-  }), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: '#ffffff'
+    }
+  }, /*#__PURE__*/React.createElement(OntecLogo, {
+    height: 34,
+    color: "#ffffff"
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       marginTop: 22,
       fontSize: 15,
-      color: 'var(--mut)',
+      color: 'rgba(238,241,234,.66)',
       lineHeight: 1.7,
       maxWidth: 320
     }
@@ -1245,7 +1014,7 @@ function Footer() {
       display: 'flex',
       gap: 10
     }
-  }, /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -1253,10 +1022,10 @@ function Footer() {
     }
   }, "Comença un projecte ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
-  }))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
-      color: 'var(--faint)',
+      color: 'var(--accent-2)',
       marginBottom: 18
     }
   }, "Navegació"), /*#__PURE__*/React.createElement("div", {
@@ -1268,14 +1037,15 @@ function Footer() {
   }, NAV_ITEMS.map(l => /*#__PURE__*/React.createElement("a", {
     key: l.label,
     href: l.href,
-    className: "linkline",
     style: {
-      fontSize: 15
+      fontSize: 15,
+      color: 'rgba(238,241,234,.7)',
+      textDecoration: 'none'
     }
   }, l.label)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
-      color: 'var(--faint)',
+      color: 'var(--accent-2)',
       marginBottom: 18
     }
   }, "Contacte"), /*#__PURE__*/React.createElement("div", {
@@ -1283,30 +1053,33 @@ function Footer() {
       display: 'flex',
       flexDirection: 'column',
       gap: 12,
-      fontSize: 15
+      fontSize: 15,
+      color: 'rgba(238,241,234,.7)'
     }
   }, /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
-    className: "linkline"
+    style: {
+      color: 'inherit',
+      textDecoration: 'none'
+    }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
     href: "mailto:info@ontecandorra.com",
-    className: "linkline"
-  }, "info@ontecandorra.com"), /*#__PURE__*/React.createElement("span", {
     style: {
-      color: 'var(--mut)'
+      color: 'inherit',
+      textDecoration: 'none'
     }
-  }, "C/ de la Vena 3, Baixos", /*#__PURE__*/React.createElement("br", null), "Encamp, Andorra")))), /*#__PURE__*/React.createElement("div", {
+  }, "info@ontecandorra.com"), /*#__PURE__*/React.createElement("span", null, "C/ de la Vena 3, Baixos", /*#__PURE__*/React.createElement("br", null), "Encamp, Andorra")))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 56,
       paddingTop: 26,
-      borderTop: '1px solid var(--line-soft)',
+      borderTop: '1px solid rgba(255,255,255,.08)',
       display: 'flex',
       justifyContent: 'space-between',
       flexWrap: 'wrap',
       gap: 12,
       fontFamily: 'var(--mono)',
       fontSize: 11,
-      color: 'var(--faint)',
+      color: 'rgba(238,241,234,.45)',
       letterSpacing: '.05em'
     }
   }, /*#__PURE__*/React.createElement("span", null, "© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats"), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
@@ -1328,7 +1101,7 @@ function Cine({
     const fn = () => {
       const r = el.getBoundingClientRect();
       const off = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-      el.style.transform = `scale(1.18) translateY(${off * -34}px)`;
+      el.style.transform = `scale(1.14) translateY(${off * -28}px)`;
     };
     window.addEventListener('scroll', fn, {
       passive: true
@@ -1340,7 +1113,7 @@ function Cine({
     style: {
       position: 'relative',
       overflow: 'hidden',
-      background: '#070707',
+      background: 'var(--panel-2)',
       ...style
     }
   }, ok ? /*#__PURE__*/React.createElement("img", {
@@ -1361,20 +1134,13 @@ function Cine({
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(135deg,#0c1810 0%,#060a07 50%,#0b0f14 100%)'
+      background: 'linear-gradient(135deg,#1a2e22 0%,#0f1d15 100%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       inset: 0,
-      backgroundImage: `linear-gradient(${A(12)} 1px,transparent 1px),linear-gradient(90deg,${A(12)} 1px,transparent 1px)`,
-      backgroundSize: '44px 44px'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      background: `radial-gradient(circle at 50% 40%, ${A(14)}, transparent 60%)`
+      background: `radial-gradient(circle at 50% 40%, ${A(18)}, transparent 60%)`
     }
   })), shade && /*#__PURE__*/React.createElement("div", {
     className: "mc-shade"
@@ -1390,10 +1156,11 @@ function PageHero({
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
-      minHeight: 'min(82vh,760px)',
+      minHeight: 'min(72vh,640px)',
       display: 'flex',
       alignItems: 'flex-end',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      background: 'var(--panel-dark)'
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: img,
@@ -1407,35 +1174,13 @@ function PageHero({
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.4) 38%,rgba(0,0,0,.78) 78%,#000 100%)'
+      background: 'linear-gradient(180deg,rgba(8,18,12,.6) 0%,rgba(8,18,12,.35) 38%,rgba(8,18,12,.8) 100%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(90deg,#000 0%,rgba(0,0,0,.45) 45%,transparent 85%)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      backgroundImage: `linear-gradient(${A(7)} 1px,transparent 1px),linear-gradient(90deg,${A(7)} 1px,transparent 1px)`,
-      backgroundSize: '88px 88px',
-      maskImage: 'radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent)'
-    }
-  }), /*#__PURE__*/React.createElement(ParticleField, {
-    style: {
-      opacity: .6
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      height: 1,
-      background: `linear-gradient(90deg,transparent,${A(45)},transparent)`,
-      animation: 'scanline 8s linear infinite'
+      background: 'linear-gradient(90deg,rgba(8,18,12,.85) 0%,rgba(8,18,12,.4) 50%,transparent 90%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide",
@@ -1448,36 +1193,34 @@ function PageHero({
       textAlign: align
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "reveal in eyebrow",
+    className: "eyebrow",
     style: {
-      marginBottom: 24,
+      marginBottom: 22,
+      color: 'rgba(255,255,255,.78)',
       justifyContent: align === 'center' ? 'center' : 'flex-start'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: 7,
-      height: 7,
-      borderRadius: '50%',
-      background: 'var(--accent)',
-      boxShadow: '0 0 10px var(--accent)'
+      width: 22,
+      height: 2,
+      background: 'var(--accent-2)'
     }
   }), kicker), /*#__PURE__*/React.createElement("h1", {
-    className: "disp glow-text",
+    className: "disp",
     style: {
-      fontSize: 'clamp(44px,7vw,116px)',
-      maxWidth: 1160,
+      color: '#fff',
+      fontSize: 'clamp(40px,6vw,92px)',
+      maxWidth: 1080,
       margin: align === 'center' ? '0 auto' : 0
     }
-  }, /*#__PURE__*/React.createElement(Scramble, {
-    text: title
-  })), sub && /*#__PURE__*/React.createElement("p", {
+  }, title), sub && /*#__PURE__*/React.createElement("p", {
     style: {
-      marginTop: 26,
+      marginTop: 24,
       fontSize: 'clamp(16px,1.4vw,19px)',
-      color: 'var(--mut)',
+      color: 'rgba(255,255,255,.74)',
       lineHeight: 1.7,
       maxWidth: 600,
-      margin: align === 'center' ? '26px auto 0' : '26px 0 0'
+      margin: align === 'center' ? '24px auto 0' : '24px 0 0'
     }
   }, sub)));
 }
@@ -1493,15 +1236,7 @@ function PageShell({
       flexDirection: 'column',
       background: 'var(--bg)'
     }
-  }, /*#__PURE__*/React.createElement("style", null, GLOBAL_CSS), /*#__PURE__*/React.createElement("div", {
-    className: "fx-aurora"
-  }), /*#__PURE__*/React.createElement(CursorFX, null), /*#__PURE__*/React.createElement("div", {
-    className: "fx-vignette"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "atmos"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "scan"
-  }), /*#__PURE__*/React.createElement(ScrollProgress, null), /*#__PURE__*/React.createElement(Nav, {
+  }, /*#__PURE__*/React.createElement("style", null, GLOBAL_CSS), /*#__PURE__*/React.createElement(ScrollProgress, null), /*#__PURE__*/React.createElement(Nav, {
     activePage: activePage
   }), /*#__PURE__*/React.createElement("main", {
     style: {
@@ -2091,152 +1826,92 @@ Object.assign(window, {
   TweakButton
 });
 
-/* ── Terminal status card ── */
-function StatusCard() {
-  const lines = [{
-    t: 0,
-    text: '$ ontec --init sistema',
-    c: '#fff'
+/* ── Hero areas card (replaces the old terminal card) ── */
+function HeroAreas() {
+  const areas = [{
+    icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
+    t: 'IT Security'
   }, {
-    t: 600,
-    text: '> carregant mòduls…',
-    c: 'var(--mut)'
+    icon: /*#__PURE__*/React.createElement(Icons.Wifi, null),
+    t: 'Comunicacions'
   }, {
-    t: 1050,
-    text: '✓ IT Security',
-    c: 'var(--accent)'
+    icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
+    t: 'Automatització'
   }, {
-    t: 1400,
-    text: '✓ Comunicacions',
-    c: 'var(--accent)'
-  }, {
-    t: 1750,
-    text: '✓ Automatització',
-    c: 'var(--accent)'
-  }, {
-    t: 2100,
-    text: '✓ Audiovisuals',
-    c: 'var(--accent)'
-  }, {
-    t: 2450,
-    text: '✓ Videoconferència',
-    c: 'var(--accent)'
-  }, {
-    t: 2900,
-    text: '> sistema llest · Andorra',
-    c: 'var(--mut)'
+    icon: /*#__PURE__*/React.createElement(Icons.Video, null),
+    t: 'Audiovisuals'
   }];
-  const [vis, setVis] = useState(0);
-  const [cur, setCur] = useState(true);
-  useEffect(() => {
-    const ids = lines.map((l, i) => setTimeout(() => setVis(v => Math.max(v, i + 1)), l.t));
-    const b = setInterval(() => setCur(v => !v), 530);
-    return () => {
-      ids.forEach(clearTimeout);
-      clearInterval(b);
-    };
-  }, []);
   return /*#__PURE__*/React.createElement("div", {
-    className: "glowborder",
     style: {
-      width: 360,
+      width: 340,
       maxWidth: '90vw',
       borderRadius: 16,
       overflow: 'hidden',
-      border: '1px solid var(--line)',
-      background: 'rgba(7,7,8,.66)',
-      backdropFilter: 'blur(18px)',
-      WebkitBackdropFilter: 'blur(18px)',
-      boxShadow: '0 30px 90px rgba(0,0,0,.7)'
+      border: '1px solid rgba(255,255,255,.14)',
+      background: 'rgba(16,33,26,.55)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      boxShadow: '0 24px 70px rgba(0,0,0,.4)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 8,
-      padding: '12px 16px',
-      borderBottom: '1px solid var(--line-soft)'
+      padding: '18px 22px',
+      borderBottom: '1px solid rgba(255,255,255,.1)'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: 6
-    }
-  }, ['#ff5f57', '#ffbd2e', '#28c840'].map(c => /*#__PURE__*/React.createElement("div", {
-    key: c,
-    style: {
-      width: 9,
-      height: 9,
-      borderRadius: '50%',
-      background: c,
-      opacity: .85
-    }
-  }))), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 10.5,
-      color: 'var(--faint)',
-      letterSpacing: '.08em',
-      marginLeft: 6
+      letterSpacing: '.16em',
+      textTransform: 'uppercase',
+      color: 'var(--accent-2)'
     }
-  }, "ontec://status"), /*#__PURE__*/React.createElement("div", {
+  }, "Àrees de servei"), /*#__PURE__*/React.createElement("div", {
     style: {
-      marginLeft: 'auto',
+      marginTop: 6,
+      fontFamily: 'var(--disp)',
+      fontWeight: 700,
+      fontSize: 19,
+      color: '#fff'
+    }
+  }, "Un sol integrador")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '10px 12px'
+    }
+  }, areas.map(a => /*#__PURE__*/React.createElement("div", {
+    key: a.t,
+    style: {
       display: 'flex',
       alignItems: 'center',
-      gap: 7
+      gap: 14,
+      padding: '13px 12px',
+      borderRadius: 10
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      position: 'relative',
-      width: 7,
-      height: 7
+      width: 38,
+      height: 38,
+      borderRadius: 9,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'var(--accent-2)',
+      background: 'rgba(142,198,63,.12)',
+      border: '1px solid rgba(142,198,63,.22)',
+      flexShrink: 0
     }
-  }, /*#__PURE__*/React.createElement("span", {
+  }, a.icon), /*#__PURE__*/React.createElement("span", {
     style: {
-      position: 'absolute',
-      inset: 0,
-      borderRadius: '50%',
-      background: 'var(--accent)'
+      fontSize: 15,
+      color: 'rgba(255,255,255,.92)',
+      fontWeight: 500
     }
-  }), /*#__PURE__*/React.createElement("span", {
+  }, a.t), /*#__PURE__*/React.createElement("span", {
     style: {
-      position: 'absolute',
-      inset: 0,
-      borderRadius: '50%',
-      background: 'var(--accent)',
-      animation: 'pulse-ring 2s ease-out infinite'
+      marginLeft: 'auto',
+      color: 'var(--accent-2)'
     }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 9.5,
-      color: 'var(--accent)',
-      letterSpacing: '.1em'
-    }
-  }, "LIVE"))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '18px 20px',
-      minHeight: 200,
-      fontFamily: 'var(--mono)',
-      fontSize: 12.5,
-      lineHeight: 2
-    }
-  }, lines.slice(0, vis).map((l, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    style: {
-      color: l.c
-    }
-  }, l.text)), vis < lines.length && /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'inline-block',
-      width: 7,
-      height: 14,
-      background: 'var(--accent)',
-      opacity: cur ? 1 : 0,
-      verticalAlign: 'middle'
-    }
-  })));
+  }, /*#__PURE__*/React.createElement(Icons.Check, null))))));
 }
 
 /* ── Hero ── */
@@ -2247,12 +1922,14 @@ function Hero() {
       minHeight: '100vh',
       display: 'flex',
       alignItems: 'flex-end',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      background: 'var(--panel-dark)'
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop",
     alt: "Infraestructura tecnològica",
     shade: false,
+    parallax: true,
     style: {
       position: 'absolute',
       inset: 0
@@ -2261,36 +1938,13 @@ function Hero() {
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(180deg,rgba(0,0,0,.74) 0%,rgba(0,0,0,.38) 30%,rgba(0,0,0,.62) 62%,#000 100%)'
+      background: 'linear-gradient(180deg,rgba(8,18,12,.62) 0%,rgba(8,18,12,.34) 32%,rgba(8,18,12,.78) 100%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 42%,transparent 80%)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      backgroundImage: `linear-gradient(${A(7)} 1px,transparent 1px),linear-gradient(90deg,${A(7)} 1px,transparent 1px)`,
-      backgroundSize: '88px 88px',
-      maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent)',
-      animation: 'gridmove 6s linear infinite'
-    }
-  }), /*#__PURE__*/React.createElement(ParticleField, {
-    style: {
-      opacity: .85
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      height: 1,
-      background: `linear-gradient(90deg,transparent,${A(45)},transparent)`,
-      animation: 'scanline 8s linear infinite'
+      background: 'linear-gradient(90deg,rgba(8,18,12,.82) 0%,rgba(8,18,12,.4) 48%,transparent 82%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide",
@@ -2298,104 +1952,67 @@ function Hero() {
       position: 'relative',
       zIndex: 2,
       width: '100%',
-      paddingBottom: 90,
-      paddingTop: 140
+      paddingBottom: 96,
+      paddingTop: 150,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end',
+      gap: 48,
+      flexWrap: 'wrap'
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      maxWidth: 1120
+      maxWidth: 760
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "reveal in eyebrow",
+    className: "eyebrow",
     style: {
-      marginBottom: 26
+      marginBottom: 26,
+      color: 'rgba(255,255,255,.8)'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      width: 7,
-      height: 7,
-      borderRadius: '50%',
-      background: 'var(--accent)',
-      boxShadow: '0 0 10px var(--accent)'
+      width: 22,
+      height: 2,
+      background: 'var(--accent-2)'
     }
   }), "Andorra · Distribució tecnològica des de 2016"), /*#__PURE__*/React.createElement("h1", {
-    className: "disp glow-text",
+    className: "disp",
     style: {
-      fontSize: 'clamp(50px,7.8vw,128px)',
-      lineHeight: .9
+      color: '#fff',
+      fontSize: 'clamp(44px,6.6vw,104px)',
+      lineHeight: 1.02
     }
-  }, /*#__PURE__*/React.createElement(Scramble, {
-    text: "Sistemes"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Scramble, {
-    text: "tecnològics",
-    delay: 120
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+  }, "Sistemes tecnològics", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
     style: {
-      color: 'var(--accent)'
+      color: 'var(--accent-2)'
     }
-  }, /*#__PURE__*/React.createElement(Scramble, {
-    text: "avançats",
-    delay: 240
-  }))), /*#__PURE__*/React.createElement("p", {
+  }, "avançats")), /*#__PURE__*/React.createElement("p", {
     style: {
-      marginTop: 34,
-      fontSize: 'clamp(16px,1.5vw,21px)',
-      color: 'var(--mut)',
+      marginTop: 30,
+      fontSize: 'clamp(16px,1.5vw,20px)',
+      color: 'rgba(255,255,255,.76)',
       lineHeight: 1.7,
-      maxWidth: 580
+      maxWidth: 560
     }
-  }, "Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses, arquitectures, ingenierías i instal·ladors a Andorra."), /*#__PURE__*/React.createElement("div", {
+  }, "Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses, arquitectures, enginyeries i instal·ladors a Andorra."), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 14,
-      marginTop: 42,
+      marginTop: 40,
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("a", {
     href: "solucions.html",
     className: "btn btn-primary"
   }, "Veure solucions ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
-  }))), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
-    className: "btn btn-ghost"
-  }, "Parla amb un expert"))))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      right: 'max(40px,calc((100vw - 1680px)/2 + 40px))',
-      top: '28%',
-      zIndex: 3,
-      animation: 'floaty 7s ease-in-out infinite'
-    },
-    className: "hero-status"
-  }, /*#__PURE__*/React.createElement(StatusCard, null)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      bottom: 34,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      zIndex: 3,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: 8,
-      opacity: .6
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 9.5,
-      letterSpacing: '.2em',
-      textTransform: 'uppercase',
-      color: 'var(--mut)'
-    }
-  }, "Scroll"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 1,
-      height: 38,
-      background: `linear-gradient(180deg,var(--accent),transparent)`
-    }
-  })), /*#__PURE__*/React.createElement("style", null, `@media(max-width:1100px){.hero-status{display:none;}}`));
+    className: "btn btn-light"
+  }, "Parla amb un expert"))), /*#__PURE__*/React.createElement("div", {
+    className: "hero-areas"
+  }, /*#__PURE__*/React.createElement(HeroAreas, null))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:1100px){.hero-areas{display:none;}}`));
 }
 
 /* ── Stat band (count up) ── */
@@ -2427,7 +2044,7 @@ function StatBand() {
     style: {
       borderTop: '1px solid var(--line)',
       borderBottom: '1px solid var(--line)',
-      background: 'rgba(8,8,9,.5)'
+      background: 'var(--panel)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide stat-wrap",
@@ -2441,13 +2058,13 @@ function StatBand() {
     delay: i * 70,
     style: {
       padding: '46px 28px',
-      borderRight: i < stats.length - 1 ? '1px solid var(--line-soft)' : 'none'
+      borderRight: i < stats.length - 1 ? '1px solid var(--line)' : 'none'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "disp glow-text",
+    className: "disp",
     style: {
       fontSize: 'clamp(34px,4vw,64px)',
-      color: 'var(--accent)'
+      color: 'var(--accent-deep)'
     }
   }, /*#__PURE__*/React.createElement(CountUp, {
     to: s.to,
@@ -2574,33 +2191,33 @@ function SolutionsGallery() {
     style: {
       width: 54,
       height: 54,
-      borderRadius: 13,
-      background: A(16),
-      border: `1px solid ${A(34)}`,
+      borderRadius: 12,
+      background: 'rgba(142,198,63,.16)',
+      border: '1px solid rgba(142,198,63,.3)',
       backdropFilter: 'blur(8px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: 'var(--accent)',
-      boxShadow: `0 0 30px ${A(25)}`
+      color: 'var(--accent-2)'
     }
   }, s.icon), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 11,
-      color: 'var(--mut)',
+      color: 'rgba(255,255,255,.6)',
       letterSpacing: '.1em'
     }
   }, s.n)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "disp",
     style: {
       fontSize: 'clamp(28px,3vw,42px)',
+      color: '#fff',
       marginBottom: 10
     }
   }, s.t), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14.5,
-      color: 'rgba(255,255,255,.66)',
+      color: 'rgba(255,255,255,.7)',
       lineHeight: 1.6,
       maxWidth: 360
     }
@@ -2614,7 +2231,7 @@ function SolutionsGallery() {
       fontSize: 11,
       letterSpacing: '.12em',
       textTransform: 'uppercase',
-      color: 'var(--accent)'
+      color: 'var(--accent-2)'
     }
   }, "Explorar ", /*#__PURE__*/React.createElement(Icons.Arrow, {
     s: 13
@@ -2626,23 +2243,12 @@ function CaseBatllia() {
     style: {
       position: 'relative',
       padding: '120px 0',
-      background: 'rgba(11,11,12,.7)',
+      background: 'var(--panel)',
       borderTop: '1px solid var(--line)',
       borderBottom: '1px solid var(--line)',
       overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      top: '-30%',
-      right: '-10%',
-      width: 600,
-      height: 600,
-      background: `radial-gradient(circle,${A(10)},transparent 70%)`,
-      filter: 'blur(40px)',
-      pointerEvents: 'none'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide",
     style: {
       position: 'relative'
@@ -2656,7 +2262,7 @@ function CaseBatllia() {
     },
     className: "case-grid"
   }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, "Cas d'èxit"), /*#__PURE__*/React.createElement("h2", {
-    className: "disp glow-text",
+    className: "disp",
     style: {
       fontSize: 'clamp(36px,5vw,84px)',
       marginBottom: 24
@@ -2716,8 +2322,12 @@ function CaseBatllia() {
       justifyContent: 'space-between'
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "kicker",
     style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.2em',
+      textTransform: 'uppercase',
+      color: 'var(--accent-2)',
       marginBottom: 4
     }
   }, "Projecte completat"), /*#__PURE__*/React.createElement("div", {
@@ -2725,19 +2335,19 @@ function CaseBatllia() {
       fontFamily: 'var(--disp)',
       fontWeight: 700,
       fontSize: 18,
-      color: 'var(--ink)'
+      color: '#fff'
     }
   }, "La Batllia d'Andorra")), /*#__PURE__*/React.createElement("div", {
     style: {
       width: 44,
       height: 44,
       borderRadius: '50%',
-      background: A(20),
-      border: `1px solid ${A(40)}`,
+      background: 'rgba(142,198,63,.2)',
+      border: '1px solid rgba(142,198,63,.4)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: 'var(--accent)'
+      color: 'var(--accent-2)'
     }
   }, /*#__PURE__*/React.createElement(Icons.Video, null)))))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 200
@@ -2992,7 +2602,7 @@ function PartnersMarquee() {
     style: {
       borderTop: '1px solid var(--line)',
       borderBottom: '1px solid var(--line)',
-      background: 'rgba(11,11,12,.6)'
+      background: 'var(--panel)'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap",
@@ -3003,7 +2613,6 @@ function PartnersMarquee() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
-      color: 'var(--faint)',
       textAlign: 'center'
     }
   }, "Fabricants i partners certificats")), /*#__PURE__*/React.createElement("div", {
@@ -3212,7 +2821,7 @@ function CtaBig() {
     style: {
       position: 'relative',
       overflow: 'hidden',
-      borderTop: '1px solid var(--line)'
+      background: 'var(--panel-dark)'
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80&auto=format&fit=crop",
@@ -3227,24 +2836,14 @@ function CtaBig() {
     style: {
       position: 'absolute',
       inset: 0,
-      background: `linear-gradient(180deg,#000 0%,${A(8)} 50%,#000 100%)`
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      background: 'radial-gradient(ellipse 60% 80% at 50% 50%,rgba(0,0,0,.2),#000)'
-    }
-  }), /*#__PURE__*/React.createElement(ParticleField, {
-    style: {
-      opacity: .5
+      background: 'linear-gradient(180deg,rgba(8,18,12,.86) 0%,rgba(8,18,12,.7) 50%,rgba(8,18,12,.9) 100%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
       position: 'relative',
       zIndex: 1,
-      padding: '150px 40px',
+      padding: '140px 40px',
       textAlign: 'center'
     }
   }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
@@ -3252,19 +2851,21 @@ function CtaBig() {
     style: {
       justifyContent: 'center',
       display: 'flex',
-      marginBottom: 22
+      marginBottom: 22,
+      color: 'var(--accent-2)'
     }
   }, "Comencem?"), /*#__PURE__*/React.createElement("h2", {
-    className: "disp glow-text",
+    className: "disp",
     style: {
-      fontSize: 'clamp(44px,8vw,140px)'
+      color: '#fff',
+      fontSize: 'clamp(40px,7vw,112px)'
     }
   }, "Tens un projecte", /*#__PURE__*/React.createElement("br", null), "en ment?"), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: '28px auto 0',
       maxWidth: 540,
       fontSize: 18,
-      color: 'var(--mut)',
+      color: 'rgba(255,255,255,.76)',
       lineHeight: 1.7
     }
   }, "Explica'ns les teves necessitats i trobarem la millor solució tecnològica per al teu projecte."), /*#__PURE__*/React.createElement("div", {
@@ -3275,15 +2876,15 @@ function CtaBig() {
       justifyContent: 'center',
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
   }, "Contacta ara ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
-  }))), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  })), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
-    className: "btn btn-ghost"
-  }, /*#__PURE__*/React.createElement(Icons.Phone, null), " +376 88 55 99"))))));
+    className: "btn btn-light"
+  }, /*#__PURE__*/React.createElement(Icons.Phone, null), " +376 88 55 99")))));
 }
 const TWEAK_DEFAULTS = {
   "mood": "acid",

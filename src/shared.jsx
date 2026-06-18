@@ -1,8 +1,8 @@
 // ════════════════════════════════════════════════════════════════════════════
-// Ontec — shared design system (cinematic / high-impact)
-// Tokens + global motion (aurora, particles, cursor spotlight, scroll progress)
-// + Reveal, Scramble, CountUp, MagneticButton, TiltCard, Marquee, Icons,
-//   Tag, SectionLabel, Nav, Footer, Cine, PageHero, PageShell.
+// Ontec — shared design system (corporate / professional)
+// Light, trustworthy palette built on the real logo green. No neon, no
+// particles, no scanlines. Moderate motion only: scroll reveals, count-ups,
+// soft image zoom and discreet hover states.
 // ════════════════════════════════════════════════════════════════════════════
 
 const { useState, useEffect, useRef } = React;
@@ -11,131 +11,84 @@ const A = (p) => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 
 const GLOBAL_CSS = `
 :root{
-  --bg:#000; --panel:#0b0b0c; --panel-2:#101011;
-  --ink:#f4f5f3; --mut:rgba(244,245,243,.54); --faint:rgba(244,245,243,.3);
-  --line:rgba(255,255,255,.10); --line-soft:rgba(255,255,255,.06);
-  --accent:#39ff6e; --accent-ink:#04130a;
+  --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
+  --ink:#13211b; --mut:rgba(19,33,27,.64); --faint:rgba(19,33,27,.42);
+  --line:rgba(19,33,27,.12); --line-soft:rgba(19,33,27,.07);
+  --accent:#4f9e2f; --accent-2:#8ec63f; --accent-deep:#3a7a22; --accent-ink:#ffffff;
   --disp:'Archivo',sans-serif; --body:'Space Grotesk',sans-serif; --mono:'Space Mono',monospace;
-  --case:uppercase; --dtrack:-0.035em; --dweight:840;
-  --glow:1; --grain:.5; --zoom:1.07; --marquee:38s; --scan:0;
-  --mx:50vw; --my:50vh;
+  --dtrack:-0.025em; --dweight:800;
+  --zoom:1.06; --marquee:48s;
 }
-[data-mood="acid"]  { --accent:#39ff6e; --accent-ink:#04130a; }
-[data-mood="ice"]   { --accent:#41dfff; --accent-ink:#03161c; }
-[data-mood="flare"] { --accent:#ff5836; --accent-ink:#190603; }
-[data-mood="mono"]  { --accent:#f4f5f3; --accent-ink:#000; }
-[data-voice="editorial"]{ --case:uppercase; --dweight:900; --dtrack:-0.04em; }
-[data-voice="modern"]   { --case:none;      --dweight:780; --dtrack:-0.03em; }
-[data-voice="soft"]     { --case:none;      --dweight:640; --dtrack:-0.018em; --disp:'Space Grotesk',sans-serif; }
-[data-intensity="calm"]     { --glow:.35; --grain:.12; --zoom:1.03; --marquee:64s; --scan:0; }
-[data-intensity="cinematic"]{ --glow:1;   --grain:.5;  --zoom:1.07; --marquee:38s; --scan:0; }
-[data-intensity="hyper"]    { --glow:1.6; --grain:.85; --zoom:1.14; --marquee:18s; --scan:1; }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 ::selection{background:var(--accent);color:var(--accent-ink);}
-::-webkit-scrollbar{width:8px;}::-webkit-scrollbar-track{background:#000;}
-::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--panel);}
+::-webkit-scrollbar-thumb{background:rgba(19,33,27,.22);border-radius:5px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent);}
 input,textarea,button,select{font-family:var(--body);}
 a{color:inherit;}
 
-.wrap{max-width:1320px;margin:0 auto;padding:0 40px;}
-.wrap-wide{max-width:1680px;margin:0 auto;padding:0 40px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+.wrap-wide{max-width:1440px;margin:0 auto;padding:0 40px;}
 
 .disp{font-family:var(--disp);font-weight:var(--dweight);letter-spacing:var(--dtrack);
-  text-transform:var(--case);line-height:.96;color:var(--ink);text-wrap:balance;}
-.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);}
+  text-transform:none;line-height:1.04;color:var(--ink);text-wrap:balance;}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-deep);}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--mut);}
-.glow-text{text-shadow:0 0 40px ${A(35)};}
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mut);}
+.glow-text{}
 
 /* buttons */
 .btn{position:relative;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;
-  font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;
-  padding:15px 26px;border-radius:999px;border:1px solid transparent;overflow:hidden;
-  transition:transform .25s cubic-bezier(.2,.7,.3,1),background .2s,color .2s,box-shadow .25s,border-color .2s;}
-.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 0 var(--accent);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 50px ${A(50)},0 0 0 1px ${A(60)};}
-.btn-primary::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);transition:left .6s ease;}
-.btn-primary:hover::after{left:140%;}
-.btn-ghost{background:rgba(255,255,255,.02);color:var(--ink);border-color:var(--line);}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 40px ${A(18)};}
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  padding:15px 26px;border-radius:10px;border:1px solid transparent;
+  transition:transform .2s ease,background .2s,color .2s,box-shadow .25s,border-color .2s;}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 6px 18px ${A(28)};}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px);box-shadow:0 12px 30px ${A(40)};}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep);transform:translateY(-2px);}
+.btn-light{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.34);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.btn-light:hover{background:#fff;color:var(--accent-deep);border-color:#fff;transform:translateY(-2px);}
 
 /* reveal on scroll */
-.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.3,1),transform 1s cubic-bezier(.2,.7,.3,1);}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1);}
 .reveal.in{opacity:1;transform:none;}
-.reveal-clip{clip-path:inset(0 100% 0 0);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);}
+.reveal-clip{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1);}
 .reveal-clip.in{clip-path:inset(0 0 0 0);}
 @media (prefers-reduced-motion:reduce){.reveal,.reveal-clip{opacity:1;transform:none;clip-path:none;transition:none;}}
 
-/* fixed atmosphere layers */
-.fx-aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:calc(.9*var(--glow));
-  background:
-    radial-gradient(38% 44% at 18% 22%, ${A(22)}, transparent 60%),
-    radial-gradient(34% 40% at 82% 14%, ${A(14)}, transparent 60%),
-    radial-gradient(46% 50% at 70% 88%, ${A(16)}, transparent 62%),
-    radial-gradient(40% 44% at 26% 82%, ${A(10)}, transparent 60%);
-  filter:blur(30px);animation:aurora 22s ease-in-out infinite alternate;}
-@keyframes aurora{0%{transform:translate3d(-2%,-1%,0) scale(1.02) rotate(0deg);}
-  50%{transform:translate3d(3%,2%,0) scale(1.08) rotate(2deg);}
-  100%{transform:translate3d(-1%,3%,0) scale(1.04) rotate(-1deg);}}
-.fx-spot{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;
-  background:radial-gradient(420px 420px at var(--mx) var(--my), ${A(12)}, transparent 70%);
-  opacity:calc(.9*var(--glow));transition:background .08s linear;}
-.atmos{position:fixed;inset:0;pointer-events:none;z-index:60;mix-blend-mode:overlay;
-  opacity:calc(.5 * var(--grain));
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");}
-.scan{position:fixed;inset:0;pointer-events:none;z-index:61;opacity:calc(.4 * var(--scan));
-  background:repeating-linear-gradient(to bottom,transparent 0 2px, rgba(0,0,0,.5) 2px 3px);}
-.scan-on{opacity:.18!important;}
-.fx-vignette{position:fixed;inset:0;pointer-events:none;z-index:59;
-  background:radial-gradient(ellipse 120% 80% at 50% 40%, transparent 55%, rgba(0,0,0,.55) 100%);}
-
 /* scroll progress */
-.prog{position:fixed;top:0;left:0;height:2px;z-index:300;background:linear-gradient(90deg,${A(50)},var(--accent));
-  box-shadow:0 0 14px var(--accent);transform-origin:0 50%;}
+.prog{position:fixed;top:0;left:0;height:3px;z-index:300;background:var(--accent);transform-origin:0 50%;}
 
 /* media card */
-.mcard{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:var(--panel);
-  text-decoration:none;display:block;transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s;}
-.mcard:hover{border-color:${A(55)};transform:translateY(-6px);box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 1px ${A(30)};}
+.mcard{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--bg);
+  text-decoration:none;display:block;box-shadow:0 1px 2px rgba(19,33,27,.04);
+  transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s;}
+.mcard:hover{border-color:${A(45)};transform:translateY(-5px);box-shadow:0 22px 48px rgba(19,33,27,.12);}
 .mcard .mc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.2,.7,.3,1),opacity .4s;}
+  transition:transform .8s cubic-bezier(.2,.7,.3,1);}
 .mcard:hover .mc-img{transform:scale(var(--zoom));}
-.mc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.35) 45%,rgba(0,0,0,.92) 100%);}
+.mc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,12,.05) 0%,rgba(8,18,12,.35) 45%,rgba(8,18,12,.9) 100%);}
 
-/* animated gradient border */
+/* (legacy hooks kept as no-ops so existing markup stays valid) */
 .glowborder{position:relative;}
-.glowborder::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;
-  background:conic-gradient(from var(--ang,0deg), transparent 0 55%, ${A(80)} 75%, transparent 90%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;animation:spinang 4s linear infinite;}
-.glowborder:hover::before{opacity:1;}
-@keyframes spinang{to{--ang:360deg;}}
-@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
 
 /* marquee */
 .mq{display:flex;overflow:hidden;user-select:none;}
 .mq-track{display:flex;flex-shrink:0;gap:0;align-items:center;animation:mq var(--marquee) linear infinite;}
 .mq:hover .mq-track{animation-play-state:paused;}
 @keyframes mq{to{transform:translateX(-50%);}}
-
-@keyframes scanline{0%{transform:translateY(-100vh);}100%{transform:translateY(220vh);}}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-@keyframes pulse-ring{0%{transform:scale(1);opacity:.6;}100%{transform:scale(2.2);opacity:0;}}
-@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes gridmove{to{background-position:88px 88px;}}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
 .linkline{position:relative;text-decoration:none;color:var(--mut);transition:color .2s;}
-.linkline::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.linkline::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1.5px;background:var(--accent);transition:width .3s;}
 .linkline:hover{color:var(--ink);}
 .linkline:hover::after{width:100%;}
 
-@media(max-width:640px){.wrap,.wrap-wide{padding:0 20px;}.fx-spot{display:none;}}
-@media(hover:none){.fx-spot{display:none;}}
+@media(max-width:640px){.wrap,.wrap-wide{padding:0 20px;}}
 `;
 
 /* ── Scroll progress bar ── */
@@ -154,102 +107,11 @@ function ScrollProgress() {
   return <div ref={ref} className="prog" style={{ width: '100%', transform: 'scaleX(0)' }} />;
 }
 
-/* ── Cursor spotlight tracker (sets CSS vars) ── */
-function CursorFX() {
-  useEffect(() => {
-    let raf = 0, x = innerWidth/2, y = innerHeight/2;
-    const onMove = (e) => { x = e.clientX; y = e.clientY;
-      if (!raf) raf = requestAnimationFrame(() => {
-        document.documentElement.style.setProperty('--mx', x + 'px');
-        document.documentElement.style.setProperty('--my', y + 'px');
-        raf = 0;
-      });
-    };
-    window.addEventListener('pointermove', onMove);
-    return () => window.removeEventListener('pointermove', onMove);
-  }, []);
-  return <div className="fx-spot" />;
-}
-
-/* ── Particle network canvas (tech mesh) ── */
-function ParticleField({ density = 0.00009, style = {} }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const cv = ref.current; if (!cv) return;
-    const ctx = cv.getContext('2d');
-    let w, h, pts = [], raf, mouse = { x: -999, y: -999 };
-    const accent = () => getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39ff6e';
-    let col = accent();
-    const resize = () => {
-      const r = cv.getBoundingClientRect();
-      w = cv.width = r.width * devicePixelRatio; h = cv.height = r.height * devicePixelRatio;
-      const n = Math.min(120, Math.max(28, Math.floor(r.width * r.height * density)));
-      pts = Array.from({ length: n }, () => ({
-        x: Math.random() * w, y: Math.random() * h,
-        vx: (Math.random() - .5) * .25 * devicePixelRatio, vy: (Math.random() - .5) * .25 * devicePixelRatio,
-      }));
-      col = accent();
-    };
-    const hex = (h2) => { const m = h2.replace('#',''); const b = m.length===3 ? m.split('').map(c=>c+c).join('') : m;
-      return [parseInt(b.slice(0,2),16),parseInt(b.slice(2,4),16),parseInt(b.slice(4,6),16)]; };
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      const [r,g,b] = hex(col.startsWith('#') ? col : '#39ff6e');
-      const mx = mouse.x * devicePixelRatio, my = mouse.y * devicePixelRatio;
-      for (const p of pts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-      }
-      const max = 130 * devicePixelRatio;
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          const d = Math.hypot(dx, dy);
-          if (d < max) { ctx.strokeStyle = `rgba(${r},${g},${b},${(1 - d/max) * .16})`;
-            ctx.lineWidth = devicePixelRatio; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); }
-        }
-        const dmx = pts[i].x - mx, dmy = pts[i].y - my, dm = Math.hypot(dmx, dmy);
-        if (dm < 180 * devicePixelRatio) { ctx.strokeStyle = `rgba(${r},${g},${b},${(1 - dm/(180*devicePixelRatio)) * .5})`;
-          ctx.lineWidth = devicePixelRatio; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(mx, my); ctx.stroke(); }
-        ctx.fillStyle = `rgba(${r},${g},${b},.7)`; ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 1.4 * devicePixelRatio, 0, 7); ctx.fill();
-      }
-      raf = requestAnimationFrame(draw);
-    };
-    const onMove = (e) => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; };
-    resize(); draw();
-    window.addEventListener('resize', resize);
-    window.addEventListener('pointermove', onMove);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); window.removeEventListener('pointermove', onMove); };
-  }, [density]);
-  return <canvas ref={ref} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block', ...style }} />;
-}
-
-/* ── Scramble / decode text ── */
-function Scramble({ text, className = '', style = {}, speed = 28, delay = 0 }) {
-  const [out, setOut] = useState(text);
-  const ref = useRef(null);
-  useEffect(() => {
-    const chars = '!<>-_\\/[]{}=+*^?#01';
-    let frame = 0, raf, started = false;
-    const run = () => {
-      const total = text.length;
-      const reveal = Math.floor(frame / 1.6);
-      let s = '';
-      for (let i = 0; i < total; i++) {
-        if (text[i] === ' ' || text[i] === '\n') { s += text[i]; continue; }
-        s += i < reveal ? text[i] : chars[Math.floor(Math.random() * chars.length)];
-      }
-      setOut(s); frame++;
-      if (reveal <= total) raf = setTimeout(run, speed); else setOut(text);
-    };
-    const io = new IntersectionObserver((es) => {
-      es.forEach((e) => { if (e.isIntersecting && !started) { started = true; setTimeout(run, delay); io.disconnect(); } });
-    }, { threshold: .4 });
-    if (ref.current) io.observe(ref.current);
-    return () => { clearTimeout(raf); io.disconnect(); };
-  }, [text]);
-  return <span ref={ref} className={className} style={style}>{out}</span>;
+/* ── Legacy effect components, neutralised (kept for API compatibility) ── */
+function CursorFX() { return null; }
+function ParticleField() { return null; }
+function Scramble({ text, className = '', style = {} }) {
+  return <span className={className} style={style}>{text}</span>;
 }
 
 /* ── CountUp ── */
@@ -258,6 +120,7 @@ function CountUp({ to, suffix = '', prefix = '', dur = 1600, decimals = 0, class
   const ref = useRef(null);
   useEffect(() => {
     let raf, start, done = false;
+    if (typeof IntersectionObserver === 'undefined') { setVal(to); return; }
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => {
         if (e.isIntersecting && !done) { done = true;
@@ -273,8 +136,8 @@ function CountUp({ to, suffix = '', prefix = '', dur = 1600, decimals = 0, class
   return <span ref={ref} className={className} style={style}>{prefix}{val.toFixed(decimals)}{suffix}</span>;
 }
 
-/* ── Magnetic button wrapper ── */
-function Magnetic({ children, strength = 0.35, style = {} }) {
+/* ── Magnetic button wrapper (subtle) ── */
+function Magnetic({ children, strength = 0.18, style = {} }) {
   const ref = useRef(null);
   const onMove = (e) => { const el = ref.current; if (!el) return; const r = el.getBoundingClientRect();
     const x = (e.clientX - (r.left + r.width/2)) * strength; const y = (e.clientY - (r.top + r.height/2)) * strength;
@@ -284,15 +147,9 @@ function Magnetic({ children, strength = 0.35, style = {} }) {
     style={{ display: 'inline-flex', transition: 'transform .35s cubic-bezier(.2,.7,.3,1)', ...style }}>{children}</span>;
 }
 
-/* ── Tilt 3D card ── */
-function Tilt({ children, max = 8, className = '', style = {} }) {
-  const ref = useRef(null);
-  const onMove = (e) => { const el = ref.current; if (!el) return; const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
-    el.style.transform = `perspective(900px) rotateY(${px*max}deg) rotateX(${-py*max}deg)`; };
-  const reset = () => { if (ref.current) ref.current.style.transform = 'perspective(900px) rotateY(0) rotateX(0)'; };
-  return <div ref={ref} onMouseMove={onMove} onMouseLeave={reset} className={className}
-    style={{ transition: 'transform .4s cubic-bezier(.2,.7,.3,1)', transformStyle: 'preserve-3d', ...style }}>{children}</div>;
+/* ── Tilt (kept as plain wrapper — no 3D rotation, corporate look) ── */
+function Tilt({ children, className = '', style = {} }) {
+  return <div className={className} style={style}>{children}</div>;
 }
 
 /* ── Reveal ── */
@@ -300,6 +157,7 @@ function Reveal({ children, delay = 0, as = 'div', clip = false, style = {}, cla
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current; if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') { el.classList.add('in'); return; }
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => { if (e.isIntersecting) { el.classList.add('in'); io.unobserve(el); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
@@ -311,15 +169,15 @@ function Reveal({ children, delay = 0, as = 'div', clip = false, style = {}, cla
 }
 
 /* ── Marquee ── */
-function Marquee({ items, sep = '✦', big = false }) {
+function Marquee({ items, sep = '·', big = false }) {
   const row = (k) => (
     <div className="mq-track" key={k} aria-hidden={k === 1}>
       {items.map((it, i) => (
         <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: big ? 26 : 18, padding: big ? '0 26px' : '0 18px' }}>
-          <span style={{ fontFamily: big ? 'var(--disp)' : 'var(--mono)', fontWeight: big ? 'var(--dweight)' : 400,
-            textTransform: big ? 'var(--case)' : 'uppercase', letterSpacing: big ? 'var(--dtrack)' : '.14em',
-            fontSize: big ? 'clamp(28px,4vw,58px)' : 12.5, color: big ? 'var(--ink)' : 'var(--mut)' }}>{it}</span>
-          <span style={{ color: 'var(--accent)', fontSize: big ? 22 : 11, opacity: .8 }}>{sep}</span>
+          <span style={{ fontFamily: big ? 'var(--disp)' : 'var(--mono)', fontWeight: big ? 700 : 400,
+            textTransform: big ? 'none' : 'uppercase', letterSpacing: big ? 'var(--dtrack)' : '.14em',
+            fontSize: big ? 'clamp(22px,3vw,40px)' : 12.5, color: big ? 'var(--ink)' : 'var(--mut)' }}>{it}</span>
+          <span style={{ color: 'var(--accent)', fontSize: big ? 18 : 11, opacity: .7 }}>{sep}</span>
         </span>
       ))}
     </div>
@@ -351,8 +209,8 @@ const Icons = {
 function Tag({ children }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--mono)', fontSize: 10.5,
-      letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)', background: A(11),
-      border: `1px solid ${A(28)}`, borderRadius: 999, padding: '5px 12px' }}>
+      letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--accent-deep)', background: A(10),
+      border: `1px solid ${A(24)}`, borderRadius: 8, padding: '5px 12px' }}>
       {children}
     </span>
   );
@@ -361,20 +219,19 @@ function Tag({ children }) {
 function SectionLabel({ children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 22 }}>
-      <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)', boxShadow: `0 0 12px var(--accent)` }} />
+      <span style={{ width: 22, height: 2, background: 'var(--accent)' }} />
       <span className="kicker">{children}</span>
     </div>
   );
 }
 
-function OntecLogo({ height = 30 }) {
+function OntecLogo({ height = 30, color = 'currentColor' }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-      <div style={{ width: height, height, background: 'var(--accent)', borderRadius: Math.round(height * 0.22),
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: `0 0 22px ${A(45)}` }}>
-        <span style={{ fontFamily: 'var(--mono)', fontWeight: 700, fontSize: Math.round(height * 0.38), color: 'var(--accent-ink)', lineHeight: 1 }}>ON</span>
-      </div>
-      <span style={{ fontFamily: 'var(--disp)', fontWeight: 800, fontSize: Math.round(height * 0.62), color: 'var(--ink)', letterSpacing: '-0.03em', textTransform: 'uppercase' }}>Ontec</span>
+      <img src="assets/ontec-logo.png" alt="Ontec" height={height}
+        style={{ height, width: 'auto', display: 'block', flexShrink: 0 }} />
+      <span style={{ fontFamily: 'var(--disp)', fontWeight: 800, fontSize: Math.round(height * 0.6),
+        color, letterSpacing: '-0.02em' }}>Ontec</span>
     </div>
   );
 }
@@ -406,16 +263,21 @@ function Nav({ activePage = '' }) {
     window.addEventListener('scroll', fn); fn();
     return () => window.removeEventListener('scroll', fn);
   }, []);
-  const linkBase = { display: 'block', padding: '9px 14px', fontFamily: 'var(--mono)', fontSize: 11.5,
-    letterSpacing: '.12em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 999, transition: 'color .15s, background .15s' };
+  const solid = scrolled || mob;             // solid white bar
+  const lightText = !solid;                  // over the dark hero → light text
+  const textMut = lightText ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const textInk = lightText ? '#ffffff' : 'var(--ink)';
+  const activeCol = lightText ? 'var(--accent-2)' : 'var(--accent-deep)';
+  const linkBase = { display: 'block', padding: '9px 13px', fontFamily: 'var(--mono)', fontSize: 11.5,
+    letterSpacing: '.1em', textTransform: 'uppercase', textDecoration: 'none', borderRadius: 8, transition: 'color .15s' };
   return (
-    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, transition: 'all .35s',
-      background: scrolled || mob ? 'rgba(0,0,0,.72)' : 'transparent',
-      borderBottom: `1px solid ${scrolled || mob ? 'var(--line)' : 'transparent'}`,
-      backdropFilter: scrolled || mob ? 'blur(20px) saturate(150%)' : 'none',
-      WebkitBackdropFilter: scrolled || mob ? 'blur(20px) saturate(150%)' : 'none' }}>
+    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, transition: 'all .3s',
+      background: solid ? 'rgba(255,255,255,.86)' : 'transparent',
+      borderBottom: `1px solid ${solid ? 'var(--line)' : 'transparent'}`,
+      backdropFilter: solid ? 'blur(18px) saturate(150%)' : 'none',
+      WebkitBackdropFilter: solid ? 'blur(18px) saturate(150%)' : 'none' }}>
       <div className="wrap" style={{ height: 74, display: 'flex', alignItems: 'center' }}>
-        <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginRight: 40, flexShrink: 0 }}>
+        <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: textInk, marginRight: 40, flexShrink: 0 }}>
           <OntecLogo height={30} />
         </a>
         <div style={{ display: 'flex', gap: 2, flex: 1 }} className="nav-desk">
@@ -423,19 +285,19 @@ function Nav({ activePage = '' }) {
             <div key={item.label} style={{ position: 'relative' }}
               onMouseEnter={() => item.children && setDrop(item.label)}
               onMouseLeave={() => setDrop(null)}>
-              <a href={item.href} style={{ ...linkBase, color: activePage === item.label ? 'var(--accent)' : 'var(--mut)' }}
-                onMouseEnter={(e) => { if (activePage !== item.label) e.currentTarget.style.color = 'var(--ink)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = activePage === item.label ? 'var(--accent)' : 'var(--mut)'; }}>
+              <a href={item.href} style={{ ...linkBase, color: activePage === item.label ? activeCol : textMut }}
+                onMouseEnter={(e) => { if (activePage !== item.label) e.currentTarget.style.color = textInk; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = activePage === item.label ? activeCol : textMut; }}>
                 {item.label}
               </a>
               {item.children && drop === item.label && (
-                <div style={{ position: 'absolute', top: '100%', left: 0, minWidth: 220, background: 'rgba(8,8,9,.96)',
-                  border: '1px solid var(--line)', borderRadius: 14, padding: '8px', backdropFilter: 'blur(20px)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,.7)' }}>
+                <div style={{ position: 'absolute', top: '100%', left: 0, minWidth: 220, background: '#ffffff',
+                  border: '1px solid var(--line)', borderRadius: 12, padding: '8px',
+                  boxShadow: '0 24px 60px rgba(19,33,27,.16)' }}>
                   {item.children.map((ch) => (
                     <a key={ch.label} href={ch.href} style={{ display: 'block', padding: '10px 14px', color: 'var(--mut)',
-                      fontSize: 13, textDecoration: 'none', borderRadius: 9, transition: 'color .12s, background .12s' }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.background = A(10); }}
+                      fontSize: 13, textDecoration: 'none', borderRadius: 8, transition: 'color .12s, background .12s' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-deep)'; e.currentTarget.style.background = A(8); }}
                       onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--mut)'; e.currentTarget.style.background = 'transparent'; }}>
                       {ch.label}
                     </a>
@@ -445,21 +307,21 @@ function Nav({ activePage = '' }) {
             </div>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexShrink: 0 }} className="nav-desk">
-          <a href="tel:+37688559" style={{ fontFamily: 'var(--mono)', fontSize: 11.5, color: 'var(--faint)', textDecoration: 'none', letterSpacing: '.04em' }}>+376 88 55 99</a>
-          <Magnetic><a href="contacta.html" className="btn btn-primary" style={{ padding: '11px 20px' }}>Contacta</a></Magnetic>
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexShrink: 0 }} className="nav-desk">
+          <a href="tel:+37688559" style={{ fontFamily: 'var(--mono)', fontSize: 11.5, color: textMut, textDecoration: 'none', letterSpacing: '.04em' }}>+376 88 55 99</a>
+          <a href="contacta.html" className="btn btn-primary" style={{ padding: '11px 20px' }}>Contacta</a>
         </div>
         <button onClick={() => setMob(!mob)} className="nav-mob"
-          style={{ display: 'none', marginLeft: 'auto', background: 'transparent', border: 'none', color: 'var(--ink)', cursor: 'pointer' }}
+          style={{ display: 'none', marginLeft: 'auto', background: 'transparent', border: 'none', color: textInk, cursor: 'pointer' }}
           aria-label="Menu" aria-expanded={mob}>
           {mob ? <Icons.X /> : <Icons.Menu />}
         </button>
       </div>
       {mob && (
-        <div style={{ background: 'rgba(0,0,0,.96)', borderTop: '1px solid var(--line)', padding: '14px 40px 28px' }}>
+        <div style={{ background: '#ffffff', borderTop: '1px solid var(--line)', padding: '14px 40px 28px' }}>
           {NAV_ITEMS.map((item) => (
-            <a key={item.label} href={item.href} className="disp" style={{ display: 'block', padding: '14px 0', fontSize: 26,
-              textDecoration: 'none', borderBottom: '1px solid var(--line-soft)' }}>{item.label}</a>
+            <a key={item.label} href={item.href} className="disp" style={{ display: 'block', padding: '14px 0', fontSize: 24,
+              color: 'var(--ink)', textDecoration: 'none', borderBottom: '1px solid var(--line-soft)' }}>{item.label}</a>
           ))}
           <a href="contacta.html" className="btn btn-primary" style={{ marginTop: 20, width: '100%', justifyContent: 'center' }}>Contacta ara</a>
         </div>
@@ -471,38 +333,38 @@ function Nav({ activePage = '' }) {
 
 function Footer() {
   return (
-    <footer style={{ position: 'relative', zIndex: 2, borderTop: '1px solid var(--line)', background: 'rgba(0,0,0,.6)', overflow: 'hidden' }}>
-      <div style={{ borderBottom: '1px solid var(--line-soft)', padding: '26px 0' }}>
+    <footer style={{ position: 'relative', zIndex: 2, background: 'var(--panel-dark)', color: '#eef1ea', overflow: 'hidden' }}>
+      <div style={{ borderBottom: '1px solid rgba(255,255,255,.08)', padding: '26px 0' }}>
         <Marquee big items={['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']} />
       </div>
       <div className="wrap" style={{ padding: '64px 40px 40px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 48, alignItems: 'start' }} className="ft-grid">
           <div>
-            <OntecLogo height={34} />
-            <p style={{ marginTop: 22, fontSize: 15, color: 'var(--mut)', lineHeight: 1.7, maxWidth: 320 }}>
+            <div style={{ color: '#ffffff' }}><OntecLogo height={34} color="#ffffff" /></div>
+            <p style={{ marginTop: 22, fontSize: 15, color: 'rgba(238,241,234,.66)', lineHeight: 1.7, maxWidth: 320 }}>
               Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.
             </p>
             <div style={{ marginTop: 26, display: 'flex', gap: 10 }}>
-              <Magnetic><a href="contacta.html" className="btn btn-primary" style={{ padding: '12px 22px' }}>Comença un projecte <Icons.UpRight s={14} /></a></Magnetic>
+              <a href="contacta.html" className="btn btn-primary" style={{ padding: '12px 22px' }}>Comença un projecte <Icons.UpRight s={14} /></a>
             </div>
           </div>
           <div>
-            <div className="kicker" style={{ color: 'var(--faint)', marginBottom: 18 }}>Navegació</div>
+            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>Navegació</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {NAV_ITEMS.map((l) => <a key={l.label} href={l.href} className="linkline" style={{ fontSize: 15 }}>{l.label}</a>)}
+              {NAV_ITEMS.map((l) => <a key={l.label} href={l.href} style={{ fontSize: 15, color: 'rgba(238,241,234,.7)', textDecoration: 'none' }}>{l.label}</a>)}
             </div>
           </div>
           <div>
-            <div className="kicker" style={{ color: 'var(--faint)', marginBottom: 18 }}>Contacte</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 15 }}>
-              <a href="tel:+37688559" className="linkline">+376 88 55 99</a>
-              <a href="mailto:info@ontecandorra.com" className="linkline">info@ontecandorra.com</a>
-              <span style={{ color: 'var(--mut)' }}>C/ de la Vena 3, Baixos<br/>Encamp, Andorra</span>
+            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>Contacte</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 15, color: 'rgba(238,241,234,.7)' }}>
+              <a href="tel:+37688559" style={{ color: 'inherit', textDecoration: 'none' }}>+376 88 55 99</a>
+              <a href="mailto:info@ontecandorra.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@ontecandorra.com</a>
+              <span>C/ de la Vena 3, Baixos<br/>Encamp, Andorra</span>
             </div>
           </div>
         </div>
-        <div style={{ marginTop: 56, paddingTop: 26, borderTop: '1px solid var(--line-soft)', display: 'flex',
-          justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--faint)', letterSpacing: '.05em' }}>
+        <div style={{ marginTop: 56, paddingTop: 26, borderTop: '1px solid rgba(255,255,255,.08)', display: 'flex',
+          justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(238,241,234,.45)', letterSpacing: '.05em' }}>
           <span>© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats</span>
           <span>ANDORRA · 42.5°N 1.5°E</span>
         </div>
@@ -519,20 +381,19 @@ function Cine({ src, alt = '', style = {}, shade = false, parallax = false, chil
     if (!parallax) return;
     const el = imgRef.current; if (!el) return;
     const fn = () => { const r = el.getBoundingClientRect(); const off = (r.top + r.height/2 - innerHeight/2) / innerHeight;
-      el.style.transform = `scale(1.18) translateY(${off * -34}px)`; };
+      el.style.transform = `scale(1.14) translateY(${off * -28}px)`; };
     window.addEventListener('scroll', fn, { passive: true }); fn();
     return () => window.removeEventListener('scroll', fn);
   }, [parallax, ok]);
   return (
-    <div style={{ position: 'relative', overflow: 'hidden', background: '#070707', ...style }}>
+    <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--panel-2)', ...style }}>
       {ok ? (
         <img ref={imgRef} src={src} alt={alt} onError={() => setOk(false)}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: parallax ? 'transform' : 'auto' }} />
       ) : (
         <>
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,#0c1810 0%,#060a07 50%,#0b0f14 100%)' }} />
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(${A(12)} 1px,transparent 1px),linear-gradient(90deg,${A(12)} 1px,transparent 1px)`, backgroundSize: '44px 44px' }} />
-          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 40%, ${A(14)}, transparent 60%)` }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,#1a2e22 0%,#0f1d15 100%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 40%, ${A(18)}, transparent 60%)` }} />
         </>
       )}
       {shade && <div className="mc-shade" />}
@@ -543,22 +404,19 @@ function Cine({ src, alt = '', style = {}, shade = false, parallax = false, chil
 
 function PageHero({ kicker, title, sub, img, align = 'left' }) {
   return (
-    <section style={{ position: 'relative', minHeight: 'min(82vh,760px)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', minHeight: 'min(72vh,640px)', display: 'flex', alignItems: 'flex-end', overflow: 'hidden', background: 'var(--panel-dark)' }}>
       <Cine src={img} alt="" parallax style={{ position: 'absolute', inset: 0 }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.4) 38%,rgba(0,0,0,.78) 78%,#000 100%)' }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,#000 0%,rgba(0,0,0,.45) 45%,transparent 85%)' }} />
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(${A(7)} 1px,transparent 1px),linear-gradient(90deg,${A(7)} 1px,transparent 1px)`, backgroundSize: '88px 88px', maskImage: 'radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent)' }} />
-      <ParticleField style={{ opacity: .6 }} />
-      <div style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 1, background: `linear-gradient(90deg,transparent,${A(45)},transparent)`, animation: 'scanline 8s linear infinite' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,18,12,.6) 0%,rgba(8,18,12,.35) 38%,rgba(8,18,12,.8) 100%)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg,rgba(8,18,12,.85) 0%,rgba(8,18,12,.4) 50%,transparent 90%)' }} />
       <div className="wrap-wide" style={{ position: 'relative', zIndex: 2, width: '100%', paddingTop: 150, paddingBottom: 80, textAlign: align }}>
-        <div className="reveal in eyebrow" style={{ marginBottom: 24, justifyContent: align === 'center' ? 'center' : 'flex-start' }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)' }} />
+        <div className="eyebrow" style={{ marginBottom: 22, color: 'rgba(255,255,255,.78)', justifyContent: align === 'center' ? 'center' : 'flex-start' }}>
+          <span style={{ width: 22, height: 2, background: 'var(--accent-2)' }} />
           {kicker}
         </div>
-        <h1 className="disp glow-text" style={{ fontSize: 'clamp(44px,7vw,116px)', maxWidth: 1160, margin: align === 'center' ? '0 auto' : 0 }}>
-          <Scramble text={title} />
+        <h1 className="disp" style={{ color: '#fff', fontSize: 'clamp(40px,6vw,92px)', maxWidth: 1080, margin: align === 'center' ? '0 auto' : 0 }}>
+          {title}
         </h1>
-        {sub && <p style={{ marginTop: 26, fontSize: 'clamp(16px,1.4vw,19px)', color: 'var(--mut)', lineHeight: 1.7, maxWidth: 600, margin: align === 'center' ? '26px auto 0' : '26px 0 0' }}>{sub}</p>}
+        {sub && <p style={{ marginTop: 24, fontSize: 'clamp(16px,1.4vw,19px)', color: 'rgba(255,255,255,.74)', lineHeight: 1.7, maxWidth: 600, margin: align === 'center' ? '24px auto 0' : '24px 0 0' }}>{sub}</p>}
       </div>
     </section>
   );
@@ -568,8 +426,7 @@ function PageShell({ activePage, children }) {
   return (
     <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg)' }}>
       <style>{GLOBAL_CSS}</style>
-      <div className="fx-aurora" /><CursorFX /><div className="fx-vignette" />
-      <div className="atmos" /><div className="scan" /><ScrollProgress />
+      <ScrollProgress />
       <Nav activePage={activePage} />
       <main style={{ position: 'relative', zIndex: 2, flex: 1 }}>{children}</main>
       <Footer />
