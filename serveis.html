@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ca" data-mood="acid" data-voice="editorial" data-intensity="cinematic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serveis | Ontec — Ingenieries, Arquitectures, Installadors, Disseny Andorra</title>
+  <meta name="description" content="Serveis tecnologics adaptats a cada sector: ingenieries, arquitectures, installadors i disseny d'interiors. Distribucio i integracio a Andorra.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ontecandorra.com/serveis.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ontecandorra.com/serveis.html">
+  <meta property="og:title" content="Serveis | Ontec — Ingenieries, Arquitectures, Installadors, Disseny Andorra">
+  <meta property="og:description" content="Serveis tecnologics adaptats a cada sector: ingenieries, arquitectures, installadors i disseny d'interiors. Distribucio i integracio a Andorra.">
+  <meta property="og:image" content="https://ontecandorra.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script src="shared.js"></script>
+<script src="tweaks.js"></script>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef } = React;
+const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic"};
+
+const SVCS = [
+  {
+    id:'ingenieries', n:'01', t:'Ingenieries', icon:<Icons.Cpu/>,
+    img:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80&auto=format&fit=crop',
+    sub:'Prescripcio, especificacio i assistencia tecnica',
+    desc:"Col laborem amb ingenieries en la definicio tecnica dels sistemes, l'especificacio d'equips i l'assistencia durant totes les fases del projecte.",
+    points:["Prescripcio de sistemes IT i AV","Especificacio d'equips i materials","Assistencia tecnica en obra","Dossiers tecnics i documentacio","Formacio per a l'equip tecnic"]
+  },
+  {
+    id:'arquitectures', n:'02', t:'Arquitectures', icon:<Icons.Building/>,
+    img:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80&auto=format&fit=crop',
+    sub:'Tecnologia integrada des de la fase de projecte',
+    desc:"Treballem amb equips d'arquitectura per integrar la tecnologia des del disseny inicial, assegurant que els sistemes s'integrin de forma optima en l'espai.",
+    points:["Consulta en fase de projecte","Disseny de passadissos i infraestructura","Integracio estetica de dispositius","Coordinacio amb altres industrials","Pressupost de tecnologia per al projecte"]
+  },
+  {
+    id:'installadors', n:'03', t:'Installadors', icon:<Icons.Shield/>,
+    img:'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=900&q=80&auto=format&fit=crop',
+    sub:'Subministre, preconfiguracio i suport en obra',
+    desc:"Subministrem i preconfigurem equips per a installadors, oferint suport tecnic durant la installacio i la posada en marxa dels sistemes.",
+    points:["Subministre d'equips certificats","Preconfiguracio de dispositius","Suport tecnic en obra","Posada en marxa i configuracio","Formacio i certificacio"]
+  },
+  {
+    id:'disseny', n:'04', t:"Disseny d'Interiors", icon:<Icons.Screen/>,
+    img:'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80&auto=format&fit=crop',
+    sub:"Tecnologia invisible, part del disseny",
+    desc:"Assessorem dissenyadors d'interiors en la seleccio i integracio de tecnologia que es fongui amb l'estetica del projecte sense comprometre les prestacions.",
+    points:["Seleccio de dispositius discrets","Pantalles i panells integrats","Il luminacio i control ambiental","Cable management estetic","Solucions sense fils quan es possible"]
+  },
+];
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  useEffect(()=>{
+    const r=document.documentElement;
+    r.setAttribute('data-mood',t.mood);r.setAttribute('data-voice',t.voice);r.setAttribute('data-intensity',t.intensity);
+  },[t.mood,t.voice,t.intensity]);
+  return (
+    <PageShell activePage="Serveis">
+      <PageHero kicker="Serveis · Adaptat a cada sector" title="Per al teu sector" sub="Solucions tecnologiques adaptades a cada tipus de client: ingenieries, arquitectures, installadors i dissenyadors d'interiors." img="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1800&q=80&auto=format&fit=crop"/>
+      {SVCS.map((s,i)=>(
+        <section key={s.id} id={s.id} style={{padding:'100px 0',borderBottom:'1px solid var(--line)'}}>
+          <div className="wrap-wide">
+            <div style={{display:'grid',gridTemplateColumns:i%2===0?'1fr 1fr':'1fr 1fr',gap:80,alignItems:'center'}} className="srv-grid">
+              {i%2===0 ? <>
+                <Reveal>
+                  <SectionLabel>{s.n} — Serveis</SectionLabel>
+                  <h2 className="disp" style={{fontSize:'clamp(36px,5vw,72px)',marginBottom:12}}>{s.t}</h2>
+                  <p style={{fontSize:14,color:'var(--accent)',fontFamily:'var(--mono)',letterSpacing:'.04em',marginBottom:20}}>{s.sub}</p>
+                  <p style={{fontSize:16,color:'var(--mut)',lineHeight:1.8,marginBottom:28}}>{s.desc}</p>
+                  <ul style={{listStyle:'none',marginBottom:36}}>
+                    {s.points.map((p,j)=><li key={j} style={{display:'flex',alignItems:'center',gap:12,padding:'8px 0',borderBottom:'1px solid var(--line-soft)',fontSize:15}}><span style={{color:'var(--accent)'}}><Icons.Check/></span>{p}</li>)}
+                  </ul>
+                  <a href="contacta.html" className="btn btn-primary">Parla amb nosaltres <Icons.UpRight s={15}/></a>
+                </Reveal>
+                <Reveal delay={120}><div style={{borderRadius:20,overflow:'hidden',border:'1px solid var(--line)'}}><Cine src={s.img} alt={s.t} style={{height:460}}/></div></Reveal>
+              </> : <>
+                <Reveal delay={120}><div style={{borderRadius:20,overflow:'hidden',border:'1px solid var(--line)'}}><Cine src={s.img} alt={s.t} style={{height:460}}/></div></Reveal>
+                <Reveal>
+                  <SectionLabel>{s.n} — Serveis</SectionLabel>
+                  <h2 className="disp" style={{fontSize:'clamp(36px,5vw,72px)',marginBottom:12}}>{s.t}</h2>
+                  <p style={{fontSize:14,color:'var(--accent)',fontFamily:'var(--mono)',letterSpacing:'.04em',marginBottom:20}}>{s.sub}</p>
+                  <p style={{fontSize:16,color:'var(--mut)',lineHeight:1.8,marginBottom:28}}>{s.desc}</p>
+                  <ul style={{listStyle:'none',marginBottom:36}}>
+                    {s.points.map((p,j)=><li key={j} style={{display:'flex',alignItems:'center',gap:12,padding:'8px 0',borderBottom:'1px solid var(--line-soft)',fontSize:15}}><span style={{color:'var(--accent)'}}><Icons.Check/></span>{p}</li>)}
+                  </ul>
+                  <a href="contacta.html" className="btn btn-primary">Parla amb nosaltres <Icons.UpRight s={15}/></a>
+                </Reveal>
+              </>}
+            </div>
+          </div>
+          <style>{`.srv-grid{@media(max-width:860px){grid-template-columns:1fr!important;}}`}</style>
+        </section>
+      ))}
+    </PageShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

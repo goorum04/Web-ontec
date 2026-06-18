@@ -1,630 +1,422 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="ca" data-mood="acid" data-voice="editorial" data-intensity="cinematic">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ontec — Distribució de sistemes tecnològics avançats. Videoconferència, ciberseguretat, audiovisuals i automatització a Andorra." />
-  <meta name="theme-color" content="#f97316" />
-  <title>Ontec · Distribució de sistemes tecnològics avançats</title>
-
-  <meta property="og:title" content="Ontec · Sistemes tecnològics avançats" />
-  <meta property="og:description" content="Integració de videoconferència, ciberseguretat i audiovisuals a Andorra. Instal·lació a la Batllia d'Andorra. Col·laboració tècnica amb INCIBE." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.ontecandorra.com/" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ontec — Sistemes tecnologics avancats a Andorra</title>
+  <meta name="description" content="Ontec distribueix i integra sistemes tecnologics avancats a Andorra: IT Security, videoconferencia, comunicacions, automatitzacio i audiovisuals. Tecnologia professional des de 2016.">
+  <meta name="keywords" content="sistemes tecnologics Andorra, IT Security, videoconferencia, ciberseguretat, automatitzacio, audiovisuals, INCIBE, integrador tecnologic">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ontecandorra.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ontecandorra.com/">
+  <meta property="og:title" content="Ontec — Sistemes tecnologics avancats a Andorra">
+  <meta property="og:description" content="Distribuim, integrem i donem suport a infraestructures tecnologiques per a empreses i professionals a Andorra.">
+  <meta property="og:image" content="https://ontecandorra.com/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Ontec","url":"https://ontecandorra.com","description":"Distribucio i integracio de sistemes tecnologics avancats a Andorra","address":{"@type":"PostalAddress","streetAddress":"C/ de la Vena 3, Baixos","addressLocality":"Encamp","addressCountry":"AD"},"telephone":"+37688559","email":"info@ontecandorra.com","foundingDate":"2016"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
+<div id="root"></div>
+<script src="shared.js"></script>
+<script src="tweaks.js"></script>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef } = React;
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header" id="top">
-    <div class="container nav-wrap">
-      <a href="#top" class="logo" aria-label="Ontec - Inici">
-        <span class="logo-mark" aria-hidden="true">ON</span>
-        <span class="logo-text">tec</span>
-      </a>
-
-      <nav class="main-nav" id="mainNav" aria-label="Navegació principal">
-        <div class="nav-group">
-          <a href="#empresa" class="nav-link">Empresa</a>
+function StatusCard() {
+  const lines = [
+    { t:0,    text:'$ ontec --init sistema', c:'#fff' },
+    { t:600,  text:'> carregant modules...', c:'var(--mut)' },
+    { t:1050, text:'checkmark IT Security', c:'var(--accent)' },
+    { t:1400, text:'checkmark Comunicacions', c:'var(--accent)' },
+    { t:1750, text:'checkmark Automatitzacio', c:'var(--accent)' },
+    { t:2100, text:'checkmark Audiovisuals', c:'var(--accent)' },
+    { t:2450, text:'checkmark Videoconferencia', c:'var(--accent)' },
+    { t:2900, text:'> sistema llest - Andorra', c:'var(--mut)' },
+  ];
+  const [vis,setVis]=useState(0);
+  const [cur,setCur]=useState(true);
+  useEffect(()=>{
+    const ids=lines.map((l,i)=>setTimeout(()=>setVis(v=>Math.max(v,i+1)),l.t));
+    const b=setInterval(()=>setCur(v=>!v),530);
+    return()=>{ ids.forEach(clearTimeout);clearInterval(b); };
+  },[]);
+  const displayLines = lines.map(l => ({...l, text: l.text.replace('checkmark', '✓')}));
+  return (
+    <div style={{width:340,maxWidth:'90vw',borderRadius:16,overflow:'hidden',border:'1px solid var(--line)',background:'rgba(7,7,8,.6)',backdropFilter:'blur(18px)',WebkitBackdropFilter:'blur(18px)',boxShadow:'0 30px 80px rgba(0,0,0,.6)'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,padding:'12px 16px',borderBottom:'1px solid var(--line-soft)'}}>
+        <div style={{display:'flex',gap:6}}>{['#ff5f57','#ffbd2e','#28c840'].map(c=><div key={c} style={{width:9,height:9,borderRadius:'50%',background:c,opacity:.85}}/>)}</div>
+        <span style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--faint)',letterSpacing:'.08em',marginLeft:6}}>ontec://status</span>
+        <div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:7}}>
+          <span style={{position:'relative',width:7,height:7}}>
+            <span style={{position:'absolute',inset:0,borderRadius:'50%',background:'var(--accent)'}}/>
+            <span style={{position:'absolute',inset:0,borderRadius:'50%',background:'var(--accent)',animation:'pulse-ring 2s ease-out infinite'}}/>
+          </span>
+          <span style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--accent)',letterSpacing:'.1em'}}>LIVE</span>
         </div>
-        <div class="nav-group has-sub">
-          <button class="nav-link nav-btn" aria-expanded="false" aria-haspopup="true">
-            Solucions <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 5l4.5 4.5L11.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </button>
-          <ul class="sub-menu" role="menu">
-            <li role="none"><a href="#solucions" role="menuitem">IT Security</a></li>
-            <li role="none"><a href="#videoconferencia" role="menuitem">Videoconferència</a></li>
-            <li role="none"><a href="#solucions" role="menuitem">Automatització</a></li>
-            <li role="none"><a href="#solucions" role="menuitem">Audiovisuals</a></li>
-          </ul>
-        </div>
-        <div class="nav-group has-sub">
-          <button class="nav-link nav-btn" aria-expanded="false" aria-haspopup="true">
-            Serveis <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 5l4.5 4.5L11.5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </button>
-          <ul class="sub-menu" role="menu">
-            <li role="none"><a href="#serveis" role="menuitem">Enginyeries</a></li>
-            <li role="none"><a href="#serveis" role="menuitem">Arquitectures</a></li>
-            <li role="none"><a href="#serveis" role="menuitem">Instal·ladors</a></li>
-            <li role="none"><a href="#serveis" role="menuitem">Disseny d'Interiors</a></li>
-          </ul>
-        </div>
-        <a href="#blog" class="nav-link">Blog</a>
-        <a href="#contacte" class="btn btn-nav">Contacta'ns</a>
-      </nav>
-
-      <button class="hamburger" id="hamburger" aria-label="Obrir menú" aria-expanded="false" aria-controls="mainNav">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-shape shape-1"></div>
-        <div class="hero-shape shape-2"></div>
-        <div class="hero-dot-grid"></div>
       </div>
-      <div class="container hero-content">
-        <div class="hero-text">
-          <p class="badge reveal">Andorra · Sistemes Tecnològics</p>
-          <h1 id="hero-title" class="reveal">
-            Tecnologia que <em>connecta</em><br>i infraestructura que <em>protegeix</em>.
+      <div style={{padding:'18px 20px',minHeight:200,fontFamily:'var(--mono)',fontSize:12.5,lineHeight:2}}>
+        {displayLines.slice(0,vis).map((l,i)=><div key={i} style={{color:l.c}}>{l.text}</div>)}
+        {vis<displayLines.length && <span style={{display:'inline-block',width:7,height:14,background:'var(--accent)',opacity:cur?1:0,verticalAlign:'middle'}}/>}
+      </div>
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'flex-end',overflow:'hidden'}}>
+      <Cine src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Infraestructura tecnologica" shade={false} style={{position:'absolute',inset:0}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.35) 30%,rgba(0,0,0,.6) 62%,#000 100%)'}}/>
+      <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 42%,transparent 80%)'}}/>
+      <div style={{position:'absolute',inset:0,backgroundImage:`linear-gradient(${A(6)} 1px,transparent 1px),linear-gradient(90deg,${A(6)} 1px,transparent 1px)`,backgroundSize:'88px 88px',maskImage:'radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent)'}}/>
+      <div style={{position:'absolute',left:0,right:0,top:0,height:1,background:`linear-gradient(90deg,transparent,${A(40)},transparent)`,animation:'scanline 8s linear infinite'}}/>
+      <div className="wrap-wide" style={{position:'relative',zIndex:2,width:'100%',paddingBottom:80,paddingTop:140}}>
+        <div style={{maxWidth:1100}}>
+          <div className="reveal in eyebrow" style={{marginBottom:26}}>
+            <span style={{width:7,height:7,borderRadius:'50%',background:'var(--accent)',boxShadow:'0 0 10px var(--accent)'}}/>
+            Andorra · Distribucio tecnologica des de 2016
+          </div>
+          <h1 className="disp" style={{fontSize:'clamp(48px,7.4vw,116px)',lineHeight:.92}}>
+            Sistemes<br/>tecnologics<br/><span style={{color:'var(--accent)'}}>avancats</span>
           </h1>
-          <p class="hero-sub reveal">
-            A <strong>Ontec</strong> dissenyem, instal·lem i mantenim sistemes de videoconferència
-            professionals i solucions de ciberseguretat per a empreses i institucions del Principat d'Andorra.
+          <p style={{marginTop:34,fontSize:'clamp(16px,1.5vw,20px)',color:'var(--mut)',lineHeight:1.7,maxWidth:560}}>
+            Distribuim, integrem i donem suport a infraestructures tecnologiques per a empreses,
+            arquitectures, ingenieries i installadors a Andorra.
           </p>
-          <div class="hero-btns reveal">
-            <a href="#cas-exit" class="btn btn-primary">Veure cas d'èxit</a>
-            <a href="#contacte" class="btn btn-outline">Parlem del teu projecte</a>
-          </div>
-        </div>
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="hero-card card-main">
-            <div class="hc-header">
-              <span class="hc-dot dot-red"></span>
-              <span class="hc-dot dot-yellow"></span>
-              <span class="hc-dot dot-green"></span>
-              <span class="hc-title">Sala de Videoconferència</span>
-            </div>
-            <div class="hc-body">
-              <div class="vc-screen">
-                <svg viewBox="0 0 220 130" width="220" height="130" fill="none">
-                  <rect width="220" height="130" rx="8" fill="#1a1a2e"/>
-                  <circle cx="60" cy="65" r="26" fill="#f97316" opacity="0.25"/>
-                  <circle cx="60" cy="65" r="18" fill="#f97316" opacity="0.5"/>
-                  <rect x="95" y="52" width="90" height="10" rx="5" fill="#fff" opacity="0.7"/>
-                  <rect x="95" y="70" width="64" height="8" rx="4" fill="#fff" opacity="0.4"/>
-                  <rect x="8" y="110" width="204" height="14" rx="4" fill="#f97316" opacity="0.2"/>
-                  <circle cx="18" cy="117" r="4" fill="#22c55e"/>
-                  <rect x="28" y="114" width="50" height="5" rx="2" fill="#fff" opacity="0.3"/>
-                  <circle cx="160" cy="117" r="4" fill="#f97316"/>
-                  <rect x="170" y="114" width="30" height="5" rx="2" fill="#fff" opacity="0.3"/>
-                </svg>
-              </div>
-              <div class="vc-status">
-                <span class="status-dot"></span>Connexió establerta · HD · Xifrat
-              </div>
-            </div>
-          </div>
-          <div class="hero-card card-sec card-sec-1">
-            <span class="cs-icon">🔒</span>
-            <div>
-              <strong>Xifrat extrem a extrem</strong>
-              <p>Tràfic 100% segur</p>
-            </div>
-          </div>
-          <div class="hero-card card-sec card-sec-2">
-            <span class="cs-icon">✅</span>
-            <div>
-              <strong>Bones pràctiques INCIBE</strong>
-              <p>Estàndards nacionals</p>
-            </div>
+          <div style={{display:'flex',gap:14,marginTop:40,flexWrap:'wrap'}}>
+            <a href="solucions.html" className="btn btn-primary">Veure solucions <Icons.UpRight s={15}/></a>
+            <a href="contacta.html" className="btn btn-ghost">Parla amb un expert</a>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ===== LOGOS / CONFIANÇA ===== -->
-    <section class="trust" aria-label="Col·laboradors i tecnologia">
-      <div class="container trust-wrap">
-        <span class="trust-label">En qui confiem i amb qui col·laborem</span>
-        <ul class="trust-list" aria-label="Socis tecnològics">
-          <li>Batllia d'Andorra</li>
-          <li>INCIBE</li>
-          <li>Cisco</li>
-          <li>Microsoft Teams</li>
-          <li>Zoom Rooms</li>
-          <li>Poly / HP</li>
-        </ul>
+      <div style={{position:'absolute',right:'max(40px,calc((100vw - 1680px)/2 + 40px))',top:'30%',zIndex:3,animation:'floaty 7s ease-in-out infinite'}} className="hero-status">
+        <StatusCard/>
       </div>
+      {[{top:96,left:40},{top:96,right:40},{bottom:120,left:40}].map((p,i)=>(
+        <div key={i} style={{position:'absolute',width:16,height:16,zIndex:2,
+          borderTop:i<2?`1px solid ${A(45)}`:'none',borderBottom:i>=2?`1px solid ${A(45)}`:'none',
+          borderLeft:(i===0||i===2)?`1px solid ${A(45)}`:'none',borderRight:i===1?`1px solid ${A(45)}`:'none',...p}}/>
+      ))}
+      <style>{`@media(max-width:1100px){.hero-status{display:none;}}`}</style>
     </section>
+  );
+}
 
-    <!-- ===== SOLUCIONS ===== -->
-    <section id="solucions" class="section">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="kicker">Solucions</span>
-          <h2>Tot el que necessites, d'un sol proveïdor</h2>
-          <p>Des del disseny fins a la posada en marxa i el suport continu. Integrem tecnologia, seguretat i experiència d'usuari en cada projecte.</p>
-        </header>
+function StatBand() {
+  const stats=[['8+','Anys operant'],['200+','Projectes lliurats'],['4','Arees clau'],['99.9%','Uptime garantit'],['< 4h','Temps de resposta']];
+  return (
+    <section style={{borderBottom:'1px solid var(--line)'}}>
+      <div className="wrap-wide" style={{display:'grid',gridTemplateColumns:`repeat(${stats.length},1fr)`,gap:0}}>
+        {stats.map(([n,l],i)=>(
+          <Reveal key={n} delay={i*70} style={{padding:'40px 28px',borderRight:i<stats.length-1?'1px solid var(--line-soft)':'none'}}>
+            <div className="disp" style={{fontSize:'clamp(34px,4vw,60px)',color:'var(--accent)'}}>{n}</div>
+            <div style={{marginTop:6,fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--mut)'}}>{l}</div>
+          </Reveal>
+        ))}
+      </div>
+      <style>{`@media(max-width:760px){.stat-wrap{grid-template-columns:1fr 1fr!important;}}`}</style>
+    </section>
+  );
+}
 
-        <div class="sol-grid">
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <rect x="2" y="5" width="14" height="11" rx="2"/><path d="M16 9l6-3v10l-6-3"/>
-              </svg>
-            </div>
-            <h3>Videoconferència</h3>
-            <p>Salas llave en mano amb càmeres PTZ, àudio professional i integració amb Teams, Zoom o Cisco Webex.</p>
-            <a href="#videoconferencia" class="sol-link">Saber-ne més →</a>
-          </article>
-
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M12 2l8 3v7c0 4.5-3.5 7.5-8 9-4.5-1.5-8-4.5-8-9V5l8-3z"/>
-                <path d="M9 12l2 2 4-4"/>
-              </svg>
-            </div>
-            <h3>IT Security</h3>
-            <p>Auditories, segmentació de xarxa, hardening d'equips i plans de resposta davant incidents.</p>
-            <a href="#ciberseguretat" class="sol-link">Saber-ne més →</a>
-          </article>
-
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>
-              </svg>
-            </div>
-            <h3>Audiovisuals</h3>
-            <p>Senyalització digital, auditoris i sales de control. Una experiència coherent a tots els espais.</p>
-            <a href="#serveis" class="sol-link">Saber-ne més →</a>
-          </article>
-
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/>
-              </svg>
-            </div>
-            <h3>Suport 24/7</h3>
-            <p>Monitoratge proactiu, SLA garantits i manteniment preventiu per a la màxima disponibilitat.</p>
-            <a href="#contacte" class="sol-link">Saber-ne més →</a>
-          </article>
-
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                <polyline points="9 22 9 12 15 12 15 22"/>
-              </svg>
-            </div>
-            <h3>Automatització</h3>
-            <p>Domòtica, control d'il·luminació, HVAC i energies renovables integrats en una sola plataforma.</p>
-            <a href="#serveis" class="sol-link">Saber-ne més →</a>
-          </article>
-
-          <article class="sol-card reveal">
-            <div class="sol-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7">
-                <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/>
-              </svg>
-            </div>
-            <h3>Comunicacions</h3>
-            <p>Xarxes corporatives, fibra òptica, telefonia IP i connectivitat d'alta disponibilitat.</p>
-            <a href="#serveis" class="sol-link">Saber-ne més →</a>
-          </article>
+const SOLS=[
+  {t:'IT Security',href:'solucions.html#it-security',n:'01',icon:<Icons.Shield/>,desc:'Proteccio integral de la infraestructura digital.',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1100&q=80&auto=format&fit=crop'},
+  {t:'Comunicacions',href:'solucions.html#comunicacions',n:'02',icon:<Icons.Wifi/>,desc:"Connectivitat d'alt rendiment per a qualsevol entorn.",img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1100&q=80&auto=format&fit=crop'},
+  {t:'Automatitzacio',href:'solucions.html#automatitzacio',n:'03',icon:<Icons.Cpu/>,desc:"Sistemes intel ligents per a edificis i llars.",img:'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1100&q=80&auto=format&fit=crop'},
+  {t:'Audiovisuals',href:'solucions.html#audiovisuals',n:'04',icon:<Icons.Screen/>,desc:'Sistemes A/V professionals per a qualsevol espai.',img:'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1100&q=80&auto=format&fit=crop'},
+];
+function SolutionsGallery() {
+  return (
+    <section style={{padding:'120px 0'}}>
+      <div className="wrap-wide">
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:56,flexWrap:'wrap',gap:24}}>
+          <Reveal><SectionLabel>Solucions</SectionLabel><h2 className="disp" style={{fontSize:'clamp(40px,6vw,96px)'}}>Tot integrat,<br/>tot controlat</h2></Reveal>
+          <Reveal delay={120}><a href="solucions.html" className="btn btn-ghost">Veure totes <Icons.UpRight s={14}/></a></Reveal>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:18}} className="gal-grid">
+          {SOLS.map((s,i)=>(
+            <Reveal key={s.t} delay={(i%2)*100}>
+              <a href={s.href} className="mcard" style={{height:380,display:'block'}}>
+                <Cine src={s.img} alt={s.t} style={{position:'absolute',inset:0}}/>
+                <div style={{position:'relative',zIndex:1,height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-between',padding:'30px 32px'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start'}}>
+                    <div style={{width:52,height:52,borderRadius:13,background:A(16),border:`1px solid ${A(34)}`,backdropFilter:'blur(8px)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)'}}>{s.icon}</div>
+                    <span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--mut)',letterSpacing:'.1em'}}>{s.n}</span>
+                  </div>
+                  <div>
+                    <h3 className="disp" style={{fontSize:'clamp(28px,3vw,40px)',marginBottom:10}}>{s.t}</h3>
+                    <p style={{fontSize:14.5,color:'rgba(255,255,255,.62)',lineHeight:1.6,maxWidth:360}}>{s.desc}</p>
+                    <div style={{marginTop:18,display:'inline-flex',alignItems:'center',gap:8,fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--accent)'}}>Explorar <Icons.Arrow s={13}/></div>
+                  </div>
+                </div>
+              </a>
+            </Reveal>
+          ))}
         </div>
       </div>
+      <style>{`@media(max-width:760px){.gal-grid{grid-template-columns:1fr!important;}}`}</style>
     </section>
+  );
+}
 
-    <!-- ===== STATS ===== -->
-    <section class="stats-band" aria-label="Xifres destacades">
-      <div class="container stats-grid">
-        <div class="stat-item reveal">
-          <span class="stat-n" data-count="120">0</span>
-          <span class="stat-l">Projectes executats</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-n" data-count="15">0</span><span class="stat-n stat-suffix">+</span>
-          <span class="stat-l">Anys d'experiència</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-n" data-count="99">0</span><span class="stat-n stat-suffix">%</span>
-          <span class="stat-l">Disponibilitat garantida</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-n" data-count="0">0</span>
-          <span class="stat-l">Incidents de seguretat</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CAS D'ÈXIT: BATLLIA D'ANDORRA ===== -->
-    <section id="cas-exit" class="section section-alt" aria-labelledby="cas-title">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="kicker kicker-orange">Cas d'èxit</span>
-          <h2 id="cas-title">Sistema de videoconferència per a la Batllia d'Andorra</h2>
-          <p>Acompanyem la institució judicial del Principat en la modernització de les seves sales, garantint comunicacions segures, estables i d'alta qualitat.</p>
-        </header>
-
-        <div class="case-grid" id="videoconferencia">
-          <div class="case-visual reveal">
-            <div class="case-img-wrap">
-              <span class="case-badge-pill">Batllia d'Andorra</span>
-              <svg class="case-svg" viewBox="0 0 480 310" fill="none" aria-hidden="true">
-                <!-- Fons sala -->
-                <rect width="480" height="310" rx="20" fill="url(#roomGrad)"/>
-                <!-- Pantalla principal -->
-                <rect x="30" y="30" width="280" height="170" rx="10" fill="#111827"/>
-                <rect x="42" y="42" width="256" height="146" rx="6" fill="#1f2937"/>
-                <!-- Avatar participants -->
-                <circle cx="110" cy="115" r="32" fill="#f97316" opacity="0.35"/>
-                <circle cx="110" cy="105" r="20" fill="#f97316" opacity="0.55"/>
-                <rect cx="85" cy="140" width="50" height="12" rx="4" fill="#fff" opacity="0" x="85" y="135"/>
-                <!-- Nom participant -->
-                <rect x="180" y="95" width="100" height="10" rx="5" fill="#f97316" opacity="0.6"/>
-                <rect x="180" y="113" width="72" height="8" rx="4" fill="#fff" opacity="0.35"/>
-                <!-- Barra inferior pantalla -->
-                <rect x="42" y="170" width="256" height="18" rx="0" fill="#0f172a"/>
-                <circle cx="58" cy="179" r="5" fill="#22c55e"/>
-                <rect x="70" y="176" width="60" height="5" rx="2" fill="#fff" opacity="0.4"/>
-                <circle cx="272" cy="179" r="5" fill="#f97316"/>
-                <rect x="282" y="176" width="10" height="5" rx="2" fill="#fff" opacity="0.4"/>
-                <!-- Panell lateral dret -->
-                <rect x="326" y="30" width="124" height="80" rx="8" fill="#111827"/>
-                <rect x="338" y="44" width="100" height="52" rx="4" fill="#1f2937"/>
-                <circle cx="388" cy="70" r="16" fill="#7c3aed" opacity="0.6"/>
-                <rect x="326" y="122" width="124" height="80" rx="8" fill="#111827"/>
-                <rect x="338" y="136" width="100" height="52" rx="4" fill="#1f2937"/>
-                <circle cx="388" cy="162" r="16" fill="#0ea5e9" opacity="0.6"/>
-                <!-- Peu de pàgina sala -->
-                <rect x="30" y="216" width="420" height="64" rx="10" fill="#0f172a" opacity="0.8"/>
-                <!-- Icones controls -->
-                <circle cx="160" cy="248" r="14" fill="#1f2937"/>
-                <circle cx="200" cy="248" r="14" fill="#1f2937"/>
-                <circle cx="240" cy="248" r="14" fill="#f97316" opacity="0.8"/>
-                <circle cx="280" cy="248" r="14" fill="#1f2937"/>
-                <circle cx="320" cy="248" r="14" fill="#ef4444" opacity="0.8"/>
-                <!-- Segell "Xifrat" -->
-                <rect x="350" y="235" width="80" height="25" rx="12" fill="#166534"/>
-                <text x="390" y="251" fill="#4ade80" font-size="10" text-anchor="middle" font-family="sans-serif" font-weight="bold">🔒 XIFRAT</text>
-                <defs>
-                  <linearGradient id="roomGrad" x1="0" y1="0" x2="480" y2="310">
-                    <stop stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div class="case-tags">
-              <span class="tag">Instal·lació completa</span>
-              <span class="tag">Xarxa segmentada</span>
-              <span class="tag">Àmbit judicial</span>
-            </div>
-          </div>
-
-          <div class="case-body reveal">
-            <div class="case-block">
-              <h3>El repte</h3>
-              <p>
-                La <strong>Batllia d'Andorra</strong> —la institució judicial del Principat— necessitava celebrar
-                vistes i compareixences per videoconferència amb plenes garanties: qualitat d'imatge i so
-                impecables, connexions estables entre sales i, per sobre de tot, confidencialitat absoluta de
-                les comunicacions judicials.
-              </p>
-            </div>
-
-            <div class="case-block">
-              <h3>La nostra solució</h3>
-              <ul class="tick-list">
-                <li>Instal·lació completa del sistema de videoconferència a les sales: càmeres PTZ d'alta definició, micròfons de conferència i pantalles de gran format.</li>
-                <li>Xarxa segmentada i xifrada que aïlla el tràfic de videoconferència de la resta de la infraestructura de la institució.</li>
-                <li>Hardening dels equips i polítiques d'accés estrictes per complir els requisits d'un entorn judicial.</li>
-                <li>Formació al personal tècnic i suport continu per garantir la disponibilitat del servei.</li>
-              </ul>
-            </div>
-
-            <div class="case-kpis">
-              <div class="kpi">
-                <span class="kpi-n">100%</span>
-                <span class="kpi-l">Sales operatives des del dia 1</span>
-              </div>
-              <div class="kpi">
-                <span class="kpi-n">0</span>
-                <span class="kpi-l">Incidents de seguretat</span>
-              </div>
-              <div class="kpi">
-                <span class="kpi-n">HD</span>
-                <span class="kpi-l">Qualitat de cada vista</span>
-              </div>
-            </div>
-
-            <blockquote class="case-quote">
-              "Buscàvem un sistema fiable i segur per a les nostres vistes a distància. El resultat ha estat
-              una solució sòlida que funciona des del primer dia, sense incidències."
-              <cite>— Equip tècnic, projecte Batllia d'Andorra</cite>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CIBERSEGURETAT + INCIBE ===== -->
-    <section id="ciberseguretat" class="section">
-      <div class="container">
-        <div class="cyber-grid">
-          <div class="cyber-text reveal">
-            <span class="kicker kicker-orange">Ciberseguretat</span>
-            <h2>Seguretat respaldada per experts, alineada amb INCIBE</h2>
-            <p class="cyber-lead">
-              La videoconferència transporta informació molt sensible. Per això tractem cada
-              desplegament com un projecte de ciberseguretat. Comptem amb un
-              <strong>tècnic especialitzat en col·laboració amb l'INCIBE</strong>
-              (Instituto Nacional de Ciberseguridad), aplicant bones pràctiques i marcs de referència
-              reconeguts a nivell nacional.
+function CaseBatllia() {
+  const specs=[['Sistema','Videoconferencia HD'],['Ubicacio',"la Batllia d'Andorra"],['Equipament','Cisco Webex + Sony PTZ'],['Cobertura','3 sales de reunions'],['Integracio','MS Teams / Zoom'],['Suport','24/7 garantit']];
+  return (
+    <section style={{padding:'120px 0',background:'var(--panel)',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)'}}>
+      <div className="wrap-wide">
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="case-grid">
+          <Reveal>
+            <SectionLabel>Cas d'exit</SectionLabel>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,80px)',marginBottom:24}}>La Batllia<br/>d'Andorra</h2>
+            <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:24}}>
+              Installacio integral del sistema de videoconferencia professional per als espais institucionals
+              de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions
+              d'alt nivell en entorns de gran exigencia tecnica i protocolaria.
             </p>
-
-            <ul class="feat-list">
-              <li>
-                <div class="feat-ic">🔒</div>
-                <div class="feat-body">
-                  <strong>Comunicacions xifrades extrem a extrem</strong>
-                  <p>Sense punts cecs en la transmissió. Cada bit viatja protegit.</p>
-                </div>
-              </li>
-              <li>
-                <div class="feat-ic">🛡️</div>
-                <div class="feat-body">
-                  <strong>Hardening i segmentació de xarxa</strong>
-                  <p>Equips enfortits i xarxes aïllades per funció i criticitat.</p>
-                </div>
-              </li>
-              <li>
-                <div class="feat-ic">📋</div>
-                <div class="feat-body">
-                  <strong>Bones pràctiques INCIBE</strong>
-                  <p>Guies i recomanacions de l'organisme nacional aplicades al teu cas concret.</p>
-                </div>
-              </li>
-              <li>
-                <div class="feat-ic">⚡</div>
-                <div class="feat-body">
-                  <strong>Resposta davant incidents</strong>
-                  <p>Protocols clars per reaccionar ràpid i minimitzar l'impacte de qualsevol incident.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <aside class="incibe-panel reveal" aria-label="Col·laboració amb INCIBE">
-            <div class="ip-glow" aria-hidden="true"></div>
-            <div class="ip-header">
-              <span class="ip-chip">Col·laboració tècnica</span>
-              <div class="ip-logo">INCIBE</div>
-            </div>
-            <p class="ip-desc">
-              L'Instituto Nacional de Ciberseguridad d'Espanya és la referència per al desenvolupament
-              de la ciberseguretat i la confiança digital de ciutadans, empreses i administracions.
+            <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:40}}>
+              El sistema permet la connexio simultanea amb organismes internacionals, tribunals i institucions
+              europees amb qualitat audiovisual de primer nivell i latencia minima.
             </p>
-            <ul class="ip-list">
-              <li>
-                <span class="ip-check" aria-hidden="true">✓</span>
-                Marcs i guies de referència nacionals
-              </li>
-              <li>
-                <span class="ip-check" aria-hidden="true">✓</span>
-                Conscienciació i formació en ciberseguretat
-              </li>
-              <li>
-                <span class="ip-check" aria-hidden="true">✓</span>
-                Bones pràctiques aplicades a cada projecte
-              </li>
-              <li>
-                <span class="ip-check" aria-hidden="true">✓</span>
-                Tècnic especialitzat integrat al nostre equip
-              </li>
-            </ul>
-            <div class="ip-note">
-              Cada instal·lació de videoconferència inclou una revisió de seguretat alineada amb els estàndards de l'INCIBE.
+            <a href="solucions.html#audiovisuals" className="btn btn-primary">Veure solucio <Icons.UpRight s={15}/></a>
+          </Reveal>
+          <div>
+            <Reveal delay={120}>
+              <div style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
+                <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferencia la Batllia" style={{height:300}}/>
+                <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
+                <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                  <div>
+                    <div className="kicker" style={{marginBottom:4}}>Projecte completat</div>
+                    <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'var(--ink)'}}>La Batllia d'Andorra</div>
+                  </div>
+                  <div style={{width:44,height:44,borderRadius:'50%',background:A(20),border:`1px solid ${A(40)}`,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)'}}><Icons.Video/></div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+                {specs.map(([k,v])=>(
+                  <div key={k} style={{background:'var(--panel-2)',border:'1px solid var(--line)',borderRadius:12,padding:'16px 18px'}}>
+                    <div style={{fontFamily:'var(--mono)',fontSize:10,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--faint)',marginBottom:6}}>{k}</div>
+                    <div style={{fontSize:14,color:'var(--ink)',fontWeight:600}}>{v}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.case-grid{grid-template-columns:1fr!important;gap:48px!important;}}`}</style>
+    </section>
+  );
+}
+
+function CiberseguretatIncibe() {
+  const threats=[
+    {icon:<Icons.Shield/>,t:'Firewall avancat',d:'Fortinet & Palo Alto Networks de nova generacio.'},
+    {icon:<Icons.Lock/>,t:'Zero Trust',d:'Arquitectura de confianca zero per a xarxes corporatives.'},
+    {icon:<Icons.Wifi/>,t:'SOC Monitorat',d:'Supervisio continua 24/7 de la infraestructura.'},
+    {icon:<Icons.Cpu/>,t:'Pentesting',d:'Auditories de seguretat i proves de penetracio.'},
+  ];
+  return (
+    <section style={{padding:'120px 0'}}>
+      <div className="wrap-wide">
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="incibe-grid">
+          <div>
+            <Reveal>
+              <div style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:20}}>
+                <Cine src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80&auto=format&fit=crop" alt="Ciberseguretat" style={{height:360}}/>
+                <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.1) 100%)'}}/>
+                <div style={{position:'absolute',top:24,left:24}}>
+                  <div style={{display:'inline-flex',alignItems:'center',gap:10,background:'rgba(0,0,0,.7)',backdropFilter:'blur(12px)',border:'1px solid var(--line)',borderRadius:999,padding:'8px 16px'}}>
+                    <span style={{width:7,height:7,borderRadius:'50%',background:'var(--accent)',boxShadow:'0 0 8px var(--accent)'}}/>
+                    <span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--accent)',letterSpacing:'.1em'}}>INCIBE CERT</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div style={{background:'var(--panel)',border:'1px solid var(--line)',borderRadius:16,padding:'22px 26px',display:'flex',alignItems:'center',gap:18}}>
+                <div style={{width:52,height:52,borderRadius:13,background:A(15),border:`1px solid ${A(30)}`,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',flexShrink:0}}><Icons.Shield/></div>
+                <div>
+                  <div style={{fontFamily:'var(--mono)',fontSize:10.5,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--accent)',marginBottom:4}}>Col laboracio oficial</div>
+                  <div style={{fontSize:15,color:'var(--ink)',fontWeight:600}}>Tecnic certificat per INCIBE</div>
+                  <div style={{fontSize:13,color:'var(--mut)',marginTop:3}}>Instituto Nacional de Ciberseguridad</div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          <Reveal delay={80}>
+            <SectionLabel>Ciberseguretat</SectionLabel>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,80px)',marginBottom:24}}>Proteccio real<br/>per a la teva<br/>empresa</h2>
+            <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:20}}>
+              Ontec compta amb un tecnic especialitzat en ciberseguretat col laborador de l'INCIBE
+              (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estandards mes exigents
+              en proteccio d'infraestructures digitals.
+            </p>
+            <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:36}}>
+              Des d'auditories de seguretat fins a la implantacio de solucions Zero Trust, oferim una
+              cobertura completa per protegir els actius digitals de qualsevol organitzacio a Andorra.
+            </p>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14,marginBottom:40}}>
+              {threats.map((th,i)=>(
+                <Reveal key={i} delay={i*60}>
+                  <div style={{background:'var(--panel)',border:'1px solid var(--line)',borderRadius:14,padding:'20px',transition:'border-color .2s,background .2s'}}
+                    onMouseEnter={e=>{e.currentTarget.style.borderColor=A(35);e.currentTarget.style.background=A(6);}}
+                    onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--line)';e.currentTarget.style.background='var(--panel)';}}>
+                    <div style={{color:'var(--accent)',marginBottom:12}}>{th.icon}</div>
+                    <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:15,color:'var(--ink)',marginBottom:6,letterSpacing:'-0.01em'}}>{th.t}</div>
+                    <div style={{fontSize:13,color:'var(--mut)',lineHeight:1.5}}>{th.d}</div>
+                  </div>
+                </Reveal>
+              ))}
             </div>
-          </aside>
+            <a href="solucions.html#it-security" className="btn btn-primary">Veure IT Security <Icons.UpRight s={15}/></a>
+          </Reveal>
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.incibe-grid{grid-template-columns:1fr!important;gap:48px!important;}}`}</style>
+    </section>
+  );
+}
+
+function PartnersMarquee() {
+  const partners=['Fortinet','Cisco','Ubiquiti','KNX','Crestron','HPE Aruba','Palo Alto','Lutron','Samsung','Sony','QSC','Shure'];
+  return (
+    <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'var(--panel)'}}>
+      <div className="wrap" style={{paddingTop:28,paddingBottom:14}}>
+        <div className="kicker" style={{color:'var(--faint)',textAlign:'center'}}>Fabricants i partners certificats</div>
+      </div>
+      <div style={{paddingBottom:30}}><Marquee items={partners}/></div>
+    </section>
+  );
+}
+
+function ServicesList() {
+  const svcs=[
+    {n:'01',t:'Ingenieries',href:'serveis.html#ingenieries',d:'Prescripcio, especificacio i assistencia tecnica.'},
+    {n:'02',t:'Arquitectures',href:'serveis.html#arquitectures',d:'Tecnologia integrada des de la fase de projecte.'},
+    {n:'03',t:'Installadors',href:'serveis.html#installadors',d:'Subministre, preconfiguracio i suport en obra.'},
+    {n:'04',t:"Disseny d'Interiors",href:'serveis.html#disseny',d:"Tecnologia invisible, part del disseny."},
+  ];
+  return (
+    <section style={{padding:'120px 0'}}>
+      <div className="wrap-wide">
+        <Reveal style={{marginBottom:48}}>
+          <SectionLabel>Serveis</SectionLabel>
+          <h2 className="disp" style={{fontSize:'clamp(40px,6vw,96px)'}}>Adaptat al<br/>teu sector</h2>
+        </Reveal>
+        <div style={{borderTop:'1px solid var(--line)'}}>
+          {svcs.map((s,i)=>(
+            <Reveal key={s.t} delay={i*60}>
+              <a href={s.href} style={{display:'grid',gridTemplateColumns:'90px 1fr auto',gap:28,alignItems:'center',padding:'34px 8px',borderBottom:'1px solid var(--line)',textDecoration:'none',transition:'background .25s,padding .25s'}}
+                onMouseEnter={e=>{e.currentTarget.style.background=A(6);e.currentTarget.style.paddingLeft='24px';e.currentTarget.querySelector('.sv-t').style.color='var(--accent)';}}
+                onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.paddingLeft='8px';e.currentTarget.querySelector('.sv-t').style.color='var(--ink)';}}>
+                <span style={{fontFamily:'var(--mono)',fontSize:13,color:'var(--faint)',letterSpacing:'.1em'}}>{s.n}</span>
+                <div style={{display:'flex',alignItems:'baseline',gap:26,flexWrap:'wrap'}}>
+                  <span className="sv-t disp" style={{fontSize:'clamp(26px,3.4vw,48px)',transition:'color .25s'}}>{s.t}</span>
+                  <span style={{fontSize:15,color:'var(--mut)'}}>{s.d}</span>
+                </div>
+                <span style={{color:'var(--accent)'}}><Icons.UpRight s={22}/></span>
+              </a>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
+  );
+}
 
-    <!-- ===== SERVEIS ===== -->
-    <section id="serveis" class="section section-alt">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="kicker">Serveis</span>
-          <h2>Projectes a mida per a cada perfil professional</h2>
-          <p>Treballem directament amb enginyeries, arquitectures, instal·ladors i equips de disseny d'interiors.</p>
-        </header>
-        <div class="serveis-grid">
-          <div class="serv-card reveal">
-            <div class="serv-num">01</div>
-            <h3>Enginyeries</h3>
-            <p>Especificacions tècniques, plànols i documentació per a projectes d'integració audiovisual i telecomunicacions.</p>
-          </div>
-          <div class="serv-card reveal">
-            <div class="serv-num">02</div>
-            <h3>Arquitectures</h3>
-            <p>Integrem la tecnologia de manera invisible i eficient des de la fase de projecte, sense compromisos estètics.</p>
-          </div>
-          <div class="serv-card reveal">
-            <div class="serv-num">03</div>
-            <h3>Instal·ladors</h3>
-            <p>Suport i formació tècnica per a empreses instal·ladores que volen ampliar la seva oferta tecnològica.</p>
-          </div>
-          <div class="serv-card reveal">
-            <div class="serv-num">04</div>
-            <h3>Disseny d'Interiors</h3>
-            <p>Tecnologia que s'integra de manera natural i elegantment dins l'espai, sense trencar el concepte estètic.</p>
-          </div>
+const BLOG=[
+  {date:'2025',tag:'Videoconferencia',title:"Sistema de videoconferencia a la Batllia d'Andorra",img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
+  {date:'2024',tag:'IT Security',title:'Zero Trust: el nou paradigma de seguretat per a pimes',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
+  {date:'2022',tag:'Domotica',title:"La domotica KNX arriba als edificis premium d'Andorra",img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
+];
+function BlogPreview() {
+  return (
+    <section style={{padding:'0 0 120px'}}>
+      <div className="wrap-wide">
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:48,flexWrap:'wrap',gap:24}}>
+          <Reveal><SectionLabel>Blog</SectionLabel><h2 className="disp" style={{fontSize:'clamp(36px,5vw,80px)'}}>Ultimes noticies</h2></Reveal>
+          <Reveal delay={120}><a href="blog.html" className="btn btn-ghost">Veure tot <Icons.UpRight s={14}/></a></Reveal>
         </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}} className="blog-grid">
+          {BLOG.map((p,i)=>(
+            <Reveal key={i} delay={i*90}>
+              <a href="blog.html" className="mcard" style={{display:'block'}}>
+                <Cine src={p.img} alt={p.title} style={{height:230}}/>
+                <div style={{padding:'24px 26px'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:14}}>
+                    <Tag>{p.tag}</Tag>
+                    <span style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--faint)'}}>{p.date}</span>
+                  </div>
+                  <h4 style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'var(--ink)',lineHeight:1.3,letterSpacing:'-0.01em'}}>{p.title}</h4>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+      <style>{`@media(max-width:860px){.blog-grid{grid-template-columns:1fr!important;}}`}</style>
+    </section>
+  );
+}
+
+function CtaBig() {
+  return (
+    <section style={{position:'relative',overflow:'hidden',borderTop:'1px solid var(--line)'}}>
+      <Cine src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80&auto=format&fit=crop" alt="" shade={false} style={{position:'absolute',inset:0}}/>
+      <div style={{position:'absolute',inset:0,background:`linear-gradient(180deg,#000 0%,${A(8)} 50%,#000 100%)`}}/>
+      <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse 60% 80% at 50% 50%,rgba(0,0,0,.2),#000)'}}/>
+      <div className="wrap" style={{position:'relative',zIndex:1,padding:'140px 40px',textAlign:'center'}}>
+        <Reveal>
+          <div className="kicker" style={{justifyContent:'center',display:'flex',marginBottom:22}}>Comencem?</div>
+          <h2 className="disp" style={{fontSize:'clamp(44px,8vw,128px)'}}>Tens un projecte<br/>en ment?</h2>
+          <p style={{margin:'28px auto 0',maxWidth:540,fontSize:18,color:'var(--mut)',lineHeight:1.7}}>
+            Explica'ns les teves necessitats i trobarem la millor solucio tecnologica per al teu projecte.
+          </p>
+          <div style={{display:'flex',gap:14,marginTop:40,justifyContent:'center',flexWrap:'wrap'}}>
+            <a href="contacta.html" className="btn btn-primary">Contacta ara <Icons.UpRight s={15}/></a>
+            <a href="tel:+37688559" className="btn btn-ghost"><Icons.Phone/> +376 88 55 99</a>
+          </div>
+        </Reveal>
       </div>
     </section>
+  );
+}
 
-    <!-- ===== VALORS ===== -->
-    <section class="section valors-section">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="kicker">Per què Ontec</span>
-          <h2>Els nostres valors, el teu avantatge</h2>
-        </header>
-        <div class="valors-grid">
-          <div class="valor reveal"><span>🌱</span><strong>Creixement</strong></div>
-          <div class="valor reveal"><span>♻️</span><strong>Sostenibilitat</strong></div>
-          <div class="valor reveal"><span>⚡</span><strong>Rendiment</strong></div>
-          <div class="valor reveal"><span>🤝</span><strong>Proximitat</strong></div>
-          <div class="valor reveal"><span>❤️</span><strong>Dedicació</strong></div>
-          <div class="valor reveal"><span>🎧</span><strong>Suport</strong></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== BLOG ===== -->
-    <section id="blog" class="section section-alt">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="kicker">Blog</span>
-          <h2>Actualitat tecnològica</h2>
-        </header>
-        <div class="blog-grid">
-          <article class="blog-card reveal">
-            <div class="blog-cat">Videoconferència</div>
-            <h3>Instal·lació a la Batllia d'Andorra: el repte de la videoconferència judicial</h3>
-            <p>Com vam dissenyar i desplegar un sistema de videoconferència segur per a un entorn judicial exigent al Principat d'Andorra.</p>
-            <a href="#cas-exit" class="blog-link">Llegir →</a>
-          </article>
-          <article class="blog-card reveal">
-            <div class="blog-cat">Ciberseguretat</div>
-            <h3>Ciberseguretat en videoconferència: les recomanacions de l'INCIBE que apliquem</h3>
-            <p>La guia de l'Instituto Nacional de Ciberseguridad i com la integrem en cada projecte d'Ontec per garantir comunicacions segures.</p>
-            <a href="#ciberseguretat" class="blog-link">Llegir →</a>
-          </article>
-          <article class="blog-card reveal">
-            <div class="blog-cat">Infraestructura</div>
-            <h3>Fusió de fibra òptica per a la telecadira de Baqueira-Beret</h3>
-            <p>Un projecte d'infraestructura de telecomunicacions en un entorn d'alta exigència tècnica i condicions extremes de muntanya.</p>
-            <a href="#blog" class="blog-link">Llegir →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTACTE ===== -->
-    <section id="contacte" class="section cta-section">
-      <div class="container cta-wrap reveal">
-        <div class="cta-text">
-          <h2>Preparat per modernitzar les teves comunicacions?</h2>
-          <p>Explica'ns el teu projecte. T'ajudem a dissenyar sistemes de videoconferència segurs, fiables i a l'alçada de la teva organització.</p>
-          <ul class="cta-info">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .06h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
-              +376 88 55 99
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              info@ontecandorra.com
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              C/ de la Vena 3, Baixos, Encamp, Andorra
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Dl–Dv: 08:00–17:00
-            </li>
-          </ul>
-        </div>
-
-        <form class="cta-form" onsubmit="return Ontec.submit(event)" novalidate>
-          <div class="form-row">
-            <div class="field">
-              <label for="nom">Nom *</label>
-              <input id="nom" name="nom" type="text" required placeholder="El teu nom" />
-            </div>
-            <div class="field">
-              <label for="email">Email *</label>
-              <input id="email" name="email" type="email" required placeholder="tu@empresa.com" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="empresa">Empresa</label>
-            <input id="empresa" name="empresa" type="text" placeholder="La teva empresa" />
-          </div>
-          <div class="field">
-            <label for="missatge">Missatge *</label>
-            <textarea id="missatge" name="missatge" rows="4" required placeholder="Explica'ns el teu projecte..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">Enviar consulta</button>
-          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container footer-top">
-      <div class="footer-brand">
-        <a href="#top" class="logo logo-footer" aria-label="Ontec - Inici">
-          <span class="logo-mark">ON</span>
-          <span class="logo-text">tec</span>
-        </a>
-        <p>Distribució de sistemes tecnològics avançats.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Twitter/X d'Ontec" class="soc-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="#" aria-label="LinkedIn d'Ontec" class="soc-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-      </div>
-      <nav class="footer-nav" aria-label="Peu de pàgina">
-        <div class="fn-col">
-          <h4>Solucions</h4>
-          <a href="#videoconferencia">Videoconferència</a>
-          <a href="#ciberseguretat">IT Security</a>
-          <a href="#solucions">Audiovisuals</a>
-          <a href="#solucions">Automatització</a>
-        </div>
-        <div class="fn-col">
-          <h4>Serveis</h4>
-          <a href="#serveis">Enginyeries</a>
-          <a href="#serveis">Arquitectures</a>
-          <a href="#serveis">Instal·ladors</a>
-          <a href="#serveis">Disseny d'Interiors</a>
-        </div>
-        <div class="fn-col">
-          <h4>Empresa</h4>
-          <a href="#empresa">Qui som</a>
-          <a href="#blog">Blog</a>
-          <a href="#contacte">Contacte</a>
-        </div>
-      </nav>
-    </div>
-    <div class="container footer-bottom">
-      <span>© <span id="footerYear"></span> Ontec | On Tecnologies S.L. | Principat d'Andorra</span>
-      <span>Dissenyat amb ♥ a Andorra</span>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic"};
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  useEffect(() => {
+    const r = document.documentElement;
+    r.setAttribute('data-mood', t.mood);
+    r.setAttribute('data-voice', t.voice);
+    r.setAttribute('data-intensity', t.intensity);
+  }, [t.mood, t.voice, t.intensity]);
+  return (
+    <PageShell activePage="Inici">
+      <Hero/><StatBand/><SolutionsGallery/><CaseBatllia/><CiberseguretatIncibe/>
+      <PartnersMarquee/><ServicesList/><BlogPreview/><CtaBig/>
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Mood"/>
+        <TweakRadio label="Mood" value={t.mood} options={[{value:'acid',label:'Acid'},{value:'ice',label:'Ice'},{value:'flare',label:'Flare'},{value:'mono',label:'Mono'}]} onChange={v=>setTweak('mood',v)}/>
+        <TweakSection label="Voice"/>
+        <TweakRadio label="Voice" value={t.voice} options={[{value:'editorial',label:'Editorial'},{value:'modern',label:'Modern'},{value:'soft',label:'Soft'}]} onChange={v=>setTweak('voice',v)}/>
+        <TweakSection label="Intensity"/>
+        <TweakRadio label="Intensity" value={t.intensity} options={[{value:'calm',label:'Calm'},{value:'cinematic',label:'Cinema'},{value:'hyper',label:'Hyper'}]} onChange={v=>setTweak('intensity',v)}/>
+      </TweaksPanel>
+    </PageShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
 </body>
 </html>
