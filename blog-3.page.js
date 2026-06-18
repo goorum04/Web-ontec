@@ -1923,211 +1923,298 @@ Object.assign(window, {
   TweakColor,
   TweakButton
 });
+const ARTICLE_DATA = {
+  id: 'incibe-ciberseguretat',
+  tag: 'Ciberseguretat',
+  date: '2024',
+  readtime: '4 min',
+  title: "INCIBE: per què tenir un tècnic certificat marca la diferència",
+  author: 'Ontec',
+  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) és l'organisme de referència per a ciberseguretat a Espanya. Les seves certificacions reconegudes internationalment són un segell de qualitat que assegura que els professionals han superat estàndards rigorosos."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Per què INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Els tècnics certificats per INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      marginLeft: 24,
+      marginTop: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Superat exàmens rigorosos de ciberseguretat teòrica i pràctica"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Demostra coneixement de marcos internacionals (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Mantingueren formació continuada obligatòria"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Suportats per la reputació de l'organisme estatal")), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Ontec i INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec compta amb un tècnic especialitzat en ciberseguretat ", /*#__PURE__*/React.createElement("strong", null, "col·laborador oficial d'INCIBE"), ". Això significa que els nostres auditors i consultors segueixen els estàndards nacionals i internacionals més exigents."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, "Les vostres auditories de seguretat amb Ontec no són només un informe: són una ", /*#__PURE__*/React.createElement("strong", null, "validació oficial"), " de vulnerabilitats i mesures correctores."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Que oferim"), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      marginLeft: 24,
+      marginTop: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoria de vulnerabilitats"), " completa de xarxes i aplicacions"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Proves de penetració"), " (pentesting) ètiques autoritzades"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formació en seguretat"), " per als vostres equips"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remediació"), " personalitzats amb metriques de risc"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Suport 24/7"), " en incidents de seguretat")), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "En un entorn on els atacs cibernètics són quotidians, tenim experts certificats que garanteixen que la vostre infraestructura compleix amb els estàndards més alts de la indústria."))
+};
 const TWEAK_DEFAULTS = {
   "mood": "acid",
   "voice": "editorial",
   "intensity": "cinematic"
 };
-const ARTICLES = [{
-  id: 'batllia-videoconferencia',
-  tag: 'Videoconferencia',
-  date: '2025',
-  readtime: '5 min',
-  title: "Sistema de videoconferencia a la Batllia d'Andorra",
-  excerpt: "Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
-  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
-  featured: true
-}, {
-  id: 'zero-trust-pimes',
-  tag: 'IT Security',
-  date: '2024',
-  readtime: '7 min',
-  title: 'Zero Trust: el nou paradigma de seguretat per a pimes andorranes',
-  excerpt: "L'arquitectura Zero Trust ja no es exclusiva de grans corporacions. Expliquem com implementar-la en empreses petites i mitjanes a Andorra amb pressupost controlat.",
-  img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'incibe-ciberseguretat',
-  tag: 'Ciberseguretat',
-  date: '2024',
-  readtime: '4 min',
-  title: "INCIBE: per que tenir un tecnic certificat marca la diferencia",
-  excerpt: "La col laboracio amb l'INCIBE (Instituto Nacional de Ciberseguridad) aporta un segell de qualitat i coneixement de primer nivell per als nostres serveis de ciberseguretat.",
-  img: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'knx-domotica',
-  tag: 'Domotica',
-  date: '2023',
-  readtime: '6 min',
-  title: "La domotica KNX arriba als edificis premium d'Andorra",
-  excerpt: "Com l'estandard internacional KNX esta transformant la gestio dels edificis d'alta gamma a Andorra, integrant llum, clima, seguretat i AV en un sol sistema.",
-  img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'wifi6-empreses',
-  tag: 'Comunicacions',
-  date: '2023',
-  readtime: '5 min',
-  title: 'WiFi 6: la revoluccio de la connectivitat empresarial',
-  excerpt: "El WiFi 6 multiplica la capacitat i redueix la latencia en entorns d'alta densitat. Analisi de les solucions Ubiquiti i Aruba per a empreses a Andorra.",
-  img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'av-sales-reunions',
-  tag: 'Audiovisuals',
-  date: '2022',
-  readtime: '4 min',
-  title: 'Disseny de sales de reunions per a l\'era hibrida',
-  excerpt: "Com crear espais de col laboracio hibrids eficients amb tecnologia Sony, QSC i Shure. Guia practica per a arquitectes i empreses.",
-  img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}];
-function BlogCard({
-  a,
-  big = false,
-  idx = 0
+function BlogArticle({
+  id,
+  tag,
+  date,
+  readtime,
+  title,
+  author = 'Ontec',
+  content
 }) {
-  return /*#__PURE__*/React.createElement("a", {
-    href: `blog-${idx + 1}.html`,
-    className: "mcard",
-    style: {
-      display: 'block'
-    }
-  }, /*#__PURE__*/React.createElement(Cine, {
-    src: a.img,
-    alt: a.title,
-    style: {
-      height: big ? 380 : 220
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '24px 26px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement(Tag, null, a.tag), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)'
-    }
-  }, a.date), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)',
-      marginLeft: 'auto'
-    }
-  }, a.readtime)), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: 'var(--disp)',
-      fontWeight: 700,
-      fontSize: big ? 24 : 18,
-      color: 'var(--ink)',
-      lineHeight: 1.3,
-      letterSpacing: '-0.01em',
-      marginBottom: 12
-    }
-  }, a.title), big && /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 15,
-      color: 'var(--mut)',
-      lineHeight: 1.7
-    }
-  }, a.excerpt), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 16,
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      fontFamily: 'var(--mono)',
-      fontSize: 11,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: 'var(--accent)'
-    }
-  }, "Llegir mes ", /*#__PURE__*/React.createElement(Icons.Arrow, {
-    s: 13
-  }))));
-}
-function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [activeTag, setActiveTag] = useState('Tot');
   useEffect(() => {
     const r = document.documentElement;
     r.setAttribute('data-mood', t.mood);
     r.setAttribute('data-voice', t.voice);
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
-  const tags = ['Tot', 'Videoconferencia', 'IT Security', 'Ciberseguretat', 'Domotica', 'Comunicacions', 'Audiovisuals'];
-  const filtered = activeTag === 'Tot' ? ARTICLES : ARTICLES.filter(a => a.tag === activeTag);
+  const relatedArticles = [{
+    title: "Ciberseguretat empresarial 2025",
+    href: "#"
+  }, {
+    title: "Tendencies en infraestructura tecnològica",
+    href: "#"
+  }, {
+    title: "Transformació digital a Andorra",
+    href: "#"
+  }];
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Blog"
-  }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Blog · Actualitat tecnologica",
-    title: "Noticies i tendencies",
-    sub: "Articles tecnics sobre IT Security, videoconferencia, domotica i les ultimes tendencies del sector a Andorra.",
-    img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1800&q=80&auto=format&fit=crop"
-  }), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("section", {
     style: {
-      padding: '80px 0 120px'
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'flex-end',
+      background: 'var(--panel-dark)',
+      position: 'relative',
+      overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wrap-wide"
-  }, /*#__PURE__*/React.createElement(Reveal, {
     style: {
-      marginBottom: 40
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(135deg,rgba(8,18,12,.7) 0%,rgba(8,18,12,.4) 100%)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide",
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      paddingTop: 120,
+      paddingBottom: 80,
+      maxWidth: 800
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 28
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 10,
-      flexWrap: 'wrap'
+      alignItems: 'center',
+      gap: 16,
+      marginBottom: 18
     }
-  }, tags.map(tag => /*#__PURE__*/React.createElement("button", {
-    key: tag,
-    onClick: () => setActiveTag(tag),
+  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
-      fontSize: 11.5,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      padding: '9px 20px',
-      borderRadius: 999,
-      border: '1px solid',
-      cursor: 'pointer',
-      transition: 'all .2s',
-      background: activeTag === tag ? 'var(--accent)' : 'transparent',
-      color: activeTag === tag ? 'var(--accent-ink)' : 'var(--mut)',
-      borderColor: activeTag === tag ? 'var(--accent)' : 'var(--line)'
+      fontSize: 12,
+      color: 'rgba(255,255,255,.6)'
     }
-  }, tag)))), filtered.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, {
+  }, date)), /*#__PURE__*/React.createElement("h1", {
+    className: "disp",
     style: {
+      fontSize: 'clamp(40px,5vw,64px)',
+      color: '#fff',
+      lineHeight: 1.15,
       marginBottom: 20
     }
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: filtered[0],
-    big: true,
-    idx: ARTICLES.indexOf(filtered[0])
-  })), /*#__PURE__*/React.createElement("div", {
+  }, title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 20,
+      fontFamily: 'var(--mono)',
+      fontSize: 13,
+      color: 'rgba(255,255,255,.7)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: 'var(--bg)',
+      padding: '80px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap",
+    style: {
+      maxWidth: 720
+    }
+  }, /*#__PURE__*/React.createElement("article", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.8,
+      color: 'var(--mut)'
+    }
+  }, content), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 80,
+      paddingTop: 60,
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: 18
+      gridTemplateColumns: '1fr 280px',
+      gap: 60
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "disp",
+    style: {
+      fontSize: 28,
+      marginBottom: 32
+    }
+  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 20
+    }
+  }, relatedArticles.map((art, i) => /*#__PURE__*/React.createElement("a", {
+    key: i,
+    href: art.href,
+    style: {
+      padding: '20px',
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 12,
+      textDecoration: 'none',
+      color: 'var(--ink)',
+      transition: 'border-color .2s,background .2s'
     },
-    className: "blog-main-grid"
-  }, filtered.slice(1).map((a, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: a.id,
-    delay: i * 70
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: a,
-    idx: ARTICLES.indexOf(a)
-  })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.blog-main-grid{grid-template-columns:1fr!important;}} @media(max-width:1100px){.blog-main-grid{grid-template-columns:repeat(2,1fr)!important;}}`)));
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = 'var(--accent)';
+      e.currentTarget.style.background = 'var(--panel-2)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = 'var(--line)';
+      e.currentTarget.style.background = 'var(--panel)';
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      color: 'var(--accent)',
+      marginBottom: 8
+    }
+  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 15
+    }
+  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'sticky',
+      top: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 14,
+      padding: 28
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: 'var(--accent)',
+      marginBottom: 20
+    }
+  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: 'var(--mut)',
+      lineHeight: 1.7,
+      marginBottom: 20
+    }
+  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+    href: "contacta.html",
+    className: "btn btn-primary",
+    style: {
+      width: '100%',
+      justifyContent: 'center',
+      padding: '12px 16px'
+    }
+  }, "Contacta'ns"))))))));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

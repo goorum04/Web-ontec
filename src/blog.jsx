@@ -44,9 +44,9 @@ const ARTICLES = [
     featured:false
   },
 ];
-function BlogCard({a, big=false}) {
+function BlogCard({a, big=false, idx=0}) {
   return (
-    <a href={`blog.html`} className="mcard" style={{display:'block'}}>
+    <a href={`blog-${idx+1}.html`} className="mcard" style={{display:'block'}}>
       <Cine src={a.img} alt={a.title} style={{height:big?380:220}}/>
       <div style={{padding:'24px 26px'}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:14}}>
@@ -88,11 +88,11 @@ function App() {
           {filtered.length > 0 && (
             <>
               <Reveal style={{marginBottom:20}}>
-                <BlogCard a={filtered[0]} big={true}/>
+                <BlogCard a={filtered[0]} big={true} idx={ARTICLES.indexOf(filtered[0])}/>
               </Reveal>
               <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:18}} className="blog-main-grid">
                 {filtered.slice(1).map((a,i)=>(
-                  <Reveal key={a.id} delay={i*70}><BlogCard a={a}/></Reveal>
+                  <Reveal key={a.id} delay={i*70}><BlogCard a={a} idx={ARTICLES.indexOf(a)}/></Reveal>
                 ))}
               </div>
             </>

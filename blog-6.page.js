@@ -1923,211 +1923,300 @@ Object.assign(window, {
   TweakColor,
   TweakButton
 });
+const ARTICLE_DATA = {
+  id: 'av-sales-reunions',
+  tag: 'Audiovisuals',
+  date: '2022',
+  readtime: '5 min',
+  title: 'Disseny de sales de reunions per a l\'era hibrida',
+  author: 'Ontec',
+  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandèmia va forçar a les empreses a reimaginar les sales de reunions. Ja no es tracta de 10 persones entorn d'una taula: ara es barreja personal presencial amb remot (homs en 3-5 ubicacions simultàniament). Aquí hi ha com dissenyar sales que siguin efectives per a treballo híbrid."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Requisits de la sala híbrida"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Captura audiovisual equilibrada"), ". Totes les persones presencials han de ser visibles de forma igual pels remots. Això requereix càmeres de pan-tilt-zoom amb enfocament automàtic. Sense \"cap de la sala\" dominant."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "2. Àudio professional"), ". Micròfons de condensador de cobertura ampla (no una sola taula de conferència). Echo cancellation agresiu. Els remots han de sentir-se com si fossin a la sala."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "3. Pantalles multiples"), ". Una pantalla gran (75\"–85\") per a contingut compartit. Miniatures de participants remots en angles visibles."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "4. Control intuïtiu"), ". Un botó per arrancar la reunió, control de brightness/zoom automàtic. Els executius no han de ser tècnics."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Arquitectura recomanada"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Càmeres:"), " Sony PTZ Pro 2 o Logitech Rally. Control motoritzat, AI tracking de parlants actius."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "Audio:"), " Taula de conferència Shure Microflex + subwoofers QSC per a graves. Processament de senyals en temps real."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "Pantalla:"), " Samsung The Wall (modular LED) o LG OLED signage (800+ nits de brightness)."), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "Codec:"), " Cisco Webex Room Pro o Zoom Rooms. Integració seamless amb apps estàndard."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Costos típics"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida premium de 25-30m² oscil·la entre:"), /*#__PURE__*/React.createElement("ul", {
+    style: {
+      marginLeft: 24,
+      marginTop: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Equipament: 25.000€ - 40.000€"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Instal·lació i xarxes: 8.000€ - 12.000€"), /*#__PURE__*/React.createElement("li", {
+    style: {
+      marginBottom: 10
+    }
+  }, "• Formació i suport: 2.000€ - 3.000€")), /*#__PURE__*/React.createElement("p", {
+    style: {
+      marginTop: 16
+    }
+  }, "Total: 35.000€ - 55.000€. El ROI es recupera dins de 18-24 mesos (reducció de viatges, productivitat ampliada)."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Truc avançat: Control de llum adaptatiu"), /*#__PURE__*/React.createElement("p", null, "Les càmeres es veuen més bé amb il·luminació consistent. Integra Lutron Palladiom per a control de llum automàtic: detecta si s'està streaming i ajusta brillantor + color temperature per optimitzar capture."), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 24,
+      fontWeight: 700,
+      marginTop: 40,
+      marginBottom: 16,
+      fontFamily: 'var(--disp)'
+    }
+  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida ben dissenyada no és un luxe: és una necessitat competitiva. Els equips remots senten que eren físicament als al lloc. Els executius lideran des de qualsevol ubicació sense pèrdua de presència."))
+};
 const TWEAK_DEFAULTS = {
   "mood": "acid",
   "voice": "editorial",
   "intensity": "cinematic"
 };
-const ARTICLES = [{
-  id: 'batllia-videoconferencia',
-  tag: 'Videoconferencia',
-  date: '2025',
-  readtime: '5 min',
-  title: "Sistema de videoconferencia a la Batllia d'Andorra",
-  excerpt: "Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
-  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
-  featured: true
-}, {
-  id: 'zero-trust-pimes',
-  tag: 'IT Security',
-  date: '2024',
-  readtime: '7 min',
-  title: 'Zero Trust: el nou paradigma de seguretat per a pimes andorranes',
-  excerpt: "L'arquitectura Zero Trust ja no es exclusiva de grans corporacions. Expliquem com implementar-la en empreses petites i mitjanes a Andorra amb pressupost controlat.",
-  img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'incibe-ciberseguretat',
-  tag: 'Ciberseguretat',
-  date: '2024',
-  readtime: '4 min',
-  title: "INCIBE: per que tenir un tecnic certificat marca la diferencia",
-  excerpt: "La col laboracio amb l'INCIBE (Instituto Nacional de Ciberseguridad) aporta un segell de qualitat i coneixement de primer nivell per als nostres serveis de ciberseguretat.",
-  img: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'knx-domotica',
-  tag: 'Domotica',
-  date: '2023',
-  readtime: '6 min',
-  title: "La domotica KNX arriba als edificis premium d'Andorra",
-  excerpt: "Com l'estandard internacional KNX esta transformant la gestio dels edificis d'alta gamma a Andorra, integrant llum, clima, seguretat i AV en un sol sistema.",
-  img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'wifi6-empreses',
-  tag: 'Comunicacions',
-  date: '2023',
-  readtime: '5 min',
-  title: 'WiFi 6: la revoluccio de la connectivitat empresarial',
-  excerpt: "El WiFi 6 multiplica la capacitat i redueix la latencia en entorns d'alta densitat. Analisi de les solucions Ubiquiti i Aruba per a empreses a Andorra.",
-  img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'av-sales-reunions',
-  tag: 'Audiovisuals',
-  date: '2022',
-  readtime: '4 min',
-  title: 'Disseny de sales de reunions per a l\'era hibrida',
-  excerpt: "Com crear espais de col laboracio hibrids eficients amb tecnologia Sony, QSC i Shure. Guia practica per a arquitectes i empreses.",
-  img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}];
-function BlogCard({
-  a,
-  big = false,
-  idx = 0
+function BlogArticle({
+  id,
+  tag,
+  date,
+  readtime,
+  title,
+  author = 'Ontec',
+  content
 }) {
-  return /*#__PURE__*/React.createElement("a", {
-    href: `blog-${idx + 1}.html`,
-    className: "mcard",
-    style: {
-      display: 'block'
-    }
-  }, /*#__PURE__*/React.createElement(Cine, {
-    src: a.img,
-    alt: a.title,
-    style: {
-      height: big ? 380 : 220
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '24px 26px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement(Tag, null, a.tag), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)'
-    }
-  }, a.date), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)',
-      marginLeft: 'auto'
-    }
-  }, a.readtime)), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: 'var(--disp)',
-      fontWeight: 700,
-      fontSize: big ? 24 : 18,
-      color: 'var(--ink)',
-      lineHeight: 1.3,
-      letterSpacing: '-0.01em',
-      marginBottom: 12
-    }
-  }, a.title), big && /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 15,
-      color: 'var(--mut)',
-      lineHeight: 1.7
-    }
-  }, a.excerpt), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 16,
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      fontFamily: 'var(--mono)',
-      fontSize: 11,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: 'var(--accent)'
-    }
-  }, "Llegir mes ", /*#__PURE__*/React.createElement(Icons.Arrow, {
-    s: 13
-  }))));
-}
-function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [activeTag, setActiveTag] = useState('Tot');
   useEffect(() => {
     const r = document.documentElement;
     r.setAttribute('data-mood', t.mood);
     r.setAttribute('data-voice', t.voice);
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
-  const tags = ['Tot', 'Videoconferencia', 'IT Security', 'Ciberseguretat', 'Domotica', 'Comunicacions', 'Audiovisuals'];
-  const filtered = activeTag === 'Tot' ? ARTICLES : ARTICLES.filter(a => a.tag === activeTag);
+  const relatedArticles = [{
+    title: "Ciberseguretat empresarial 2025",
+    href: "#"
+  }, {
+    title: "Tendencies en infraestructura tecnològica",
+    href: "#"
+  }, {
+    title: "Transformació digital a Andorra",
+    href: "#"
+  }];
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Blog"
-  }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Blog · Actualitat tecnologica",
-    title: "Noticies i tendencies",
-    sub: "Articles tecnics sobre IT Security, videoconferencia, domotica i les ultimes tendencies del sector a Andorra.",
-    img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1800&q=80&auto=format&fit=crop"
-  }), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("section", {
     style: {
-      padding: '80px 0 120px'
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'flex-end',
+      background: 'var(--panel-dark)',
+      position: 'relative',
+      overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wrap-wide"
-  }, /*#__PURE__*/React.createElement(Reveal, {
     style: {
-      marginBottom: 40
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(135deg,rgba(8,18,12,.7) 0%,rgba(8,18,12,.4) 100%)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide",
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      paddingTop: 120,
+      paddingBottom: 80,
+      maxWidth: 800
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 28
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 10,
-      flexWrap: 'wrap'
+      alignItems: 'center',
+      gap: 16,
+      marginBottom: 18
     }
-  }, tags.map(tag => /*#__PURE__*/React.createElement("button", {
-    key: tag,
-    onClick: () => setActiveTag(tag),
+  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
-      fontSize: 11.5,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      padding: '9px 20px',
-      borderRadius: 999,
-      border: '1px solid',
-      cursor: 'pointer',
-      transition: 'all .2s',
-      background: activeTag === tag ? 'var(--accent)' : 'transparent',
-      color: activeTag === tag ? 'var(--accent-ink)' : 'var(--mut)',
-      borderColor: activeTag === tag ? 'var(--accent)' : 'var(--line)'
+      fontSize: 12,
+      color: 'rgba(255,255,255,.6)'
     }
-  }, tag)))), filtered.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, {
+  }, date)), /*#__PURE__*/React.createElement("h1", {
+    className: "disp",
     style: {
+      fontSize: 'clamp(40px,5vw,64px)',
+      color: '#fff',
+      lineHeight: 1.15,
       marginBottom: 20
     }
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: filtered[0],
-    big: true,
-    idx: ARTICLES.indexOf(filtered[0])
-  })), /*#__PURE__*/React.createElement("div", {
+  }, title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 20,
+      fontFamily: 'var(--mono)',
+      fontSize: 13,
+      color: 'rgba(255,255,255,.7)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: 'var(--bg)',
+      padding: '80px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap",
+    style: {
+      maxWidth: 720
+    }
+  }, /*#__PURE__*/React.createElement("article", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.8,
+      color: 'var(--mut)'
+    }
+  }, content), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 80,
+      paddingTop: 60,
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: 18
+      gridTemplateColumns: '1fr 280px',
+      gap: 60
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "disp",
+    style: {
+      fontSize: 28,
+      marginBottom: 32
+    }
+  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 20
+    }
+  }, relatedArticles.map((art, i) => /*#__PURE__*/React.createElement("a", {
+    key: i,
+    href: art.href,
+    style: {
+      padding: '20px',
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 12,
+      textDecoration: 'none',
+      color: 'var(--ink)',
+      transition: 'border-color .2s,background .2s'
     },
-    className: "blog-main-grid"
-  }, filtered.slice(1).map((a, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: a.id,
-    delay: i * 70
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: a,
-    idx: ARTICLES.indexOf(a)
-  })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.blog-main-grid{grid-template-columns:1fr!important;}} @media(max-width:1100px){.blog-main-grid{grid-template-columns:repeat(2,1fr)!important;}}`)));
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = 'var(--accent)';
+      e.currentTarget.style.background = 'var(--panel-2)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = 'var(--line)';
+      e.currentTarget.style.background = 'var(--panel)';
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      color: 'var(--accent)',
+      marginBottom: 8
+    }
+  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 15
+    }
+  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'sticky',
+      top: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 14,
+      padding: 28
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: 'var(--accent)',
+      marginBottom: 20
+    }
+  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: 'var(--mut)',
+      lineHeight: 1.7,
+      marginBottom: 20
+    }
+  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+    href: "contacta.html",
+    className: "btn btn-primary",
+    style: {
+      width: '100%',
+      justifyContent: 'center',
+      padding: '12px 16px'
+    }
+  }, "Contacta'ns"))))))));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));
