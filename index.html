@@ -18,6 +18,43 @@
 </head>
 <body>
 <div id="root"></div>
+<style>
+@keyframes fadeOut {
+  to { opacity: 0; transform: translate(8px, 8px); }
+}
+.cursor-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--accent, #45e07f);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 0 8px var(--accent, #45e07f);
+  animation: fadeOut 0.8s ease-out forwards;
+}
+</style>
+<script>
+const trail = document.createElement('div');
+trail.id = 'cursor-trail';
+trail.style.pointerEvents = 'none';
+document.body.appendChild(trail);
+
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  if (Math.random() > 0.75) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+    trail.appendChild(dot);
+    setTimeout(() => dot.remove(), 800);
+    if (trail.children.length > 15) trail.children[0].remove();
+  }
+});
+</script>
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
