@@ -2194,98 +2194,371 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'av-sales-reunions',
-  tag: 'Audiovisuals',
+  tag: {
+    ca: 'Audiovisuals',
+    es: 'Audiovisuales',
+    fr: 'Audiovisuel',
+    en: 'Audiovisual'
+  },
   date: '2022',
   readtime: '5 min',
-  title: 'Disseny de sales de reunions per a l\'era hibrida',
+  title: {
+    ca: 'Disseny de sales de reunions per a l\'era hibrida',
+    es: 'Diseño de salas de reuniones para la era híbrida',
+    fr: 'Conception de salles de réunion pour l\'ère hybride',
+    en: 'Designing meeting rooms for the hybrid era'
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandèmia va forçar a les empreses a reimaginar les sales de reunions. Ja no es tracta de 10 persones entorn d'una taula: ara es barreja personal presencial amb remot (homs en 3-5 ubicacions simultàniament). Aquí hi ha com dissenyar sales que siguin efectives per a treballo híbrid."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Requisits de la sala híbrida"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Captura audiovisual equilibrada"), ". Totes les persones presencials han de ser visibles de forma igual pels remots. Això requereix càmeres de pan-tilt-zoom amb enfocament automàtic. Sense \"cap de la sala\" dominant."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "2. Àudio professional"), ". Micròfons de condensador de cobertura ampla (no una sola taula de conferència). Echo cancellation agresiu. Els remots han de sentir-se com si fossin a la sala."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "3. Pantalles multiples"), ". Una pantalla gran (75\"–85\") per a contingut compartit. Miniatures de participants remots en angles visibles."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "4. Control intuïtiu"), ". Un botó per arrancar la reunió, control de brightness/zoom automàtic. Els executius no han de ser tècnics."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Arquitectura recomanada"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Càmeres:"), " Sony PTZ Pro 2 o Logitech Rally. Control motoritzat, AI tracking de parlants actius."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Audio:"), " Taula de conferència Shure Microflex + subwoofers QSC per a graves. Processament de senyals en temps real."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Pantalla:"), " Samsung The Wall (modular LED) o LG OLED signage (800+ nits de brightness)."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Codec:"), " Cisco Webex Room Pro o Zoom Rooms. Integració seamless amb apps estàndard."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Costos típics"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida premium de 25-30m² oscil·la entre:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Equipament: 25.000€ - 40.000€"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Instal·lació i xarxes: 8.000€ - 12.000€"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Formació i suport: 2.000€ - 3.000€")), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Total: 35.000€ - 55.000€. El ROI es recupera dins de 18-24 mesos (reducció de viatges, productivitat ampliada)."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Truc avançat: Control de llum adaptatiu"), /*#__PURE__*/React.createElement("p", null, "Les càmeres es veuen més bé amb il·luminació consistent. Integra Lutron Palladiom per a control de llum automàtic: detecta si s'està streaming i ajusta brillantor + color temperature per optimitzar capture."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida ben dissenyada no és un luxe: és una necessitat competitiva. Els equips remots senten que eren físicament als al lloc. Els executius lideran des de qualsevol ubicació sense pèrdua de presència."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandèmia va forçar les empreses a reimaginar les sales de reunions. Ja no es tracta de 10 persones al voltant d'una taula: ara es barreja personal presencial amb remot (persones en 3-5 ubicacions simultàniament). Aquí t'expliquem com dissenyar sales que siguin efectives per al treball híbrid."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Requisits de la sala híbrida"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Captura audiovisual equilibrada"), ". Totes les persones presencials han de ser visibles de manera equitativa per als remots. Això requereix càmeres de pan-tilt-zoom amb enfocament automàtic. Sense un \"cap de la sala\" dominant."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Àudio professional"), ". Micròfons de condensador de cobertura ampla (no una sola unitat de conferència de taula). Cancel·lació d'eco agressiva. Els remots han de sentir-se com si fossin a la sala."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Pantalles múltiples"), ". Una pantalla gran (75\"-85\") per al contingut compartit. Miniatures dels participants remots en angles visibles."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Control intuïtiu"), ". Un botó per iniciar la reunió, control automàtic de brillantor i zoom. Els executius no han de ser tècnics."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Arquitectura recomanada"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Càmeres:"), " Sony PTZ Pro 2 o Logitech Rally. Control motoritzat, AI tracking dels parlants actius."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Àudio:"), " Unitat de conferència Shure Microflex + subwoofers QSC per als greus. Processament de senyal en temps real."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Pantalla:"), " Samsung The Wall (LED modular) o LG OLED signage (800+ nits de brillantor)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Codec:"), " Cisco Webex Room Pro o Zoom Rooms. Integració seamless amb apps estàndard."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Costos típics"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida premium de 25-30 m² oscil·la entre:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Equipament: 25.000€ - 40.000€"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Instal·lació i xarxes: 8.000€ - 12.000€"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Formació i suport: 2.000€ - 3.000€")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Total: 35.000€ - 55.000€. El ROI es recupera en 18-24 mesos (reducció de viatges, productivitat ampliada)."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Truc avançat: control de llum adaptatiu"), /*#__PURE__*/React.createElement("p", null, "Les càmeres es veuen millor amb una il·luminació consistent. Integra Lutron Palladiom per al control automàtic de la llum: detecta si s'està fent streaming i ajusta la brillantor i la temperatura de color per optimitzar la captura."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "Una sala de reunions híbrida ben dissenyada no és un luxe: és una necessitat competitiva. Els equips remots senten que hi són físicament. Els executius lideren des de qualsevol ubicació sense pèrdua de presència.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandemia obligó a las empresas a reimaginar las salas de reuniones. Ya no se trata de 10 personas alrededor de una mesa: ahora se mezcla personal presencial con remoto (personas en 3-5 ubicaciones simultáneamente). Aquí te explicamos cómo diseñar salas que sean efectivas para el trabajo híbrido."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Requisitos de la sala híbrida"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Captura audiovisual equilibrada"), ". Todas las personas presenciales deben ser visibles de forma equitativa para los remotos. Esto requiere cámaras de pan-tilt-zoom con enfoque automático. Sin un \"cabecera de la sala\" dominante."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Audio profesional"), ". Micrófonos de condensador de cobertura amplia (no una sola unidad de conferencia de mesa). Cancelación de eco agresiva. Los remotos deben sentirse como si estuvieran en la sala."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Pantallas múltiples"), ". Una pantalla grande (75\"-85\") para el contenido compartido. Miniaturas de los participantes remotos en ángulos visibles."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Control intuitivo"), ". Un botón para iniciar la reunión, control automático de brillo y zoom. Los ejecutivos no tienen que ser técnicos."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Arquitectura recomendada"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Cámaras:"), " Sony PTZ Pro 2 o Logitech Rally. Control motorizado, AI tracking de los hablantes activos."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Audio:"), " Unidad de conferencia Shure Microflex + subwoofers QSC para los graves. Procesamiento de señal en tiempo real."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Pantalla:"), " Samsung The Wall (LED modular) o LG OLED signage (800+ nits de brillo)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Codec:"), " Cisco Webex Room Pro o Zoom Rooms. Integración seamless con apps estándar."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Costes típicos"), /*#__PURE__*/React.createElement("p", null, "Una sala de reuniones híbrida premium de 25-30 m² oscila entre:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Equipamiento: 25.000€ - 40.000€"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Instalación y redes: 8.000€ - 12.000€"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Formación y soporte: 2.000€ - 3.000€")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Total: 35.000€ - 55.000€. El ROI se recupera en 18-24 meses (reducción de viajes, productividad ampliada)."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Truco avanzado: control de luz adaptativo"), /*#__PURE__*/React.createElement("p", null, "Las cámaras se ven mejor con una iluminación consistente. Integra Lutron Palladiom para el control automático de la luz: detecta si se está haciendo streaming y ajusta el brillo y la temperatura de color para optimizar la captura."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "Una sala de reuniones híbrida bien diseñada no es un lujo: es una necesidad competitiva. Los equipos remotos sienten que están físicamente presentes. Los ejecutivos lideran desde cualquier ubicación sin pérdida de presencia.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandémie a contraint les entreprises à repenser les salles de réunion. Il ne s'agit plus de 10 personnes autour d'une table : on mélange désormais du personnel en présentiel et à distance (des personnes réparties dans 3 à 5 lieux simultanément). Voici comment concevoir des salles efficaces pour le travail hybride."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Exigences de la salle hybride"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Captation audiovisuelle équilibrée"), ". Toutes les personnes présentes doivent être visibles de manière équitable pour les participants distants. Cela nécessite des caméras pan-tilt-zoom avec mise au point automatique. Sans une « tête de table » dominante."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Audio professionnel"), ". Microphones à condensateur à large couverture (et non une seule unité de conférence de table). Annulation d'écho agressive. Les participants distants doivent avoir l'impression d'être dans la salle."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Écrans multiples"), ". Un grand écran (75\"-85\") pour le contenu partagé. Vignettes des participants distants à des angles visibles."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Contrôle intuitif"), ". Un bouton pour démarrer la réunion, contrôle automatique de la luminosité et du zoom. Les dirigeants n'ont pas à être techniciens."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Architecture recommandée"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Caméras :"), " Sony PTZ Pro 2 ou Logitech Rally. Contrôle motorisé, AI tracking des intervenants actifs."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Audio :"), " Unité de conférence Shure Microflex + subwoofers QSC pour les graves. Traitement du signal en temps réel."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Écran :"), " Samsung The Wall (LED modulaire) ou LG OLED signage (800+ nits de luminosité)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Codec :"), " Cisco Webex Room Pro ou Zoom Rooms. Intégration seamless avec les applications standard."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Coûts typiques"), /*#__PURE__*/React.createElement("p", null, "Une salle de réunion hybride premium de 25-30 m² se situe entre :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Équipement : 25 000 € - 40 000 €"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Installation et réseaux : 8 000 € - 12 000 €"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Formation et support : 2 000 € - 3 000 €")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Total : 35 000 € - 55 000 €. Le ROI se récupère en 18 à 24 mois (réduction des déplacements, productivité accrue)."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Astuce avancée : contrôle d'éclairage adaptatif"), /*#__PURE__*/React.createElement("p", null, "Les caméras rendent mieux avec un éclairage constant. Intégrez Lutron Palladiom pour le contrôle automatique de l'éclairage : il détecte si un streaming est en cours et ajuste la luminosité et la température de couleur pour optimiser la captation."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Une salle de réunion hybride bien conçue n'est pas un luxe : c'est une nécessité concurrentielle. Les équipes distantes ont le sentiment d'être physiquement présentes. Les dirigeants pilotent depuis n'importe quel lieu sans perte de présence.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "The pandemic forced companies to reimagine meeting rooms. It is no longer about 10 people around a table: now in-person staff mix with remote participants (people in 3-5 locations simultaneously). Here is how to design rooms that are effective for hybrid work."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Hybrid room requirements"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Balanced audiovisual capture"), ". Everyone in the room must be equally visible to remote participants. This requires pan-tilt-zoom cameras with automatic focus. No dominant \"head of the room\"."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Professional audio"), ". Wide-coverage condenser microphones (not a single tabletop conference unit). Aggressive echo cancellation. Remote participants must feel as if they are in the room."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Multiple screens"), ". A large screen (75\"-85\") for shared content. Thumbnails of remote participants at visible angles."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Intuitive control"), ". A single button to start the meeting, automatic brightness and zoom control. Executives should not have to be technicians."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Recommended architecture"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Cameras:"), " Sony PTZ Pro 2 or Logitech Rally. Motorized control, AI tracking of active speakers."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Audio:"), " Shure Microflex conference unit + QSC subwoofers for the low end. Real-time signal processing."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Screen:"), " Samsung The Wall (modular LED) or LG OLED signage (800+ nits of brightness)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Codec:"), " Cisco Webex Room Pro or Zoom Rooms. Seamless integration with standard apps."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Typical costs"), /*#__PURE__*/React.createElement("p", null, "A premium hybrid meeting room of 25-30 m² ranges between:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Equipment: €25,000 - €40,000"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Installation and networking: €8,000 - €12,000"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Training and support: €2,000 - €3,000")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Total: €35,000 - €55,000. The ROI is recovered within 18-24 months (reduced travel, increased productivity)."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Advanced tip: adaptive lighting control"), /*#__PURE__*/React.createElement("p", null, "Cameras look better with consistent lighting. Integrate Lutron Palladiom for automatic lighting control: it detects whether streaming is in progress and adjusts brightness and color temperature to optimize the capture."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "A well-designed hybrid meeting room is not a luxury: it is a competitive necessity. Remote teams feel as if they are physically present. Executives lead from any location without loss of presence."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2301,6 +2574,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2309,13 +2583,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2355,7 +2644,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2369,7 +2658,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2378,7 +2667,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2394,7 +2688,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2412,7 +2706,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2445,12 +2744,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2471,14 +2775,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2486,6 +2800,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

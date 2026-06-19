@@ -2194,84 +2194,315 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'knx-domotica',
-  tag: 'Domotica',
+  tag: {
+    ca: 'Domotica',
+    es: 'Domótica',
+    fr: 'Domotique',
+    en: 'Home automation'
+  },
   date: '2023',
   readtime: '6 min',
-  title: "La domòtica KNX arriba als edificis premium d'Andorra",
+  title: {
+    ca: "La domòtica KNX arriba als edificis premium d'Andorra",
+    es: "La domótica KNX llega a los edificios premium de Andorra",
+    fr: "La domotique KNX arrive dans les bâtiments premium d'Andorre",
+    en: "KNX home automation reaches Andorra's premium buildings"
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Els edificis intel·ligents ja no són futur. A Andorra, els promotors i arquitectes de projectes premium han adoptat l'estàndard KNX per a la gestió centralitzada de: llum, clima, seguretat, audiovisuals i riego. Aquí expliquem per què."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Què és KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "KNX"), " és un estàndard internacional (ISO/IEC 14543) per a la domòtica i automatització de edificis. Va ser creat per fusionar tres estàndards europeus (Instabus, EHS, BatiBUS) en un sistema unificat."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "A diferència de solucions propietàries (que bloquegen els usuaris amb una marca), KNX permet que múltiples fabricants construeixin dispositius compatibles. Això garanteix ", /*#__PURE__*/React.createElement("strong", null, "llibertat de selecció i no-dependència de proveïdor"), "."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Per què KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Interoperabilitat"), ". Pots barrejar interruptors Siemens, termòstats Schneider i pantalles Gira en un mateix sistema."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "2. Escalabilitat"), ". Comença amb control bàsic de llum i afegeix zones complexes més tard."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiència energètica"), ". Control granular de climatització per espai = 20-30% d'estalvi en energia."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "4. Seguretat"), ". Integració native amb sistemes CCTV, accés per badges, alarms."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "5. Usabilitat"), ". Una sola app per controlar tot l'edifici, des del mòbil o panells tactils."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Casos d'ús a Andorra"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Hotels premium."), " Control de climat, llum ambient, cortines i entreteniment per a cada habitació. Guests controlen tot des del telèfon."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Residències de luxe."), " Automatització completa de domòtica casolana: portero automàtic, riego intel·ligent, climatització adaptativa."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Oficines corporatives."), " Sense sensals manuals. Els espais es configuren segons horari de reserva de sales."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Implementació"), /*#__PURE__*/React.createElement("p", null, "Una instal·lació KNX típica a un edifici premium de 5.000m² oscil·la entre 80.000€ i 150.000€ (hardware, instal·lació, enginyeria, tests). El cost per m² és típicament 16-30€ en edificis nous."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "El ROI arriba amb l'estalvi energètic, reducció de manteniment manual i increment del valor de venda de propietats."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "KNX és el \"lingua franca\" de la domòtica global. Els edificis premiumi d'Andorra que la adoptin avui gaudiran d'una tecnologia robust, evoluble i reconeixuda internacionalment."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Els edificis intel·ligents ja no són futur. A Andorra, els promotors i arquitectes de projectes premium han adoptat l'estàndard KNX per a la gestió centralitzada de la llum, el clima, la seguretat, els audiovisuals i el reg. Aquí expliquem per què."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Què és KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "KNX"), " és un estàndard internacional (ISO/IEC 14543) per a la domòtica i l'automatització d'edificis. Va ser creat per fusionar tres estàndards europeus (Instabus, EHS, BatiBUS) en un sistema unificat."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "A diferència de les solucions propietàries (que bloquegen els usuaris en una sola marca), KNX permet que múltiples fabricants construeixin dispositius compatibles. Això garanteix ", /*#__PURE__*/React.createElement("strong", null, "llibertat d'elecció i independència de proveïdor"), "."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Per què KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Interoperabilitat"), ". Pots barrejar interruptors Siemens, termòstats Schneider i pantalles Gira en un mateix sistema."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Escalabilitat"), ". Comença amb el control bàsic de la llum i afegeix zones complexes més endavant."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiència energètica"), ". Control granular de la climatització per espai = 20-30% d'estalvi en energia."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Seguretat"), ". Integració nativa amb sistemes CCTV, accés per badges i alarmes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "5. Usabilitat"), ". Una sola app per controlar tot l'edifici, des del mòbil o panells tàctils."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Casos d'ús a Andorra"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Hotels premium."), " Control del clima, llum ambient, cortines i entreteniment per a cada habitació. Els hostes ho controlen tot des del telèfon."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Residències de luxe."), " Automatització completa de la domòtica de la llar: porter automàtic, reg intel·ligent, climatització adaptativa."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Oficines corporatives."), " Sense interruptors manuals. Els espais es configuren segons l'horari de reserva de sales."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementació"), /*#__PURE__*/React.createElement("p", null, "Una instal·lació KNX típica en un edifici premium de 5.000 m² oscil·la entre 80.000€ i 150.000€ (hardware, instal·lació, enginyeria, proves). El cost per m² és típicament de 16-30€ en edificis nous."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "El ROI arriba amb l'estalvi energètic, la reducció del manteniment manual i l'increment del valor de venda de les propietats."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "KNX és la \"lingua franca\" de la domòtica global. Els edificis premium d'Andorra que l'adoptin avui gaudiran d'una tecnologia robusta, evolutiva i reconeguda internacionalment.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Los edificios inteligentes ya no son el futuro. En Andorra, los promotores y arquitectos de proyectos premium han adoptado el estándar KNX para la gestión centralizada de la luz, el clima, la seguridad, los audiovisuales y el riego. Aquí explicamos por qué."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "¿Qué es KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "KNX"), " es un estándar internacional (ISO/IEC 14543) para la domótica y la automatización de edificios. Fue creado para fusionar tres estándares europeos (Instabus, EHS, BatiBUS) en un sistema unificado."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "A diferencia de las soluciones propietarias (que bloquean a los usuarios en una sola marca), KNX permite que múltiples fabricantes construyan dispositivos compatibles. Esto garantiza ", /*#__PURE__*/React.createElement("strong", null, "libertad de elección e independencia de proveedor"), "."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "¿Por qué KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Interoperabilidad"), ". Puedes mezclar interruptores Siemens, termostatos Schneider y pantallas Gira en un mismo sistema."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Escalabilidad"), ". Empieza con el control básico de la luz y añade zonas complejas más adelante."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiencia energética"), ". Control granular de la climatización por espacio = 20-30% de ahorro en energía."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Seguridad"), ". Integración nativa con sistemas CCTV, acceso por badges y alarmas."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "5. Usabilidad"), ". Una sola app para controlar todo el edificio, desde el móvil o paneles táctiles."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Casos de uso en Andorra"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Hoteles premium."), " Control del clima, luz ambiente, cortinas y entretenimiento para cada habitación. Los huéspedes lo controlan todo desde el teléfono."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Residencias de lujo."), " Automatización completa de la domótica del hogar: portero automático, riego inteligente, climatización adaptativa."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Oficinas corporativas."), " Sin interruptores manuales. Los espacios se configuran según el horario de reserva de salas."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementación"), /*#__PURE__*/React.createElement("p", null, "Una instalación KNX típica en un edificio premium de 5.000 m² oscila entre 80.000€ y 150.000€ (hardware, instalación, ingeniería, pruebas). El coste por m² es típicamente de 16-30€ en edificios nuevos."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "El ROI llega con el ahorro energético, la reducción del mantenimiento manual y el incremento del valor de venta de las propiedades."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "KNX es la \"lingua franca\" de la domótica global. Los edificios premium de Andorra que lo adopten hoy disfrutarán de una tecnología robusta, evolutiva y reconocida internacionalmente.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Les bâtiments intelligents ne relèvent plus du futur. En Andorre, les promoteurs et architectes de projets premium ont adopté le standard KNX pour la gestion centralisée de l'éclairage, du climat, de la sécurité, de l'audiovisuel et de l'arrosage. Voici pourquoi."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Qu'est-ce que KNX ?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "KNX"), " est un standard international (ISO/IEC 14543) pour la domotique et l'automatisation des bâtiments. Il a été créé pour fusionner trois standards européens (Instabus, EHS, BatiBUS) en un système unifié."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Contrairement aux solutions propriétaires (qui enferment les utilisateurs dans une seule marque), KNX permet à plusieurs fabricants de concevoir des appareils compatibles. Cela garantit la ", /*#__PURE__*/React.createElement("strong", null, "liberté de choix et l'indépendance vis-à-vis du fournisseur"), "."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Pourquoi KNX ?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Interopérabilité"), ". Vous pouvez combiner des interrupteurs Siemens, des thermostats Schneider et des écrans Gira dans un même système."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Évolutivité"), ". Commencez avec le contrôle de base de l'éclairage et ajoutez des zones complexes plus tard."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Efficacité énergétique"), ". Contrôle granulaire de la climatisation par espace = 20 à 30 % d'économies d'énergie."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Sécurité"), ". Intégration native avec les systèmes CCTV, l'accès par badges et les alarmes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "5. Facilité d'utilisation"), ". Une seule application pour contrôler tout le bâtiment, depuis le mobile ou des panneaux tactiles."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Cas d'usage en Andorre"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Hôtels premium."), " Contrôle du climat, de l'éclairage d'ambiance, des rideaux et du divertissement pour chaque chambre. Les clients contrôlent tout depuis leur téléphone."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Résidences de luxe."), " Automatisation complète de la domotique de la maison : portier automatique, arrosage intelligent, climatisation adaptative."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Bureaux d'entreprise."), " Sans interrupteurs manuels. Les espaces se configurent en fonction des horaires de réservation des salles."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Mise en œuvre"), /*#__PURE__*/React.createElement("p", null, "Une installation KNX type dans un bâtiment premium de 5 000 m² se situe entre 80 000 € et 150 000 € (matériel, installation, ingénierie, tests). Le coût au m² est généralement de 16 à 30 € dans les bâtiments neufs."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Le ROI provient des économies d'énergie, de la réduction de la maintenance manuelle et de l'augmentation de la valeur de revente des biens."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "KNX est la « lingua franca » de la domotique mondiale. Les bâtiments premium d'Andorre qui l'adopteront aujourd'hui bénéficieront d'une technologie robuste, évolutive et reconnue à l'international.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Smart buildings are no longer the future. In Andorra, developers and architects of premium projects have adopted the KNX standard for the centralized management of lighting, climate, security, audiovisual and irrigation. Here is why."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "What is KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "KNX"), " is an international standard (ISO/IEC 14543) for home automation and building automation. It was created to merge three European standards (Instabus, EHS, BatiBUS) into a unified system."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Unlike proprietary solutions (which lock users into a single brand), KNX allows multiple manufacturers to build compatible devices. This guarantees ", /*#__PURE__*/React.createElement("strong", null, "freedom of choice and vendor independence"), "."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Why KNX?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Interoperability"), ". You can mix Siemens switches, Schneider thermostats and Gira screens in the same system."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Scalability"), ". Start with basic lighting control and add complex zones later."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Energy efficiency"), ". Granular climate control per space = 20-30% energy savings."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Security"), ". Native integration with CCTV systems, badge access and alarms."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "5. Usability"), ". A single app to control the entire building, from a mobile or touch panels."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Use cases in Andorra"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Premium hotels."), " Control of climate, ambient lighting, curtains and entertainment for each room. Guests control everything from their phone."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Luxury residences."), " Complete home automation: automatic intercom, smart irrigation, adaptive climate control."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Corporate offices."), " No manual switches. Spaces are configured according to room booking schedules."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementation"), /*#__PURE__*/React.createElement("p", null, "A typical KNX installation in a premium 5,000 m² building ranges between €80,000 and €150,000 (hardware, installation, engineering, testing). The cost per m² is typically €16-30 in new buildings."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "The ROI comes from energy savings, reduced manual maintenance and an increase in the resale value of properties."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "KNX is the \"lingua franca\" of global home automation. Andorra's premium buildings that adopt it today will enjoy a robust, evolving and internationally recognized technology."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2287,6 +2518,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2295,13 +2527,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2341,7 +2588,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2355,7 +2602,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2364,7 +2611,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2380,7 +2632,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2398,7 +2650,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2431,12 +2688,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2457,14 +2719,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2472,6 +2744,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

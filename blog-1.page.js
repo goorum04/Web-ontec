@@ -2194,66 +2194,243 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'batllia-videoconferencia',
-  tag: 'Videoconferencia',
+  tag: {
+    ca: 'Videoconferencia',
+    es: 'Videoconferencia',
+    fr: 'Visioconférence',
+    en: 'Video conferencing'
+  },
   date: '2025',
   readtime: '5 min',
-  title: "Sistema de videoconferencia a la Batllia d'Andorra",
+  title: {
+    ca: "Sistema de videoconferencia a la Batllia d'Andorra",
+    es: "Sistema de videoconferencia en la Batllia d'Andorra",
+    fr: "Système de visioconférence à la Batllia d'Andorra",
+    en: "Video conferencing system at the Batllia d'Andorra"
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La Batllia d'Andorra és la seu del poder executiu de la Principalitat. Durant els últims anys, les seves necessitats de comunicació s'han multiplicat amb organismes internacionals, tribunals europeus i institucions de la Unió Europea."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "El desafiament"), /*#__PURE__*/React.createElement("p", null, "Els espais de reunions institucionals requerien una solució de videoconferència de primer nivell que complís amb estàndards internacionals de seguretat, qualitat audiovisual i escalabilitat. Les connexions amb òrgans de govern internacionals exigeixen latència mínima, criptografia de punta a punta i compatibilitat amb els sistemes més exigents."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "La solució desplegada"), /*#__PURE__*/React.createElement("p", null, "Ontec ha implementat una ", /*#__PURE__*/React.createElement("strong", null, "infraestructura completa de videoconferència professional"), " basada en:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cisco Webex MCU"), " com a nucli de videoconferència, amb suport per a 500+ participants simultàniament"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Sony PTZ Cameras"), " amb enfocament automàtic i control de zoom per a captures cinematogràfiques"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Audio de duallà qualitat"), " amb sistemes Shure de condensador de cobertura ampla"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Xarxa de transmissió segura"), " amb encriptació de dades en trànsi i en repòs"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Integració amb Microsoft Teams i Zoom"), " per a flexibilitat d'ecosistemes")), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Resultat"), /*#__PURE__*/React.createElement("p", null, "Avui dia, la Batllia pot realitzar connexions ", /*#__PURE__*/React.createElement("strong", null, "d'alt nivell amb organismes internacionals"), " amb qualitat audiovisual certificada. Les sessions són enregistrades de forma segura, amb logs complets per a auditori i traçabilitat total."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Aquest projecte exemplifica la capacitat d'Ontec per desplegar solucions tecnològiques crítica en entorns institucionals, combinant fiabilitat, seguretat i innovació."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La Batllia d'Andorra és la seu del poder executiu de la Principalitat. Durant els últims anys, les seves necessitats de comunicació s'han multiplicat amb organismes internacionals, tribunals europeus i institucions de la Unió Europea."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "El desafiament"), /*#__PURE__*/React.createElement("p", null, "Els espais de reunions institucionals requerien una solució de videoconferència de primer nivell que complís amb estàndards internacionals de seguretat, qualitat audiovisual i escalabilitat. Les connexions amb òrgans de govern internacionals exigeixen latència mínima, criptografia de punta a punta i compatibilitat amb els sistemes més exigents."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "La solució desplegada"), /*#__PURE__*/React.createElement("p", null, "Ontec ha implementat una ", /*#__PURE__*/React.createElement("strong", null, "infraestructura completa de videoconferència professional"), " basada en:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cisco Webex MCU"), " com a nucli de videoconferència, amb suport per a 500+ participants simultàniament"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Sony PTZ Cameras"), " amb enfocament automàtic i control de zoom per a captures cinematogràfiques"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Àudio d'alta qualitat"), " amb sistemes Shure de condensador de cobertura ampla"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Xarxa de transmissió segura"), " amb encriptació de dades en trànsit i en repòs"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Integració amb Microsoft Teams i Zoom"), " per a flexibilitat d'ecosistemes")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Resultat"), /*#__PURE__*/React.createElement("p", null, "Avui dia, la Batllia pot realitzar connexions ", /*#__PURE__*/React.createElement("strong", null, "d'alt nivell amb organismes internacionals"), " amb qualitat audiovisual certificada. Les sessions són enregistrades de forma segura, amb logs complets per a auditoria i traçabilitat total."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Aquest projecte exemplifica la capacitat d'Ontec per desplegar solucions tecnològiques crítiques en entorns institucionals, combinant fiabilitat, seguretat i innovació.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La Batllia d'Andorra es la sede del poder ejecutivo del Principado. Durante los últimos años, sus necesidades de comunicación se han multiplicado con organismos internacionales, tribunales europeos e instituciones de la Unión Europea."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "El desafío"), /*#__PURE__*/React.createElement("p", null, "Los espacios de reuniones institucionales requerían una solución de videoconferencia de primer nivel que cumpliera con estándares internacionales de seguridad, calidad audiovisual y escalabilidad. Las conexiones con órganos de gobierno internacionales exigen una latencia mínima, criptografía de extremo a extremo y compatibilidad con los sistemas más exigentes."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "La solución desplegada"), /*#__PURE__*/React.createElement("p", null, "Ontec ha implementado una ", /*#__PURE__*/React.createElement("strong", null, "infraestructura completa de videoconferencia profesional"), " basada en:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cisco Webex MCU"), " como núcleo de videoconferencia, con soporte para más de 500 participantes simultáneamente"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Sony PTZ Cameras"), " con enfoque automático y control de zoom para capturas cinematográficas"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Audio de alta calidad"), " con sistemas Shure de condensador de cobertura amplia"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Red de transmisión segura"), " con cifrado de datos en tránsito y en reposo"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Integración con Microsoft Teams y Zoom"), " para mayor flexibilidad de ecosistemas")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Resultado"), /*#__PURE__*/React.createElement("p", null, "Hoy en día, la Batllia puede realizar conexiones ", /*#__PURE__*/React.createElement("strong", null, "de alto nivel con organismos internacionales"), " con calidad audiovisual certificada. Las sesiones se graban de forma segura, con registros completos para auditoría y trazabilidad total."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Este proyecto ejemplifica la capacidad de Ontec para desplegar soluciones tecnológicas críticas en entornos institucionales, combinando fiabilidad, seguridad e innovación.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La Batllia d'Andorra est le siège du pouvoir exécutif de la Principauté. Au cours des dernières années, ses besoins en communication se sont multipliés avec des organismes internationaux, des tribunaux européens et des institutions de l'Union européenne."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Le défi"), /*#__PURE__*/React.createElement("p", null, "Les espaces de réunion institutionnels nécessitaient une solution de visioconférence de premier ordre, conforme aux normes internationales de sécurité, de qualité audiovisuelle et d'évolutivité. Les connexions avec des organes de gouvernement internationaux exigent une latence minimale, un chiffrement de bout en bout et une compatibilité avec les systèmes les plus exigeants."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "La solution déployée"), /*#__PURE__*/React.createElement("p", null, "Ontec a mis en place une ", /*#__PURE__*/React.createElement("strong", null, "infrastructure complète de visioconférence professionnelle"), " reposant sur :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cisco Webex MCU"), " comme cœur de la visioconférence, avec prise en charge de plus de 500 participants simultanément"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Sony PTZ Cameras"), " avec mise au point automatique et contrôle du zoom pour des prises de vue cinématographiques"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Audio haute qualité"), " avec des systèmes Shure à condensateur à large couverture"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Réseau de transmission sécurisé"), " avec chiffrement des données en transit et au repos"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Intégration avec Microsoft Teams et Zoom"), " pour une flexibilité entre écosystèmes")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Résultat"), /*#__PURE__*/React.createElement("p", null, "Aujourd'hui, la Batllia peut établir des connexions ", /*#__PURE__*/React.createElement("strong", null, "de haut niveau avec des organismes internationaux"), " avec une qualité audiovisuelle certifiée. Les sessions sont enregistrées de manière sécurisée, avec des journaux complets pour l'audit et une traçabilité totale."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Ce projet illustre la capacité d'Ontec à déployer des solutions technologiques critiques dans des environnements institutionnels, en alliant fiabilité, sécurité et innovation.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "The Batllia d'Andorra is the seat of the Principality's executive power. In recent years, its communication needs have multiplied with international organizations, European courts and European Union institutions."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "The challenge"), /*#__PURE__*/React.createElement("p", null, "The institutional meeting spaces required a top-tier video conferencing solution that met international standards for security, audiovisual quality and scalability. Connections with international government bodies demand minimal latency, end-to-end encryption and compatibility with the most demanding systems."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "The deployed solution"), /*#__PURE__*/React.createElement("p", null, "Ontec has implemented a ", /*#__PURE__*/React.createElement("strong", null, "complete professional video conferencing infrastructure"), " based on:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cisco Webex MCU"), " as the video conferencing core, with support for 500+ simultaneous participants"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Sony PTZ Cameras"), " with automatic focus and zoom control for cinematic shots"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "High-quality audio"), " with wide-coverage Shure condenser systems"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Secure transmission network"), " with data encryption in transit and at rest"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Integration with Microsoft Teams and Zoom"), " for ecosystem flexibility")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Outcome"), /*#__PURE__*/React.createElement("p", null, "Today, the Batllia can hold ", /*#__PURE__*/React.createElement("strong", null, "high-level connections with international organizations"), " with certified audiovisual quality. Sessions are recorded securely, with complete logs for auditing and full traceability."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "This project exemplifies Ontec's ability to deploy critical technology solutions in institutional environments, combining reliability, security and innovation."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2269,6 +2446,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2277,13 +2455,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2323,7 +2516,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2337,7 +2530,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2346,7 +2539,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2362,7 +2560,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2380,7 +2578,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2413,12 +2616,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2439,14 +2647,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2454,6 +2672,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

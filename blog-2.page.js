@@ -2194,86 +2194,323 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'zero-trust-pimes',
-  tag: 'IT Security',
+  tag: {
+    ca: 'IT Security',
+    es: 'IT Security',
+    fr: 'IT Security',
+    en: 'IT Security'
+  },
   date: '2024',
   readtime: '7 min',
-  title: 'Zero Trust: el nou paradigma de seguretat per a pimes andorranes',
+  title: {
+    ca: 'Zero Trust: el nou paradigma de seguretat per a pimes andorranes',
+    es: 'Zero Trust: el nuevo paradigma de seguridad para pymes andorranas',
+    fr: 'Zero Trust : le nouveau paradigme de sécurité pour les PME andorranes',
+    en: 'Zero Trust: the new security paradigm for Andorran SMEs'
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandèmia va accelerar la transformació digital, però va deixar visible una debilitat estructural: els perímetres de seguretat tradicionals ja no funcionen. Les pimes andorranes que havien confiat en firewall i VPN de \"xarxa privada\" es van trobar vulnerables quan els seus treballadors van passar a treballo remot."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Què és Zero Trust?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Zero Trust"), " és una arquitectura de seguretat que rebutja la premissa de \"confiar en qui és dins del perímetre\". En canvi, ", /*#__PURE__*/React.createElement("em", null, "verifica cadascun connexió"), ", independent de la seva origen."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Els principis fonamentals són:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Verificació contínua"), " de identitat i dispositiu"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Accés per privilegis mínims"), " (least privilege)"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Xifrat de tot el tràfic"), ", intern i extern"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Monitorització i logging constant"), " d'anomalies")), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Implementació a pimes: pas a pas"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Pas 1: Inventari i context"), ". Mapeja els actius crítics (bases de dades, aplicacions, documents sensibles) i els usuaris que hi accedeixen."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Pas 2: Autenticació multi-factor"), ". Implementa MFA en tots els accesos (Microsoft Entra, Okta o solucions gratuïtes com Keycloak)."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Pas 3: Segmentació de xarxa"), ". Crea zones de confiança lògica (development, producció, dades sensibles) amb regles d'accés granulars."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Pas 4: Micro-segmentació"), ". Aplica polítiques a nivell de tràfic, no només a nivell de usuari."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Cost vs. Benefici"), /*#__PURE__*/React.createElement("p", null, "Un desployment Zero Trust entry-level per a una pime de 20-50 empleats oscil·la entre 15.000€ i 40.000€ (hardware, software, formació). El temps de ROI és típicament 18-24 mesos, considerant reducció de riscos de breach."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Els costos d'un breach de dades mitjà són ", /*#__PURE__*/React.createElement("strong", null, "10-100x més alts"), " que un desployment preventiu."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "Zero Trust ja no és exclusiva de bancs i governs. Les pimes andorranes que adoptin aquest model avui serán més resilients davant de ciberamenaces en constant evolució."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandèmia va accelerar la transformació digital, però va deixar visible una debilitat estructural: els perímetres de seguretat tradicionals ja no funcionen. Les pimes andorranes que havien confiat en firewall i VPN de \"xarxa privada\" es van trobar vulnerables quan els seus treballadors van passar al treball remot."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Què és Zero Trust?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Zero Trust"), " és una arquitectura de seguretat que rebutja la premissa de \"confiar en qui és dins del perímetre\". En canvi, ", /*#__PURE__*/React.createElement("em", null, "verifica cada connexió"), ", independentment del seu origen."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Els principis fonamentals són:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Verificació contínua"), " d'identitat i dispositiu"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Accés per privilegis mínims"), " (least privilege)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Xifrat de tot el tràfic"), ", intern i extern"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Monitorització i logging constants"), " d'anomalies")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementació a pimes: pas a pas"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Pas 1: Inventari i context"), ". Mapeja els actius crítics (bases de dades, aplicacions, documents sensibles) i els usuaris que hi accedeixen."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Pas 2: Autenticació multifactor"), ". Implementa MFA en tots els accessos (Microsoft Entra, Okta o solucions gratuïtes com Keycloak)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Pas 3: Segmentació de xarxa"), ". Crea zones de confiança lògica (desenvolupament, producció, dades sensibles) amb regles d'accés granulars."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Pas 4: Microsegmentació"), ". Aplica polítiques a nivell de tràfic, no només a nivell d'usuari."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Cost vs. Benefici"), /*#__PURE__*/React.createElement("p", null, "Un desplegament Zero Trust d'entrada per a una pime de 20-50 empleats oscil·la entre 15.000€ i 40.000€ (hardware, software, formació). El temps de ROI és típicament de 18-24 mesos, considerant la reducció de riscos de breach."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Els costos d'un breach de dades mitjà són ", /*#__PURE__*/React.createElement("strong", null, "10-100x més alts"), " que un desplegament preventiu."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "Zero Trust ja no és exclusiu de bancs i governs. Les pimes andorranes que adoptin aquest model avui seran més resilients davant de les ciberamenaces en constant evolució.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandemia aceleró la transformación digital, pero dejó al descubierto una debilidad estructural: los perímetros de seguridad tradicionales ya no funcionan. Las pymes andorranas que habían confiado en firewall y VPN de \"red privada\" se encontraron vulnerables cuando sus trabajadores pasaron al trabajo remoto."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "¿Qué es Zero Trust?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Zero Trust"), " es una arquitectura de seguridad que rechaza la premisa de \"confiar en quien está dentro del perímetro\". En cambio, ", /*#__PURE__*/React.createElement("em", null, "verifica cada conexión"), ", independientemente de su origen."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Los principios fundamentales son:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Verificación continua"), " de identidad y dispositivo"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Acceso con privilegios mínimos"), " (least privilege)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Cifrado de todo el tráfico"), ", interno y externo"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Monitorización y logging constantes"), " de anomalías")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementación en pymes: paso a paso"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Paso 1: Inventario y contexto"), ". Mapea los activos críticos (bases de datos, aplicaciones, documentos sensibles) y los usuarios que acceden a ellos."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Paso 2: Autenticación multifactor"), ". Implementa MFA en todos los accesos (Microsoft Entra, Okta o soluciones gratuitas como Keycloak)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Paso 3: Segmentación de red"), ". Crea zonas de confianza lógica (desarrollo, producción, datos sensibles) con reglas de acceso granulares."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Paso 4: Microsegmentación"), ". Aplica políticas a nivel de tráfico, no solo a nivel de usuario."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Coste vs. Beneficio"), /*#__PURE__*/React.createElement("p", null, "Un despliegue Zero Trust de entrada para una pyme de 20-50 empleados oscila entre 15.000€ y 40.000€ (hardware, software, formación). El tiempo de ROI es típicamente de 18-24 meses, considerando la reducción de riesgos de breach."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Los costes de un breach de datos medio son ", /*#__PURE__*/React.createElement("strong", null, "10-100x más altos"), " que un despliegue preventivo."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "Zero Trust ya no es exclusivo de bancos y gobiernos. Las pymes andorranas que adopten este modelo hoy serán más resilientes frente a las ciberamenazas en constante evolución.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "La pandémie a accéléré la transformation numérique, mais a mis en évidence une faiblesse structurelle : les périmètres de sécurité traditionnels ne fonctionnent plus. Les PME andorranes qui avaient fait confiance au firewall et au VPN de « réseau privé » se sont retrouvées vulnérables lorsque leurs salariés sont passés au travail à distance."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Qu'est-ce que le Zero Trust ?"), /*#__PURE__*/React.createElement("p", null, "Le ", /*#__PURE__*/React.createElement("strong", null, "Zero Trust"), " est une architecture de sécurité qui rejette le principe de « faire confiance à ceux qui sont à l'intérieur du périmètre ». Au contraire, il ", /*#__PURE__*/React.createElement("em", null, "vérifie chaque connexion"), ", quelle que soit son origine."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Les principes fondamentaux sont :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Vérification continue"), " de l'identité et de l'appareil"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Accès au moindre privilège"), " (least privilege)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Chiffrement de tout le trafic"), ", interne et externe"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Surveillance et journalisation constantes"), " des anomalies")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implémentation dans les PME : étape par étape"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Étape 1 : Inventaire et contexte"), ". Cartographiez les actifs critiques (bases de données, applications, documents sensibles) et les utilisateurs qui y accèdent."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Étape 2 : Authentification multifacteur"), ". Mettez en place le MFA sur tous les accès (Microsoft Entra, Okta ou des solutions gratuites comme Keycloak)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Étape 3 : Segmentation du réseau"), ". Créez des zones de confiance logiques (développement, production, données sensibles) avec des règles d'accès granulaires."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Étape 4 : Microsegmentation"), ". Appliquez des politiques au niveau du trafic, et pas seulement au niveau de l'utilisateur."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Coût vs. Bénéfice"), /*#__PURE__*/React.createElement("p", null, "Un déploiement Zero Trust d'entrée de gamme pour une PME de 20 à 50 employés se situe entre 15 000 € et 40 000 € (matériel, logiciels, formation). Le délai de ROI est généralement de 18 à 24 mois, compte tenu de la réduction des risques de breach."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Les coûts d'un breach de données moyen sont ", /*#__PURE__*/React.createElement("strong", null, "10 à 100 fois plus élevés"), " qu'un déploiement préventif."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Le Zero Trust n'est plus réservé aux banques et aux gouvernements. Les PME andorranes qui adopteront ce modèle dès aujourd'hui seront plus résilientes face aux cybermenaces en constante évolution.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "The pandemic accelerated digital transformation, but it also exposed a structural weakness: traditional security perimeters no longer work. The Andorran SMEs that had relied on firewall and \"private network\" VPN found themselves vulnerable when their employees switched to remote work."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "What is Zero Trust?"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Zero Trust"), " is a security architecture that rejects the premise of \"trusting whoever is inside the perimeter\". Instead, it ", /*#__PURE__*/React.createElement("em", null, "verifies every connection"), ", regardless of its origin."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "The core principles are:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Continuous verification"), " of identity and device"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Least-privilege access"), " (least privilege)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Encryption of all traffic"), ", internal and external"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Constant monitoring and logging"), " of anomalies")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Implementation for SMEs: step by step"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Step 1: Inventory and context"), ". Map the critical assets (databases, applications, sensitive documents) and the users who access them."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Step 2: Multi-factor authentication"), ". Implement MFA on all access points (Microsoft Entra, Okta or free solutions such as Keycloak)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Step 3: Network segmentation"), ". Create logical trust zones (development, production, sensitive data) with granular access rules."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Step 4: Micro-segmentation"), ". Apply policies at the traffic level, not just at the user level."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Cost vs. Benefit"), /*#__PURE__*/React.createElement("p", null, "An entry-level Zero Trust deployment for an SME of 20-50 employees ranges between €15,000 and €40,000 (hardware, software, training). The ROI period is typically 18-24 months, factoring in the reduction of breach risks."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "The costs of an average data breach are ", /*#__PURE__*/React.createElement("strong", null, "10-100x higher"), " than a preventive deployment."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Zero Trust is no longer exclusive to banks and governments. The Andorran SMEs that adopt this model today will be more resilient against constantly evolving cyber threats."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2289,6 +2526,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2297,13 +2535,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2343,7 +2596,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2357,7 +2610,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2366,7 +2619,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2382,7 +2640,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2400,7 +2658,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2433,12 +2696,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2459,14 +2727,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2474,6 +2752,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

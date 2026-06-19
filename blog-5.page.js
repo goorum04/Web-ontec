@@ -2194,90 +2194,339 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'wifi6-empreses',
-  tag: 'Comunicacions',
+  tag: {
+    ca: 'Comunicacions',
+    es: 'Comunicaciones',
+    fr: 'Communications',
+    en: 'Communications'
+  },
   date: '2023',
   readtime: '5 min',
-  title: 'WiFi 6: la revolució de la connectivitat empresarial',
+  title: {
+    ca: 'WiFi 6: la revolució de la connectivitat empresarial',
+    es: 'WiFi 6: la revolución de la conectividad empresarial',
+    fr: 'WiFi 6 : la révolution de la connectivité en entreprise',
+    en: 'WiFi 6: the revolution in enterprise connectivity'
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "El WiFi 5 (802.11ac) s'ha quedat estret. Les empreses modernes amb centenars de dispositius simultàniament connectats experimentem latència, desconexions i bottlenecks. ", /*#__PURE__*/React.createElement("strong", null, "WiFi 6 (802.11ax)"), " és la resposta."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Millores claus del WiFi 6"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Velocitat 4x més alta"), ". WiFi 5: 1.2 Gbps teòrics. WiFi 6: 9.6 Gbps en configuracions de antena múltiple."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "2. Latència ultra-baixa"), ". 802.11ax introdueix OFDMA (Orthogonal Frequency-Division Multiple Access), que permet que varis clients comparteixin el mateix canal sense interferència. Latència real: 10-20ms (WiFi 5: 30-50ms)."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiència energètica"), ". Target Wake Time (TWT) permet que dispositius IoT s'activin només quan necessari. Bateries de telèfons últiman 30% més."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "4. Densitat de dispositius"), ". Una xarxa WiFi 6 pot suportar 100+ dispositius sense degradació. WiFi 5 comença a fallar a 50+."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Solucions WiFi 6 a Ontec"), /*#__PURE__*/React.createElement("p", null, "Distribuïm i instal·lem accés points de dues marques líderes:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Ubiquiti UniFi WiFi 6"), ": solució semi-professional amb control centralitzat. Ideal per a pimes i multi-ubicació."), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Aruba Instant On WiFi 6"), ": solució empresarial amb roaming seamless i seguretat integrada.")), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Casos d'ús"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Coworking i hoteles"), ". Els guests esperen xarxa ultra-ràpida sense caigudes. WiFi 6 ho garanteix."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Manufactura i logística"), ". Dispositius IoT (sensors, drones, carretilles) requereixen llatència baixa i cobertura densa."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, /*#__PURE__*/React.createElement("strong", null, "Hospitals i educació"), ". Centenars de treballadors, pacients o estudiants simultàniament. WiFi 6 és obligatori."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Planificació i instalació"), /*#__PURE__*/React.createElement("p", null, "Un survey de WiFi 6 per a edifici de 3.000m² (oficines o hotel) costa tipicament 2.000-4.000€. El deployment: 8.000-15.000€ (hardware + instal·lació + tunes)."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "El ROI és quasi immediat: reducció de tickets de suport de xarxa, clients més contents, productivitat ampliada."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "WiFi 6 ja és l'estàndard de facto en empreses competitives. Si el vostre edifici està en fase de renovació de xarxa, WiFi 6 és la única opció sensata per als pròxims 5-7 anys."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "El WiFi 5 (802.11ac) s'ha quedat curt. Les empreses modernes amb centenars de dispositius connectats simultàniament experimenten latència, desconnexions i colls d'ampolla. El ", /*#__PURE__*/React.createElement("strong", null, "WiFi 6 (802.11ax)"), " és la resposta."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Millores clau del WiFi 6"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Velocitat 4x més alta"), ". WiFi 5: 1,2 Gbps teòrics. WiFi 6: 9,6 Gbps en configuracions d'antena múltiple."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Latència ultrabaixa"), ". El 802.11ax introdueix OFDMA (Orthogonal Frequency-Division Multiple Access), que permet que diversos clients comparteixin el mateix canal sense interferència. Latència real: 10-20 ms (WiFi 5: 30-50 ms)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiència energètica"), ". El Target Wake Time (TWT) permet que els dispositius IoT s'activin només quan és necessari. Les bateries dels telèfons duren un 30% més."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Densitat de dispositius"), ". Una xarxa WiFi 6 pot suportar 100+ dispositius sense degradació. El WiFi 5 comença a fallar a partir de 50+."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Solucions WiFi 6 a Ontec"), /*#__PURE__*/React.createElement("p", null, "Distribuïm i instal·lem punts d'accés de dues marques líders:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Ubiquiti UniFi WiFi 6"), ": solució semiprofessional amb control centralitzat. Ideal per a pimes i multiubicació."), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Aruba Instant On WiFi 6"), ": solució empresarial amb roaming seamless i seguretat integrada.")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Casos d'ús"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Coworking i hotels"), ". Els hostes esperen una xarxa ultraràpida sense caigudes. El WiFi 6 ho garanteix."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Manufactura i logística"), ". Els dispositius IoT (sensors, drons, carretons) requereixen baixa latència i cobertura densa."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Hospitals i educació"), ". Centenars de treballadors, pacients o estudiants simultàniament. El WiFi 6 és obligatori."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Planificació i instal·lació"), /*#__PURE__*/React.createElement("p", null, "Un survey de WiFi 6 per a un edifici de 3.000 m² (oficines o hotel) costa típicament 2.000-4.000€. El desplegament: 8.000-15.000€ (hardware + instal·lació + ajustos)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "El ROI és quasi immediat: reducció de tickets de suport de xarxa, clients més contents i productivitat ampliada."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "El WiFi 6 ja és l'estàndard de facto en empreses competitives. Si el vostre edifici està en fase de renovació de xarxa, el WiFi 6 és l'única opció sensata per als pròxims 5-7 anys.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "El WiFi 5 (802.11ac) se ha quedado corto. Las empresas modernas con cientos de dispositivos conectados simultáneamente experimentan latencia, desconexiones y cuellos de botella. El ", /*#__PURE__*/React.createElement("strong", null, "WiFi 6 (802.11ax)"), " es la respuesta."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Mejoras clave del WiFi 6"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Velocidad 4x más alta"), ". WiFi 5: 1,2 Gbps teóricos. WiFi 6: 9,6 Gbps en configuraciones de antena múltiple."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Latencia ultrabaja"), ". El 802.11ax introduce OFDMA (Orthogonal Frequency-Division Multiple Access), que permite que varios clientes compartan el mismo canal sin interferencias. Latencia real: 10-20 ms (WiFi 5: 30-50 ms)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Eficiencia energética"), ". El Target Wake Time (TWT) permite que los dispositivos IoT se activen solo cuando es necesario. Las baterías de los teléfonos duran un 30% más."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Densidad de dispositivos"), ". Una red WiFi 6 puede soportar 100+ dispositivos sin degradación. El WiFi 5 empieza a fallar a partir de 50+."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Soluciones WiFi 6 en Ontec"), /*#__PURE__*/React.createElement("p", null, "Distribuimos e instalamos puntos de acceso de dos marcas líderes:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Ubiquiti UniFi WiFi 6"), ": solución semiprofesional con control centralizado. Ideal para pymes y multiubicación."), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Aruba Instant On WiFi 6"), ": solución empresarial con roaming seamless y seguridad integrada.")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Casos de uso"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Coworking y hoteles"), ". Los huéspedes esperan una red ultrarrápida sin caídas. El WiFi 6 lo garantiza."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Manufactura y logística"), ". Los dispositivos IoT (sensores, drones, carretillas) requieren baja latencia y cobertura densa."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Hospitales y educación"), ". Cientos de trabajadores, pacientes o estudiantes simultáneamente. El WiFi 6 es obligatorio."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Planificación e instalación"), /*#__PURE__*/React.createElement("p", null, "Un survey de WiFi 6 para un edificio de 3.000 m² (oficinas u hotel) cuesta típicamente 2.000-4.000€. El despliegue: 8.000-15.000€ (hardware + instalación + ajustes)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "El ROI es casi inmediato: reducción de tickets de soporte de red, clientes más contentos y productividad ampliada."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "El WiFi 6 ya es el estándar de facto en empresas competitivas. Si vuestro edificio está en fase de renovación de red, el WiFi 6 es la única opción sensata para los próximos 5-7 años.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Le WiFi 5 (802.11ac) a atteint ses limites. Les entreprises modernes comptant des centaines d'appareils connectés simultanément subissent de la latence, des déconnexions et des goulots d'étranglement. Le ", /*#__PURE__*/React.createElement("strong", null, "WiFi 6 (802.11ax)"), " est la réponse."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Principales améliorations du WiFi 6"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. Vitesse 4x supérieure"), ". WiFi 5 : 1,2 Gbps théoriques. WiFi 6 : 9,6 Gbps en configurations multi-antennes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Latence ultra-faible"), ". Le 802.11ax introduit l'OFDMA (Orthogonal Frequency-Division Multiple Access), qui permet à plusieurs clients de partager le même canal sans interférence. Latence réelle : 10-20 ms (WiFi 5 : 30-50 ms)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Efficacité énergétique"), ". Le Target Wake Time (TWT) permet aux appareils IoT de s'activer uniquement lorsque c'est nécessaire. Les batteries des téléphones durent 30 % de plus."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Densité d'appareils"), ". Un réseau WiFi 6 peut prendre en charge plus de 100 appareils sans dégradation. Le WiFi 5 commence à faiblir au-delà de 50."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Solutions WiFi 6 chez Ontec"), /*#__PURE__*/React.createElement("p", null, "Nous distribuons et installons des points d'accès de deux marques leaders :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Ubiquiti UniFi WiFi 6"), " : solution semi-professionnelle avec gestion centralisée. Idéale pour les PME et le multisite."), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Aruba Instant On WiFi 6"), " : solution professionnelle avec roaming seamless et sécurité intégrée.")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Cas d'usage"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Coworking et hôtels"), ". Les clients attendent un réseau ultra-rapide sans coupures. Le WiFi 6 le garantit."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Industrie et logistique"), ". Les appareils IoT (capteurs, drones, chariots) exigent une faible latence et une couverture dense."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Hôpitaux et éducation"), ". Des centaines de travailleurs, patients ou étudiants simultanément. Le WiFi 6 est indispensable."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Planification et installation"), /*#__PURE__*/React.createElement("p", null, "Un survey WiFi 6 pour un bâtiment de 3 000 m² (bureaux ou hôtel) coûte généralement 2 000-4 000 €. Le déploiement : 8 000-15 000 € (matériel + installation + réglages)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Le ROI est quasi immédiat : réduction des tickets de support réseau, clients plus satisfaits et productivité accrue."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Le WiFi 6 est déjà le standard de facto dans les entreprises compétitives. Si votre bâtiment est en phase de rénovation du réseau, le WiFi 6 est la seule option raisonnable pour les 5 à 7 prochaines années.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "WiFi 5 (802.11ac) has fallen short. Modern companies with hundreds of devices connected simultaneously experience latency, disconnections and bottlenecks. ", /*#__PURE__*/React.createElement("strong", null, "WiFi 6 (802.11ax)"), " is the answer."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Key WiFi 6 improvements"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "1. 4x higher speed"), ". WiFi 5: 1.2 Gbps theoretical. WiFi 6: 9.6 Gbps in multi-antenna configurations."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "2. Ultra-low latency"), ". 802.11ax introduces OFDMA (Orthogonal Frequency-Division Multiple Access), which allows several clients to share the same channel without interference. Real latency: 10-20 ms (WiFi 5: 30-50 ms)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "3. Energy efficiency"), ". Target Wake Time (TWT) lets IoT devices wake up only when needed. Phone batteries last 30% longer."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "4. Device density"), ". A WiFi 6 network can support 100+ devices without degradation. WiFi 5 starts to fail beyond 50+."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "WiFi 6 solutions at Ontec"), /*#__PURE__*/React.createElement("p", null, "We distribute and install access points from two leading brands:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Ubiquiti UniFi WiFi 6"), ": a semi-professional solution with centralized control. Ideal for SMEs and multi-site setups."), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Aruba Instant On WiFi 6"), ": an enterprise solution with seamless roaming and integrated security.")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Use cases"), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Coworking and hotels"), ". Guests expect an ultra-fast network without dropouts. WiFi 6 guarantees it."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Manufacturing and logistics"), ". IoT devices (sensors, drones, forklifts) require low latency and dense coverage."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Hospitals and education"), ". Hundreds of workers, patients or students simultaneously. WiFi 6 is mandatory."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Planning and installation"), /*#__PURE__*/React.createElement("p", null, "A WiFi 6 survey for a 3,000 m² building (offices or hotel) typically costs €2,000-4,000. The deployment: €8,000-15,000 (hardware + installation + tuning)."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "The ROI is almost immediate: fewer network support tickets, happier customers and increased productivity."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "WiFi 6 is already the de facto standard in competitive companies. If your building is undergoing a network upgrade, WiFi 6 is the only sensible option for the next 5-7 years."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2293,6 +2542,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2301,13 +2551,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2347,7 +2612,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2361,7 +2626,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2370,7 +2635,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2386,7 +2656,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2404,7 +2674,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2437,12 +2712,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2463,14 +2743,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2478,6 +2768,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));

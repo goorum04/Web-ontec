@@ -2194,96 +2194,363 @@ Object.assign(window, {
 });
 const ARTICLE_DATA = {
   id: 'incibe-ciberseguretat',
-  tag: 'Ciberseguretat',
+  tag: {
+    ca: 'Ciberseguretat',
+    es: 'Ciberseguridad',
+    fr: 'Cybersécurité',
+    en: 'Cybersecurity'
+  },
   date: '2024',
   readtime: '4 min',
-  title: "INCIBE: per què tenir un tècnic certificat marca la diferència",
+  title: {
+    ca: "INCIBE: per què tenir un tècnic certificat marca la diferència",
+    es: "INCIBE: por qué tener un técnico certificado marca la diferencia",
+    fr: "INCIBE : pourquoi disposer d'un technicien certifié fait la différence",
+    en: "INCIBE: why having a certified technician makes the difference"
+  },
   author: 'Ontec',
-  content: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) és l'organisme de referència per a ciberseguretat a Espanya. Les seves certificacions reconegudes internationalment són un segell de qualitat que assegura que els professionals han superat estàndards rigorosos."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Per què INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Els tècnics certificats per INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Superat exàmens rigorosos de ciberseguretat teòrica i pràctica"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Demostra coneixement de marcos internacionals (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Mantingueren formació continuada obligatòria"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• Suportats per la reputació de l'organisme estatal")), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Ontec i INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec compta amb un tècnic especialitzat en ciberseguretat ", /*#__PURE__*/React.createElement("strong", null, "col·laborador oficial d'INCIBE"), ". Això significa que els nostres auditors i consultors segueixen els estàndards nacionals i internacionals més exigents."), /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: 16
-    }
-  }, "Les vostres auditories de seguretat amb Ontec no són només un informe: són una ", /*#__PURE__*/React.createElement("strong", null, "validació oficial"), " de vulnerabilitats i mesures correctores."), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Que oferim"), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      marginLeft: 24,
-      marginTop: 16,
-      marginBottom: 16
-    }
-  }, /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoria de vulnerabilitats"), " completa de xarxes i aplicacions"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Proves de penetració"), " (pentesting) ètiques autoritzades"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formació en seguretat"), " per als vostres equips"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remediació"), " personalitzats amb metriques de risc"), /*#__PURE__*/React.createElement("li", {
-    style: {
-      marginBottom: 10
-    }
-  }, "• ", /*#__PURE__*/React.createElement("strong", null, "Suport 24/7"), " en incidents de seguretat")), /*#__PURE__*/React.createElement("h2", {
-    style: {
-      fontSize: 24,
-      fontWeight: 700,
-      marginTop: 40,
-      marginBottom: 16,
-      fontFamily: 'var(--disp)'
-    }
-  }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "En un entorn on els atacs cibernètics són quotidians, tenim experts certificats que garanteixen que la vostre infraestructura compleix amb els estàndards més alts de la indústria."))
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) és l'organisme de referència per a la ciberseguretat a Espanya. Les seves certificacions, reconegudes internacionalment, són un segell de qualitat que assegura que els professionals han superat estàndards rigorosos."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Per què INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Els tècnics certificats per INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Superat exàmens rigorosos de ciberseguretat teòrica i pràctica"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demostrat coneixement de marcs internacionals (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Mantingut una formació continuada obligatòria"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• El suport de la reputació de l'organisme estatal")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec i INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec compta amb un tècnic especialitzat en ciberseguretat ", /*#__PURE__*/React.createElement("strong", null, "col·laborador oficial d'INCIBE"), ". Això significa que els nostres auditors i consultors segueixen els estàndards nacionals i internacionals més exigents."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Les vostres auditories de seguretat amb Ontec no són només un informe: són una ", /*#__PURE__*/React.createElement("strong", null, "validació oficial"), " de vulnerabilitats i mesures correctores."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Què oferim"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoria de vulnerabilitats"), " completa de xarxes i aplicacions"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Proves de penetració"), " (pentesting) ètiques i autoritzades"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formació en seguretat"), " per als vostres equips"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remediació"), " personalitzats amb mètriques de risc"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Suport 24/7"), " en incidents de seguretat")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "En un entorn on els atacs cibernètics són quotidians, comptem amb experts certificats que garanteixen que la vostra infraestructura compleix amb els estàndards més alts de la indústria.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "El ", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) es el organismo de referencia para la ciberseguridad en España. Sus certificaciones, reconocidas internacionalmente, son un sello de calidad que asegura que los profesionales han superado estándares rigurosos."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "¿Por qué INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Los técnicos certificados por INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Superado exámenes rigurosos de ciberseguridad teórica y práctica"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demostrado conocimiento de marcos internacionales (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Mantenido una formación continua obligatoria"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• El respaldo de la reputación del organismo estatal")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec e INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec cuenta con un técnico especializado en ciberseguridad ", /*#__PURE__*/React.createElement("strong", null, "colaborador oficial de INCIBE"), ". Esto significa que nuestros auditores y consultores siguen los estándares nacionales e internacionales más exigentes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Vuestras auditorías de seguridad con Ontec no son solo un informe: son una ", /*#__PURE__*/React.createElement("strong", null, "validación oficial"), " de vulnerabilidades y medidas correctoras."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Qué ofrecemos"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoría de vulnerabilidades"), " completa de redes y aplicaciones"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Pruebas de penetración"), " (pentesting) éticas y autorizadas"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formación en seguridad"), " para vuestros equipos"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Planes de remediación"), " personalizados con métricas de riesgo"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Soporte 24/7"), " en incidentes de seguridad")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "En un entorno donde los ataques cibernéticos son cotidianos, contamos con expertos certificados que garantizan que vuestra infraestructura cumple con los estándares más altos de la industria.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) est l'organisme de référence en matière de cybersécurité en Espagne. Ses certifications, reconnues à l'international, constituent un gage de qualité garantissant que les professionnels ont satisfait à des normes rigoureuses."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Pourquoi INCIBE ?"), /*#__PURE__*/React.createElement("p", null, "Les techniciens certifiés par l'INCIBE ont :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Réussi des examens rigoureux de cybersécurité théorique et pratique"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Démontré une maîtrise des cadres internationaux (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Maintenu une formation continue obligatoire"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Le soutien de la réputation de l'organisme étatique")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec et l'INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec dispose d'un technicien spécialisé en cybersécurité ", /*#__PURE__*/React.createElement("strong", null, "collaborateur officiel de l'INCIBE"), ". Cela signifie que nos auditeurs et consultants respectent les normes nationales et internationales les plus exigeantes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Vos audits de sécurité avec Ontec ne sont pas qu'un simple rapport : ce sont une ", /*#__PURE__*/React.createElement("strong", null, "validation officielle"), " des vulnérabilités et des mesures correctives."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ce que nous offrons"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Audit de vulnérabilités"), " complet des réseaux et des applications"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Tests d'intrusion"), " (pentesting) éthiques et autorisés"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formation à la sécurité"), " pour vos équipes"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remédiation"), " personnalisés avec des métriques de risque"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Support 24/7"), " en cas d'incidents de sécurité")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Dans un environnement où les cyberattaques sont quotidiennes, nous disposons d'experts certifiés qui garantissent que votre infrastructure respecte les normes les plus élevées du secteur.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) is the benchmark body for cybersecurity in Spain. Its internationally recognized certifications are a seal of quality that ensures professionals have met rigorous standards."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Why INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Technicians certified by INCIBE have:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Passed rigorous theoretical and practical cybersecurity exams"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demonstrated knowledge of international frameworks (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Maintained mandatory continuous training"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• The backing of the state body's reputation")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec and INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec has a cybersecurity specialist who is an ", /*#__PURE__*/React.createElement("strong", null, "official INCIBE collaborator"), ". This means our auditors and consultants follow the most demanding national and international standards."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Your security audits with Ontec are not just a report: they are an ", /*#__PURE__*/React.createElement("strong", null, "official validation"), " of vulnerabilities and corrective measures."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "What we offer"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Vulnerability auditing"), " — complete coverage of networks and applications"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Penetration testing"), " (pentesting) — ethical and authorized"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Security training"), " for your teams"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Remediation plans"), " tailored with risk metrics"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "24/7 support"), " for security incidents")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "In an environment where cyberattacks are an everyday occurrence, we have certified experts who guarantee that your infrastructure meets the highest standards in the industry."))
+  }
 };
 const TWEAK_DEFAULTS = {
   "mood": "acid",
@@ -2299,6 +2566,7 @@ function BlogArticle({
   author = 'Ontec',
   content
 }) {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2307,13 +2575,28 @@ function BlogArticle({
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
   const relatedArticles = [{
-    title: "Ciberseguretat empresarial 2025",
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
     href: "#"
   }, {
-    title: "Tendencies en infraestructura tecnològica",
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
     href: "#"
   }, {
-    title: "Transformació digital a Andorra",
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
     href: "#"
   }];
   return /*#__PURE__*/React.createElement(PageShell, {
@@ -2353,7 +2636,7 @@ function BlogArticle({
       gap: 16,
       marginBottom: 18
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
@@ -2367,7 +2650,7 @@ function BlogArticle({
       lineHeight: 1.15,
       marginBottom: 20
     }
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2376,7 +2659,12 @@ function BlogArticle({
       fontSize: 13,
       color: 'rgba(255,255,255,.7)'
     }
-  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, "Per ", author))))), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '80px 0'
@@ -2392,7 +2680,7 @@ function BlogArticle({
       lineHeight: 1.8,
       color: 'var(--mut)'
     }
-  }, content), /*#__PURE__*/React.createElement("div", {
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 80,
       paddingTop: 60,
@@ -2410,7 +2698,12 @@ function BlogArticle({
       fontSize: 28,
       marginBottom: 32
     }
-  }, "Articles relacionats"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2443,12 +2736,17 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 8
     }
-  }, "ARTICLE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontWeight: 600,
       fontSize: 15
     }
-  }, art.title))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'sticky',
       top: 100
@@ -2469,14 +2767,24 @@ function BlogArticle({
       color: 'var(--accent)',
       marginBottom: 20
     }
-  }, "Sobre Ontec"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--mut)',
       lineHeight: 1.7,
       marginBottom: 20
     }
-  }, "Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes."), /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -2484,6 +2792,11 @@ function BlogArticle({
       justifyContent: 'center',
       padding: '12px 16px'
     }
-  }, "Contacta'ns"))))))));
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));
