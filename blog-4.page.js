@@ -14,6 +14,127 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
+
+/* ════════════════════════════════════════════════════════════════════════════
+   i18n — multilanguage (Català · Español · Français · English)
+   Lightweight pub/sub store + useLang() hook + tt({ca,es,fr,en}) helper.
+   Persisted in localStorage; syncs <html lang>. Page roots call useLang() so
+   tt(...) calls re-evaluate on language change.
+   ════════════════════════════════════════════════════════════════════════════ */
+const LANGS = [{
+  code: 'ca',
+  label: 'CA',
+  name: 'Català'
+}, {
+  code: 'es',
+  label: 'ES',
+  name: 'Español'
+}, {
+  code: 'fr',
+  label: 'FR',
+  name: 'Français'
+}, {
+  code: 'en',
+  label: 'EN',
+  name: 'English'
+}];
+const LANG_CODES = LANGS.map(l => l.code);
+let CURRENT_LANG = (() => {
+  try {
+    const saved = localStorage.getItem('ontec_lang');
+    if (saved && LANG_CODES.includes(saved)) return saved;
+    const nav = (navigator.language || 'ca').slice(0, 2).toLowerCase();
+    if (LANG_CODES.includes(nav)) return nav;
+  } catch (e) {}
+  return 'ca';
+})();
+const LANG_LISTENERS = new Set();
+function setLang(code) {
+  if (!LANG_CODES.includes(code) || code === CURRENT_LANG) return;
+  CURRENT_LANG = code;
+  try {
+    localStorage.setItem('ontec_lang', code);
+  } catch (e) {}
+  try {
+    document.documentElement.setAttribute('lang', code);
+  } catch (e) {}
+  LANG_LISTENERS.forEach(fn => fn(code));
+}
+function getLang() {
+  return CURRENT_LANG;
+}
+
+/* translate: tt({ca, es, fr, en}) → value for active language (ca fallback).
+   value may be a string or a JSX node. Plain strings pass through unchanged. */
+function tt(obj) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'object' && !obj.ca && !obj.es && !obj.fr && !obj.en) return obj; // JSX/element
+  return obj[CURRENT_LANG] != null ? obj[CURRENT_LANG] : obj.ca != null ? obj.ca : '';
+}
+
+/* hook: subscribe a component to language changes */
+function useLang() {
+  const [lang, setL] = useState(CURRENT_LANG);
+  useEffect(() => {
+    const fn = code => setL(code);
+    LANG_LISTENERS.add(fn);
+    try {
+      document.documentElement.setAttribute('lang', CURRENT_LANG);
+    } catch (e) {}
+    return () => LANG_LISTENERS.delete(fn);
+  }, []);
+  return [lang, setLang];
+}
+
+/* ── Language switcher (segmented CA · ES · FR · EN) ── */
+function LangSwitcher({
+  light = false,
+  compact = false
+}) {
+  const [lang] = useLang();
+  const idle = light ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const hover = light ? '#ffffff' : 'var(--ink)';
+  return /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "Idioma",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 2,
+      border: `1px solid ${light ? 'rgba(255,255,255,.28)' : 'var(--line)'}`,
+      borderRadius: 999,
+      padding: 3
+    }
+  }, LANGS.map(l => {
+    const on = lang === l.code;
+    return /*#__PURE__*/React.createElement("button", {
+      key: l.code,
+      onClick: () => setLang(l.code),
+      "aria-pressed": on,
+      title: l.name,
+      style: {
+        fontFamily: 'var(--mono)',
+        fontSize: 10.5,
+        letterSpacing: '.04em',
+        fontWeight: 700,
+        padding: compact ? '7px 10px' : '6px 9px',
+        borderRadius: 999,
+        border: 'none',
+        cursor: 'pointer',
+        background: on ? 'var(--accent)' : 'transparent',
+        color: on ? 'var(--accent-ink)' : idle,
+        transition: 'background .18s, color .18s'
+      },
+      onMouseEnter: e => {
+        if (!on) e.currentTarget.style.color = hover;
+      },
+      onMouseLeave: e => {
+        if (!on) e.currentTarget.style.color = idle;
+      }
+    }, l.label);
+  }));
+}
 const GLOBAL_CSS = `
 :root{
   --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
@@ -793,49 +914,124 @@ function OntecLogo({
   }, "Ontec"));
 }
 const NAV_ITEMS = [{
-  label: 'Empresa',
+  id: 'Empresa',
+  label: {
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  },
   href: 'empresa.html',
   children: [{
-    label: 'Partners',
+    label: {
+      ca: 'Partners',
+      es: 'Partners',
+      fr: 'Partenaires',
+      en: 'Partners'
+    },
     href: 'empresa.html#partners'
   }]
 }, {
-  label: 'Solucions',
+  id: 'Solucions',
+  label: {
+    ca: 'Solucions',
+    es: 'Soluciones',
+    fr: 'Solutions',
+    en: 'Solutions'
+  },
   href: 'solucions.html',
   children: [{
-    label: 'IT Security',
+    label: {
+      ca: 'IT Security',
+      es: 'IT Security',
+      fr: 'IT Security',
+      en: 'IT Security'
+    },
     href: 'solucions.html#it-security'
   }, {
-    label: 'Comunicacions',
+    label: {
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    },
     href: 'solucions.html#comunicacions'
   }, {
-    label: 'Automatització',
+    label: {
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    },
     href: 'solucions.html#automatitzacio'
   }, {
-    label: 'Audiovisuals',
+    label: {
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    },
     href: 'solucions.html#audiovisuals'
   }]
 }, {
-  label: 'Serveis',
+  id: 'Serveis',
+  label: {
+    ca: 'Serveis',
+    es: 'Servicios',
+    fr: 'Services',
+    en: 'Services'
+  },
   href: 'serveis.html',
   children: [{
-    label: 'Ingenierías',
+    label: {
+      ca: 'Enginyeries',
+      es: 'Ingenierías',
+      fr: 'Ingénieries',
+      en: 'Engineering'
+    },
     href: 'serveis.html#ingenieries'
   }, {
-    label: 'Arquitectures',
+    label: {
+      ca: 'Arquitectures',
+      es: 'Arquitecturas',
+      fr: 'Architectures',
+      en: 'Architecture'
+    },
     href: 'serveis.html#arquitectures'
   }, {
-    label: 'Instal·ladors',
+    label: {
+      ca: 'Instal·ladors',
+      es: 'Instaladores',
+      fr: 'Installateurs',
+      en: 'Installers'
+    },
     href: 'serveis.html#installadors'
   }, {
-    label: "Disseny d'Interiors",
+    label: {
+      ca: "Disseny d'Interiors",
+      es: 'Diseño de Interiores',
+      fr: "Design d'Intérieur",
+      en: 'Interior Design'
+    },
     href: 'serveis.html#disseny'
   }]
 }, {
-  label: 'Blog',
+  id: 'Blog',
+  label: {
+    ca: 'Blog',
+    es: 'Blog',
+    fr: 'Blog',
+    en: 'Blog'
+  },
   href: 'blog.html'
 }, {
-  label: 'Contacta',
+  id: 'Contacta',
+  label: {
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  },
   href: 'contacta.html'
 }];
 function Nav({
@@ -844,6 +1040,7 @@ function Nav({
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
   const [drop, setDrop] = useState(null);
+  useLang();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn);
@@ -906,25 +1103,25 @@ function Nav({
     },
     className: "nav-desk"
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("div", {
-    key: item.label,
+    key: item.id,
     style: {
       position: 'relative'
     },
-    onMouseEnter: () => item.children && setDrop(item.label),
+    onMouseEnter: () => item.children && setDrop(item.id),
     onMouseLeave: () => setDrop(null)
   }, /*#__PURE__*/React.createElement("a", {
     href: item.href,
     style: {
       ...linkBase,
-      color: activePage === item.label ? activeCol : textMut
+      color: activePage === item.id ? activeCol : textMut
     },
     onMouseEnter: e => {
-      if (activePage !== item.label) e.currentTarget.style.color = textInk;
+      if (activePage !== item.id) e.currentTarget.style.color = textInk;
     },
     onMouseLeave: e => {
-      e.currentTarget.style.color = activePage === item.label ? activeCol : textMut;
+      e.currentTarget.style.color = activePage === item.id ? activeCol : textMut;
     }
-  }, item.label), item.children && drop === item.label && /*#__PURE__*/React.createElement("div", {
+  }, tt(item.label)), item.children && drop === item.id && /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '100%',
@@ -937,7 +1134,7 @@ function Nav({
       boxShadow: '0 24px 60px rgba(19,33,27,.16)'
     }
   }, item.children.map(ch => /*#__PURE__*/React.createElement("a", {
-    key: ch.label,
+    key: ch.href,
     href: ch.href,
     style: {
       display: 'block',
@@ -956,15 +1153,17 @@ function Nav({
       e.currentTarget.style.color = 'var(--mut)';
       e.currentTarget.style.background = 'transparent';
     }
-  }, ch.label)))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(ch.label))))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 16,
+      gap: 14,
       alignItems: 'center',
       flexShrink: 0
     },
     className: "nav-desk"
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    light: lightText
+  }), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
     style: {
       fontFamily: 'var(--mono)',
@@ -979,7 +1178,12 @@ function Nav({
     style: {
       padding: '11px 20px'
     }
-  }, "Contacta")), /*#__PURE__*/React.createElement("button", {
+  }, tt({
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  }))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setMob(!mob),
     className: "nav-mob",
     style: {
@@ -999,7 +1203,7 @@ function Nav({
       padding: '14px 40px 28px'
     }
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("a", {
-    key: item.label,
+    key: item.id,
     href: item.href,
     className: "disp",
     style: {
@@ -1010,17 +1214,31 @@ function Nav({
       textDecoration: 'none',
       borderBottom: '1px solid var(--line-soft)'
     }
-  }, item.label)), /*#__PURE__*/React.createElement("a", {
+  }, tt(item.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 22,
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    compact: true
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 20,
+      marginTop: 18,
       width: '100%',
       justifyContent: 'center'
     }
-  }, "Contacta ara")), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
+  }, tt({
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Get in touch'
+  }))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
 }
 function Footer() {
+  useLang();
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       position: 'relative',
@@ -1036,7 +1254,27 @@ function Footer() {
     }
   }, /*#__PURE__*/React.createElement(Marquee, {
     big: true,
-    items: ['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']
+    items: [tt({
+      ca: 'Sistemes tecnològics',
+      es: 'Sistemas tecnológicos',
+      fr: 'Systèmes technologiques',
+      en: 'Technology systems'
+    }), 'IT Security', tt({
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    }), tt({
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    }), tt({
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    }), 'Andorra']
   })), /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
@@ -1065,7 +1303,12 @@ function Footer() {
       lineHeight: 1.7,
       maxWidth: 320
     }
-  }, "Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.',
+    es: 'Distribución e integración de sistemas tecnológicos avanzados. Andorra, desde 2016.',
+    fr: 'Distribution et intégration de systèmes technologiques avancés. Andorre, depuis 2016.',
+    en: 'Distribution and integration of advanced technology systems. Andorra, since 2016.'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 26,
       display: 'flex',
@@ -1077,7 +1320,12 @@ function Footer() {
     style: {
       padding: '12px 22px'
     }
-  }, "Comença un projecte ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Comença un projecte',
+    es: 'Empieza un proyecto',
+    fr: 'Démarrer un projet',
+    en: 'Start a project'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
@@ -1085,27 +1333,37 @@ function Footer() {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Navegació"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Navegació',
+    es: 'Navegación',
+    fr: 'Navigation',
+    en: 'Navigation'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 12
     }
   }, NAV_ITEMS.map(l => /*#__PURE__*/React.createElement("a", {
-    key: l.label,
+    key: l.id,
     href: l.href,
     style: {
       fontSize: 15,
       color: 'rgba(238,241,234,.7)',
       textDecoration: 'none'
     }
-  }, l.label)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, tt(l.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Contacte"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Contacte',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1139,7 +1397,12 @@ function Footer() {
       color: 'rgba(238,241,234,.45)',
       letterSpacing: '.05em'
     }
-  }, /*#__PURE__*/React.createElement("span", null, "© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats"), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
+  }, /*#__PURE__*/React.createElement("span", null, tt({
+    ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats',
+    es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados',
+    fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés',
+    en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved'
+  })), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
 }
 function Cine({
   src,
@@ -1365,7 +1628,13 @@ Object.assign(window, {
   Scramble,
   CountUp,
   Magnetic,
-  Tilt
+  Tilt,
+  LANGS,
+  tt,
+  useLang,
+  setLang,
+  getLang,
+  LangSwitcher
 });
 
 // tweaks-panel.jsx
