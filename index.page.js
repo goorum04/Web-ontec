@@ -2197,16 +2197,36 @@ Object.assign(window, {
 function HeroAreas() {
   const areas = [{
     icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
-    t: 'IT Security'
+    t: {
+      ca: 'IT Security',
+      es: 'IT Security',
+      fr: 'IT Security',
+      en: 'IT Security'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Wifi, null),
-    t: 'Comunicacions'
+    t: {
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
-    t: 'Automatització'
+    t: {
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Video, null),
-    t: 'Audiovisuals'
+    t: {
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    }
   }];
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2233,7 +2253,12 @@ function HeroAreas() {
       textTransform: 'uppercase',
       color: 'var(--accent-2)'
     }
-  }, "Àrees de servei"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Àrees de servei',
+    es: 'Áreas de servicio',
+    fr: 'Domaines de service',
+    en: 'Service areas'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 6,
       fontFamily: 'var(--disp)',
@@ -2241,12 +2266,17 @@ function HeroAreas() {
       fontSize: 19,
       color: '#fff'
     }
-  }, "Un sol integrador")), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Un sol integrador',
+    es: 'Un solo integrador',
+    fr: 'Un seul intégrateur',
+    en: 'A single integrator'
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       padding: '10px 12px'
     }
-  }, areas.map(a => /*#__PURE__*/React.createElement("div", {
-    key: a.t,
+  }, areas.map((a, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2273,7 +2303,7 @@ function HeroAreas() {
       color: 'rgba(255,255,255,.92)',
       fontWeight: 500
     }
-  }, a.t), /*#__PURE__*/React.createElement("span", {
+  }, tt(a.t)), /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: 'auto',
       color: 'var(--accent-2)'
@@ -2396,7 +2426,12 @@ function Hero() {
       height: 2,
       background: 'var(--accent-2)'
     }
-  }), "Andorra · Distribució tecnològica des de 2016"), /*#__PURE__*/React.createElement("h1", {
+  }), tt({
+    ca: 'Andorra · Distribució tecnològica des de 2016',
+    es: 'Andorra · Distribución tecnológica desde 2016',
+    fr: 'Andorre · Distribution technologique depuis 2016',
+    en: 'Andorra · Technology distribution since 2016'
+  })), /*#__PURE__*/React.createElement("h1", {
     ref: h1Ref,
     className: "disp",
     style: {
@@ -2404,11 +2439,28 @@ function Hero() {
       fontSize: 'clamp(44px,6.6vw,104px)',
       lineHeight: 1.02
     }
-  }, "Sistemes tecnològics", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--accent-2)'
-    }
-  }, "avançats")), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Sistemes tecnològics", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--accent-2)'
+      }
+    }, "avançats")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Sistemas tecnológicos", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--accent-2)'
+      }
+    }, "avanzados")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Systèmes technologiques", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--accent-2)'
+      }
+    }, "avancés")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Advanced", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--accent-2)'
+      }
+    }, "technology systems"))
+  })), /*#__PURE__*/React.createElement("p", {
     ref: pRef,
     style: {
       marginTop: 30,
@@ -2417,7 +2469,12 @@ function Hero() {
       lineHeight: 1.7,
       maxWidth: 560
     }
-  }, "Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses, arquitectures, enginyeries i instal·ladors a Andorra."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Distribuïm, integrem i donem suport a infraestructures tecnològiques per a empreses, arquitectures, enginyeries i instal·ladors a Andorra.',
+    es: 'Distribuimos, integramos y damos soporte a infraestructuras tecnológicas para empresas, arquitecturas, ingenierías e instaladores en Andorra.',
+    fr: 'Nous distribuons, intégrons et accompagnons les infrastructures technologiques pour les entreprises, architectes, bureaux d\'études et installateurs en Andorre.',
+    en: 'We distribute, integrate and support technology infrastructures for businesses, architects, engineering firms and installers in Andorra.'
+  })), /*#__PURE__*/React.createElement("div", {
     ref: ctaRef,
     style: {
       display: 'flex',
@@ -2428,12 +2485,22 @@ function Hero() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "solucions.html",
     className: "btn btn-primary"
-  }, "Veure solucions ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Veure solucions',
+    es: 'Ver soluciones',
+    fr: 'Voir les solutions',
+    en: 'View solutions'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-light"
-  }, "Parla amb un expert"))), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Parla amb un expert',
+    es: 'Habla con un experto',
+    fr: 'Parlez à un expert',
+    en: 'Talk to an expert'
+  })))), /*#__PURE__*/React.createElement("div", {
     ref: areasRef,
     className: "hero-areas"
   }, /*#__PURE__*/React.createElement(HeroAreas, null))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:1100px){.hero-areas{display:none;}}`));
@@ -2444,25 +2511,50 @@ function StatBand() {
   const stats = [{
     to: 8,
     suf: '+',
-    l: 'Anys operant'
+    l: {
+      ca: 'Anys operant',
+      es: 'Años operando',
+      fr: 'Années d\'activité',
+      en: 'Years operating'
+    }
   }, {
     to: 200,
     suf: '+',
-    l: 'Projectes lliurats'
+    l: {
+      ca: 'Projectes lliurats',
+      es: 'Proyectos entregados',
+      fr: 'Projets livrés',
+      en: 'Projects delivered'
+    }
   }, {
     to: 4,
     suf: '',
-    l: 'Àrees clau'
+    l: {
+      ca: 'Àrees clau',
+      es: 'Áreas clave',
+      fr: 'Domaines clés',
+      en: 'Key areas'
+    }
   }, {
     to: 99.9,
     suf: '%',
     dec: 1,
-    l: 'Uptime garantit'
+    l: {
+      ca: 'Uptime garantit',
+      es: 'Uptime garantizado',
+      fr: 'Disponibilité garantie',
+      en: 'Guaranteed uptime'
+    }
   }, {
     to: 4,
     pre: '< ',
     suf: 'h',
-    l: 'Temps de resposta'
+    l: {
+      ca: 'Temps de resposta',
+      es: 'Tiempo de respuesta',
+      fr: 'Temps de réponse',
+      en: 'Response time'
+    }
   }];
   return /*#__PURE__*/React.createElement("section", {
     style: {
@@ -2504,35 +2596,75 @@ function StatBand() {
       textTransform: 'uppercase',
       color: 'var(--mut)'
     }
-  }, s.l)))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:760px){.stat-wrap{grid-template-columns:1fr 1fr!important;}}`));
+  }, tt(s.l))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:760px){.stat-wrap{grid-template-columns:1fr 1fr!important;}}`));
 }
 const SOLS = [{
-  t: 'IT Security',
+  t: {
+    ca: 'IT Security',
+    es: 'IT Security',
+    fr: 'IT Security',
+    en: 'IT Security'
+  },
   href: 'solucions.html#it-security',
   n: '01',
   icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
-  desc: 'Protecció integral de la infraestructura digital.',
+  desc: {
+    ca: 'Protecció integral de la infraestructura digital.',
+    es: 'Protección integral de la infraestructura digital.',
+    fr: 'Protection intégrale de l\'infrastructure numérique.',
+    en: 'Comprehensive protection of your digital infrastructure.'
+  },
   img: 'https://images.unsplash.com/photo-1611917436955-d21c1999520c?w=1100&q=80&auto=format&fit=crop'
 }, {
-  t: 'Comunicacions',
+  t: {
+    ca: 'Comunicacions',
+    es: 'Comunicaciones',
+    fr: 'Communications',
+    en: 'Communications'
+  },
   href: 'solucions.html#comunicacions',
   n: '02',
   icon: /*#__PURE__*/React.createElement(Icons.Wifi, null),
-  desc: "Connectivitat d'alt rendiment per a qualsevol entorn.",
+  desc: {
+    ca: "Connectivitat d'alt rendiment per a qualsevol entorn.",
+    es: 'Conectividad de alto rendimiento para cualquier entorno.',
+    fr: 'Connectivité haute performance pour tout environnement.',
+    en: 'High-performance connectivity for any environment.'
+  },
   img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1100&q=80&auto=format&fit=crop'
 }, {
-  t: 'Automatització',
+  t: {
+    ca: 'Automatització',
+    es: 'Automatización',
+    fr: 'Automatisation',
+    en: 'Automation'
+  },
   href: 'solucions.html#automatitzacio',
   n: '03',
   icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
-  desc: "Sistemes intel·ligents per a edificis i llars.",
+  desc: {
+    ca: "Sistemes intel·ligents per a edificis i llars.",
+    es: 'Sistemas inteligentes para edificios y hogares.',
+    fr: 'Systèmes intelligents pour bâtiments et habitations.',
+    en: 'Smart systems for buildings and homes.'
+  },
   img: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1100&q=80&auto=format&fit=crop'
 }, {
-  t: 'Audiovisuals',
+  t: {
+    ca: 'Audiovisuals',
+    es: 'Audiovisuales',
+    fr: 'Audiovisuel',
+    en: 'Audiovisual'
+  },
   href: 'solucions.html#audiovisuals',
   n: '04',
   icon: /*#__PURE__*/React.createElement(Icons.Screen, null),
-  desc: 'Sistemes A/V professionals per a qualsevol espai.',
+  desc: {
+    ca: 'Sistemes A/V professionals per a qualsevol espai.',
+    es: 'Sistemas A/V profesionales para cualquier espacio.',
+    fr: 'Systèmes A/V professionnels pour tout espace.',
+    en: 'Professional A/V systems for any space.'
+  },
   img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1100&q=80&auto=format&fit=crop'
 }];
 function SolutionsGallery() {
@@ -2551,17 +2683,32 @@ function SolutionsGallery() {
       flexWrap: 'wrap',
       gap: 24
     }
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, "Solucions"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Solucions',
+    es: 'Soluciones',
+    fr: 'Solutions',
+    en: 'Solutions'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(40px,6vw,96px)'
     }
-  }, "Tot integrat,", /*#__PURE__*/React.createElement("br", null), "tot controlat")), /*#__PURE__*/React.createElement(Reveal, {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Tot integrat,", /*#__PURE__*/React.createElement("br", null), "tot controlat"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Todo integrado,", /*#__PURE__*/React.createElement("br", null), "todo controlado"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Tout intégré,", /*#__PURE__*/React.createElement("br", null), "tout maîtrisé"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Fully integrated,", /*#__PURE__*/React.createElement("br", null), "fully controlled")
+  }))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
   }, /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
     href: "solucions.html",
     className: "btn btn-ghost"
-  }, "Veure totes ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Veure totes',
+    es: 'Ver todas',
+    fr: 'Voir toutes',
+    en: 'View all'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   }))))), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2571,7 +2718,7 @@ function SolutionsGallery() {
     },
     className: "gal-grid"
   }, SOLS.map((s, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: s.t,
+    key: i,
     delay: i % 2 * 100
   }, /*#__PURE__*/React.createElement(Tilt, {
     max: 6
@@ -2584,7 +2731,7 @@ function SolutionsGallery() {
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: s.img,
-    alt: s.t,
+    alt: tt(s.t),
     style: {
       position: 'absolute',
       inset: 0
@@ -2638,14 +2785,14 @@ function SolutionsGallery() {
       color: '#fff',
       marginBottom: 10
     }
-  }, s.t), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.t)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14.5,
       color: 'rgba(255,255,255,.7)',
       lineHeight: 1.6,
       maxWidth: 360
     }
-  }, s.desc), /*#__PURE__*/React.createElement("div", {
+  }, tt(s.desc)), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 18,
       display: 'inline-flex',
@@ -2657,12 +2804,77 @@ function SolutionsGallery() {
       textTransform: 'uppercase',
       color: 'var(--accent-2)'
     }
-  }, "Explorar ", /*#__PURE__*/React.createElement(Icons.Arrow, {
+  }, tt({
+    ca: 'Explorar',
+    es: 'Explorar',
+    fr: 'Explorer',
+    en: 'Explore'
+  }), " ", /*#__PURE__*/React.createElement(Icons.Arrow, {
     s: 13
   })))))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:760px){.gal-grid{grid-template-columns:1fr!important;}}`));
 }
 function CaseBatllia() {
-  const specs = [['Sistema', 'Videoconferència HD'], ['Ubicació', "la Batllia d'Andorra"], ['Equipament', 'Cisco Webex + Sony PTZ'], ['Cobertura', '3 sales de reunions'], ['Integració', 'MS Teams / Zoom'], ['Suport', '24/7 garantit']];
+  const specs = [[{
+    ca: 'Sistema',
+    es: 'Sistema',
+    fr: 'Système',
+    en: 'System'
+  }, {
+    ca: 'Videoconferència HD',
+    es: 'Videoconferencia HD',
+    fr: 'Visioconférence HD',
+    en: 'HD video conferencing'
+  }], [{
+    ca: 'Ubicació',
+    es: 'Ubicación',
+    fr: 'Emplacement',
+    en: 'Location'
+  }, {
+    ca: "la Batllia d'Andorra",
+    es: "la Batllia d'Andorra",
+    fr: "la Batllia d'Andorra",
+    en: "la Batllia d'Andorra"
+  }], [{
+    ca: 'Equipament',
+    es: 'Equipamiento',
+    fr: 'Équipement',
+    en: 'Equipment'
+  }, {
+    ca: 'Cisco Webex + Sony PTZ',
+    es: 'Cisco Webex + Sony PTZ',
+    fr: 'Cisco Webex + Sony PTZ',
+    en: 'Cisco Webex + Sony PTZ'
+  }], [{
+    ca: 'Cobertura',
+    es: 'Cobertura',
+    fr: 'Couverture',
+    en: 'Coverage'
+  }, {
+    ca: '3 sales de reunions',
+    es: '3 salas de reuniones',
+    fr: '3 salles de réunion',
+    en: '3 meeting rooms'
+  }], [{
+    ca: 'Integració',
+    es: 'Integración',
+    fr: 'Intégration',
+    en: 'Integration'
+  }, {
+    ca: 'MS Teams / Zoom',
+    es: 'MS Teams / Zoom',
+    fr: 'MS Teams / Zoom',
+    en: 'MS Teams / Zoom'
+  }], [{
+    ca: 'Suport',
+    es: 'Soporte',
+    fr: 'Support',
+    en: 'Support'
+  }, {
+    ca: '24/7 garantit',
+    es: '24/7 garantizado',
+    fr: '24/7 garanti',
+    en: '24/7 guaranteed'
+  }]];
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -2685,30 +2897,55 @@ function CaseBatllia() {
       alignItems: 'center'
     },
     className: "case-grid"
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, "Cas d'èxit"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: "Cas d'èxit",
+    es: 'Caso de éxito',
+    fr: 'Étude de cas',
+    en: 'Case study'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,5vw,84px)',
       marginBottom: 24
     }
-  }, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra")
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 24
     }
-  }, "Instal·lació integral del sistema de videoconferència professional per als espais institucionals de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària."), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: "Instal·lació integral del sistema de videoconferència professional per als espais institucionals de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària.",
+    es: "Instalación integral del sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra. Un proyecto que demuestra la capacidad de Ontec para desplegar soluciones de alto nivel en entornos de gran exigencia técnica y protocolaria.",
+    fr: "Installation intégrale du système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra. Un projet qui démontre la capacité d'Ontec à déployer des solutions haut de gamme dans des environnements aux exigences techniques et protocolaires élevées.",
+    en: "Full deployment of a professional video conferencing system for the institutional spaces of la Batllia d'Andorra. A project that showcases Ontec's ability to deliver high-end solutions in demanding technical and protocol environments."
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 40
     }
-  }, "El sistema permet la connexió simultània amb organismes internacionals, tribunals i institucions europees amb qualitat audiovisual de primer nivell i latència mínima."), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, tt({
+    ca: "El sistema permet la connexió simultània amb organismes internacionals, tribunals i institucions europees amb qualitat audiovisual de primer nivell i latència mínima.",
+    es: "El sistema permite la conexión simultánea con organismos internacionales, tribunales e instituciones europeas con calidad audiovisual de primer nivel y latencia mínima.",
+    fr: "Le système permet la connexion simultanée avec des organismes internationaux, des tribunaux et des institutions européennes, avec une qualité audiovisuelle de premier ordre et une latence minimale.",
+    en: "The system enables simultaneous connections with international bodies, courts and European institutions, with top-tier audiovisual quality and minimal latency."
+  })), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
     href: "solucions.html#audiovisuals",
     className: "btn btn-primary"
-  }, "Veure solució ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Veure solució',
+    es: 'Ver solución',
+    fr: 'Voir la solution',
+    en: 'View solution'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
@@ -2754,7 +2991,12 @@ function CaseBatllia() {
       color: 'var(--accent-2)',
       marginBottom: 4
     }
-  }, "Projecte completat"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Projecte completat',
+    es: 'Proyecto completado',
+    fr: 'Projet réalisé',
+    en: 'Completed project'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--disp)',
       fontWeight: 700,
@@ -2781,8 +3023,8 @@ function CaseBatllia() {
       gridTemplateColumns: '1fr 1fr',
       gap: 10
     }
-  }, specs.map(([k, v]) => /*#__PURE__*/React.createElement("div", {
-    key: k,
+  }, specs.map(([k, v], i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
     style: {
       background: 'var(--panel-2)',
       border: '1px solid var(--line)',
@@ -2798,31 +3040,71 @@ function CaseBatllia() {
       color: 'var(--faint)',
       marginBottom: 6
     }
-  }, k), /*#__PURE__*/React.createElement("div", {
+  }, tt(k)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 14,
       color: 'var(--ink)',
       fontWeight: 600
     }
-  }, v)))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.case-grid{grid-template-columns:1fr!important;gap:48px!important;}}`));
+  }, tt(v))))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.case-grid{grid-template-columns:1fr!important;gap:48px!important;}}`));
 }
 function CiberseguretatIncibe() {
   const threats = [{
     icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
-    t: 'Firewall avançat',
-    d: 'Fortinet & Palo Alto Networks de nova generació.'
+    t: {
+      ca: 'Firewall avançat',
+      es: 'Firewall avanzado',
+      fr: 'Pare-feu avancé',
+      en: 'Advanced firewall'
+    },
+    d: {
+      ca: 'Fortinet & Palo Alto Networks de nova generació.',
+      es: 'Fortinet & Palo Alto Networks de nueva generación.',
+      fr: 'Fortinet & Palo Alto Networks nouvelle génération.',
+      en: 'Next-generation Fortinet & Palo Alto Networks.'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Lock, null),
-    t: 'Zero Trust',
-    d: 'Arquitectura de confiança zero per a xarxes corporatives.'
+    t: {
+      ca: 'Zero Trust',
+      es: 'Zero Trust',
+      fr: 'Zero Trust',
+      en: 'Zero Trust'
+    },
+    d: {
+      ca: 'Arquitectura de confiança zero per a xarxes corporatives.',
+      es: 'Arquitectura de confianza cero para redes corporativas.',
+      fr: 'Architecture zéro confiance pour les réseaux d\'entreprise.',
+      en: 'Zero-trust architecture for corporate networks.'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Wifi, null),
-    t: 'SOC Monitorat',
-    d: 'Supervisió contínua 24/7 de la infraestructura.'
+    t: {
+      ca: 'SOC Monitorat',
+      es: 'SOC Monitorizado',
+      fr: 'SOC Supervisé',
+      en: 'Monitored SOC'
+    },
+    d: {
+      ca: 'Supervisió contínua 24/7 de la infraestructura.',
+      es: 'Supervisión continua 24/7 de la infraestructura.',
+      fr: 'Supervision continue 24/7 de l\'infrastructure.',
+      en: 'Continuous 24/7 infrastructure monitoring.'
+    }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
-    t: 'Pentesting',
-    d: 'Auditories de seguretat i proves de penetració.'
+    t: {
+      ca: 'Pentesting',
+      es: 'Pentesting',
+      fr: 'Pentesting',
+      en: 'Pentesting'
+    },
+    d: {
+      ca: 'Auditories de seguretat i proves de penetració.',
+      es: 'Auditorías de seguridad y pruebas de penetración.',
+      fr: 'Audits de sécurité et tests d\'intrusion.',
+      en: 'Security audits and penetration testing.'
+    }
   }];
   return /*#__PURE__*/React.createElement("section", {
     style: {
@@ -2928,13 +3210,23 @@ function CiberseguretatIncibe() {
       color: 'var(--accent)',
       marginBottom: 4
     }
-  }, "Col·laboració oficial"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Col·laboració oficial',
+    es: 'Colaboración oficial',
+    fr: 'Collaboration officielle',
+    en: 'Official collaboration'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 15,
       color: 'var(--ink)',
       fontWeight: 600
     }
-  }, "Tècnic certificat per INCIBE"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Tècnic certificat per INCIBE',
+    es: 'Técnico certificado por INCIBE',
+    fr: 'Technicien certifié par INCIBE',
+    en: 'INCIBE-certified technician'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: 'var(--mut)',
@@ -2942,31 +3234,63 @@ function CiberseguretatIncibe() {
     }
   }, "Instituto Nacional de Ciberseguridad"))))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 80
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, "Ciberseguretat"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Ciberseguretat',
+    es: 'Ciberseguridad',
+    fr: 'Cybersécurité',
+    en: 'Cybersecurity'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp glow-text",
     style: {
       fontSize: 'clamp(36px,5vw,84px)',
       marginBottom: 24
     }
-  }, "Protecció real", /*#__PURE__*/React.createElement("br", null), "per a la teva", /*#__PURE__*/React.createElement("br", null), "empresa"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Protecció real", /*#__PURE__*/React.createElement("br", null), "per a la teva", /*#__PURE__*/React.createElement("br", null), "empresa"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Protección real", /*#__PURE__*/React.createElement("br", null), "para tu", /*#__PURE__*/React.createElement("br", null), "empresa"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Une protection réelle", /*#__PURE__*/React.createElement("br", null), "pour votre", /*#__PURE__*/React.createElement("br", null), "entreprise"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Real protection", /*#__PURE__*/React.createElement("br", null), "for your", /*#__PURE__*/React.createElement("br", null), "business")
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 20
     }
-  }, "Ontec compta amb un tècnic especialitzat en ciberseguretat col·laborador de l'", /*#__PURE__*/React.createElement("strong", {
-    style: {
-      color: 'var(--ink)'
-    }
-  }, "INCIBE"), "(Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals."), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec compta amb un tècnic especialitzat en ciberseguretat col·laborador de l'", /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: 'var(--ink)'
+      }
+    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals."),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec cuenta con un técnico especializado en ciberseguridad colaborador del ", /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: 'var(--ink)'
+      }
+    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España), garantizando los estándares más exigentes en protección de infraestructuras digitales."),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec dispose d'un technicien spécialisé en cybersécurité, collaborateur de l'", /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: 'var(--ink)'
+      }
+    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espagne), garantissant les standards les plus exigeants en matière de protection des infrastructures numériques."),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec has a cybersecurity specialist who collaborates with ", /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: 'var(--ink)'
+      }
+    }, "INCIBE"), " (Spain's Instituto Nacional de Ciberseguridad), ensuring the highest standards in digital infrastructure protection.")
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 36
     }
-  }, "Des d'auditories de seguretat fins a la implantació de solucions Zero Trust, oferim una cobertura completa per protegir els actius digitals de qualsevol organització a Andorra."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: "Des d'auditories de seguretat fins a la implantació de solucions Zero Trust, oferim una cobertura completa per protegir els actius digitals de qualsevol organització a Andorra.",
+    es: 'Desde auditorías de seguridad hasta la implantación de soluciones Zero Trust, ofrecemos una cobertura completa para proteger los activos digitales de cualquier organización en Andorra.',
+    fr: "Des audits de sécurité jusqu'au déploiement de solutions Zero Trust, nous offrons une couverture complète pour protéger les actifs numériques de toute organisation en Andorre.",
+    en: 'From security audits to the deployment of Zero Trust solutions, we offer complete coverage to protect the digital assets of any organization in Andorra.'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
@@ -3007,16 +3331,21 @@ function CiberseguretatIncibe() {
       marginBottom: 6,
       letterSpacing: '-0.01em'
     }
-  }, th.t), /*#__PURE__*/React.createElement("div", {
+  }, tt(th.t)), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
       color: 'var(--mut)',
       lineHeight: 1.5
     }
-  }, th.d))))), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
+  }, tt(th.d)))))), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
     href: "solucions.html#it-security",
     className: "btn btn-primary"
-  }, "Veure IT Security ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Veure IT Security',
+    es: 'Ver IT Security',
+    fr: 'Voir IT Security',
+    en: 'View IT Security'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.incibe-grid{grid-template-columns:1fr!important;gap:48px!important;}}`));
 }
@@ -3039,7 +3368,12 @@ function PartnersMarquee() {
     style: {
       textAlign: 'center'
     }
-  }, "Fabricants i partners certificats")), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Fabricants i partners certificats',
+    es: 'Fabricantes y partners certificados',
+    fr: 'Fabricants et partenaires certifiés',
+    en: 'Certified manufacturers and partners'
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       paddingBottom: 30
     }
@@ -3050,24 +3384,64 @@ function PartnersMarquee() {
 function ServicesList() {
   const svcs = [{
     n: '01',
-    t: 'Ingenierías',
+    t: {
+      ca: 'Ingenierías',
+      es: 'Ingenierías',
+      fr: 'Bureaux d\'études',
+      en: 'Engineering firms'
+    },
     href: 'serveis.html#ingenieries',
-    d: 'Prescripció, especificació i assistència tècnica.'
+    d: {
+      ca: 'Prescripció, especificació i assistència tècnica.',
+      es: 'Prescripción, especificación y asistencia técnica.',
+      fr: 'Prescription, spécification et assistance technique.',
+      en: 'Specification, prescription and technical support.'
+    }
   }, {
     n: '02',
-    t: 'Arquitectures',
+    t: {
+      ca: 'Arquitectures',
+      es: 'Arquitecturas',
+      fr: 'Architectes',
+      en: 'Architects'
+    },
     href: 'serveis.html#arquitectures',
-    d: 'Tecnologia integrada des de la fase de projecte.'
+    d: {
+      ca: 'Tecnologia integrada des de la fase de projecte.',
+      es: 'Tecnología integrada desde la fase de proyecto.',
+      fr: 'Technologie intégrée dès la phase de projet.',
+      en: 'Technology integrated from the project phase.'
+    }
   }, {
     n: '03',
-    t: 'Instal·ladors',
+    t: {
+      ca: 'Instal·ladors',
+      es: 'Instaladores',
+      fr: 'Installateurs',
+      en: 'Installers'
+    },
     href: 'serveis.html#installadors',
-    d: 'Subministre, preconfiguració i suport en obra.'
+    d: {
+      ca: 'Subministre, preconfiguració i suport en obra.',
+      es: 'Suministro, preconfiguración y soporte en obra.',
+      fr: 'Fourniture, préconfiguration et support sur chantier.',
+      en: 'Supply, pre-configuration and on-site support.'
+    }
   }, {
     n: '04',
-    t: "Disseny d'Interiors",
+    t: {
+      ca: "Disseny d'Interiors",
+      es: 'Diseño de Interiores',
+      fr: 'Architecture d\'intérieur',
+      en: 'Interior Design'
+    },
     href: 'serveis.html#disseny',
-    d: "Tecnologia invisible, part del disseny."
+    d: {
+      ca: "Tecnologia invisible, part del disseny.",
+      es: 'Tecnología invisible, parte del diseño.',
+      fr: 'Une technologie invisible, intégrée au design.',
+      en: 'Invisible technology, part of the design.'
+    }
   }];
   return /*#__PURE__*/React.createElement("section", {
     style: {
@@ -3079,17 +3453,27 @@ function ServicesList() {
     style: {
       marginBottom: 48
     }
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, "Serveis"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Serveis',
+    es: 'Servicios',
+    fr: 'Services',
+    en: 'Services'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(40px,6vw,96px)'
     }
-  }, "Adaptat al", /*#__PURE__*/React.createElement("br", null), "teu sector")), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Adaptat al", /*#__PURE__*/React.createElement("br", null), "teu sector"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Adaptado a", /*#__PURE__*/React.createElement("br", null), "tu sector"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Adapté à", /*#__PURE__*/React.createElement("br", null), "votre secteur"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Tailored to", /*#__PURE__*/React.createElement("br", null), "your sector")
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       borderTop: '1px solid var(--line)'
     }
   }, svcs.map((s, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: s.t,
+    key: i,
     delay: i * 60
   }, /*#__PURE__*/React.createElement("a", {
     href: s.href,
@@ -3133,12 +3517,12 @@ function ServicesList() {
       fontSize: 'clamp(26px,3.4vw,48px)',
       transition: 'color .25s'
     }
-  }, s.t), /*#__PURE__*/React.createElement("span", {
+  }, tt(s.t)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 15,
       color: 'var(--mut)'
     }
-  }, s.d)), /*#__PURE__*/React.createElement("span", {
+  }, tt(s.d))), /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--accent)'
     }
@@ -3148,18 +3532,48 @@ function ServicesList() {
 }
 const BLOG = [{
   date: '2025',
-  tag: 'Videoconferència',
-  title: "Sistema de videoconferència a la Batllia d'Andorra",
+  tag: {
+    ca: 'Videoconferència',
+    es: 'Videoconferencia',
+    fr: 'Visioconférence',
+    en: 'Video conferencing'
+  },
+  title: {
+    ca: "Sistema de videoconferència a la Batllia d'Andorra",
+    es: "Sistema de videoconferencia en la Batllia d'Andorra",
+    fr: "Système de visioconférence à la Batllia d'Andorra",
+    en: "Video conferencing system at la Batllia d'Andorra"
+  },
   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'
 }, {
   date: '2024',
-  tag: 'IT Security',
-  title: 'Zero Trust: el nou paradigma de seguretat per a pimes',
+  tag: {
+    ca: 'IT Security',
+    es: 'IT Security',
+    fr: 'IT Security',
+    en: 'IT Security'
+  },
+  title: {
+    ca: 'Zero Trust: el nou paradigma de seguretat per a pimes',
+    es: 'Zero Trust: el nuevo paradigma de seguridad para pymes',
+    fr: 'Zero Trust : le nouveau paradigme de sécurité pour les PME',
+    en: 'Zero Trust: the new security paradigm for SMEs'
+  },
   img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'
 }, {
   date: '2022',
-  tag: 'Domòtica',
-  title: "La domòtica KNX arriba als edificis premium d'Andorra",
+  tag: {
+    ca: 'Domòtica',
+    es: 'Domótica',
+    fr: 'Domotique',
+    en: 'Home automation'
+  },
+  title: {
+    ca: "La domòtica KNX arriba als edificis premium d'Andorra",
+    es: "La domótica KNX llega a los edificios premium de Andorra",
+    fr: "La domotique KNX arrive dans les bâtiments premium d'Andorre",
+    en: "KNX home automation arrives in Andorra's premium buildings"
+  },
   img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'
 }];
 function BlogPreview() {
@@ -3183,12 +3597,22 @@ function BlogPreview() {
     style: {
       fontSize: 'clamp(36px,5vw,80px)'
     }
-  }, "Últimes notícies")), /*#__PURE__*/React.createElement(Reveal, {
+  }, tt({
+    ca: 'Últimes notícies',
+    es: 'Últimas noticias',
+    fr: 'Dernières actualités',
+    en: 'Latest news'
+  }))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
   }, /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
     href: "blog.html",
     className: "btn btn-ghost"
-  }, "Veure tot ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Veure tot',
+    es: 'Ver todo',
+    fr: 'Voir tout',
+    en: 'View all'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   }))))), /*#__PURE__*/React.createElement("div", {
     style: {
@@ -3208,7 +3632,7 @@ function BlogPreview() {
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: p.img,
-    alt: p.title,
+    alt: tt(p.title),
     style: {
       height: 230
     }
@@ -3223,7 +3647,7 @@ function BlogPreview() {
       gap: 12,
       marginBottom: 14
     }
-  }, /*#__PURE__*/React.createElement(Tag, null, p.tag), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(p.tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 10.5,
@@ -3238,7 +3662,7 @@ function BlogPreview() {
       lineHeight: 1.3,
       letterSpacing: '-0.01em'
     }
-  }, p.title))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.blog-grid{grid-template-columns:1fr!important;}}`));
+  }, tt(p.title)))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.blog-grid{grid-template-columns:1fr!important;}}`));
 }
 function CtaBig() {
   return /*#__PURE__*/React.createElement("section", {
@@ -3278,13 +3702,23 @@ function CtaBig() {
       marginBottom: 22,
       color: 'var(--accent-2)'
     }
-  }, "Comencem?"), /*#__PURE__*/React.createElement("h2", {
+  }, tt({
+    ca: 'Comencem?',
+    es: '¿Empezamos?',
+    fr: 'On commence ?',
+    en: 'Shall we start?'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       color: '#fff',
       fontSize: 'clamp(40px,7vw,112px)'
     }
-  }, "Tens un projecte", /*#__PURE__*/React.createElement("br", null), "en ment?"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Tens un projecte", /*#__PURE__*/React.createElement("br", null), "en ment?"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "¿Tienes un proyecto", /*#__PURE__*/React.createElement("br", null), "en mente?"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Vous avez un projet", /*#__PURE__*/React.createElement("br", null), "en tête ?"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Have a project", /*#__PURE__*/React.createElement("br", null), "in mind?")
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
       margin: '28px auto 0',
       maxWidth: 540,
@@ -3292,7 +3726,12 @@ function CtaBig() {
       color: 'rgba(255,255,255,.76)',
       lineHeight: 1.7
     }
-  }, "Explica'ns les teves necessitats i trobarem la millor solució tecnològica per al teu projecte."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: "Explica'ns les teves necessitats i trobarem la millor solució tecnològica per al teu projecte.",
+    es: 'Cuéntanos tus necesidades y encontraremos la mejor solución tecnológica para tu proyecto.',
+    fr: 'Parlez-nous de vos besoins et nous trouverons la meilleure solution technologique pour votre projet.',
+    en: "Tell us about your needs and we'll find the best technology solution for your project."
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 14,
@@ -3303,7 +3742,12 @@ function CtaBig() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
-  }, "Contacta ara ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Get in touch'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
@@ -3316,6 +3760,7 @@ const TWEAK_DEFAULTS = {
   "intensity": "cinematic"
 };
 function App() {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;

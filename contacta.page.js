@@ -2215,7 +2215,12 @@ function ContactForm() {
   const submit = e => {
     e.preventDefault();
     if (!form.nom || !form.email || !form.missatge) {
-      setErr('Si us plau, omple els camps obligatoris.');
+      setErr(tt({
+        ca: 'Si us plau, omple els camps obligatoris.',
+        es: 'Por favor, rellena los campos obligatorios.',
+        fr: 'Veuillez remplir les champs obligatoires.',
+        en: 'Please fill in the required fields.'
+      }));
       return;
     }
     setSent(true);
@@ -2283,13 +2288,23 @@ function ContactForm() {
       fontSize: 36,
       marginBottom: 16
     }
-  }, "Gracies, ", form.nom, "!"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Gracies',
+    es: 'Gracias',
+    fr: 'Merci',
+    en: 'Thank you'
+  }), ", ", form.nom, "!"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.7
     }
-  }, "Hem rebut la teva consulta i ens posarem en contacte en menys de 4 hores."));
+  }, tt({
+    ca: 'Hem rebut la teva consulta i ens posarem en contacte en menys de 4 hores.',
+    es: 'Hemos recibido tu consulta y nos pondremos en contacto en menos de 4 horas.',
+    fr: 'Nous avons bien reçu votre demande et vous recontacterons sous moins de 4 heures.',
+    en: 'We have received your enquiry and will get in touch within 4 hours.'
+  })));
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: submit,
     style: {
@@ -2304,7 +2319,27 @@ function ContactForm() {
       gap: 16
     },
     className: "form-row"
-  }, field('Nom i cognoms', 'nom', 'text', true, 'Joan Garcia'), field('Empresa', 'empresa', 'text', false, 'Empresa S.L.'), field('Correu electronic', 'email', 'email', true, 'joan@empresa.com'), field('Telefon', 'tel', 'tel', false, '+376 XXX XXX')), /*#__PURE__*/React.createElement("div", {
+  }, field(tt({
+    ca: 'Nom i cognoms',
+    es: 'Nombre y apellidos',
+    fr: 'Nom et prénom',
+    en: 'Full name'
+  }), 'nom', 'text', true, 'Joan Garcia'), field(tt({
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  }), 'empresa', 'text', false, 'Empresa S.L.'), field(tt({
+    ca: 'Correu electronic',
+    es: 'Correo electrónico',
+    fr: 'Adresse e-mail',
+    en: 'Email'
+  }), 'email', 'email', true, 'joan@empresa.com'), field(tt({
+    ca: 'Telefon',
+    es: 'Teléfono',
+    fr: 'Téléphone',
+    en: 'Phone'
+  }), 'tel', 'tel', false, '+376 XXX XXX')), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2318,7 +2353,12 @@ function ContactForm() {
       textTransform: 'uppercase',
       color: 'var(--mut)'
     }
-  }, "Servei d'interes"), /*#__PURE__*/React.createElement("select", {
+  }, tt({
+    ca: 'Area d\'interes',
+    es: 'Área de interés',
+    fr: 'Domaine d\'intérêt',
+    en: 'Area of interest'
+  })), /*#__PURE__*/React.createElement("select", {
     value: form.servei,
     onChange: e => handle('servei', e.target.value),
     style: {
@@ -2334,7 +2374,40 @@ function ContactForm() {
     }
   }, /*#__PURE__*/React.createElement("option", {
     value: ""
-  }, "Selecciona una opcio..."), /*#__PURE__*/React.createElement("option", null, "IT Security / Ciberseguretat"), /*#__PURE__*/React.createElement("option", null, "Comunicacions i xarxes"), /*#__PURE__*/React.createElement("option", null, "Automatitzacio KNX"), /*#__PURE__*/React.createElement("option", null, "Audiovisuals i videoconferencia"), /*#__PURE__*/React.createElement("option", null, "Altres / Consulta general"))), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Selecciona una opcio...',
+    es: 'Selecciona una opción...',
+    fr: 'Sélectionnez une option...',
+    en: 'Select an option...'
+  })), [{
+    ca: 'IT Security / Ciberseguretat',
+    es: 'IT Security / Ciberseguridad',
+    fr: 'IT Security / Cybersécurité',
+    en: 'IT Security / Cybersecurity'
+  }, {
+    ca: 'Comunicacions i xarxes',
+    es: 'Comunicaciones y redes',
+    fr: 'Communications et réseaux',
+    en: 'Communications and networks'
+  }, {
+    ca: 'Automatitzacio KNX',
+    es: 'Automatización KNX',
+    fr: 'Automatisation KNX',
+    en: 'KNX automation'
+  }, {
+    ca: 'Audiovisuals i videoconferencia',
+    es: 'Audiovisuales y videoconferencia',
+    fr: 'Audiovisuel et visioconférence',
+    en: 'Audiovisual and video conferencing'
+  }, {
+    ca: 'Altres / Consulta general',
+    es: 'Otros / Consulta general',
+    fr: 'Autres / Demande générale',
+    en: 'Other / General enquiry'
+  }].map(o => /*#__PURE__*/React.createElement("option", {
+    key: o.ca,
+    value: o.ca
+  }, tt(o))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2348,7 +2421,12 @@ function ContactForm() {
       textTransform: 'uppercase',
       color: 'var(--mut)'
     }
-  }, "Missatge", /*#__PURE__*/React.createElement("span", {
+  }, tt({
+    ca: 'Missatge',
+    es: 'Mensaje',
+    fr: 'Message',
+    en: 'Message'
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--accent)',
       marginLeft: 4
@@ -2357,7 +2435,12 @@ function ContactForm() {
     value: form.missatge,
     onChange: e => handle('missatge', e.target.value),
     rows: 5,
-    placeholder: "Descriu el teu projecte o consulta...",
+    placeholder: tt({
+      ca: 'Descriu el teu projecte o consulta...',
+      es: 'Describe tu proyecto o consulta...',
+      fr: 'Décrivez votre projet ou votre demande...',
+      en: 'Describe your project or enquiry...'
+    }),
     style: {
       background: 'var(--panel)',
       border: '1px solid var(--line)',
@@ -2386,11 +2469,17 @@ function ContactForm() {
       alignSelf: 'flex-start',
       padding: '16px 32px'
     }
-  }, "Enviar consulta ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Enviar consulta',
+    es: 'Enviar consulta',
+    fr: 'Envoyer la demande',
+    en: 'Send enquiry'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })), /*#__PURE__*/React.createElement("style", null, `.form-row{@media(max-width:640px){grid-template-columns:1fr!important;}}`));
 }
 function App() {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2401,9 +2490,24 @@ function App() {
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Contacta"
   }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Contacta · Resposta en 4h",
-    title: "Parla amb l'equip",
-    sub: "Tens un projecte en ment? Explica'ns-ho i prepararem una proposta tecnica a mida sense compromis.",
+    kicker: tt({
+      ca: 'Contacta · Resposta en 4h',
+      es: 'Contacto · Respuesta en 4h',
+      fr: 'Contact · Réponse sous 4h',
+      en: 'Contact · Reply within 4h'
+    }),
+    title: tt({
+      ca: "Parla amb l'equip",
+      es: 'Habla con el equipo',
+      fr: "Parlez avec l'équipe",
+      en: 'Talk to the team'
+    }),
+    sub: tt({
+      ca: "Tens un projecte en ment? Explica'ns-ho i prepararem una proposta tecnica a mida sense compromis.",
+      es: '¿Tienes un proyecto en mente? Cuéntanoslo y prepararemos una propuesta técnica a medida sin compromiso.',
+      fr: "Vous avez un projet en tête ? Parlez-nous-en et nous préparerons une proposition technique sur mesure, sans engagement.",
+      en: 'Have a project in mind? Tell us about it and we will prepare a tailored technical proposal at no commitment.'
+    }),
     img: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1800&q=80&auto=format&fit=crop"
   }), /*#__PURE__*/React.createElement("section", {
     style: {
@@ -2419,13 +2523,23 @@ function App() {
       alignItems: 'start'
     },
     className: "contact-grid"
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, "Formulari de contacte"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Formulari de contacte',
+    es: 'Formulario de contacto',
+    fr: 'Formulaire de contact',
+    en: 'Contact form'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,4vw,64px)',
       marginBottom: 40
     }
-  }, "Envia'ns una consulta"), /*#__PURE__*/React.createElement(ContactForm, null)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
+  }, tt({
+    ca: "Envia'ns una consulta",
+    es: 'Envíanos una consulta',
+    fr: 'Envoyez-nous une demande',
+    en: 'Send us an enquiry'
+  })), /*#__PURE__*/React.createElement(ContactForm, null)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2435,7 +2549,12 @@ function App() {
       padding: '36px',
       marginBottom: 20
     }
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, "Contacte directe"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Contacte directe',
+    es: 'Contacto directo',
+    fr: 'Contact direct',
+    en: 'Direct contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2444,17 +2563,32 @@ function App() {
     }
   }, [{
     icon: /*#__PURE__*/React.createElement(Icons.Phone, null),
-    label: 'Telefon',
+    label: tt({
+      ca: 'Telefon',
+      es: 'Teléfono',
+      fr: 'Téléphone',
+      en: 'Phone'
+    }),
     val: '+376 88 55 99',
     href: 'tel:+37688559'
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Mail, null),
-    label: 'Email',
+    label: tt({
+      ca: 'Email',
+      es: 'Email',
+      fr: 'E-mail',
+      en: 'Email'
+    }),
     val: 'info@ontecandorra.com',
     href: 'mailto:info@ontecandorra.com'
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Pin, null),
-    label: 'Oficina',
+    label: tt({
+      ca: 'Oficina',
+      es: 'Oficina',
+      fr: 'Bureau',
+      en: 'Office'
+    }),
     val: 'C/ de la Vena 3, Baixos\nEncamp, Andorra',
     href: null
   }].map((item, i) => /*#__PURE__*/React.createElement("div", {
@@ -2513,7 +2647,37 @@ function App() {
     style: {
       marginBottom: 14
     }
-  }, "Horari d'atencio"), [['Dilluns — Divendres', '9:00 — 18:00'], ['Dissabte', 'Tancat'], ['Urgencies tecni.', '24/7 amb contracte']].map(([d, h]) => /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Horari d\'atencio',
+    es: 'Horario de atención',
+    fr: 'Horaires d\'ouverture',
+    en: 'Opening hours'
+  })), [[tt({
+    ca: 'Dilluns — Divendres',
+    es: 'Lunes — Viernes',
+    fr: 'Lundi — Vendredi',
+    en: 'Monday — Friday'
+  }), '9:00 — 18:00'], [tt({
+    ca: 'Dissabte',
+    es: 'Sábado',
+    fr: 'Samedi',
+    en: 'Saturday'
+  }), tt({
+    ca: 'Tancat',
+    es: 'Cerrado',
+    fr: 'Fermé',
+    en: 'Closed'
+  })], [tt({
+    ca: 'Urgencies tecni.',
+    es: 'Urgencias técni.',
+    fr: 'Urgences tech.',
+    en: 'Tech emergencies'
+  }), tt({
+    ca: '24/7 amb contracte',
+    es: '24/7 con contrato',
+    fr: '24/7 avec contrat',
+    en: '24/7 with contract'
+  })]].map(([d, h]) => /*#__PURE__*/React.createElement("div", {
     key: d,
     style: {
       display: 'flex',
