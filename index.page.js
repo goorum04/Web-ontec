@@ -2614,7 +2614,7 @@ const SOLS = [{
     fr: 'Protection intégrale de l\'infrastructure numérique.',
     en: 'Comprehensive protection of your digital infrastructure.'
   },
-  img: 'https://images.unsplash.com/photo-1611917436955-d21c1999520c?w=1100&q=80&auto=format&fit=crop'
+  img: 'https://images.unsplash.com/photo-1563986768609-6f3ee8585a1d?w=1100&q=80&auto=format&fit=crop'
 }, {
   t: {
     ca: 'Comunicacions',
