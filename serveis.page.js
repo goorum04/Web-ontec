@@ -1774,6 +1774,10 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+var __ontecHostOrigin = null;
+function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
+function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
+function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -1787,10 +1791,10 @@ function useTweaks(defaults) {
       ...prev,
       ...edits
     }));
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_set_keys',
       edits
-    }, '*');
+    });
   }, []);
   return [values, setTweak];
 }
@@ -1840,20 +1844,22 @@ function TweaksPanel({
   }, [open, clampToViewport]);
   React.useEffect(() => {
     const onMsg = e => {
+      if (!__ontecTrusted(e)) return;
+      __ontecHostOrigin = e.origin;
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_available'
-    }, '*');
+    });
     return () => window.removeEventListener('message', onMsg);
   }, []);
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_dismissed'
-    }, '*');
+    });
   };
   const onDragStart = e => {
     const panel = dragRef.current;
