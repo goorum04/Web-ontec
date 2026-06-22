@@ -1,0 +1,16 @@
+# Protege los archivos internos del panel: no deben servirse directamente.
+# (Las páginas .php que el usuario usa —login, index, etc.— sí se sirven.)
+
+<FilesMatch "^(lib|config)\.php$">
+  Require all denied
+</FilesMatch>
+
+# Por si el servidor es Apache antiguo (2.2):
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^(lib|config)\.php$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+Options -Indexes

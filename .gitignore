@@ -1,1 +1,9 @@
 node_modules/
+
+# Datos en ejecución del panel de administración (no versionar)
+admin/data/
+content/*.tmp
+
+# Imágenes subidas por el usuario en producción (se conserva solo la protección)
+uploads/*
+!uploads/.htaccess

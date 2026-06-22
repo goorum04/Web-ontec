@@ -1,0 +1,16 @@
+# Carpeta de imágenes subidas desde el panel.
+# Seguridad: impide que se ejecute cualquier script aquí (solo se sirven como archivos).
+php_flag engine off
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|pht|cgi|pl|py|asp|aspx|sh|htaccess)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule !mod_authz_core.c>
+  <FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|pht|cgi|pl|py|asp|aspx|sh)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+Options -Indexes

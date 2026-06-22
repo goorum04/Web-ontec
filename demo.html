@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Demo · Contenido editable Ontec</title>
+  <style>
+    :root{--accent:#45e07f}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f1115;color:#eef1ea}
+    .note{background:#171a21;border-bottom:1px solid #262b36;padding:10px 20px;font-size:13px;color:#9aa3b2}
+    .hero{min-height:70vh;display:flex;align-items:center;padding:6vw;background-size:cover;background-position:center;position:relative}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,17,21,.92),rgba(15,17,21,.55))}
+    .inner{position:relative;z-index:1;max-width:760px}
+    .kicker{font-family:ui-monospace,monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+    h1{font-size:clamp(32px,6vw,64px);line-height:1.05;margin:14px 0 18px}
+    p{font-size:clamp(16px,2.2vw,21px);color:#c7cdd6;line-height:1.6;max-width:620px}
+  </style>
+</head>
+<body>
+  <div class="note">▶ Demo en vivo: esta página lee <code>content/home.json</code>. Edita la portada en <code>/admin</code> y recarga aquí para ver el cambio — <b>sin tocar código</b>.</div>
+  <section class="hero" id="hero">
+    <div class="inner">
+      <div class="kicker" id="kicker"></div>
+      <h1 id="title"></h1>
+      <p id="subtitle"></p>
+    </div>
+  </section>
+
+  <script>
+    // Carga el contenido en tiempo de ejecución desde el JSON que edita el panel.
+    fetch('content/home.json?v=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var h = (data && data.hero) || {};
+        document.getElementById('kicker').textContent = h.kicker || '';
+        document.getElementById('title').textContent = h.title || '';
+        document.getElementById('subtitle').textContent = h.subtitle || '';
+        if (h.image) {
+          document.getElementById('hero').style.backgroundImage = "url('" + h.image + "')";
+        }
+      })
+      .catch(function () {
+        document.getElementById('title').textContent = 'No se pudo cargar el contenido.';
+      });
+  </script>
+</body>
+</html>
