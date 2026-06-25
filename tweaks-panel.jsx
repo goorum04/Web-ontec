@@ -136,16 +136,6 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
-// Hardened host bridge: the tweak panel only talks to a *preview host* that
-// embeds this page in an iframe. In a normal production deploy the page is not
-// framed, so the bridge stays inert (no outbound messages, no toggles).
-// Inbound messages are only trusted from our direct parent, and replies target
-// the host's exact origin (learned from the first trusted message) instead of '*'.
-let __ontecHostOrigin = null;
-function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
-function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
-function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
-
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -155,7 +145,7 @@ function useTweaks(defaults) {
     const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
       ? keyOrEdits : { [keyOrEdits]: val };
     setValues((prev) => ({ ...prev, ...edits }));
-    __ontecPost({ type: '__edit_mode_set_keys', edits });
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
   }, []);
   return [values, setTweak];
 }
@@ -201,20 +191,18 @@ function TweaksPanel({ title = 'Tweaks', children }) {
 
   React.useEffect(() => {
     const onMsg = (e) => {
-      if (!__ontecTrusted(e)) return;
-      __ontecHostOrigin = e.origin;
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);
       else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    __ontecPost({ type: '__edit_mode_available' });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
   const dismiss = () => {
     setOpen(false);
-    __ontecPost({ type: '__edit_mode_dismissed' });
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
   };
 
   const onDragStart = (e) => {

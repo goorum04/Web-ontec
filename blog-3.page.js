@@ -2198,64 +2198,8 @@ Object.assign(window, {
   TweakColor,
   TweakButton
 });
-const TWEAK_DEFAULTS = {
-  "mood": "acid",
-  "voice": "editorial",
-  "intensity": "cinematic"
-};
-const ARTICLES = [{
-  id: 'batllia-videoconferencia',
-  tagId: 'video',
-  tag: {
-    ca: 'Videoconferencia',
-    es: 'Videoconferencia',
-    fr: 'Visioconférence',
-    en: 'Video conferencing'
-  },
-  date: '2025',
-  readtime: '5 min',
-  title: {
-    ca: "Sistema de videoconferencia a la Batllia d'Andorra",
-    es: "Sistema de videoconferencia en la Batllia d'Andorra",
-    fr: "Système de visioconférence à la Batllia d'Andorra",
-    en: "Video conferencing system at the Batllia d'Andorra"
-  },
-  excerpt: {
-    ca: "Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
-    es: "Ontec ha instalado el sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra, permitiendo conexiones de alto nivel con organismos internacionales.",
-    fr: "Ontec a installé le système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra, permettant des connexions de haut niveau avec des organismes internationaux.",
-    en: "Ontec has installed the professional video conferencing system for the institutional spaces of the Batllia d'Andorra, enabling high-level connections with international organizations."
-  },
-  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
-  featured: true
-}, {
-  id: 'zero-trust-pimes',
-  tagId: 'itsec',
-  tag: {
-    ca: 'IT Security',
-    es: 'IT Security',
-    fr: 'IT Security',
-    en: 'IT Security'
-  },
-  date: '2024',
-  readtime: '7 min',
-  title: {
-    ca: 'Zero Trust: el nou paradigma de seguretat per a pimes andorranes',
-    es: 'Zero Trust: el nuevo paradigma de seguridad para pymes andorranas',
-    fr: 'Zero Trust : le nouveau paradigme de sécurité pour les PME andorranes',
-    en: 'Zero Trust: the new security paradigm for Andorran SMEs'
-  },
-  excerpt: {
-    ca: "L'arquitectura Zero Trust ja no es exclusiva de grans corporacions. Expliquem com implementar-la en empreses petites i mitjanes a Andorra amb pressupost controlat.",
-    es: "La arquitectura Zero Trust ya no es exclusiva de las grandes corporaciones. Explicamos cómo implementarla en pequeñas y medianas empresas en Andorra con un presupuesto controlado.",
-    fr: "L'architecture Zero Trust n'est plus réservée aux grandes entreprises. Nous expliquons comment l'implémenter dans les petites et moyennes entreprises en Andorre avec un budget maîtrisé.",
-    en: "The Zero Trust architecture is no longer exclusive to large corporations. We explain how to implement it in small and medium-sized businesses in Andorra with a controlled budget."
-  },
-  img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
+const ARTICLE_DATA = {
   id: 'incibe-ciberseguretat',
-  tagId: 'ciber',
   tag: {
     ca: 'Ciberseguretat',
     es: 'Ciberseguridad',
@@ -2265,317 +2209,600 @@ const ARTICLES = [{
   date: '2024',
   readtime: '4 min',
   title: {
-    ca: "INCIBE: per que tenir un tecnic certificat marca la diferencia",
+    ca: "INCIBE: per què tenir un tècnic certificat marca la diferència",
     es: "INCIBE: por qué tener un técnico certificado marca la diferencia",
     fr: "INCIBE : pourquoi disposer d'un technicien certifié fait la différence",
     en: "INCIBE: why having a certified technician makes the difference"
   },
-  excerpt: {
-    ca: "La col laboracio amb l'INCIBE (Instituto Nacional de Ciberseguridad) aporta un segell de qualitat i coneixement de primer nivell per als nostres serveis de ciberseguretat.",
-    es: "La colaboración con el INCIBE (Instituto Nacional de Ciberseguridad) aporta un sello de calidad y conocimiento de primer nivel a nuestros servicios de ciberseguridad.",
-    fr: "La collaboration avec l'INCIBE (Instituto Nacional de Ciberseguridad) apporte un gage de qualité et un savoir-faire de premier ordre à nos services de cybersécurité.",
-    en: "The collaboration with INCIBE (Instituto Nacional de Ciberseguridad) brings a seal of quality and first-class expertise to our cybersecurity services."
-  },
-  img: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'knx-domotica',
-  tagId: 'domotica',
-  tag: {
-    ca: 'Domotica',
-    es: 'Domótica',
-    fr: 'Domotique',
-    en: 'Home automation'
-  },
-  date: '2023',
-  readtime: '6 min',
-  title: {
-    ca: "La domotica KNX arriba als edificis premium d'Andorra",
-    es: "La domótica KNX llega a los edificios premium de Andorra",
-    fr: "La domotique KNX arrive dans les bâtiments premium d'Andorre",
-    en: "KNX home automation reaches Andorra's premium buildings"
-  },
-  excerpt: {
-    ca: "Com l'estandard internacional KNX esta transformant la gestio dels edificis d'alta gamma a Andorra, integrant llum, clima, seguretat i AV en un sol sistema.",
-    es: "Cómo el estándar internacional KNX está transformando la gestión de los edificios de alta gama en Andorra, integrando luz, clima, seguridad y AV en un solo sistema.",
-    fr: "Comment le standard international KNX transforme la gestion des bâtiments haut de gamme en Andorre, en intégrant l'éclairage, le climat, la sécurité et l'AV dans un seul système.",
-    en: "How the international KNX standard is transforming the management of high-end buildings in Andorra, integrating lighting, climate, security and AV into a single system."
-  },
-  img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'wifi6-empreses',
-  tagId: 'comun',
-  tag: {
-    ca: 'Comunicacions',
-    es: 'Comunicaciones',
-    fr: 'Communications',
-    en: 'Communications'
-  },
-  date: '2023',
-  readtime: '5 min',
-  title: {
-    ca: 'WiFi 6: la revoluccio de la connectivitat empresarial',
-    es: 'WiFi 6: la revolución de la conectividad empresarial',
-    fr: 'WiFi 6 : la révolution de la connectivité en entreprise',
-    en: 'WiFi 6: the revolution in enterprise connectivity'
-  },
-  excerpt: {
-    ca: "El WiFi 6 multiplica la capacitat i redueix la latencia en entorns d'alta densitat. Analisi de les solucions Ubiquiti i Aruba per a empreses a Andorra.",
-    es: "El WiFi 6 multiplica la capacidad y reduce la latencia en entornos de alta densidad. Análisis de las soluciones Ubiquiti y Aruba para empresas en Andorra.",
-    fr: "Le WiFi 6 multiplie la capacité et réduit la latence dans les environnements à haute densité. Analyse des solutions Ubiquiti et Aruba pour les entreprises en Andorre.",
-    en: "WiFi 6 multiplies capacity and reduces latency in high-density environments. An analysis of the Ubiquiti and Aruba solutions for companies in Andorra."
-  },
-  img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}, {
-  id: 'av-sales-reunions',
-  tagId: 'av',
-  tag: {
-    ca: 'Audiovisuals',
-    es: 'Audiovisuales',
-    fr: 'Audiovisuel',
-    en: 'Audiovisual'
-  },
-  date: '2022',
-  readtime: '4 min',
-  title: {
-    ca: 'Disseny de sales de reunions per a l\'era hibrida',
-    es: 'Diseño de salas de reuniones para la era híbrida',
-    fr: 'Conception de salles de réunion pour l\'ère hybride',
-    en: 'Designing meeting rooms for the hybrid era'
-  },
-  excerpt: {
-    ca: "Com crear espais de col laboracio hibrids eficients amb tecnologia Sony, QSC i Shure. Guia practica per a arquitectes i empreses.",
-    es: "Cómo crear espacios de colaboración híbridos eficientes con tecnología Sony, QSC y Shure. Guía práctica para arquitectos y empresas.",
-    fr: "Comment créer des espaces de collaboration hybrides efficaces avec la technologie Sony, QSC et Shure. Guide pratique pour les architectes et les entreprises.",
-    en: "How to create efficient hybrid collaboration spaces with Sony, QSC and Shure technology. A practical guide for architects and businesses."
-  },
-  img: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&q=80&auto=format&fit=crop',
-  featured: false
-}];
-function BlogCard({
-  a,
-  big = false,
-  idx = 0
+  author: 'Ontec',
+  content: {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) és l'organisme de referència per a la ciberseguretat a Espanya. Les seves certificacions, reconegudes internacionalment, són un segell de qualitat que assegura que els professionals han superat estàndards rigorosos."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Per què INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Els tècnics certificats per INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Superat exàmens rigorosos de ciberseguretat teòrica i pràctica"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demostrat coneixement de marcs internacionals (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Mantingut una formació continuada obligatòria"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• El suport de la reputació de l'organisme estatal")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec i INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec compta amb un tècnic especialitzat en ciberseguretat ", /*#__PURE__*/React.createElement("strong", null, "col·laborador oficial d'INCIBE"), ". Això significa que els nostres auditors i consultors segueixen els estàndards nacionals i internacionals més exigents."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Les vostres auditories de seguretat amb Ontec no són només un informe: són una ", /*#__PURE__*/React.createElement("strong", null, "validació oficial"), " de vulnerabilitats i mesures correctores."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Què oferim"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoria de vulnerabilitats"), " completa de xarxes i aplicacions"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Proves de penetració"), " (pentesting) ètiques i autoritzades"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formació en seguretat"), " per als vostres equips"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remediació"), " personalitzats amb mètriques de risc"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Suport 24/7"), " en incidents de seguretat")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusió"), /*#__PURE__*/React.createElement("p", null, "En un entorn on els atacs cibernètics són quotidians, comptem amb experts certificats que garanteixen que la vostra infraestructura compleix amb els estàndards més alts de la indústria.")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "El ", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) es el organismo de referencia para la ciberseguridad en España. Sus certificaciones, reconocidas internacionalmente, son un sello de calidad que asegura que los profesionales han superado estándares rigurosos."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "¿Por qué INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Los técnicos certificados por INCIBE han:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Superado exámenes rigurosos de ciberseguridad teórica y práctica"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demostrado conocimiento de marcos internacionales (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Mantenido una formación continua obligatoria"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• El respaldo de la reputación del organismo estatal")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec e INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec cuenta con un técnico especializado en ciberseguridad ", /*#__PURE__*/React.createElement("strong", null, "colaborador oficial de INCIBE"), ". Esto significa que nuestros auditores y consultores siguen los estándares nacionales e internacionales más exigentes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Vuestras auditorías de seguridad con Ontec no son solo un informe: son una ", /*#__PURE__*/React.createElement("strong", null, "validación oficial"), " de vulnerabilidades y medidas correctoras."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Qué ofrecemos"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Auditoría de vulnerabilidades"), " completa de redes y aplicaciones"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Pruebas de penetración"), " (pentesting) éticas y autorizadas"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formación en seguridad"), " para vuestros equipos"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Planes de remediación"), " personalizados con métricas de riesgo"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Soporte 24/7"), " en incidentes de seguridad")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusión"), /*#__PURE__*/React.createElement("p", null, "En un entorno donde los ataques cibernéticos son cotidianos, contamos con expertos certificados que garantizan que vuestra infraestructura cumple con los estándares más altos de la industria.")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "L'", /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) est l'organisme de référence en matière de cybersécurité en Espagne. Ses certifications, reconnues à l'international, constituent un gage de qualité garantissant que les professionnels ont satisfait à des normes rigoureuses."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Pourquoi INCIBE ?"), /*#__PURE__*/React.createElement("p", null, "Les techniciens certifiés par l'INCIBE ont :"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Réussi des examens rigoureux de cybersécurité théorique et pratique"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Démontré une maîtrise des cadres internationaux (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Maintenu une formation continue obligatoire"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Le soutien de la réputation de l'organisme étatique")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec et l'INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec dispose d'un technicien spécialisé en cybersécurité ", /*#__PURE__*/React.createElement("strong", null, "collaborateur officiel de l'INCIBE"), ". Cela signifie que nos auditeurs et consultants respectent les normes nationales et internationales les plus exigeantes."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Vos audits de sécurité avec Ontec ne sont pas qu'un simple rapport : ce sont une ", /*#__PURE__*/React.createElement("strong", null, "validation officielle"), " des vulnérabilités et des mesures correctives."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ce que nous offrons"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Audit de vulnérabilités"), " complet des réseaux et des applications"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Tests d'intrusion"), " (pentesting) éthiques et autorisés"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Formation à la sécurité"), " pour vos équipes"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Plans de remédiation"), " personnalisés avec des métriques de risque"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Support 24/7"), " en cas d'incidents de sécurité")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "Dans un environnement où les cyberattaques sont quotidiennes, nous disposons d'experts certifiés qui garantissent que votre infrastructure respecte les normes les plus élevées du secteur.")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España) is the benchmark body for cybersecurity in Spain. Its internationally recognized certifications are a seal of quality that ensures professionals have met rigorous standards."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Why INCIBE?"), /*#__PURE__*/React.createElement("p", null, "Technicians certified by INCIBE have:"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Passed rigorous theoretical and practical cybersecurity exams"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Demonstrated knowledge of international frameworks (ISO 27001, NIST, CIS)"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• Maintained mandatory continuous training"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• The backing of the state body's reputation")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Ontec and INCIBE"), /*#__PURE__*/React.createElement("p", null, "Ontec has a cybersecurity specialist who is an ", /*#__PURE__*/React.createElement("strong", null, "official INCIBE collaborator"), ". This means our auditors and consultants follow the most demanding national and international standards."), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 16
+      }
+    }, "Your security audits with Ontec are not just a report: they are an ", /*#__PURE__*/React.createElement("strong", null, "official validation"), " of vulnerabilities and corrective measures."), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "What we offer"), /*#__PURE__*/React.createElement("ul", {
+      style: {
+        marginLeft: 24,
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Vulnerability auditing"), " — complete coverage of networks and applications"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Penetration testing"), " (pentesting) — ethical and authorized"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Security training"), " for your teams"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "Remediation plans"), " tailored with risk metrics"), /*#__PURE__*/React.createElement("li", {
+      style: {
+        marginBottom: 10
+      }
+    }, "• ", /*#__PURE__*/React.createElement("strong", null, "24/7 support"), " for security incidents")), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginTop: 40,
+        marginBottom: 16,
+        fontFamily: 'var(--disp)'
+      }
+    }, "Conclusion"), /*#__PURE__*/React.createElement("p", null, "In an environment where cyberattacks are an everyday occurrence, we have certified experts who guarantee that your infrastructure meets the highest standards in the industry."))
+  }
+};
+const TWEAK_DEFAULTS = {
+  "mood": "acid",
+  "voice": "editorial",
+  "intensity": "cinematic"
+};
+function BlogArticle({
+  id,
+  tag,
+  date,
+  readtime,
+  title,
+  author = 'Ontec',
+  content
 }) {
-  return /*#__PURE__*/React.createElement("a", {
-    href: `blog-${idx + 1}.html`,
-    className: "mcard",
-    style: {
-      display: 'block'
-    }
-  }, /*#__PURE__*/React.createElement(Cine, {
-    src: a.img,
-    alt: tt(a.title),
-    style: {
-      height: big ? 380 : 220
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '24px 26px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      marginBottom: 14
-    }
-  }, /*#__PURE__*/React.createElement(Tag, null, tt(a.tag)), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)'
-    }
-  }, a.date), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontFamily: 'var(--mono)',
-      fontSize: 10.5,
-      color: 'var(--faint)',
-      marginLeft: 'auto'
-    }
-  }, a.readtime)), /*#__PURE__*/React.createElement("h3", {
-    style: {
-      fontFamily: 'var(--disp)',
-      fontWeight: 700,
-      fontSize: big ? 24 : 18,
-      color: 'var(--ink)',
-      lineHeight: 1.3,
-      letterSpacing: '-0.01em',
-      marginBottom: 12
-    }
-  }, tt(a.title)), big && /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 15,
-      color: 'var(--mut)',
-      lineHeight: 1.7
-    }
-  }, tt(a.excerpt)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: 16,
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      fontFamily: 'var(--mono)',
-      fontSize: 11,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      color: 'var(--accent)'
-    }
-  }, tt({
-    ca: 'Llegir mes',
-    es: 'Leer más',
-    fr: 'Lire plus',
-    en: 'Read more'
-  }), " ", /*#__PURE__*/React.createElement(Icons.Arrow, {
-    s: 13
-  }))));
-}
-function App() {
   useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [activeTag, setActiveTag] = useState('all');
   useEffect(() => {
     const r = document.documentElement;
     r.setAttribute('data-mood', t.mood);
     r.setAttribute('data-voice', t.voice);
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
-  const tags = [{
-    id: 'all',
-    label: {
-      ca: 'Tot',
-      es: 'Todo',
-      fr: 'Tout',
-      en: 'All'
-    }
+  const relatedArticles = [{
+    title: {
+      ca: "Ciberseguretat empresarial 2025",
+      es: "Ciberseguridad empresarial 2025",
+      fr: "Cybersécurité en entreprise 2025",
+      en: "Enterprise cybersecurity 2025"
+    },
+    href: "#"
   }, {
-    id: 'video',
-    label: {
-      ca: 'Videoconferencia',
-      es: 'Videoconferencia',
-      fr: 'Visioconférence',
-      en: 'Video conferencing'
-    }
+    title: {
+      ca: "Tendencies en infraestructura tecnològica",
+      es: "Tendencias en infraestructura tecnológica",
+      fr: "Tendances en infrastructure technologique",
+      en: "Trends in technology infrastructure"
+    },
+    href: "#"
   }, {
-    id: 'itsec',
-    label: {
-      ca: 'IT Security',
-      es: 'IT Security',
-      fr: 'IT Security',
-      en: 'IT Security'
-    }
-  }, {
-    id: 'ciber',
-    label: {
-      ca: 'Ciberseguretat',
-      es: 'Ciberseguridad',
-      fr: 'Cybersécurité',
-      en: 'Cybersecurity'
-    }
-  }, {
-    id: 'domotica',
-    label: {
-      ca: 'Domotica',
-      es: 'Domótica',
-      fr: 'Domotique',
-      en: 'Home automation'
-    }
-  }, {
-    id: 'comun',
-    label: {
-      ca: 'Comunicacions',
-      es: 'Comunicaciones',
-      fr: 'Communications',
-      en: 'Communications'
-    }
-  }, {
-    id: 'av',
-    label: {
-      ca: 'Audiovisuals',
-      es: 'Audiovisuales',
-      fr: 'Audiovisuel',
-      en: 'Audiovisual'
-    }
+    title: {
+      ca: "Transformació digital a Andorra",
+      es: "Transformación digital en Andorra",
+      fr: "Transformation numérique en Andorre",
+      en: "Digital transformation in Andorra"
+    },
+    href: "#"
   }];
-  const filtered = activeTag === 'all' ? ARTICLES : ARTICLES.filter(a => a.tagId === activeTag);
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Blog"
-  }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: tt({
-      ca: 'Blog · Actualitat tecnologica',
-      es: 'Blog · Actualidad tecnológica',
-      fr: 'Blog · Actualité technologique',
-      en: 'Blog · Technology news'
-    }),
-    title: tt({
-      ca: 'Noticies i tendencies',
-      es: 'Noticias y tendencias',
-      fr: 'Actualités et tendances',
-      en: 'News and trends'
-    }),
-    sub: tt({
-      ca: 'Articles tecnics sobre IT Security, videoconferencia, domotica i les ultimes tendencies del sector a Andorra.',
-      es: 'Artículos técnicos sobre IT Security, videoconferencia, domótica y las últimas tendencias del sector en Andorra.',
-      fr: 'Articles techniques sur l\'IT Security, la visioconférence, la domotique et les dernières tendances du secteur en Andorre.',
-      en: 'Technical articles on IT Security, video conferencing, home automation and the latest trends in the sector in Andorra.'
-    }),
-    img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1800&q=80&auto=format&fit=crop"
-  }), /*#__PURE__*/React.createElement("section", {
+  }, /*#__PURE__*/React.createElement("section", {
     style: {
-      padding: '80px 0 120px'
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'flex-end',
+      background: 'var(--panel-dark)',
+      position: 'relative',
+      overflow: 'hidden'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wrap-wide"
-  }, /*#__PURE__*/React.createElement(Reveal, {
     style: {
-      marginBottom: 40
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(135deg,rgba(8,18,12,.7) 0%,rgba(8,18,12,.4) 100%)'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide",
+    style: {
+      position: 'relative',
+      zIndex: 2,
+      paddingTop: 120,
+      paddingBottom: 80,
+      maxWidth: 800
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 28
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 10,
-      flexWrap: 'wrap'
+      alignItems: 'center',
+      gap: 16,
+      marginBottom: 18
     }
-  }, tags.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    onClick: () => setActiveTag(t.id),
+  }, /*#__PURE__*/React.createElement(Tag, null, tt(tag)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
-      fontSize: 11.5,
-      letterSpacing: '.12em',
-      textTransform: 'uppercase',
-      padding: '9px 20px',
-      borderRadius: 999,
-      border: '1px solid',
-      cursor: 'pointer',
-      transition: 'all .2s',
-      background: activeTag === t.id ? 'var(--accent)' : 'transparent',
-      color: activeTag === t.id ? 'var(--accent-ink)' : 'var(--mut)',
-      borderColor: activeTag === t.id ? 'var(--accent)' : 'var(--line)'
+      fontSize: 12,
+      color: 'rgba(255,255,255,.6)'
     }
-  }, tt(t.label))))), filtered.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, {
+  }, date)), /*#__PURE__*/React.createElement("h1", {
+    className: "disp",
     style: {
+      fontSize: 'clamp(40px,5vw,64px)',
+      color: '#fff',
+      lineHeight: 1.15,
       marginBottom: 20
     }
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: filtered[0],
-    big: true,
-    idx: ARTICLES.indexOf(filtered[0])
-  })), /*#__PURE__*/React.createElement("div", {
+  }, tt(title)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 20,
+      fontFamily: 'var(--mono)',
+      fontSize: 13,
+      color: 'rgba(255,255,255,.7)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, readtime), /*#__PURE__*/React.createElement("span", null, "·"), /*#__PURE__*/React.createElement("span", null, tt({
+    ca: `Per ${author}`,
+    es: `Por ${author}`,
+    fr: `Par ${author}`,
+    en: `By ${author}`
+  })))))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: 'var(--bg)',
+      padding: '80px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap",
+    style: {
+      maxWidth: 720
+    }
+  }, /*#__PURE__*/React.createElement("article", {
+    style: {
+      fontSize: 16,
+      lineHeight: 1.8,
+      color: 'var(--mut)'
+    }
+  }, tt(content)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 80,
+      paddingTop: 60,
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap: 18
+      gridTemplateColumns: '1fr 280px',
+      gap: 60
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "disp",
+    style: {
+      fontSize: 28,
+      marginBottom: 32
+    }
+  }, tt({
+    ca: 'Articles relacionats',
+    es: 'Artículos relacionados',
+    fr: 'Articles liés',
+    en: 'Related articles'
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 20
+    }
+  }, relatedArticles.map((art, i) => /*#__PURE__*/React.createElement("a", {
+    key: i,
+    href: art.href,
+    style: {
+      padding: '20px',
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 12,
+      textDecoration: 'none',
+      color: 'var(--ink)',
+      transition: 'border-color .2s,background .2s'
     },
-    className: "blog-main-grid"
-  }, filtered.slice(1).map((a, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: a.id,
-    delay: i * 70
-  }, /*#__PURE__*/React.createElement(BlogCard, {
-    a: a,
-    idx: ARTICLES.indexOf(a)
-  })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.blog-main-grid{grid-template-columns:1fr!important;}} @media(max-width:1100px){.blog-main-grid{grid-template-columns:repeat(2,1fr)!important;}}`)));
+    onMouseEnter: e => {
+      e.currentTarget.style.borderColor = 'var(--accent)';
+      e.currentTarget.style.background = 'var(--panel-2)';
+    },
+    onMouseLeave: e => {
+      e.currentTarget.style.borderColor = 'var(--line)';
+      e.currentTarget.style.background = 'var(--panel)';
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      color: 'var(--accent)',
+      marginBottom: 8
+    }
+  }, tt({
+    ca: 'ARTICLE',
+    es: 'ARTÍCULO',
+    fr: 'ARTICLE',
+    en: 'ARTICLE'
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 15
+    }
+  }, tt(art.title)))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'sticky',
+      top: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: 'var(--panel)',
+      border: '1px solid var(--line)',
+      borderRadius: 14,
+      padding: 28
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.12em',
+      textTransform: 'uppercase',
+      color: 'var(--accent)',
+      marginBottom: 20
+    }
+  }, tt({
+    ca: 'Sobre Ontec',
+    es: 'Sobre Ontec',
+    fr: 'À propos d\'Ontec',
+    en: 'About Ontec'
+  })), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 14,
+      color: 'var(--mut)',
+      lineHeight: 1.7,
+      marginBottom: 20
+    }
+  }, tt({
+    ca: 'Som especialistes en sistemes tecnològics avancats: IT Security, videoconferència, comunicacions i automatització per a empreses andorranes.',
+    es: 'Somos especialistas en sistemas tecnológicos avanzados: IT Security, videoconferencia, comunicaciones y automatización para empresas andorranas.',
+    fr: 'Nous sommes spécialistes des systèmes technologiques avancés : IT Security, visioconférence, communications et automatisation pour les entreprises andorranes.',
+    en: 'We are specialists in advanced technology systems: IT Security, video conferencing, communications and automation for Andorran businesses.'
+  })), /*#__PURE__*/React.createElement("a", {
+    href: "contacta.html",
+    className: "btn btn-primary",
+    style: {
+      width: '100%',
+      justifyContent: 'center',
+      padding: '12px 16px'
+    }
+  }, tt({
+    ca: "Contacta'ns",
+    es: 'Contáctanos',
+    fr: 'Contactez-nous',
+    en: 'Contact us'
+  })))))))));
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(BlogArticle, ARTICLE_DATA));
