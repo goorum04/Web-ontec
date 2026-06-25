@@ -1774,10 +1774,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
-var __ontecHostOrigin = null;
-function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
-function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
-function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
