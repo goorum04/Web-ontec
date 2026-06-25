@@ -1774,10 +1774,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
-var __ontecHostOrigin = null;
-function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
-function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
-function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -2315,16 +2329,16 @@ const SOLS_FULL = [{
     en: 'Professional A/V systems and high-end videoconferencing'
   },
   desc: {
-    ca: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a la Batllia d'Andorra per a connexions institucionals internacionals.",
-    es: 'Diseñamos e instalamos sistemas audiovisuales profesionales y salas de videoconferencia de primer nivel. Referencia: instalación en la Batllia de Andorra para conexiones institucionales internacionales.',
-    fr: 'Nous concevons et installons des systèmes audiovisuels professionnels et des salles de visioconférence haut de gamme. Référence : installation à la Batllia d\'Andorre pour des connexions institutionnelles internationales.',
-    en: 'We design and install professional audiovisual systems and top-tier videoconferencing rooms. Reference: installation at the Batllia of Andorra for international institutional connections.'
+    ca: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a l'edifici emblemàtic de la seu de justicia per a connexions institucionals internacionals.",
+    es: 'Diseñamos e instalamos sistemas audiovisuales profesionales y salas de videoconferencia de primer nivel. Referencia: instalación en la sede de justicia para conexiones institucionales internacionales.',
+    fr: 'Nous concevons et installons des systèmes audiovisuels professionnels et des salles de visioconférence haut de gamme. Référence : installation au siège de la justice pour des connexions institutionnelles internationales.',
+    en: 'We design and install professional audiovisual systems and top-tier videoconferencing rooms. Reference: installation at the judicial center for international institutional connections.'
   },
   features: {
-    ca: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: la Batllia d\'Andorra'],
-    es: ['Salas de videoconferencia Cisco Webex', 'Cámaras PTZ Sony profesionales', 'Pantallas interactivas Samsung', 'Sistemas de audio QSC & Shure', 'Sistemas de presentación wireless', 'Caso de éxito: la Batllia de Andorra'],
-    fr: ['Salles de visioconférence Cisco Webex', 'Caméras PTZ Sony professionnelles', 'Écrans interactifs Samsung', 'Systèmes audio QSC & Shure', 'Systèmes de présentation sans fil', 'Cas de réussite : la Batllia d\'Andorre'],
-    en: ['Cisco Webex videoconferencing rooms', 'Professional Sony PTZ cameras', 'Samsung interactive displays', 'QSC & Shure audio systems', 'Wireless presentation systems', 'Success story: the Batllia of Andorra']
+    ca: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: Seu de Justicia d\'Andorra'],
+    es: ['Salas de videoconferencia Cisco Webex', 'Cámaras PTZ Sony profesionales', 'Pantallas interactivas Samsung', 'Sistemas de audio QSC & Shure', 'Sistemas de presentación wireless', 'Caso de éxito: Sede de Justicia de Andorra'],
+    fr: ['Salles de visioconférence Cisco Webex', 'Caméras PTZ Sony professionnelles', 'Écrans interactifs Samsung', 'Systèmes audio QSC & Shure', 'Systèmes de présentation sans fil', 'Cas de réussite : Siège de la Justice d\'Andorre'],
+    en: ['Cisco Webex videoconferencing rooms', 'Professional Sony PTZ cameras', 'Samsung interactive displays', 'QSC & Shure audio systems', 'Wireless presentation systems', 'Success story: Judicial Center of Andorra']
   },
   partners: ['Cisco', 'Sony', 'Samsung', 'QSC', 'Shure']
 }];

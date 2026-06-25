@@ -1774,10 +1774,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
-var __ontecHostOrigin = null;
-function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
-function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
-function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -2215,16 +2229,16 @@ const ARTICLES = [{
   date: '2025',
   readtime: '5 min',
   title: {
-    ca: "Sistema de videoconferencia a la Batllia d'Andorra",
-    es: "Sistema de videoconferencia en la Batllia d'Andorra",
-    fr: "Système de visioconférence à la Batllia d'Andorra",
-    en: "Video conferencing system at the Batllia d'Andorra"
+    ca: "Sistema de videoconferencia per a la seu de justicia d'Andorra",
+    es: "Sistema de videoconferencia para la sede de justicia de Andorra",
+    fr: "Système de visioconférence pour le siège de la justice d'Andorre",
+    en: "Video conferencing system for the judicial center of Andorra"
   },
   excerpt: {
-    ca: "Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
-    es: "Ontec ha instalado el sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra, permitiendo conexiones de alto nivel con organismos internacionales.",
-    fr: "Ontec a installé le système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra, permettant des connexions de haut niveau avec des organismes internationaux.",
-    en: "Ontec has installed the professional video conferencing system for the institutional spaces of the Batllia d'Andorra, enabling high-level connections with international organizations."
+    ca: "Ontec ha instal·lat el sistema de videoconferencia professional per als espais de l'edifici emblemàtic de la seu de justicia, permetent connexions d'alt nivell amb organismes internacionals.",
+    es: "Ontec ha instalado el sistema de videoconferencia profesional para los espacios del edificio emblemático de la sede de justicia, permitiendo conexiones de alto nivel con organismos internacionales.",
+    fr: "Ontec a installé le système de visioconférence professionnel pour les espaces du bâtiment emblématique du siège de la justice, permettant des connexions de haut niveau avec des organismes internationaux.",
+    en: "Ontec has installed the professional video conferencing system for the spaces of the emblematic judicial building, enabling high-level connections with international organizations."
   },
   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
   featured: true
