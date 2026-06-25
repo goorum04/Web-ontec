@@ -85,7 +85,7 @@ const SOLS_FULL = [
       en:'Audiovisual & Videoconferencing'
     },
     icon:<Icons.Video/>,
-    img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
+    img:'/images/batllia-building.jpg',
     sub:{
       ca:'Sistemes AV professionals i videoconferencia d\'alt nivell',
       es:'Sistemas A/V profesionales y videoconferencia de alto nivel',

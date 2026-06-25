@@ -17,7 +17,7 @@ const ARTICLES = [
       fr:"Ontec a installé le système de visioconférence professionnel pour les espaces du bâtiment emblématique du siège de la justice, permettant des connexions de haut niveau avec des organismes internationaux.",
       en:"Ontec has installed the professional video conferencing system for the spaces of the emblematic judicial building, enabling high-level connections with international organizations."
     },
-    img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
+    img:'/images/batllia-building.jpg',
     featured:true
   },
   {
