@@ -6,16 +6,16 @@ const ARTICLES = [
     tag:{ca:'Videoconferencia',es:'Videoconferencia',fr:'Visioconférence',en:'Video conferencing'},
     date:'2025', readtime:'5 min',
     title:{
-      ca:"Sistema de videoconferencia a la Batllia d'Andorra",
-      es:"Sistema de videoconferencia en la Batllia d'Andorra",
-      fr:"Système de visioconférence à la Batllia d'Andorra",
-      en:"Video conferencing system at the Batllia d'Andorra"
+      ca:"Sistema de videoconferencia per a la seu de justicia d'Andorra",
+      es:"Sistema de videoconferencia para la sede de justicia de Andorra",
+      fr:"Système de visioconférence pour le siège de la justice d'Andorre",
+      en:"Video conferencing system for the judicial center of Andorra"
     },
     excerpt:{
-      ca:"Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
-      es:"Ontec ha instalado el sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra, permitiendo conexiones de alto nivel con organismos internacionales.",
-      fr:"Ontec a installé le système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra, permettant des connexions de haut niveau avec des organismes internationaux.",
-      en:"Ontec has installed the professional video conferencing system for the institutional spaces of the Batllia d'Andorra, enabling high-level connections with international organizations."
+      ca:"Ontec ha instal·lat el sistema de videoconferencia professional per als espais de l'edifici emblemàtic de la seu de justicia, permetent connexions d'alt nivell amb organismes internacionals.",
+      es:"Ontec ha instalado el sistema de videoconferencia profesional para los espacios del edificio emblemático de la sede de justicia, permitiendo conexiones de alto nivel con organismos internacionales.",
+      fr:"Ontec a installé le système de visioconférence professionnel pour les espaces du bâtiment emblématique du siège de la justice, permettant des connexions de haut niveau avec des organismes internationaux.",
+      en:"Ontec has installed the professional video conferencing system for the spaces of the emblematic judicial building, enabling high-level connections with international organizations."
     },
     img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
     featured:true

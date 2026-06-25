@@ -155,7 +155,7 @@ function SolutionsGallery() {
 function CaseBatllia() {
   const specs=[
     [{ca:'Sistema',es:'Sistema',fr:'Système',en:'System'},{ca:'Videoconferència HD',es:'Videoconferencia HD',fr:'Visioconférence HD',en:'HD video conferencing'}],
-    [{ca:'Ubicació',es:'Ubicación',fr:'Emplacement',en:'Location'},{ca:"la Batllia d'Andorra",es:"la Batllia d'Andorra",fr:"la Batllia d'Andorra",en:"la Batllia d'Andorra"}],
+    [{ca:'Ubicació',es:'Ubicación',fr:'Emplacement',en:'Location'},{ca:"Edifici emblemàtic d'Andorra",es:"Edificio emblemático de Andorra",fr:"Bâtiment emblématique d'Andorre",en:"Emblematic building of Andorra"}],
     [{ca:'Equipament',es:'Equipamiento',fr:'Équipement',en:'Equipment'},{ca:'Cisco Webex + Sony PTZ',es:'Cisco Webex + Sony PTZ',fr:'Cisco Webex + Sony PTZ',en:'Cisco Webex + Sony PTZ'}],
     [{ca:'Cobertura',es:'Cobertura',fr:'Couverture',en:'Coverage'},{ca:'3 sales de reunions',es:'3 salas de reuniones',fr:'3 salles de réunion',en:'3 meeting rooms'}],
     [{ca:'Integració',es:'Integración',fr:'Intégration',en:'Integration'},{ca:'MS Teams / Zoom',es:'MS Teams / Zoom',fr:'MS Teams / Zoom',en:'MS Teams / Zoom'}],
@@ -167,13 +167,13 @@ function CaseBatllia() {
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="case-grid">
           <Reveal>
             <SectionLabel>{tt({ca:"Cas d'èxit",es:'Caso de éxito',fr:'Étude de cas',en:'Case study'})}</SectionLabel>
-            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>{tt({ca:<>La Batllia<br/>d'Andorra</>,es:<>La Batllia<br/>d'Andorra</>,fr:<>La Batllia<br/>d'Andorra</>,en:<>La Batllia<br/>d'Andorra</>})}</h2>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>{tt({ca:<>Seu de Justicia<br/>d'Andorra</>,es:<>Sede de Justicia<br/>de Andorra</>,fr:<>Siège de la Justice<br/>d'Andorre</>,en:<>Judicial Center<br/>of Andorra</>})}</h2>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:24}}>
               {tt({
-                ca:"Instal·lació integral del sistema de videoconferència professional per als espais institucionals de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària.",
-                es:"Instalación integral del sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra. Un proyecto que demuestra la capacidad de Ontec para desplegar soluciones de alto nivel en entornos de gran exigencia técnica y protocolaria.",
-                fr:"Installation intégrale du système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra. Un projet qui démontre la capacité d'Ontec à déployer des solutions haut de gamme dans des environnements aux exigences techniques et protocolaires élevées.",
-                en:"Full deployment of a professional video conferencing system for the institutional spaces of la Batllia d'Andorra. A project that showcases Ontec's ability to deliver high-end solutions in demanding technical and protocol environments."
+                ca:"Instal·lació integral d'un sistema de videoconferència professional per a la seu de justicia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària.",
+                es:"Instalación integral de un sistema de videoconferencia profesional para la sede de justicia de Andorra. Un proyecto que demuestra la capacidad de Ontec para desplegar soluciones de alto nivel en entornos de gran exigencia técnica y protocolaria.",
+                fr:"Installation intégrale d'un système de visioconférence professionnel pour le siège de la justice d'Andorre. Un projet qui démontre la capacité d'Ontec à déployer des solutions haut de gamme dans des environnements aux exigences techniques et protocolaires élevées.",
+                en:"Full deployment of a professional video conferencing system for the judicial center of Andorra. A project that showcases Ontec's ability to deliver high-end solutions in demanding technical and protocol environments."
               })}
             </p>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:40}}>
@@ -190,12 +190,12 @@ function CaseBatllia() {
             <Reveal delay={120}>
               <Tilt max={7}>
                 <div className="glowborder" style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
-                  <Cine src="https://images.unsplash.com/photo-1634141428610-1781a3862a9b?w=900&q=80&auto=format&fit=crop" alt="Andorra la Vella" style={{height:320}}/>
+                  <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
                       <div style={{fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.2em',textTransform:'uppercase',color:'var(--accent-2)',marginBottom:4}}>{tt({ca:'Projecte completat',es:'Proyecto completado',fr:'Projet réalisé',en:'Completed project'})}</div>
-                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'#fff'}}>La Batllia d'Andorra</div>
+                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'#fff'}}>{tt({ca:'Edifici emblemàtic',es:'Edificio emblemático',fr:'Bâtiment emblématique',en:'Emblematic building'})}</div>
                     </div>
                     <div style={{width:44,height:44,borderRadius:'50%',background:'rgba(142,198,63,.2)',border:'1px solid rgba(142,198,63,.4)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent-2)'}}><Icons.Video/></div>
                   </div>
@@ -346,9 +346,15 @@ function ServicesList() {
 }
 
 const BLOG=[
+<<<<<<< HEAD
+  {date:'2025',tag:'Videoconferència',title:"Sistema de videoconferència per a la seu de justicia d'Andorra",img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
+  {date:'2024',tag:'IT Security',title:'Zero Trust: el nou paradigma de seguretat per a pimes',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
+  {date:'2022',tag:'Domòtica',title:"La domòtica KNX arriba als edificis premium d'Andorra",img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
+=======
   {date:'2025',tag:{ca:'Videoconferència',es:'Videoconferencia',fr:'Visioconférence',en:'Video conferencing'},title:{ca:"Sistema de videoconferència a la Batllia d'Andorra",es:"Sistema de videoconferencia en la Batllia d'Andorra",fr:"Système de visioconférence à la Batllia d'Andorra",en:"Video conferencing system at la Batllia d'Andorra"},img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
   {date:'2024',tag:{ca:'IT Security',es:'IT Security',fr:'IT Security',en:'IT Security'},title:{ca:'Zero Trust: el nou paradigma de seguretat per a pimes',es:'Zero Trust: el nuevo paradigma de seguridad para pymes',fr:'Zero Trust : le nouveau paradigme de sécurité pour les PME',en:'Zero Trust: the new security paradigm for SMEs'},img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
   {date:'2022',tag:{ca:'Domòtica',es:'Domótica',fr:'Domotique',en:'Home automation'},title:{ca:"La domòtica KNX arriba als edificis premium d'Andorra",es:"La domótica KNX llega a los edificios premium de Andorra",fr:"La domotique KNX arrive dans les bâtiments premium d'Andorre",en:"KNX home automation arrives in Andorra's premium buildings"},img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
+>>>>>>> origin/main
 ];
 function BlogPreview() {
   return (

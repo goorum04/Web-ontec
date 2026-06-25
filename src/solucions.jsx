@@ -93,16 +93,16 @@ const SOLS_FULL = [
       en:'Professional A/V systems and high-end videoconferencing'
     },
     desc:{
-      ca:"Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a la Batllia d'Andorra per a connexions institucionals internacionals.",
-      es:'Diseñamos e instalamos sistemas audiovisuales profesionales y salas de videoconferencia de primer nivel. Referencia: instalación en la Batllia de Andorra para conexiones institucionales internacionales.',
-      fr:'Nous concevons et installons des systèmes audiovisuels professionnels et des salles de visioconférence haut de gamme. Référence : installation à la Batllia d\'Andorre pour des connexions institutionnelles internationales.',
-      en:'We design and install professional audiovisual systems and top-tier videoconferencing rooms. Reference: installation at the Batllia of Andorra for international institutional connections.'
+      ca:"Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a l'edifici emblemàtic de la seu de justicia per a connexions institucionals internacionals.",
+      es:'Diseñamos e instalamos sistemas audiovisuales profesionales y salas de videoconferencia de primer nivel. Referencia: instalación en la sede de justicia para conexiones institucionales internacionales.',
+      fr:'Nous concevons et installons des systèmes audiovisuels professionnels et des salles de visioconférence haut de gamme. Référence : installation au siège de la justice pour des connexions institutionnelles internationales.',
+      en:'We design and install professional audiovisual systems and top-tier videoconferencing rooms. Reference: installation at the judicial center for international institutional connections.'
     },
     features:{
-      ca:['Sales de videoconferencia Cisco Webex','Cameras PTZ Sony professionals','Pantalles interactives Samsung','Sistemes d\'audio QSC & Shure','Sistemes de presentacio wireless','Cas d\'exit: la Batllia d\'Andorra'],
-      es:['Salas de videoconferencia Cisco Webex','Cámaras PTZ Sony profesionales','Pantallas interactivas Samsung','Sistemas de audio QSC & Shure','Sistemas de presentación wireless','Caso de éxito: la Batllia de Andorra'],
-      fr:['Salles de visioconférence Cisco Webex','Caméras PTZ Sony professionnelles','Écrans interactifs Samsung','Systèmes audio QSC & Shure','Systèmes de présentation sans fil','Cas de réussite : la Batllia d\'Andorre'],
-      en:['Cisco Webex videoconferencing rooms','Professional Sony PTZ cameras','Samsung interactive displays','QSC & Shure audio systems','Wireless presentation systems','Success story: the Batllia of Andorra']
+      ca:['Sales de videoconferencia Cisco Webex','Cameras PTZ Sony professionals','Pantalles interactives Samsung','Sistemes d\'audio QSC & Shure','Sistemes de presentacio wireless','Cas d\'exit: Seu de Justicia d\'Andorra'],
+      es:['Salas de videoconferencia Cisco Webex','Cámaras PTZ Sony profesionales','Pantallas interactivas Samsung','Sistemas de audio QSC & Shure','Sistemas de presentación wireless','Caso de éxito: Sede de Justicia de Andorra'],
+      fr:['Salles de visioconférence Cisco Webex','Caméras PTZ Sony professionnelles','Écrans interactifs Samsung','Systèmes audio QSC & Shure','Systèmes de présentation sans fil','Cas de réussite : Siège de la Justice d\'Andorre'],
+      en:['Cisco Webex videoconferencing rooms','Professional Sony PTZ cameras','Samsung interactive displays','QSC & Shure audio systems','Wireless presentation systems','Success story: Judicial Center of Andorra']
     },
     partners:['Cisco','Sony','Samsung','QSC','Shure']
   },
