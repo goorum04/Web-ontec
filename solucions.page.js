@@ -2321,7 +2321,7 @@ const SOLS_FULL = [{
     en: 'Audiovisual & Videoconferencing'
   },
   icon: /*#__PURE__*/React.createElement(Icons.Video, null),
-  img: 'https://d2ol7oe51mr4n9.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/e388ac10-c3f8-45fc-91fa-7edcf390c4cf.png',
+  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
   sub: {
     ca: 'Sistemes AV professionals i videoconferencia d\'alt nivell',
     es: 'Sistemas A/V profesionales y videoconferencia de alto nivel',

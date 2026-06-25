@@ -2981,7 +2981,7 @@ function CaseBatllia() {
       marginBottom: 18
     }
   }, /*#__PURE__*/React.createElement(Cine, {
-    src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/e388ac10-c3f8-45fc-91fa-7edcf390c4cf.png",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop",
     alt: "Sala de videoconferència de la seu de justicia",
     style: {
       height: 320
