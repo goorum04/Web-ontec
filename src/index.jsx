@@ -190,7 +190,7 @@ function CaseBatllia() {
             <Reveal delay={120}>
               <Tilt max={7}>
                 <div className="glowborder" style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
-                  <Cine src="/images/batllia-building.jpg" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
+                  <Cine src="https://d2ol7oe51mr4n9.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/e388ac10-c3f8-45fc-91fa-7edcf390c4cf.png" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
