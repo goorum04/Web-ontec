@@ -251,7 +251,7 @@ function CiberseguretatIncibe() {
                 <div style={{width:52,height:52,borderRadius:13,background:A(15),border:`1px solid ${A(30)}`,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',flexShrink:0,boxShadow:`0 0 28px ${A(22)}`}}><Icons.Shield/></div>
                 <div>
                   <div style={{fontFamily:'var(--mono)',fontSize:10.5,letterSpacing:'.12em',textTransform:'uppercase',color:'var(--accent)',marginBottom:4}}>{tt({ca:'Col·laboració oficial',es:'Colaboración oficial',fr:'Collaboration officielle',en:'Official collaboration'})}</div>
-                  <div style={{fontSize:15,color:'var(--ink)',fontWeight:600}}>{tt({ca:'Tècnic certificat per INCIBE',es:'Técnico certificado por INCIBE',fr:'Technicien certifié par INCIBE',en:'INCIBE-certified technician'})}</div>
+                  <div style={{fontSize:15,color:'var(--ink)',fontWeight:600}}>{tt({ca:'Equip certificat per INCIBE',es:'Equipo certificado por INCIBE',fr:'Équipe certifiée par INCIBE',en:'INCIBE-certified team'})}</div>
                   <div style={{fontSize:13,color:'var(--mut)',marginTop:3}}>Instituto Nacional de Ciberseguridad</div>
                 </div>
               </div>
@@ -262,10 +262,10 @@ function CiberseguretatIncibe() {
             <h2 className="disp glow-text" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>{tt({ca:<>Protecció real<br/>per a la teva<br/>empresa</>,es:<>Protección real<br/>para tu<br/>empresa</>,fr:<>Une protection réelle<br/>pour votre<br/>entreprise</>,en:<>Real protection<br/>for your<br/>business</>})}</h2>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:20}}>
               {tt({
-                ca:<>Ontec compta amb un tècnic especialitzat en ciberseguretat col·laborador de l'<strong style={{color:'var(--ink)'}}>INCIBE</strong> (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals.</>,
-                es:<>Ontec cuenta con un técnico especializado en ciberseguridad colaborador del <strong style={{color:'var(--ink)'}}>INCIBE</strong> (Instituto Nacional de Ciberseguridad de España), garantizando los estándares más exigentes en protección de infraestructuras digitales.</>,
-                fr:<>Ontec dispose d'un technicien spécialisé en cybersécurité, collaborateur de l'<strong style={{color:'var(--ink)'}}>INCIBE</strong> (Instituto Nacional de Ciberseguridad d'Espagne), garantissant les standards les plus exigeants en matière de protection des infrastructures numériques.</>,
-                en:<>Ontec has a cybersecurity specialist who collaborates with <strong style={{color:'var(--ink)'}}>INCIBE</strong> (Spain's Instituto Nacional de Ciberseguridad), ensuring the highest standards in digital infrastructure protection.</>
+                ca:<>Ontec és un equip especialitzat en ciberseguretat <strong style={{color:'var(--ink)'}}>certificat per INCIBE</strong> (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals.</>,
+                es:<>Ontec es un equipo especializado en ciberseguridad <strong style={{color:'var(--ink)'}}>certificado por INCIBE</strong> (Instituto Nacional de Ciberseguridad de España), garantizando los estándares más exigentes en protección de infraestructuras digitales.</>,
+                fr:<>Ontec est une équipe spécialisée en cybersécurité <strong style={{color:'var(--ink)'}}>certifiée par INCIBE</strong> (Instituto Nacional de Ciberseguridad d'Espagne), garantissant les standards les plus exigeants en matière de protection des infrastructures numériques.</>,
+                en:<>Ontec is a cybersecurity team <strong style={{color:'var(--ink)'}}>certified by INCIBE</strong> (Spain's Instituto Nacional de Ciberseguridad), ensuring the highest standards in digital infrastructure protection.</>
               })}
             </p>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:36}}>

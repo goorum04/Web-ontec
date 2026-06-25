@@ -3247,10 +3247,10 @@ function CiberseguretatIncibe() {
       fontWeight: 600
     }
   }, tt({
-    ca: 'Tècnic certificat per INCIBE',
-    es: 'Técnico certificado por INCIBE',
-    fr: 'Technicien certifié par INCIBE',
-    en: 'INCIBE-certified technician'
+    ca: 'Equip certificat per INCIBE',
+    es: 'Equipo certificado por INCIBE',
+    fr: 'Équipe certifiée par INCIBE',
+    en: 'INCIBE-certified team'
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 13,
@@ -3283,26 +3283,26 @@ function CiberseguretatIncibe() {
       marginBottom: 20
     }
   }, tt({
-    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec compta amb un tècnic especialitzat en ciberseguretat col·laborador de l'", /*#__PURE__*/React.createElement("strong", {
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec és un equip especialitzat en ciberseguretat ", /*#__PURE__*/React.createElement("strong", {
       style: {
         color: 'var(--ink)'
       }
-    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals."),
-    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec cuenta con un técnico especializado en ciberseguridad colaborador del ", /*#__PURE__*/React.createElement("strong", {
+    }, "certificat per INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espanya), garantint els estàndards més exigents en protecció d'infraestructures digitals."),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec es un equipo especializado en ciberseguridad ", /*#__PURE__*/React.createElement("strong", {
       style: {
         color: 'var(--ink)'
       }
-    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad de España), garantizando los estándares más exigentes en protección de infraestructuras digitales."),
-    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec dispose d'un technicien spécialisé en cybersécurité, collaborateur de l'", /*#__PURE__*/React.createElement("strong", {
+    }, "certificado por INCIBE"), " (Instituto Nacional de Ciberseguridad de España), garantizando los estándares más exigentes en protección de infraestructuras digitales."),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec est une équipe spécialisée en cybersécurité ", /*#__PURE__*/React.createElement("strong", {
       style: {
         color: 'var(--ink)'
       }
-    }, "INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espagne), garantissant les standards les plus exigeants en matière de protection des infrastructures numériques."),
-    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec has a cybersecurity specialist who collaborates with ", /*#__PURE__*/React.createElement("strong", {
+    }, "certifiée par INCIBE"), " (Instituto Nacional de Ciberseguridad d'Espagne), garantissant les standards les plus exigeants en matière de protection des infrastructures numériques."),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Ontec is a cybersecurity team ", /*#__PURE__*/React.createElement("strong", {
       style: {
         color: 'var(--ink)'
       }
-    }, "INCIBE"), " (Spain's Instituto Nacional de Ciberseguridad), ensuring the highest standards in digital infrastructure protection.")
+    }, "certified by INCIBE"), " (Spain's Instituto Nacional de Ciberseguridad), ensuring the highest standards in digital infrastructure protection.")
   })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,

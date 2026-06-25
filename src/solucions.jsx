@@ -13,10 +13,10 @@ const SOLS_FULL = [
       en:'Comprehensive protection of digital infrastructure'
     },
     desc:{
-      ca:"La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, incloent un tecnic certificat per l'INCIBE.",
-      es:"La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Fortinet y Palo Alto Networks, incluyendo un técnico certificado por el INCIBE.",
-      fr:"La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Fortinet et Palo Alto Networks, dont un technicien certifié par l'INCIBE.",
-      en:"Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Fortinet and Palo Alto Networks technology, including an INCIBE-certified technician."
+      ca:"La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, amb un equip certificat per l'INCIBE.",
+      es:"La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Fortinet y Palo Alto Networks, con un equipo certificado por el INCIBE.",
+      fr:"La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Fortinet et Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
+      en:"Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Fortinet and Palo Alto Networks technology, with an INCIBE-certified team."
     },
     features:{
       ca:['Firewall NGFW Fortinet & Palo Alto','VPN i acces remot segur','Zero Trust Network Access','Monitorat SOC 24/7','Auditories de seguretat','Deteccio i resposta (EDR/XDR)'],
