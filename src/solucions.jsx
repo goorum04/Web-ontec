@@ -85,7 +85,7 @@ const SOLS_FULL = [
       en:'Audiovisual & Videoconferencing'
     },
     icon:<Icons.Video/>,
-    img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
+    img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png',
     sub:{
       ca:'Sistemes AV professionals i videoconferencia d\'alt nivell',
       es:'Sistemas A/V profesionales y videoconferencia de alto nivel',

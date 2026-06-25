@@ -190,7 +190,7 @@ function CaseBatllia() {
             <Reveal delay={120}>
               <Tilt max={7}>
                 <div className="glowborder" style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
-                  <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
+                  <Cine src="https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
@@ -346,15 +346,9 @@ function ServicesList() {
 }
 
 const BLOG=[
-<<<<<<< HEAD
-  {date:'2025',tag:'Videoconferència',title:"Sistema de videoconferència per a la seu de justicia d'Andorra",img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
-  {date:'2024',tag:'IT Security',title:'Zero Trust: el nou paradigma de seguretat per a pimes',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
-  {date:'2022',tag:'Domòtica',title:"La domòtica KNX arriba als edificis premium d'Andorra",img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
-=======
-  {date:'2025',tag:{ca:'Videoconferència',es:'Videoconferencia',fr:'Visioconférence',en:'Video conferencing'},title:{ca:"Sistema de videoconferència a la Batllia d'Andorra",es:"Sistema de videoconferencia en la Batllia d'Andorra",fr:"Système de visioconférence à la Batllia d'Andorra",en:"Video conferencing system at la Batllia d'Andorra"},img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
+  {date:'2025',tag:{ca:'Videoconferència',es:'Videoconferencia',fr:'Visioconférence',en:'Video conferencing'},title:{ca:"Sistema de videoconferència per a la seu de justicia d'Andorra",es:"Sistema de videoconferencia para la sede de justicia de Andorra",fr:"Système de visioconférence pour le siège de la justice d'Andorre",en:"Video conferencing system for the judicial center of Andorra"},img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png'},
   {date:'2024',tag:{ca:'IT Security',es:'IT Security',fr:'IT Security',en:'IT Security'},title:{ca:'Zero Trust: el nou paradigma de seguretat per a pimes',es:'Zero Trust: el nuevo paradigma de seguridad para pymes',fr:'Zero Trust : le nouveau paradigme de sécurité pour les PME',en:'Zero Trust: the new security paradigm for SMEs'},img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
   {date:'2022',tag:{ca:'Domòtica',es:'Domótica',fr:'Domotique',en:'Home automation'},title:{ca:"La domòtica KNX arriba als edificis premium d'Andorra",es:"La domótica KNX llega a los edificios premium de Andorra",fr:"La domotique KNX arrive dans les bâtiments premium d'Andorre",en:"KNX home automation arrives in Andorra's premium buildings"},img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
->>>>>>> origin/main
 ];
 function BlogPreview() {
   return (

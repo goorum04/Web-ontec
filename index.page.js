@@ -1774,10 +1774,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
-var __ontecHostOrigin = null;
-function __ontecFramed() { return typeof window !== 'undefined' && window.parent && window.parent !== window; }
-function __ontecPost(message) { if (!__ontecFramed()) return; try { window.parent.postMessage(message, __ontecHostOrigin || '*'); } catch (e) {} }
-function __ontecTrusted(e) { return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null'; }
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -2836,10 +2850,10 @@ function CaseBatllia() {
     fr: 'Emplacement',
     en: 'Location'
   }, {
-    ca: "la Batllia d'Andorra",
-    es: "la Batllia d'Andorra",
-    fr: "la Batllia d'Andorra",
-    en: "la Batllia d'Andorra"
+    ca: "Edifici emblemàtic d'Andorra",
+    es: "Edificio emblemático de Andorra",
+    fr: "Bâtiment emblématique d'Andorre",
+    en: "Emblematic building of Andorra"
   }], [{
     ca: 'Equipament',
     es: 'Equipamiento',
@@ -2915,10 +2929,10 @@ function CaseBatllia() {
       marginBottom: 24
     }
   }, tt({
-    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
-    es: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
-    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
-    en: /*#__PURE__*/React.createElement(React.Fragment, null, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra")
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, "Seu de Justicia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, "Sede de Justicia", /*#__PURE__*/React.createElement("br", null), "de Andorra"),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, "Siège de la Justice", /*#__PURE__*/React.createElement("br", null), "d'Andorre"),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, "Judicial Center", /*#__PURE__*/React.createElement("br", null), "of Andorra")
   })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
@@ -2927,10 +2941,10 @@ function CaseBatllia() {
       marginBottom: 24
     }
   }, tt({
-    ca: "Instal·lació integral del sistema de videoconferència professional per als espais institucionals de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària.",
-    es: "Instalación integral del sistema de videoconferencia profesional para los espacios institucionales de la Batllia d'Andorra. Un proyecto que demuestra la capacidad de Ontec para desplegar soluciones de alto nivel en entornos de gran exigencia técnica y protocolaria.",
-    fr: "Installation intégrale du système de visioconférence professionnel pour les espaces institutionnels de la Batllia d'Andorra. Un projet qui démontre la capacité d'Ontec à déployer des solutions haut de gamme dans des environnements aux exigences techniques et protocolaires élevées.",
-    en: "Full deployment of a professional video conferencing system for the institutional spaces of la Batllia d'Andorra. A project that showcases Ontec's ability to deliver high-end solutions in demanding technical and protocol environments."
+    ca: "Instal·lació integral d'un sistema de videoconferència professional per a la seu de justicia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària.",
+    es: "Instalación integral de un sistema de videoconferencia profesional para la sede de justicia de Andorra. Un proyecto que demuestra la capacidad de Ontec para desplegar soluciones de alto nivel en entornos de gran exigencia técnica y protocolaria.",
+    fr: "Installation intégrale d'un système de visioconférence professionnel pour le siège de la justice d'Andorre. Un projet qui démontre la capacité d'Ontec à déployer des solutions haut de gamme dans des environnements aux exigences techniques et protocolaires élevées.",
+    en: "Full deployment of a professional video conferencing system for the judicial center of Andorra. A project that showcases Ontec's ability to deliver high-end solutions in demanding technical and protocol environments."
   })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
@@ -2967,8 +2981,8 @@ function CaseBatllia() {
       marginBottom: 18
     }
   }, /*#__PURE__*/React.createElement(Cine, {
-    src: "https://images.unsplash.com/photo-1634141428610-1781a3862a9b?w=900&q=80&auto=format&fit=crop",
-    alt: "Andorra la Vella",
+    src: "https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png",
+    alt: "Sala de videoconferència de la seu de justicia",
     style: {
       height: 320
     }
@@ -3009,7 +3023,12 @@ function CaseBatllia() {
       fontSize: 18,
       color: '#fff'
     }
-  }, "La Batllia d'Andorra")), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Edifici emblemàtic',
+    es: 'Edificio emblemático',
+    fr: 'Bâtiment emblématique',
+    en: 'Emblematic building'
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       width: 44,
       height: 44,
@@ -3545,12 +3564,12 @@ const BLOG = [{
     en: 'Video conferencing'
   },
   title: {
-    ca: "Sistema de videoconferència a la Batllia d'Andorra",
-    es: "Sistema de videoconferencia en la Batllia d'Andorra",
-    fr: "Système de visioconférence à la Batllia d'Andorra",
-    en: "Video conferencing system at la Batllia d'Andorra"
+    ca: "Sistema de videoconferència per a la seu de justicia d'Andorra",
+    es: "Sistema de videoconferencia para la sede de justicia de Andorra",
+    fr: "Système de visioconférence pour le siège de la justice d'Andorre",
+    en: "Video conferencing system for the judicial center of Andorra"
   },
-  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'
+  img: 'https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png'
 }, {
   date: '2024',
   tag: {
