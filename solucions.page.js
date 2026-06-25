@@ -1965,8 +1965,8 @@ const SOLS_FULL = [{
   icon: /*#__PURE__*/React.createElement(Icons.Video, null),
   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
   sub: 'Sistemes AV professionals i videoconferencia d\'alt nivell',
-  desc: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a la Batllia d'Andorra per a connexions institucionals internacionals.",
-  features: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: la Batllia d\'Andorra'],
+  desc: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a l'edifici emblemàtic de la seu de justicia per a connexions institucionals internacionals.",
+  features: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: Seu de Justicia d\'Andorra'],
   partners: ['Cisco', 'Sony', 'Samsung', 'QSC', 'Shure']
 }];
 function SolucioSection({

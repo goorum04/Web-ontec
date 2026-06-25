@@ -144,17 +144,17 @@ function SolutionsGallery() {
 }
 
 function CaseBatllia() {
-  const specs=[['Sistema','Videoconferència HD'],['Ubicació',"la Batllia d'Andorra"],['Equipament','Cisco Webex + Sony PTZ'],['Cobertura','3 sales de reunions'],['Integració','MS Teams / Zoom'],['Suport','24/7 garantit']];
+  const specs=[['Sistema','Videoconferència HD'],['Ubicació',"Edifici emblemàtic d'Andorra"],['Equipament','Cisco Webex + Sony PTZ'],['Cobertura','3 sales de reunions'],['Integració','MS Teams / Zoom'],['Suport','24/7 garantit']];
   return (
     <section style={{position:'relative',padding:'120px 0',background:'var(--panel)',borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',overflow:'hidden'}}>
       <div className="wrap-wide" style={{position:'relative'}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}} className="case-grid">
           <Reveal>
             <SectionLabel>Cas d'èxit</SectionLabel>
-            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>La Batllia<br/>d'Andorra</h2>
+            <h2 className="disp" style={{fontSize:'clamp(36px,5vw,84px)',marginBottom:24}}>Seu de Justicia<br/>d'Andorra</h2>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:24}}>
-              Instal·lació integral del sistema de videoconferència professional per als espais institucionals
-              de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions
+              Instal·lació integral d'un sistema de videoconferència professional per a la seu de justicia
+              d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions
               d'alt nivell en entorns de gran exigència tècnica i protocol·lària.
             </p>
             <p style={{fontSize:17,color:'var(--mut)',lineHeight:1.8,marginBottom:40}}>
@@ -167,12 +167,12 @@ function CaseBatllia() {
             <Reveal delay={120}>
               <Tilt max={7}>
                 <div className="glowborder" style={{position:'relative',borderRadius:20,overflow:'hidden',border:'1px solid var(--line)',marginBottom:18}}>
-                  <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferència la Batllia" style={{height:320}}/>
+                  <Cine src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop" alt="Sala de videoconferència de la seu de justicia" style={{height:320}}/>
                   <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85) 100%)'}}/>
                   <div style={{position:'absolute',bottom:24,left:24,right:24,display:'flex',alignItems:'center',justifyContent:'space-between'}}>
                     <div>
                       <div style={{fontFamily:'var(--mono)',fontSize:11,letterSpacing:'.2em',textTransform:'uppercase',color:'var(--accent-2)',marginBottom:4}}>Projecte completat</div>
-                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'#fff'}}>La Batllia d'Andorra</div>
+                      <div style={{fontFamily:'var(--disp)',fontWeight:700,fontSize:18,color:'#fff'}}>Edifici emblemàtic</div>
                     </div>
                     <div style={{width:44,height:44,borderRadius:'50%',background:'rgba(142,198,63,.2)',border:'1px solid rgba(142,198,63,.4)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent-2)'}}><Icons.Video/></div>
                   </div>
@@ -316,7 +316,7 @@ function ServicesList() {
 }
 
 const BLOG=[
-  {date:'2025',tag:'Videoconferència',title:"Sistema de videoconferència a la Batllia d'Andorra",img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
+  {date:'2025',tag:'Videoconferència',title:"Sistema de videoconferència per a la seu de justicia d'Andorra",img:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'},
   {date:'2024',tag:'IT Security',title:'Zero Trust: el nou paradigma de seguretat per a pimes',img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop'},
   {date:'2022',tag:'Domòtica',title:"La domòtica KNX arriba als edificis premium d'Andorra",img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop'},
 ];

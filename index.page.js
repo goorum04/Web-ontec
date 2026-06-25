@@ -2393,7 +2393,7 @@ function SolutionsGallery() {
   })))))))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:760px){.gal-grid{grid-template-columns:1fr!important;}}`));
 }
 function CaseBatllia() {
-  const specs = [['Sistema', 'Videoconferència HD'], ['Ubicació', "la Batllia d'Andorra"], ['Equipament', 'Cisco Webex + Sony PTZ'], ['Cobertura', '3 sales de reunions'], ['Integració', 'MS Teams / Zoom'], ['Suport', '24/7 garantit']];
+  const specs = [['Sistema', 'Videoconferència HD'], ['Ubicació', "Edifici emblemàtic d'Andorra"], ['Equipament', 'Cisco Webex + Sony PTZ'], ['Cobertura', '3 sales de reunions'], ['Integració', 'MS Teams / Zoom'], ['Suport', '24/7 garantit']];
   return /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -2422,14 +2422,14 @@ function CaseBatllia() {
       fontSize: 'clamp(36px,5vw,84px)',
       marginBottom: 24
     }
-  }, "La Batllia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"), /*#__PURE__*/React.createElement("p", {
+  }, "Seu de Justicia", /*#__PURE__*/React.createElement("br", null), "d'Andorra"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 24
     }
-  }, "Instal·lació integral del sistema de videoconferència professional per als espais institucionals de la Batllia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària."), /*#__PURE__*/React.createElement("p", {
+  }, "Instal·lació integral d'un sistema de videoconferència professional per a la seu de justicia d'Andorra. Un projecte que demostra la capacitat d'Ontec per desplegar solucions d'alt nivell en entorns de gran exigència tècnica i protocol·lària."), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
@@ -2456,7 +2456,7 @@ function CaseBatllia() {
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop",
-    alt: "Sala de videoconferència la Batllia",
+    alt: "Sala de videoconferència de la seu de justicia",
     style: {
       height: 320
     }
@@ -2492,7 +2492,7 @@ function CaseBatllia() {
       fontSize: 18,
       color: '#fff'
     }
-  }, "La Batllia d'Andorra")), /*#__PURE__*/React.createElement("div", {
+  }, "Edifici emblemàtic")), /*#__PURE__*/React.createElement("div", {
     style: {
       width: 44,
       height: 44,
@@ -2880,7 +2880,7 @@ function ServicesList() {
 const BLOG = [{
   date: '2025',
   tag: 'Videoconferència',
-  title: "Sistema de videoconferència a la Batllia d'Andorra",
+  title: "Sistema de videoconferència per a la seu de justicia d'Andorra",
   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop'
 }, {
   date: '2024',

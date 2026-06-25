@@ -1933,8 +1933,8 @@ const ARTICLES = [{
   tag: 'Videoconferencia',
   date: '2025',
   readtime: '5 min',
-  title: "Sistema de videoconferencia a la Batllia d'Andorra",
-  excerpt: "Ontec ha instalmat el sistema de videoconferencia professional per als espais institucionals de la Batllia d'Andorra, permetent connexions d'alt nivell amb organismes internacionals.",
+  title: "Sistema de videoconferencia per a la seu de justicia d'Andorra",
+  excerpt: "Ontec ha instal·lat el sistema de videoconferencia professional per als espais de l'edifici emblemàtic de la seu de justicia, permetent connexions d'alt nivell amb organismes internacionals.",
   img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80&auto=format&fit=crop',
   featured: true
 }, {
