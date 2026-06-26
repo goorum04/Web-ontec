@@ -2288,6 +2288,20 @@ const TWEAK_DEFAULTS = {
   "intensity": "cinematic"
 };
 const PARTNERS = [{
+  name: 'Zyxel',
+  cat: {
+    ca: 'Ciberseguretat',
+    es: 'Ciberseguridad',
+    fr: 'Cybersécurité',
+    en: 'Cybersecurity'
+  },
+  desc: {
+    ca: "Firewalls i xarxes segures per a empreses.",
+    es: "Firewalls y redes seguras para empresas.",
+    fr: "Pare-feu et réseaux sécurisés pour les entreprises.",
+    en: "Firewalls and secure networks for businesses."
+  }
+}, {
   name: 'Cisco',
   cat: {
     ca: 'Xarxa & Video',

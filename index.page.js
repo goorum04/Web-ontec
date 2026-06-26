@@ -3153,10 +3153,10 @@ function CiberseguretatIncibe() {
       en: 'Advanced firewall'
     },
     d: {
-      ca: 'Palo Alto Networks de nova generació.',
-      es: 'Palo Alto Networks de nueva generación.',
-      fr: 'Palo Alto Networks nouvelle génération.',
-      en: 'Next-generation Palo Alto Networks.'
+      ca: 'Zyxel & Palo Alto Networks de nova generació.',
+      es: 'Zyxel & Palo Alto Networks de nueva generación.',
+      fr: 'Zyxel & Palo Alto Networks nouvelle génération.',
+      en: 'Next-generation Zyxel & Palo Alto Networks.'
     }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Lock, null),
@@ -3445,7 +3445,7 @@ function CiberseguretatIncibe() {
   })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.incibe-grid{grid-template-columns:1fr!important;gap:48px!important;}}`));
 }
 function PartnersMarquee() {
-  const partners = ['Cisco', 'Ubiquiti', 'KNX', 'Crestron', 'HPE Aruba', 'Palo Alto', 'Lutron', 'Samsung', 'Sony', 'QSC', 'Shure'];
+  const partners = ['Zyxel', 'Cisco', 'Ubiquiti', 'KNX', 'Crestron', 'HPE Aruba', 'Palo Alto', 'Lutron', 'Samsung', 'Sony', 'QSC', 'Shure'];
   return /*#__PURE__*/React.createElement("section", {
     style: {
       borderTop: '1px solid var(--line)',
