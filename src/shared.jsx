@@ -322,7 +322,7 @@ const Icons = {
 };
 
 // Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
-const SUPORT_REMOT_EXE = 'downloads/ontec-suport-remot.exe';
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 
 function Tag({ children }) {
   return (
