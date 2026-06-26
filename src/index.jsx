@@ -222,7 +222,7 @@ function CaseBatllia() {
 
 function CiberseguretatIncibe() {
   const threats=[
-    {icon:<Icons.Shield/>,t:{ca:'Firewall avançat',es:'Firewall avanzado',fr:'Pare-feu avancé',en:'Advanced firewall'},d:{ca:'Fortinet & Palo Alto Networks de nova generació.',es:'Fortinet & Palo Alto Networks de nueva generación.',fr:'Fortinet & Palo Alto Networks nouvelle génération.',en:'Next-generation Fortinet & Palo Alto Networks.'}},
+    {icon:<Icons.Shield/>,t:{ca:'Firewall avançat',es:'Firewall avanzado',fr:'Pare-feu avancé',en:'Advanced firewall'},d:{ca:'Palo Alto Networks de nova generació.',es:'Palo Alto Networks de nueva generación.',fr:'Palo Alto Networks nouvelle génération.',en:'Next-generation Palo Alto Networks.'}},
     {icon:<Icons.Lock/>,t:{ca:'Zero Trust',es:'Zero Trust',fr:'Zero Trust',en:'Zero Trust'},d:{ca:'Arquitectura de confiança zero per a xarxes corporatives.',es:'Arquitectura de confianza cero para redes corporativas.',fr:'Architecture zéro confiance pour les réseaux d\'entreprise.',en:'Zero-trust architecture for corporate networks.'}},
     {icon:<Icons.Wifi/>,t:{ca:'SOC Monitorat',es:'SOC Monitorizado',fr:'SOC Supervisé',en:'Monitored SOC'},d:{ca:'Supervisió contínua 24/7 de la infraestructura.',es:'Supervisión continua 24/7 de la infraestructura.',fr:'Supervision continue 24/7 de l\'infrastructure.',en:'Continuous 24/7 infrastructure monitoring.'}},
     {icon:<Icons.Cpu/>,t:{ca:'Pentesting',es:'Pentesting',fr:'Pentesting',en:'Pentesting'},d:{ca:'Auditories de seguretat i proves de penetració.',es:'Auditorías de seguridad y pruebas de penetración.',fr:'Audits de sécurité et tests d\'intrusion.',en:'Security audits and penetration testing.'}},
@@ -299,7 +299,7 @@ function CiberseguretatIncibe() {
 }
 
 function PartnersMarquee() {
-  const partners=['Fortinet','Cisco','Ubiquiti','KNX','Crestron','HPE Aruba','Palo Alto','Lutron','Samsung','Sony','QSC','Shure'];
+  const partners=['Cisco','Ubiquiti','KNX','Crestron','HPE Aruba','Palo Alto','Lutron','Samsung','Sony','QSC','Shure'];
   return (
     <section style={{borderTop:'1px solid var(--line)',borderBottom:'1px solid var(--line)',background:'var(--panel)'}}>
       <div className="wrap" style={{paddingTop:28,paddingBottom:14}}>

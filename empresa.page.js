@@ -2288,20 +2288,6 @@ const TWEAK_DEFAULTS = {
   "intensity": "cinematic"
 };
 const PARTNERS = [{
-  name: 'Fortinet',
-  cat: {
-    ca: 'Ciberseguretat',
-    es: 'Ciberseguridad',
-    fr: 'Cybersécurité',
-    en: 'Cybersecurity'
-  },
-  desc: {
-    ca: "Lider mundial en seguretat de xarxa de nova generacio.",
-    es: "Líder mundial en seguridad de red de nueva generación.",
-    fr: "Leader mondial de la sécurité réseau nouvelle génération.",
-    en: "World leader in next-generation network security."
-  }
-}, {
   name: 'Cisco',
   cat: {
     ca: 'Xarxa & Video',

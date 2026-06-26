@@ -2306,18 +2306,18 @@ const SOLS_FULL = [{
     en: 'Comprehensive protection of digital infrastructure'
   },
   desc: {
-    ca: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, amb un equip certificat per l'INCIBE.",
-    es: "La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Fortinet y Palo Alto Networks, con un equipo certificado por el INCIBE.",
-    fr: "La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Fortinet et Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
-    en: "Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Fortinet and Palo Alto Networks technology, with an INCIBE-certified team."
+    ca: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Palo Alto Networks, amb un equip certificat per l'INCIBE.",
+    es: "La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Palo Alto Networks, con un equipo certificado por el INCIBE.",
+    fr: "La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec la technologie Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
+    en: "Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Palo Alto Networks technology, with an INCIBE-certified team."
   },
   features: {
-    ca: ['Firewall NGFW Fortinet & Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
-    es: ['Firewall NGFW Fortinet & Palo Alto', 'VPN y acceso remoto seguro', 'Zero Trust Network Access', 'Monitorización SOC 24/7', 'Auditorías de seguridad', 'Detección y respuesta (EDR/XDR)'],
-    fr: ['Firewall NGFW Fortinet & Palo Alto', 'VPN et accès distant sécurisé', 'Zero Trust Network Access', 'Supervision SOC 24/7', 'Audits de sécurité', 'Détection et réponse (EDR/XDR)'],
-    en: ['Firewall NGFW Fortinet & Palo Alto', 'VPN and secure remote access', 'Zero Trust Network Access', '24/7 SOC monitoring', 'Security audits', 'Detection and response (EDR/XDR)']
+    ca: ['Firewall NGFW Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
+    es: ['Firewall NGFW Palo Alto', 'VPN y acceso remoto seguro', 'Zero Trust Network Access', 'Monitorización SOC 24/7', 'Auditorías de seguridad', 'Detección y respuesta (EDR/XDR)'],
+    fr: ['Firewall NGFW Palo Alto', 'VPN et accès distant sécurisé', 'Zero Trust Network Access', 'Supervision SOC 24/7', 'Audits de sécurité', 'Détection et réponse (EDR/XDR)'],
+    en: ['Firewall NGFW Palo Alto', 'VPN and secure remote access', 'Zero Trust Network Access', '24/7 SOC monitoring', 'Security audits', 'Detection and response (EDR/XDR)']
   },
-  partners: ['Fortinet', 'Palo Alto Networks', 'Cisco']
+  partners: ['Palo Alto Networks', 'Cisco']
 }, {
   id: 'comunicacions',
   n: '02',
