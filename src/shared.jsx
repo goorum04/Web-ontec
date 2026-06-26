@@ -318,7 +318,11 @@ const Icons = {
   Lock:   () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
   Star:   () => <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
   Building:()=><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 22V12h6v10"/><path d="M3 9h18"/></svg>,
+  Download:(p)=><svg width={(p&&p.s)||16} height={(p&&p.s)||16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/ontec-suport-remot.exe';
 
 function Tag({ children }) {
   return (
@@ -426,6 +430,14 @@ function Nav({ activePage = '' }) {
         <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexShrink: 0 }} className="nav-desk">
           <LangSwitcher light={lightText} />
           <a href="tel:+37688559" style={{ fontFamily: 'var(--mono)', fontSize: 11.5, color: textMut, textDecoration: 'none', letterSpacing: '.04em' }}>+376 88 55 99</a>
+          <a href={SUPORT_REMOT_EXE} download className="btn btn-ghost"
+            title={tt({ ca: 'Descarrega l\'eina de suport remot (Windows)', es: 'Descarga la herramienta de soporte remoto (Windows)', fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)', en: 'Download the remote support tool (Windows)' })}
+            style={{ padding: '10px 16px', display: 'inline-flex', alignItems: 'center', gap: 7,
+              border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`, borderRadius: 10,
+              fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase',
+              color: textInk, textDecoration: 'none' }}>
+            <Icons.Download s={15} /> {tt({ ca: 'Suport remot', es: 'Soporte remoto', fr: 'Assistance', en: 'Remote support' })}
+          </a>
           <a href="contacta.html" className="btn btn-primary" style={{ padding: '11px 20px' }}>{tt({ ca: 'Contacta', es: 'Contacto', fr: 'Contact', en: 'Contact' })}</a>
         </div>
         <button onClick={() => setMob(!mob)} className="nav-mob"
@@ -441,7 +453,10 @@ function Nav({ activePage = '' }) {
               color: 'var(--ink)', textDecoration: 'none', borderBottom: '1px solid var(--line-soft)' }}>{tt(item.label)}</a>
           ))}
           <div style={{ marginTop: 22, display: 'flex', justifyContent: 'center' }}><LangSwitcher compact /></div>
-          <a href="contacta.html" className="btn btn-primary" style={{ marginTop: 18, width: '100%', justifyContent: 'center' }}>{tt({ ca: 'Contacta ara', es: 'Contacta ahora', fr: 'Contactez-nous', en: 'Get in touch' })}</a>
+          <a href={SUPORT_REMOT_EXE} download className="btn btn-ghost" style={{ marginTop: 18, width: '100%', justifyContent: 'center', gap: 8 }}>
+            <Icons.Download s={17} /> {tt({ ca: 'Suport remot (Windows)', es: 'Soporte remoto (Windows)', fr: 'Assistance (Windows)', en: 'Remote support (Windows)' })}
+          </a>
+          <a href="contacta.html" className="btn btn-primary" style={{ marginTop: 12, width: '100%', justifyContent: 'center' }}>{tt({ ca: 'Contacta ara', es: 'Contacta ahora', fr: 'Contactez-nous', en: 'Get in touch' })}</a>
         </div>
       )}
       <style>{`@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`}</style>
