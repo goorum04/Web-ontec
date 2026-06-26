@@ -14,6 +14,127 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
+
+/* ════════════════════════════════════════════════════════════════════════════
+   i18n — multilanguage (Català · Español · Français · English)
+   Lightweight pub/sub store + useLang() hook + tt({ca,es,fr,en}) helper.
+   Persisted in localStorage; syncs <html lang>. Page roots call useLang() so
+   tt(...) calls re-evaluate on language change.
+   ════════════════════════════════════════════════════════════════════════════ */
+const LANGS = [{
+  code: 'ca',
+  label: 'CA',
+  name: 'Català'
+}, {
+  code: 'es',
+  label: 'ES',
+  name: 'Español'
+}, {
+  code: 'fr',
+  label: 'FR',
+  name: 'Français'
+}, {
+  code: 'en',
+  label: 'EN',
+  name: 'English'
+}];
+const LANG_CODES = LANGS.map(l => l.code);
+let CURRENT_LANG = (() => {
+  try {
+    const saved = localStorage.getItem('ontec_lang');
+    if (saved && LANG_CODES.includes(saved)) return saved;
+    const nav = (navigator.language || 'ca').slice(0, 2).toLowerCase();
+    if (LANG_CODES.includes(nav)) return nav;
+  } catch (e) {}
+  return 'ca';
+})();
+const LANG_LISTENERS = new Set();
+function setLang(code) {
+  if (!LANG_CODES.includes(code) || code === CURRENT_LANG) return;
+  CURRENT_LANG = code;
+  try {
+    localStorage.setItem('ontec_lang', code);
+  } catch (e) {}
+  try {
+    document.documentElement.setAttribute('lang', code);
+  } catch (e) {}
+  LANG_LISTENERS.forEach(fn => fn(code));
+}
+function getLang() {
+  return CURRENT_LANG;
+}
+
+/* translate: tt({ca, es, fr, en}) → value for active language (ca fallback).
+   value may be a string or a JSX node. Plain strings pass through unchanged. */
+function tt(obj) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'object' && !obj.ca && !obj.es && !obj.fr && !obj.en) return obj; // JSX/element
+  return obj[CURRENT_LANG] != null ? obj[CURRENT_LANG] : obj.ca != null ? obj.ca : '';
+}
+
+/* hook: subscribe a component to language changes */
+function useLang() {
+  const [lang, setL] = useState(CURRENT_LANG);
+  useEffect(() => {
+    const fn = code => setL(code);
+    LANG_LISTENERS.add(fn);
+    try {
+      document.documentElement.setAttribute('lang', CURRENT_LANG);
+    } catch (e) {}
+    return () => LANG_LISTENERS.delete(fn);
+  }, []);
+  return [lang, setLang];
+}
+
+/* ── Language switcher (segmented CA · ES · FR · EN) ── */
+function LangSwitcher({
+  light = false,
+  compact = false
+}) {
+  const [lang] = useLang();
+  const idle = light ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const hover = light ? '#ffffff' : 'var(--ink)';
+  return /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "Idioma",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 2,
+      border: `1px solid ${light ? 'rgba(255,255,255,.28)' : 'var(--line)'}`,
+      borderRadius: 999,
+      padding: 3
+    }
+  }, LANGS.map(l => {
+    const on = lang === l.code;
+    return /*#__PURE__*/React.createElement("button", {
+      key: l.code,
+      onClick: () => setLang(l.code),
+      "aria-pressed": on,
+      title: l.name,
+      style: {
+        fontFamily: 'var(--mono)',
+        fontSize: 10.5,
+        letterSpacing: '.04em',
+        fontWeight: 700,
+        padding: compact ? '7px 10px' : '6px 9px',
+        borderRadius: 999,
+        border: 'none',
+        cursor: 'pointer',
+        background: on ? 'var(--accent)' : 'transparent',
+        color: on ? 'var(--accent-ink)' : idle,
+        transition: 'background .18s, color .18s'
+      },
+      onMouseEnter: e => {
+        if (!on) e.currentTarget.style.color = hover;
+      },
+      onMouseLeave: e => {
+        if (!on) e.currentTarget.style.color = idle;
+      }
+    }, l.label);
+  }));
+}
 const GLOBAL_CSS = `
 :root{
   --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
@@ -720,8 +841,30 @@ const Icons = {
     d: "M9 22V12h6v10"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M3 9h18"
+  })),
+  Download: p => /*#__PURE__*/React.createElement("svg", {
+    width: p && p.s || 16,
+    height: p && p.s || 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "7 10 12 15 17 10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "15",
+    x2: "12",
+    y2: "3"
   }))
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 function Tag({
   children
 }) {
@@ -793,49 +936,124 @@ function OntecLogo({
   }, "Ontec"));
 }
 const NAV_ITEMS = [{
-  label: 'Empresa',
+  id: 'Empresa',
+  label: {
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  },
   href: 'empresa.html',
   children: [{
-    label: 'Partners',
+    label: {
+      ca: 'Partners',
+      es: 'Partners',
+      fr: 'Partenaires',
+      en: 'Partners'
+    },
     href: 'empresa.html#partners'
   }]
 }, {
-  label: 'Solucions',
+  id: 'Solucions',
+  label: {
+    ca: 'Solucions',
+    es: 'Soluciones',
+    fr: 'Solutions',
+    en: 'Solutions'
+  },
   href: 'solucions.html',
   children: [{
-    label: 'IT Security',
+    label: {
+      ca: 'IT Security',
+      es: 'IT Security',
+      fr: 'IT Security',
+      en: 'IT Security'
+    },
     href: 'solucions.html#it-security'
   }, {
-    label: 'Comunicacions',
+    label: {
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    },
     href: 'solucions.html#comunicacions'
   }, {
-    label: 'Automatització',
+    label: {
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    },
     href: 'solucions.html#automatitzacio'
   }, {
-    label: 'Audiovisuals',
+    label: {
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    },
     href: 'solucions.html#audiovisuals'
   }]
 }, {
-  label: 'Serveis',
+  id: 'Serveis',
+  label: {
+    ca: 'Serveis',
+    es: 'Servicios',
+    fr: 'Services',
+    en: 'Services'
+  },
   href: 'serveis.html',
   children: [{
-    label: 'Ingenierías',
+    label: {
+      ca: 'Enginyeries',
+      es: 'Ingenierías',
+      fr: 'Ingénieries',
+      en: 'Engineering'
+    },
     href: 'serveis.html#ingenieries'
   }, {
-    label: 'Arquitectures',
+    label: {
+      ca: 'Arquitectures',
+      es: 'Arquitecturas',
+      fr: 'Architectures',
+      en: 'Architecture'
+    },
     href: 'serveis.html#arquitectures'
   }, {
-    label: 'Instal·ladors',
+    label: {
+      ca: 'Instal·ladors',
+      es: 'Instaladores',
+      fr: 'Installateurs',
+      en: 'Installers'
+    },
     href: 'serveis.html#installadors'
   }, {
-    label: "Disseny d'Interiors",
+    label: {
+      ca: "Disseny d'Interiors",
+      es: 'Diseño de Interiores',
+      fr: "Design d'Intérieur",
+      en: 'Interior Design'
+    },
     href: 'serveis.html#disseny'
   }]
 }, {
-  label: 'Blog',
+  id: 'Blog',
+  label: {
+    ca: 'Blog',
+    es: 'Blog',
+    fr: 'Blog',
+    en: 'Blog'
+  },
   href: 'blog.html'
 }, {
-  label: 'Contacta',
+  id: 'Contacta',
+  label: {
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  },
   href: 'contacta.html'
 }];
 function Nav({
@@ -844,6 +1062,7 @@ function Nav({
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
   const [drop, setDrop] = useState(null);
+  useLang();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn);
@@ -906,25 +1125,25 @@ function Nav({
     },
     className: "nav-desk"
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("div", {
-    key: item.label,
+    key: item.id,
     style: {
       position: 'relative'
     },
-    onMouseEnter: () => item.children && setDrop(item.label),
+    onMouseEnter: () => item.children && setDrop(item.id),
     onMouseLeave: () => setDrop(null)
   }, /*#__PURE__*/React.createElement("a", {
     href: item.href,
     style: {
       ...linkBase,
-      color: activePage === item.label ? activeCol : textMut
+      color: activePage === item.id ? activeCol : textMut
     },
     onMouseEnter: e => {
-      if (activePage !== item.label) e.currentTarget.style.color = textInk;
+      if (activePage !== item.id) e.currentTarget.style.color = textInk;
     },
     onMouseLeave: e => {
-      e.currentTarget.style.color = activePage === item.label ? activeCol : textMut;
+      e.currentTarget.style.color = activePage === item.id ? activeCol : textMut;
     }
-  }, item.label), item.children && drop === item.label && /*#__PURE__*/React.createElement("div", {
+  }, tt(item.label)), item.children && drop === item.id && /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '100%',
@@ -937,7 +1156,7 @@ function Nav({
       boxShadow: '0 24px 60px rgba(19,33,27,.16)'
     }
   }, item.children.map(ch => /*#__PURE__*/React.createElement("a", {
-    key: ch.label,
+    key: ch.href,
     href: ch.href,
     style: {
       display: 'block',
@@ -956,15 +1175,17 @@ function Nav({
       e.currentTarget.style.color = 'var(--mut)';
       e.currentTarget.style.background = 'transparent';
     }
-  }, ch.label)))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(ch.label))))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 16,
+      gap: 14,
       alignItems: 'center',
       flexShrink: 0
     },
     className: "nav-desk"
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    light: lightText
+  }), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
     style: {
       fontFamily: 'var(--mono)',
@@ -974,12 +1195,48 @@ function Nav({
       letterSpacing: '.04em'
     }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    title: tt({
+      ca: 'Descarrega l\'eina de suport remot (Windows)',
+      es: 'Descarga la herramienta de soporte remoto (Windows)',
+      fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)',
+      en: 'Download the remote support tool (Windows)'
+    }),
+    style: {
+      padding: '10px 16px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`,
+      borderRadius: 10,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      textTransform: 'uppercase',
+      color: textInk,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 15
+  }), " ", tt({
+    ca: 'Suport remot',
+    es: 'Soporte remoto',
+    fr: 'Assistance',
+    en: 'Remote support'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
       padding: '11px 20px'
     }
-  }, "Contacta")), /*#__PURE__*/React.createElement("button", {
+  }, tt({
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  }))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setMob(!mob),
     className: "nav-mob",
     style: {
@@ -999,7 +1256,7 @@ function Nav({
       padding: '14px 40px 28px'
     }
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("a", {
-    key: item.label,
+    key: item.id,
     href: item.href,
     className: "disp",
     style: {
@@ -1010,17 +1267,48 @@ function Nav({
       textDecoration: 'none',
       borderBottom: '1px solid var(--line-soft)'
     }
-  }, item.label)), /*#__PURE__*/React.createElement("a", {
+  }, tt(item.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 22,
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    compact: true
+  })), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    style: {
+      marginTop: 18,
+      width: '100%',
+      justifyContent: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 17
+  }), " ", tt({
+    ca: 'Suport remot (Windows)',
+    es: 'Soporte remoto (Windows)',
+    fr: 'Assistance (Windows)',
+    en: 'Remote support (Windows)'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 20,
+      marginTop: 12,
       width: '100%',
       justifyContent: 'center'
     }
-  }, "Contacta ara")), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
+  }, tt({
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Get in touch'
+  }))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
 }
 function Footer() {
+  useLang();
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       position: 'relative',
@@ -1036,7 +1324,27 @@ function Footer() {
     }
   }, /*#__PURE__*/React.createElement(Marquee, {
     big: true,
-    items: ['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']
+    items: [tt({
+      ca: 'Sistemes tecnològics',
+      es: 'Sistemas tecnológicos',
+      fr: 'Systèmes technologiques',
+      en: 'Technology systems'
+    }), 'IT Security', tt({
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    }), tt({
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    }), tt({
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    }), 'Andorra']
   })), /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
@@ -1065,7 +1373,12 @@ function Footer() {
       lineHeight: 1.7,
       maxWidth: 320
     }
-  }, "Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.',
+    es: 'Distribución e integración de sistemas tecnológicos avanzados. Andorra, desde 2016.',
+    fr: 'Distribution et intégration de systèmes technologiques avancés. Andorre, depuis 2016.',
+    en: 'Distribution and integration of advanced technology systems. Andorra, since 2016.'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 26,
       display: 'flex',
@@ -1077,7 +1390,12 @@ function Footer() {
     style: {
       padding: '12px 22px'
     }
-  }, "Comença un projecte ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Comença un projecte',
+    es: 'Empieza un proyecto',
+    fr: 'Démarrer un projet',
+    en: 'Start a project'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
@@ -1085,27 +1403,37 @@ function Footer() {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Navegació"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Navegació',
+    es: 'Navegación',
+    fr: 'Navigation',
+    en: 'Navigation'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 12
     }
   }, NAV_ITEMS.map(l => /*#__PURE__*/React.createElement("a", {
-    key: l.label,
+    key: l.id,
     href: l.href,
     style: {
       fontSize: 15,
       color: 'rgba(238,241,234,.7)',
       textDecoration: 'none'
     }
-  }, l.label)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, tt(l.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Contacte"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Contacte',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1139,7 +1467,12 @@ function Footer() {
       color: 'rgba(238,241,234,.45)',
       letterSpacing: '.05em'
     }
-  }, /*#__PURE__*/React.createElement("span", null, "© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats"), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
+  }, /*#__PURE__*/React.createElement("span", null, tt({
+    ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats',
+    es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados',
+    fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés',
+    en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved'
+  })), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
 }
 function Cine({
   src,
@@ -1365,7 +1698,13 @@ Object.assign(window, {
   Scramble,
   CountUp,
   Magnetic,
-  Tilt
+  Tilt,
+  LANGS,
+  tt,
+  useLang,
+  setLang,
+  getLang,
+  LangSwitcher
 });
 
 // tweaks-panel.jsx
@@ -1505,6 +1844,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -1518,10 +1875,10 @@ function useTweaks(defaults) {
       ...prev,
       ...edits
     }));
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_set_keys',
       edits
-    }, '*');
+    });
   }, []);
   return [values, setTweak];
 }
@@ -1571,20 +1928,22 @@ function TweaksPanel({
   }, [open, clampToViewport]);
   React.useEffect(() => {
     const onMsg = e => {
+      if (!__ontecTrusted(e)) return;
+      __ontecHostOrigin = e.origin;
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_available'
-    }, '*');
+    });
     return () => window.removeEventListener('message', onMsg);
   }, []);
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_dismissed'
-    }, '*');
+    });
   };
   const onDragStart = e => {
     const panel = dragRef.current;
@@ -1931,41 +2290,206 @@ const TWEAK_DEFAULTS = {
 const SVCS = [{
   id: 'ingenieries',
   n: '01',
-  t: 'Ingenieries',
+  title: 'Ingenieries',
   icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
+  titleI18n: {
+    ca: 'Ingenieries',
+    es: 'Ingenierías',
+    fr: 'Ingénieries',
+    en: 'Engineering'
+  },
   img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80&auto=format&fit=crop',
-  sub: 'Prescripcio, especificacio i assistencia tecnica',
-  desc: "Col laborem amb ingenieries en la definicio tecnica dels sistemes, l'especificacio d'equips i l'assistencia durant totes les fases del projecte.",
-  points: ["Prescripcio de sistemes IT i AV", "Especificacio d'equips i materials", "Assistencia tecnica en obra", "Dossiers tecnics i documentacio", "Formacio per a l'equip tecnic"]
+  sub: {
+    ca: 'Prescripcio, especificacio i assistencia tecnica',
+    es: 'Prescripción, especificación y asistencia técnica',
+    fr: 'Prescription, spécification et assistance technique',
+    en: 'Specification, prescription and technical assistance'
+  },
+  desc: {
+    ca: "Col laborem amb ingenieries en la definicio tecnica dels sistemes, l'especificacio d'equips i l'assistencia durant totes les fases del projecte.",
+    es: "Colaboramos con ingenierías en la definición técnica de los sistemas, la especificación de equipos y la asistencia durante todas las fases del proyecto.",
+    fr: "Nous collaborons avec les bureaux d'ingénierie sur la définition technique des systèmes, la spécification des équipements et l'assistance tout au long des phases du projet.",
+    en: "We work with engineering firms on the technical definition of systems, equipment specification and assistance throughout every phase of the project."
+  },
+  points: [{
+    ca: "Prescripcio de sistemes IT i AV",
+    es: "Prescripción de sistemas IT y AV",
+    fr: "Prescription de systèmes IT et AV",
+    en: "IT and AV system specification"
+  }, {
+    ca: "Especificacio d'equips i materials",
+    es: "Especificación de equipos y materiales",
+    fr: "Spécification d'équipements et de matériaux",
+    en: "Equipment and materials specification"
+  }, {
+    ca: "Assistencia tecnica en obra",
+    es: "Asistencia técnica en obra",
+    fr: "Assistance technique sur chantier",
+    en: "On-site technical assistance"
+  }, {
+    ca: "Dossiers tecnics i documentacio",
+    es: "Dossieres técnicos y documentación",
+    fr: "Dossiers techniques et documentation",
+    en: "Technical dossiers and documentation"
+  }, {
+    ca: "Formacio per a l'equip tecnic",
+    es: "Formación para el equipo técnico",
+    fr: "Formation pour l'équipe technique",
+    en: "Training for the technical team"
+  }]
 }, {
   id: 'arquitectures',
   n: '02',
-  t: 'Arquitectures',
+  title: 'Arquitectures',
   icon: /*#__PURE__*/React.createElement(Icons.Building, null),
+  titleI18n: {
+    ca: 'Arquitectures',
+    es: 'Arquitecturas',
+    fr: 'Architectures',
+    en: 'Architecture'
+  },
   img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80&auto=format&fit=crop',
-  sub: 'Tecnologia integrada des de la fase de projecte',
-  desc: "Treballem amb equips d'arquitectura per integrar la tecnologia des del disseny inicial, assegurant que els sistemes s'integrin de forma optima en l'espai.",
-  points: ["Consulta en fase de projecte", "Disseny de passadissos i infraestructura", "Integracio estetica de dispositius", "Coordinacio amb altres industrials", "Pressupost de tecnologia per al projecte"]
+  sub: {
+    ca: 'Tecnologia integrada des de la fase de projecte',
+    es: 'Tecnología integrada desde la fase de proyecto',
+    fr: 'Technologie intégrée dès la phase de projet',
+    en: 'Technology integrated from the design phase'
+  },
+  desc: {
+    ca: "Treballem amb equips d'arquitectura per integrar la tecnologia des del disseny inicial, assegurant que els sistemes s'integrin de forma optima en l'espai.",
+    es: "Trabajamos con equipos de arquitectura para integrar la tecnología desde el diseño inicial, asegurando que los sistemas se integren de forma óptima en el espacio.",
+    fr: "Nous travaillons avec les équipes d'architecture pour intégrer la technologie dès la conception initiale, en garantissant que les systèmes s'intègrent de manière optimale dans l'espace.",
+    en: "We work with architecture teams to integrate technology from the initial design, ensuring systems blend optimally into the space."
+  },
+  points: [{
+    ca: "Consulta en fase de projecte",
+    es: "Consultoría en fase de proyecto",
+    fr: "Conseil en phase de projet",
+    en: "Consulting during the design phase"
+  }, {
+    ca: "Disseny de passadissos i infraestructura",
+    es: "Diseño de pasillos e infraestructura",
+    fr: "Conception des passages et de l'infrastructure",
+    en: "Design of routing and infrastructure"
+  }, {
+    ca: "Integracio estetica de dispositius",
+    es: "Integración estética de dispositivos",
+    fr: "Intégration esthétique des dispositifs",
+    en: "Aesthetic integration of devices"
+  }, {
+    ca: "Coordinacio amb altres industrials",
+    es: "Coordinación con otros industriales",
+    fr: "Coordination avec les autres corps de métier",
+    en: "Coordination with other trades"
+  }, {
+    ca: "Pressupost de tecnologia per al projecte",
+    es: "Presupuesto de tecnología para el proyecto",
+    fr: "Budget technologique pour le projet",
+    en: "Technology budget for the project"
+  }]
 }, {
   id: 'installadors',
   n: '03',
-  t: 'Installadors',
+  title: 'Installadors',
   icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
+  titleI18n: {
+    ca: 'Installadors',
+    es: 'Instaladores',
+    fr: 'Installateurs',
+    en: 'Installers'
+  },
   img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=900&q=80&auto=format&fit=crop',
-  sub: 'Subministre, preconfiguracio i suport en obra',
-  desc: "Subministrem i preconfigurem equips per a installadors, oferint suport tecnic durant la installacio i la posada en marxa dels sistemes.",
-  points: ["Subministre d'equips certificats", "Preconfiguracio de dispositius", "Suport tecnic en obra", "Posada en marxa i configuracio", "Formacio i certificacio"]
+  sub: {
+    ca: 'Subministre, preconfiguracio i suport en obra',
+    es: 'Suministro, preconfiguración y soporte en obra',
+    fr: 'Fourniture, préconfiguration et support sur chantier',
+    en: 'Supply, preconfiguration and on-site support'
+  },
+  desc: {
+    ca: "Subministrem i preconfigurem equips per a installadors, oferint suport tecnic durant la installacio i la posada en marxa dels sistemes.",
+    es: "Suministramos y preconfiguramos equipos para instaladores, ofreciendo soporte técnico durante la instalación y la puesta en marcha de los sistemas.",
+    fr: "Nous fournissons et préconfigurons les équipements pour les installateurs, en offrant un support technique pendant l'installation et la mise en service des systèmes.",
+    en: "We supply and preconfigure equipment for installers, providing technical support during installation and system commissioning."
+  },
+  points: [{
+    ca: "Subministre d'equips certificats",
+    es: "Suministro de equipos certificados",
+    fr: "Fourniture d'équipements certifiés",
+    en: "Supply of certified equipment"
+  }, {
+    ca: "Preconfiguracio de dispositius",
+    es: "Preconfiguración de dispositivos",
+    fr: "Préconfiguration des dispositifs",
+    en: "Device preconfiguration"
+  }, {
+    ca: "Suport tecnic en obra",
+    es: "Soporte técnico en obra",
+    fr: "Support technique sur chantier",
+    en: "On-site technical support"
+  }, {
+    ca: "Posada en marxa i configuracio",
+    es: "Puesta en marcha y configuración",
+    fr: "Mise en service et configuration",
+    en: "Commissioning and configuration"
+  }, {
+    ca: "Formacio i certificacio",
+    es: "Formación y certificación",
+    fr: "Formation et certification",
+    en: "Training and certification"
+  }]
 }, {
   id: 'disseny',
   n: '04',
-  t: "Disseny d'Interiors",
+  title: "Disseny d'Interiors",
   icon: /*#__PURE__*/React.createElement(Icons.Screen, null),
+  titleI18n: {
+    ca: "Disseny d'Interiors",
+    es: "Diseño de Interiores",
+    fr: "Design d'Intérieur",
+    en: "Interior Design"
+  },
   img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80&auto=format&fit=crop',
-  sub: "Tecnologia invisible, part del disseny",
-  desc: "Assessorem dissenyadors d'interiors en la seleccio i integracio de tecnologia que es fongui amb l'estetica del projecte sense comprometre les prestacions.",
-  points: ["Seleccio de dispositius discrets", "Pantalles i panells integrats", "Il luminacio i control ambiental", "Cable management estetic", "Solucions sense fils quan es possible"]
+  sub: {
+    ca: "Tecnologia invisible, part del disseny",
+    es: "Tecnología invisible, parte del diseño",
+    fr: "Technologie invisible, partie du design",
+    en: "Invisible technology, part of the design"
+  },
+  desc: {
+    ca: "Assessorem dissenyadors d'interiors en la seleccio i integracio de tecnologia que es fongui amb l'estetica del projecte sense comprometre les prestacions.",
+    es: "Asesoramos a diseñadores de interiores en la selección e integración de tecnología que se fusione con la estética del proyecto sin comprometer las prestaciones.",
+    fr: "Nous conseillons les designers d'intérieur dans la sélection et l'intégration de technologies qui se fondent dans l'esthétique du projet sans compromettre les performances.",
+    en: "We advise interior designers on selecting and integrating technology that blends with the project's aesthetic without compromising performance."
+  },
+  points: [{
+    ca: "Seleccio de dispositius discrets",
+    es: "Selección de dispositivos discretos",
+    fr: "Sélection de dispositifs discrets",
+    en: "Selection of discreet devices"
+  }, {
+    ca: "Pantalles i panells integrats",
+    es: "Pantallas y paneles integrados",
+    fr: "Écrans et panneaux intégrés",
+    en: "Integrated screens and panels"
+  }, {
+    ca: "Il luminacio i control ambiental",
+    es: "Iluminación y control ambiental",
+    fr: "Éclairage et contrôle d'ambiance",
+    en: "Lighting and ambient control"
+  }, {
+    ca: "Cable management estetic",
+    es: "Cable management estético",
+    fr: "Gestion esthétique des câbles",
+    en: "Aesthetic cable management"
+  }, {
+    ca: "Solucions sense fils quan es possible",
+    es: "Soluciones inalámbricas cuando es posible",
+    fr: "Solutions sans fil lorsque c'est possible",
+    en: "Wireless solutions where possible"
+  }]
 }];
 function App() {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -1976,9 +2500,24 @@ function App() {
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Serveis"
   }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Serveis · Adaptat a cada sector",
-    title: "Per al teu sector",
-    sub: "Solucions tecnologiques adaptades a cada tipus de client: ingenieries, arquitectures, installadors i dissenyadors d'interiors.",
+    kicker: tt({
+      ca: "Serveis · Adaptat a cada sector",
+      es: "Servicios · Adaptado a cada sector",
+      fr: "Services · Adapté à chaque secteur",
+      en: "Services · Tailored to each sector"
+    }),
+    title: tt({
+      ca: "Per al teu sector",
+      es: "Para tu sector",
+      fr: "Pour votre secteur",
+      en: "For your sector"
+    }),
+    sub: tt({
+      ca: "Solucions tecnologiques adaptades a cada tipus de client: ingenieries, arquitectures, installadors i dissenyadors d'interiors.",
+      es: "Soluciones tecnológicas adaptadas a cada tipo de cliente: ingenierías, arquitecturas, instaladores y diseñadores de interiores.",
+      fr: "Des solutions technologiques adaptées à chaque type de client : ingénieries, architectures, installateurs et designers d'intérieur.",
+      en: "Technology solutions tailored to each type of client: engineering firms, architects, installers and interior designers."
+    }),
     img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1800&q=80&auto=format&fit=crop"
   }), SVCS.map((s, i) => /*#__PURE__*/React.createElement("section", {
     key: s.id,
@@ -1997,13 +2536,18 @@ function App() {
       alignItems: 'center'
     },
     className: "srv-grid"
-  }, i % 2 === 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — Serveis"), /*#__PURE__*/React.createElement("h2", {
+  }, i % 2 === 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", tt({
+    ca: "Serveis",
+    es: "Servicios",
+    fr: "Services",
+    en: "Services"
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,5vw,72px)',
       marginBottom: 12
     }
-  }, s.t), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.titleI18n)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--accent)',
@@ -2011,14 +2555,14 @@ function App() {
       letterSpacing: '.04em',
       marginBottom: 20
     }
-  }, s.sub), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.sub)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 28
     }
-  }, s.desc), /*#__PURE__*/React.createElement("ul", {
+  }, tt(s.desc)), /*#__PURE__*/React.createElement("ul", {
     style: {
       listStyle: 'none',
       marginBottom: 36
@@ -2037,10 +2581,15 @@ function App() {
     style: {
       color: 'var(--accent)'
     }
-  }, /*#__PURE__*/React.createElement(Icons.Check, null)), p))), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(Icons.Check, null)), tt(p)))), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
-  }, "Parla amb nosaltres ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: "Parla amb nosaltres",
+    es: "Habla con nosotros",
+    fr: "Parlez avec nous",
+    en: "Talk to us"
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   }))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
@@ -2052,7 +2601,7 @@ function App() {
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: s.img,
-    alt: s.t,
+    alt: s.title,
     style: {
       height: 460
     }
@@ -2066,17 +2615,22 @@ function App() {
     }
   }, /*#__PURE__*/React.createElement(Cine, {
     src: s.img,
-    alt: s.t,
+    alt: s.title,
     style: {
       height: 460
     }
-  }))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — Serveis"), /*#__PURE__*/React.createElement("h2", {
+  }))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", tt({
+    ca: "Serveis",
+    es: "Servicios",
+    fr: "Services",
+    en: "Services"
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,5vw,72px)',
       marginBottom: 12
     }
-  }, s.t), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.titleI18n)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 14,
       color: 'var(--accent)',
@@ -2084,14 +2638,14 @@ function App() {
       letterSpacing: '.04em',
       marginBottom: 20
     }
-  }, s.sub), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.sub)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 28
     }
-  }, s.desc), /*#__PURE__*/React.createElement("ul", {
+  }, tt(s.desc)), /*#__PURE__*/React.createElement("ul", {
     style: {
       listStyle: 'none',
       marginBottom: 36
@@ -2110,10 +2664,15 @@ function App() {
     style: {
       color: 'var(--accent)'
     }
-  }, /*#__PURE__*/React.createElement(Icons.Check, null)), p))), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(Icons.Check, null)), tt(p)))), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
-  }, "Parla amb nosaltres ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: "Parla amb nosaltres",
+    es: "Habla con nosotros",
+    fr: "Parlez avec nous",
+    en: "Talk to us"
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })))))), /*#__PURE__*/React.createElement("style", null, `.srv-grid{@media(max-width:860px){grid-template-columns:1fr!important;}}`))));
 }

@@ -14,6 +14,127 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
+
+/* ════════════════════════════════════════════════════════════════════════════
+   i18n — multilanguage (Català · Español · Français · English)
+   Lightweight pub/sub store + useLang() hook + tt({ca,es,fr,en}) helper.
+   Persisted in localStorage; syncs <html lang>. Page roots call useLang() so
+   tt(...) calls re-evaluate on language change.
+   ════════════════════════════════════════════════════════════════════════════ */
+const LANGS = [{
+  code: 'ca',
+  label: 'CA',
+  name: 'Català'
+}, {
+  code: 'es',
+  label: 'ES',
+  name: 'Español'
+}, {
+  code: 'fr',
+  label: 'FR',
+  name: 'Français'
+}, {
+  code: 'en',
+  label: 'EN',
+  name: 'English'
+}];
+const LANG_CODES = LANGS.map(l => l.code);
+let CURRENT_LANG = (() => {
+  try {
+    const saved = localStorage.getItem('ontec_lang');
+    if (saved && LANG_CODES.includes(saved)) return saved;
+    const nav = (navigator.language || 'ca').slice(0, 2).toLowerCase();
+    if (LANG_CODES.includes(nav)) return nav;
+  } catch (e) {}
+  return 'ca';
+})();
+const LANG_LISTENERS = new Set();
+function setLang(code) {
+  if (!LANG_CODES.includes(code) || code === CURRENT_LANG) return;
+  CURRENT_LANG = code;
+  try {
+    localStorage.setItem('ontec_lang', code);
+  } catch (e) {}
+  try {
+    document.documentElement.setAttribute('lang', code);
+  } catch (e) {}
+  LANG_LISTENERS.forEach(fn => fn(code));
+}
+function getLang() {
+  return CURRENT_LANG;
+}
+
+/* translate: tt({ca, es, fr, en}) → value for active language (ca fallback).
+   value may be a string or a JSX node. Plain strings pass through unchanged. */
+function tt(obj) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'object' && !obj.ca && !obj.es && !obj.fr && !obj.en) return obj; // JSX/element
+  return obj[CURRENT_LANG] != null ? obj[CURRENT_LANG] : obj.ca != null ? obj.ca : '';
+}
+
+/* hook: subscribe a component to language changes */
+function useLang() {
+  const [lang, setL] = useState(CURRENT_LANG);
+  useEffect(() => {
+    const fn = code => setL(code);
+    LANG_LISTENERS.add(fn);
+    try {
+      document.documentElement.setAttribute('lang', CURRENT_LANG);
+    } catch (e) {}
+    return () => LANG_LISTENERS.delete(fn);
+  }, []);
+  return [lang, setLang];
+}
+
+/* ── Language switcher (segmented CA · ES · FR · EN) ── */
+function LangSwitcher({
+  light = false,
+  compact = false
+}) {
+  const [lang] = useLang();
+  const idle = light ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const hover = light ? '#ffffff' : 'var(--ink)';
+  return /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "Idioma",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 2,
+      border: `1px solid ${light ? 'rgba(255,255,255,.28)' : 'var(--line)'}`,
+      borderRadius: 999,
+      padding: 3
+    }
+  }, LANGS.map(l => {
+    const on = lang === l.code;
+    return /*#__PURE__*/React.createElement("button", {
+      key: l.code,
+      onClick: () => setLang(l.code),
+      "aria-pressed": on,
+      title: l.name,
+      style: {
+        fontFamily: 'var(--mono)',
+        fontSize: 10.5,
+        letterSpacing: '.04em',
+        fontWeight: 700,
+        padding: compact ? '7px 10px' : '6px 9px',
+        borderRadius: 999,
+        border: 'none',
+        cursor: 'pointer',
+        background: on ? 'var(--accent)' : 'transparent',
+        color: on ? 'var(--accent-ink)' : idle,
+        transition: 'background .18s, color .18s'
+      },
+      onMouseEnter: e => {
+        if (!on) e.currentTarget.style.color = hover;
+      },
+      onMouseLeave: e => {
+        if (!on) e.currentTarget.style.color = idle;
+      }
+    }, l.label);
+  }));
+}
 const GLOBAL_CSS = `
 :root{
   --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
@@ -720,8 +841,30 @@ const Icons = {
     d: "M9 22V12h6v10"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M3 9h18"
+  })),
+  Download: p => /*#__PURE__*/React.createElement("svg", {
+    width: p && p.s || 16,
+    height: p && p.s || 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "7 10 12 15 17 10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "15",
+    x2: "12",
+    y2: "3"
   }))
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 function Tag({
   children
 }) {
@@ -793,49 +936,124 @@ function OntecLogo({
   }, "Ontec"));
 }
 const NAV_ITEMS = [{
-  label: 'Empresa',
+  id: 'Empresa',
+  label: {
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  },
   href: 'empresa.html',
   children: [{
-    label: 'Partners',
+    label: {
+      ca: 'Partners',
+      es: 'Partners',
+      fr: 'Partenaires',
+      en: 'Partners'
+    },
     href: 'empresa.html#partners'
   }]
 }, {
-  label: 'Solucions',
+  id: 'Solucions',
+  label: {
+    ca: 'Solucions',
+    es: 'Soluciones',
+    fr: 'Solutions',
+    en: 'Solutions'
+  },
   href: 'solucions.html',
   children: [{
-    label: 'IT Security',
+    label: {
+      ca: 'IT Security',
+      es: 'IT Security',
+      fr: 'IT Security',
+      en: 'IT Security'
+    },
     href: 'solucions.html#it-security'
   }, {
-    label: 'Comunicacions',
+    label: {
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    },
     href: 'solucions.html#comunicacions'
   }, {
-    label: 'Automatització',
+    label: {
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    },
     href: 'solucions.html#automatitzacio'
   }, {
-    label: 'Audiovisuals',
+    label: {
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    },
     href: 'solucions.html#audiovisuals'
   }]
 }, {
-  label: 'Serveis',
+  id: 'Serveis',
+  label: {
+    ca: 'Serveis',
+    es: 'Servicios',
+    fr: 'Services',
+    en: 'Services'
+  },
   href: 'serveis.html',
   children: [{
-    label: 'Ingenierías',
+    label: {
+      ca: 'Enginyeries',
+      es: 'Ingenierías',
+      fr: 'Ingénieries',
+      en: 'Engineering'
+    },
     href: 'serveis.html#ingenieries'
   }, {
-    label: 'Arquitectures',
+    label: {
+      ca: 'Arquitectures',
+      es: 'Arquitecturas',
+      fr: 'Architectures',
+      en: 'Architecture'
+    },
     href: 'serveis.html#arquitectures'
   }, {
-    label: 'Instal·ladors',
+    label: {
+      ca: 'Instal·ladors',
+      es: 'Instaladores',
+      fr: 'Installateurs',
+      en: 'Installers'
+    },
     href: 'serveis.html#installadors'
   }, {
-    label: "Disseny d'Interiors",
+    label: {
+      ca: "Disseny d'Interiors",
+      es: 'Diseño de Interiores',
+      fr: "Design d'Intérieur",
+      en: 'Interior Design'
+    },
     href: 'serveis.html#disseny'
   }]
 }, {
-  label: 'Blog',
+  id: 'Blog',
+  label: {
+    ca: 'Blog',
+    es: 'Blog',
+    fr: 'Blog',
+    en: 'Blog'
+  },
   href: 'blog.html'
 }, {
-  label: 'Contacta',
+  id: 'Contacta',
+  label: {
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  },
   href: 'contacta.html'
 }];
 function Nav({
@@ -844,6 +1062,7 @@ function Nav({
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
   const [drop, setDrop] = useState(null);
+  useLang();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn);
@@ -906,25 +1125,25 @@ function Nav({
     },
     className: "nav-desk"
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("div", {
-    key: item.label,
+    key: item.id,
     style: {
       position: 'relative'
     },
-    onMouseEnter: () => item.children && setDrop(item.label),
+    onMouseEnter: () => item.children && setDrop(item.id),
     onMouseLeave: () => setDrop(null)
   }, /*#__PURE__*/React.createElement("a", {
     href: item.href,
     style: {
       ...linkBase,
-      color: activePage === item.label ? activeCol : textMut
+      color: activePage === item.id ? activeCol : textMut
     },
     onMouseEnter: e => {
-      if (activePage !== item.label) e.currentTarget.style.color = textInk;
+      if (activePage !== item.id) e.currentTarget.style.color = textInk;
     },
     onMouseLeave: e => {
-      e.currentTarget.style.color = activePage === item.label ? activeCol : textMut;
+      e.currentTarget.style.color = activePage === item.id ? activeCol : textMut;
     }
-  }, item.label), item.children && drop === item.label && /*#__PURE__*/React.createElement("div", {
+  }, tt(item.label)), item.children && drop === item.id && /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '100%',
@@ -937,7 +1156,7 @@ function Nav({
       boxShadow: '0 24px 60px rgba(19,33,27,.16)'
     }
   }, item.children.map(ch => /*#__PURE__*/React.createElement("a", {
-    key: ch.label,
+    key: ch.href,
     href: ch.href,
     style: {
       display: 'block',
@@ -956,15 +1175,17 @@ function Nav({
       e.currentTarget.style.color = 'var(--mut)';
       e.currentTarget.style.background = 'transparent';
     }
-  }, ch.label)))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(ch.label))))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 16,
+      gap: 14,
       alignItems: 'center',
       flexShrink: 0
     },
     className: "nav-desk"
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    light: lightText
+  }), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
     style: {
       fontFamily: 'var(--mono)',
@@ -974,12 +1195,48 @@ function Nav({
       letterSpacing: '.04em'
     }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    title: tt({
+      ca: 'Descarrega l\'eina de suport remot (Windows)',
+      es: 'Descarga la herramienta de soporte remoto (Windows)',
+      fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)',
+      en: 'Download the remote support tool (Windows)'
+    }),
+    style: {
+      padding: '10px 16px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`,
+      borderRadius: 10,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      textTransform: 'uppercase',
+      color: textInk,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 15
+  }), " ", tt({
+    ca: 'Suport remot',
+    es: 'Soporte remoto',
+    fr: 'Assistance',
+    en: 'Remote support'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
       padding: '11px 20px'
     }
-  }, "Contacta")), /*#__PURE__*/React.createElement("button", {
+  }, tt({
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  }))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setMob(!mob),
     className: "nav-mob",
     style: {
@@ -999,7 +1256,7 @@ function Nav({
       padding: '14px 40px 28px'
     }
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("a", {
-    key: item.label,
+    key: item.id,
     href: item.href,
     className: "disp",
     style: {
@@ -1010,17 +1267,48 @@ function Nav({
       textDecoration: 'none',
       borderBottom: '1px solid var(--line-soft)'
     }
-  }, item.label)), /*#__PURE__*/React.createElement("a", {
+  }, tt(item.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 22,
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    compact: true
+  })), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    style: {
+      marginTop: 18,
+      width: '100%',
+      justifyContent: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 17
+  }), " ", tt({
+    ca: 'Suport remot (Windows)',
+    es: 'Soporte remoto (Windows)',
+    fr: 'Assistance (Windows)',
+    en: 'Remote support (Windows)'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 20,
+      marginTop: 12,
       width: '100%',
       justifyContent: 'center'
     }
-  }, "Contacta ara")), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
+  }, tt({
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Get in touch'
+  }))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
 }
 function Footer() {
+  useLang();
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       position: 'relative',
@@ -1036,7 +1324,27 @@ function Footer() {
     }
   }, /*#__PURE__*/React.createElement(Marquee, {
     big: true,
-    items: ['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']
+    items: [tt({
+      ca: 'Sistemes tecnològics',
+      es: 'Sistemas tecnológicos',
+      fr: 'Systèmes technologiques',
+      en: 'Technology systems'
+    }), 'IT Security', tt({
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    }), tt({
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    }), tt({
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    }), 'Andorra']
   })), /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
@@ -1065,7 +1373,12 @@ function Footer() {
       lineHeight: 1.7,
       maxWidth: 320
     }
-  }, "Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.',
+    es: 'Distribución e integración de sistemas tecnológicos avanzados. Andorra, desde 2016.',
+    fr: 'Distribution et intégration de systèmes technologiques avancés. Andorre, depuis 2016.',
+    en: 'Distribution and integration of advanced technology systems. Andorra, since 2016.'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 26,
       display: 'flex',
@@ -1077,7 +1390,12 @@ function Footer() {
     style: {
       padding: '12px 22px'
     }
-  }, "Comença un projecte ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Comença un projecte',
+    es: 'Empieza un proyecto',
+    fr: 'Démarrer un projet',
+    en: 'Start a project'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
@@ -1085,27 +1403,37 @@ function Footer() {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Navegació"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Navegació',
+    es: 'Navegación',
+    fr: 'Navigation',
+    en: 'Navigation'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 12
     }
   }, NAV_ITEMS.map(l => /*#__PURE__*/React.createElement("a", {
-    key: l.label,
+    key: l.id,
     href: l.href,
     style: {
       fontSize: 15,
       color: 'rgba(238,241,234,.7)',
       textDecoration: 'none'
     }
-  }, l.label)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, tt(l.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Contacte"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Contacte',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1139,7 +1467,12 @@ function Footer() {
       color: 'rgba(238,241,234,.45)',
       letterSpacing: '.05em'
     }
-  }, /*#__PURE__*/React.createElement("span", null, "© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats"), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
+  }, /*#__PURE__*/React.createElement("span", null, tt({
+    ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats',
+    es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados',
+    fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés',
+    en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved'
+  })), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
 }
 function Cine({
   src,
@@ -1365,7 +1698,13 @@ Object.assign(window, {
   Scramble,
   CountUp,
   Magnetic,
-  Tilt
+  Tilt,
+  LANGS,
+  tt,
+  useLang,
+  setLang,
+  getLang,
+  LangSwitcher
 });
 
 // tweaks-panel.jsx
@@ -1505,6 +1844,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -1518,10 +1875,10 @@ function useTweaks(defaults) {
       ...prev,
       ...edits
     }));
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_set_keys',
       edits
-    }, '*');
+    });
   }, []);
   return [values, setTweak];
 }
@@ -1571,20 +1928,22 @@ function TweaksPanel({
   }, [open, clampToViewport]);
   React.useEffect(() => {
     const onMsg = e => {
+      if (!__ontecTrusted(e)) return;
+      __ontecHostOrigin = e.origin;
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_available'
-    }, '*');
+    });
     return () => window.removeEventListener('message', onMsg);
   }, []);
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_dismissed'
-    }, '*');
+    });
   };
   const onDragStart = e => {
     const panel = dragRef.current;
@@ -1932,43 +2291,183 @@ const SOLS_FULL = [{
   id: 'it-security',
   n: '01',
   title: 'IT Security',
+  titleI18n: {
+    ca: 'IT Security',
+    es: 'IT Security',
+    fr: 'IT Security',
+    en: 'IT Security'
+  },
   icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
   img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&auto=format&fit=crop',
-  sub: 'Proteccio integral de la infraestructura digital',
-  desc: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, incloent un tecnic certificat per l'INCIBE.",
-  features: ['Firewall NGFW Fortinet & Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
-  partners: ['Fortinet', 'Palo Alto Networks', 'Cisco']
+  sub: {
+    ca: 'Proteccio integral de la infraestructura digital',
+    es: 'Protección integral de la infraestructura digital',
+    fr: "Protection intégrale de l'infrastructure numérique",
+    en: 'Comprehensive protection of digital infrastructure'
+  },
+  desc: {
+    ca: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Zyxel i Palo Alto Networks, amb un equip certificat per l'INCIBE.",
+    es: "La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Zyxel y Palo Alto Networks, con un equipo certificado por el INCIBE.",
+    fr: "La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Zyxel et Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
+    en: "Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Zyxel and Palo Alto Networks technology, with an INCIBE-certified team."
+  },
+  features: {
+    ca: ['Firewall NGFW Zyxel & Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
+    es: ['Firewall NGFW Zyxel & Palo Alto', 'VPN y acceso remoto seguro', 'Zero Trust Network Access', 'Monitorización SOC 24/7', 'Auditorías de seguridad', 'Detección y respuesta (EDR/XDR)'],
+    fr: ['Firewall NGFW Zyxel & Palo Alto', 'VPN et accès distant sécurisé', 'Zero Trust Network Access', 'Supervision SOC 24/7', 'Audits de sécurité', 'Détection et réponse (EDR/XDR)'],
+    en: ['Firewall NGFW Zyxel & Palo Alto', 'VPN and secure remote access', 'Zero Trust Network Access', '24/7 SOC monitoring', 'Security audits', 'Detection and response (EDR/XDR)']
+  },
+  partners: ['Zyxel', 'Palo Alto Networks', 'Cisco']
 }, {
   id: 'comunicacions',
   n: '02',
   title: 'Comunicacions',
+  titleI18n: {
+    ca: 'Comunicacions',
+    es: 'Comunicaciones',
+    fr: 'Communications',
+    en: 'Communications'
+  },
   icon: /*#__PURE__*/React.createElement(Icons.Wifi, null),
   img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&q=80&auto=format&fit=crop',
-  sub: "Connectivitat d'alt rendiment per a qualsevol entorn",
-  desc: "Dissenyem i despleguem infraestructures de comunicacions empresarials d'alta disponibilitat: xarxes WiFi, commutadors gestionats, sistemes de videoconferencia i telefonia IP.",
-  features: ['WiFi 6/6E empresarial Ubiquiti & Aruba', 'Commutadors gestionats HPE Aruba', 'Videoconferencia Cisco Webex & Teams', 'Telefonia IP i VOIP', 'Fibra optica i cablatge estructurat', 'SD-WAN i gestio centralitzada'],
+  sub: {
+    ca: "Connectivitat d'alt rendiment per a qualsevol entorn",
+    es: 'Conectividad de alto rendimiento para cualquier entorno',
+    fr: 'Connectivité haute performance pour tout environnement',
+    en: 'High-performance connectivity for any environment'
+  },
+  desc: {
+    ca: "Dissenyem i despleguem infraestructures de comunicacions empresarials d'alta disponibilitat: xarxes WiFi, commutadors gestionats, sistemes de videoconferencia i telefonia IP.",
+    es: 'Diseñamos y desplegamos infraestructuras de comunicaciones empresariales de alta disponibilidad: redes WiFi, conmutadores gestionados, sistemas de videoconferencia y telefonía IP.',
+    fr: 'Nous concevons et déployons des infrastructures de communication d\'entreprise à haute disponibilité : réseaux WiFi, commutateurs administrés, systèmes de visioconférence et téléphonie IP.',
+    en: 'We design and deploy high-availability enterprise communications infrastructures: WiFi networks, managed switches, videoconferencing systems and IP telephony.'
+  },
+  features: {
+    ca: ['WiFi 6/6E empresarial Ubiquiti & Aruba', 'Commutadors gestionats HPE Aruba', 'Videoconferencia Cisco Webex & Teams', 'Telefonia IP i VOIP', 'Fibra optica i cablatge estructurat', 'SD-WAN i gestio centralitzada'],
+    es: ['WiFi 6/6E empresarial Ubiquiti & Aruba', 'Conmutadores gestionados HPE Aruba', 'Videoconferencia Cisco Webex & Teams', 'Telefonía IP y VOIP', 'Fibra óptica y cableado estructurado', 'SD-WAN y gestión centralizada'],
+    fr: ['WiFi 6/6E professionnel Ubiquiti & Aruba', 'Commutateurs administrés HPE Aruba', 'Visioconférence Cisco Webex & Teams', 'Téléphonie IP et VOIP', 'Fibre optique et câblage structuré', 'SD-WAN et gestion centralisée'],
+    en: ['Enterprise WiFi 6/6E Ubiquiti & Aruba', 'HPE Aruba managed switches', 'Cisco Webex & Teams videoconferencing', 'IP telephony and VOIP', 'Fiber optics and structured cabling', 'SD-WAN and centralized management']
+  },
   partners: ['Ubiquiti', 'Cisco', 'HPE Aruba']
 }, {
   id: 'automatitzacio',
   n: '03',
   title: 'Automatitzacio',
+  titleI18n: {
+    ca: 'Automatitzacio',
+    es: 'Automatización',
+    fr: 'Automatisation',
+    en: 'Automation'
+  },
   icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
   img: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1200&q=80&auto=format&fit=crop',
-  sub: "Sistemes intel ligents per a edificis i llars",
-  desc: "Integrem sistemes de domotica i BMS (Building Management Systems) amb l'estandard internacional KNX i solucions Crestron per a control total de llum, persianes, clima i seguretat.",
-  features: ['Domotica KNX per a edificis i llars', 'Control centralitzat Crestron', 'Il luminacio Lutron DALI/KNX', 'Gestio de clima i HVAC', 'Seguretat i control d\'acces', 'Integracio amb plataformes IoT'],
+  sub: {
+    ca: "Sistemes intel ligents per a edificis i llars",
+    es: 'Sistemas inteligentes para edificios y hogares',
+    fr: 'Systèmes intelligents pour bâtiments et habitations',
+    en: 'Intelligent systems for buildings and homes'
+  },
+  desc: {
+    ca: "Integrem sistemes de domotica i BMS (Building Management Systems) amb l'estandard internacional KNX i solucions Crestron per a control total de llum, persianes, clima i seguretat.",
+    es: 'Integramos sistemas de domótica y BMS (Building Management Systems) con el estándar internacional KNX y soluciones Crestron para el control total de luz, persianas, clima y seguridad.',
+    fr: 'Nous intégrons des systèmes de domotique et de BMS (Building Management Systems) avec le standard international KNX et des solutions Crestron pour un contrôle total de l\'éclairage, des stores, du climat et de la sécurité.',
+    en: 'We integrate home automation and BMS (Building Management Systems) with the international KNX standard and Crestron solutions for full control of lighting, blinds, climate and security.'
+  },
+  features: {
+    ca: ['Domotica KNX per a edificis i llars', 'Control centralitzat Crestron', 'Il luminacio Lutron DALI/KNX', 'Gestio de clima i HVAC', 'Seguretat i control d\'acces', 'Integracio amb plataformes IoT'],
+    es: ['Domótica KNX para edificios y hogares', 'Control centralizado Crestron', 'Iluminación Lutron DALI/KNX', 'Gestión de clima y HVAC', 'Seguridad y control de acceso', 'Integración con plataformas IoT'],
+    fr: ['Domotique KNX pour bâtiments et habitations', 'Contrôle centralisé Crestron', 'Éclairage Lutron DALI/KNX', 'Gestion du climat et HVAC', 'Sécurité et contrôle d\'accès', 'Intégration avec plateformes IoT'],
+    en: ['KNX home automation for buildings and homes', 'Centralized Crestron control', 'Lutron DALI/KNX lighting', 'Climate and HVAC management', 'Security and access control', 'Integration with IoT platforms']
+  },
   partners: ['KNX', 'Crestron', 'Lutron']
 }, {
   id: 'audiovisuals',
   n: '04',
   title: 'Audiovisuals & Videoconferencia',
+  titleI18n: {
+    ca: 'Audiovisuals & Videoconferencia',
+    es: 'Audiovisuales & Videoconferencia',
+    fr: 'Audiovisuel & Visioconférence',
+    en: 'Audiovisual & Videoconferencing'
+  },
   icon: /*#__PURE__*/React.createElement(Icons.Video, null),
-  img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80&auto=format&fit=crop',
-  sub: 'Sistemes AV professionals i videoconferencia d\'alt nivell',
-  desc: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a la Batllia d'Andorra per a connexions institucionals internacionals.",
-  features: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: la Batllia d\'Andorra'],
+  img: 'https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png',
+  sub: {
+    ca: 'Sistemes AV professionals i videoconferencia d\'alt nivell',
+    es: 'Sistemas A/V profesionales y videoconferencia de alto nivel',
+    fr: 'Systèmes A/V professionnels et visioconférence haut de gamme',
+    en: 'Professional A/V systems and high-end videoconferencing'
+  },
+  desc: {
+    ca: "Dissenyem i instal lem sistemes audiovisuals professionals i sales de videoconferencia de primer nivell. Referencia: installacio a l'edifici emblemàtic de la seu de justicia per a connexions institucionals internacionals.",
+    es: 'Diseñamos e instalamos sistemas audiovisuales profesionales y salas de videoconferencia de primer nivel. Referencia: instalación en la sede de justicia para conexiones institucionales internacionales.',
+    fr: 'Nous concevons et installons des systèmes audiovisuels professionnels et des salles de visioconférence haut de gamme. Référence : installation au siège de la justice pour des connexions institutionnelles internationales.',
+    en: 'We design and install professional audiovisual systems and top-tier videoconferencing rooms. Reference: installation at the judicial center for international institutional connections.'
+  },
+  features: {
+    ca: ['Sales de videoconferencia Cisco Webex', 'Cameras PTZ Sony professionals', 'Pantalles interactives Samsung', 'Sistemes d\'audio QSC & Shure', 'Sistemes de presentacio wireless', 'Cas d\'exit: Seu de Justicia d\'Andorra'],
+    es: ['Salas de videoconferencia Cisco Webex', 'Cámaras PTZ Sony profesionales', 'Pantallas interactivas Samsung', 'Sistemas de audio QSC & Shure', 'Sistemas de presentación wireless', 'Caso de éxito: Sede de Justicia de Andorra'],
+    fr: ['Salles de visioconférence Cisco Webex', 'Caméras PTZ Sony professionnelles', 'Écrans interactifs Samsung', 'Systèmes audio QSC & Shure', 'Systèmes de présentation sans fil', 'Cas de réussite : Siège de la Justice d\'Andorre'],
+    en: ['Cisco Webex videoconferencing rooms', 'Professional Sony PTZ cameras', 'Samsung interactive displays', 'QSC & Shure audio systems', 'Wireless presentation systems', 'Success story: Judicial Center of Andorra']
+  },
   partners: ['Cisco', 'Sony', 'Samsung', 'QSC', 'Shure']
 }];
+const L = {
+  featuresLabel: {
+    ca: 'Característiques',
+    es: 'Características',
+    fr: 'Caractéristiques',
+    en: 'Features'
+  },
+  requestQuote: {
+    ca: 'Sol licitar pressupost',
+    es: 'Solicitar presupuesto',
+    fr: 'Demander un devis',
+    en: 'Request a quote'
+  },
+  heroKicker: {
+    ca: 'Solucions · 4 arees',
+    es: 'Soluciones · 4 áreas',
+    fr: 'Solutions · 4 domaines',
+    en: 'Solutions · 4 areas'
+  },
+  heroTitle: {
+    ca: 'Tecnologia que funciona',
+    es: 'Tecnología que funciona',
+    fr: 'Une technologie qui fonctionne',
+    en: 'Technology that works'
+  },
+  heroSub: {
+    ca: 'IT Security, Comunicacions, Automatitzacio i Audiovisuals. Quatre arees especialitzades, un sol integrador de confianca.',
+    es: 'IT Security, Comunicaciones, Automatización y Audiovisuales. Cuatro áreas especializadas, un solo integrador de confianza.',
+    fr: 'IT Security, Communications, Automatisation et Audiovisuel. Quatre domaines spécialisés, un seul intégrateur de confiance.',
+    en: 'IT Security, Communications, Automation and Audiovisual. Four specialized areas, a single trusted integrator.'
+  },
+  ctaKicker: {
+    ca: 'Comencem?',
+    es: '¿Empezamos?',
+    fr: 'On commence ?',
+    en: 'Shall we start?'
+  },
+  ctaTitle: {
+    ca: 'Tens un projecte?',
+    es: '¿Tienes un proyecto?',
+    fr: 'Vous avez un projet ?',
+    en: 'Have a project?'
+  },
+  ctaSub: {
+    ca: "Explica'ns les teves necessitats i prepararem una proposta a mida.",
+    es: 'Cuéntanos tus necesidades y prepararemos una propuesta a medida.',
+    fr: 'Parlez-nous de vos besoins et nous préparerons une proposition sur mesure.',
+    en: 'Tell us your needs and we will prepare a tailor-made proposal.'
+  },
+  contactNow: {
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Contact us now'
+  }
+};
 function SolucioSection({
   s,
   reverse = false
@@ -1994,13 +2493,13 @@ function SolucioSection({
     style: {
       direction: 'ltr'
     }
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", s.title), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", tt(s.titleI18n)), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,5vw,72px)',
       marginBottom: 16
     }
-  }, s.title), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.titleI18n)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 15,
       color: 'var(--accent)',
@@ -2008,19 +2507,19 @@ function SolucioSection({
       letterSpacing: '.04em',
       marginBottom: 20
     }
-  }, s.sub), /*#__PURE__*/React.createElement("p", {
+  }, tt(s.sub)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 16,
       color: 'var(--mut)',
       lineHeight: 1.8,
       marginBottom: 28
     }
-  }, s.desc), /*#__PURE__*/React.createElement("ul", {
+  }, tt(s.desc)), /*#__PURE__*/React.createElement("ul", {
     style: {
       listStyle: 'none',
       marginBottom: 36
     }
-  }, s.features.map((f, i) => /*#__PURE__*/React.createElement("li", {
+  }, tt(s.features).map((f, i) => /*#__PURE__*/React.createElement("li", {
     key: i,
     style: {
       display: 'flex',
@@ -2048,7 +2547,7 @@ function SolucioSection({
   }, p))), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
-  }, "Sol licitar pressupost ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt(L.requestQuote), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   }))), /*#__PURE__*/React.createElement(Reveal, {
     delay: 120,
@@ -2070,6 +2569,7 @@ function SolucioSection({
   }))))), /*#__PURE__*/React.createElement("style", null, `.sol-grid{@media(max-width:860px){grid-template-columns:1fr!important;direction:ltr!important;}}`));
 }
 function App() {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2080,9 +2580,9 @@ function App() {
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Solucions"
   }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Solucions · 4 arees",
-    title: "Tecnologia que funciona",
-    sub: "IT Security, Comunicacions, Automatitzacio i Audiovisuals. Quatre arees especialitzades, un sol integrador de confianca.",
+    kicker: tt(L.heroKicker),
+    title: tt(L.heroTitle),
+    sub: tt(L.heroSub),
     img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1800&q=80&auto=format&fit=crop"
   }), SOLS_FULL.map((s, i) => /*#__PURE__*/React.createElement(SolucioSection, {
     key: s.id,
@@ -2102,13 +2602,13 @@ function App() {
       justifyContent: 'center',
       marginBottom: 20
     }
-  }, "Comencem?"), /*#__PURE__*/React.createElement("h2", {
+  }, tt(L.ctaKicker)), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(40px,6vw,96px)',
       marginBottom: 28
     }
-  }, "Tens un projecte?"), /*#__PURE__*/React.createElement("p", {
+  }, tt(L.ctaTitle)), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 18,
       color: 'var(--mut)',
@@ -2116,7 +2616,7 @@ function App() {
       maxWidth: 520,
       margin: '0 auto 36px'
     }
-  }, "Explica'ns les teves necessitats i prepararem una proposta a mida."), /*#__PURE__*/React.createElement("div", {
+  }, tt(L.ctaSub)), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: 14,
@@ -2126,7 +2626,7 @@ function App() {
   }, /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary"
-  }, "Contacta ara ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt(L.contactNow), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",

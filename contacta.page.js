@@ -14,6 +14,127 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 const A = p => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
+
+/* ════════════════════════════════════════════════════════════════════════════
+   i18n — multilanguage (Català · Español · Français · English)
+   Lightweight pub/sub store + useLang() hook + tt({ca,es,fr,en}) helper.
+   Persisted in localStorage; syncs <html lang>. Page roots call useLang() so
+   tt(...) calls re-evaluate on language change.
+   ════════════════════════════════════════════════════════════════════════════ */
+const LANGS = [{
+  code: 'ca',
+  label: 'CA',
+  name: 'Català'
+}, {
+  code: 'es',
+  label: 'ES',
+  name: 'Español'
+}, {
+  code: 'fr',
+  label: 'FR',
+  name: 'Français'
+}, {
+  code: 'en',
+  label: 'EN',
+  name: 'English'
+}];
+const LANG_CODES = LANGS.map(l => l.code);
+let CURRENT_LANG = (() => {
+  try {
+    const saved = localStorage.getItem('ontec_lang');
+    if (saved && LANG_CODES.includes(saved)) return saved;
+    const nav = (navigator.language || 'ca').slice(0, 2).toLowerCase();
+    if (LANG_CODES.includes(nav)) return nav;
+  } catch (e) {}
+  return 'ca';
+})();
+const LANG_LISTENERS = new Set();
+function setLang(code) {
+  if (!LANG_CODES.includes(code) || code === CURRENT_LANG) return;
+  CURRENT_LANG = code;
+  try {
+    localStorage.setItem('ontec_lang', code);
+  } catch (e) {}
+  try {
+    document.documentElement.setAttribute('lang', code);
+  } catch (e) {}
+  LANG_LISTENERS.forEach(fn => fn(code));
+}
+function getLang() {
+  return CURRENT_LANG;
+}
+
+/* translate: tt({ca, es, fr, en}) → value for active language (ca fallback).
+   value may be a string or a JSX node. Plain strings pass through unchanged. */
+function tt(obj) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'object' && !obj.ca && !obj.es && !obj.fr && !obj.en) return obj; // JSX/element
+  return obj[CURRENT_LANG] != null ? obj[CURRENT_LANG] : obj.ca != null ? obj.ca : '';
+}
+
+/* hook: subscribe a component to language changes */
+function useLang() {
+  const [lang, setL] = useState(CURRENT_LANG);
+  useEffect(() => {
+    const fn = code => setL(code);
+    LANG_LISTENERS.add(fn);
+    try {
+      document.documentElement.setAttribute('lang', CURRENT_LANG);
+    } catch (e) {}
+    return () => LANG_LISTENERS.delete(fn);
+  }, []);
+  return [lang, setLang];
+}
+
+/* ── Language switcher (segmented CA · ES · FR · EN) ── */
+function LangSwitcher({
+  light = false,
+  compact = false
+}) {
+  const [lang] = useLang();
+  const idle = light ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const hover = light ? '#ffffff' : 'var(--ink)';
+  return /*#__PURE__*/React.createElement("div", {
+    role: "group",
+    "aria-label": "Idioma",
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 2,
+      border: `1px solid ${light ? 'rgba(255,255,255,.28)' : 'var(--line)'}`,
+      borderRadius: 999,
+      padding: 3
+    }
+  }, LANGS.map(l => {
+    const on = lang === l.code;
+    return /*#__PURE__*/React.createElement("button", {
+      key: l.code,
+      onClick: () => setLang(l.code),
+      "aria-pressed": on,
+      title: l.name,
+      style: {
+        fontFamily: 'var(--mono)',
+        fontSize: 10.5,
+        letterSpacing: '.04em',
+        fontWeight: 700,
+        padding: compact ? '7px 10px' : '6px 9px',
+        borderRadius: 999,
+        border: 'none',
+        cursor: 'pointer',
+        background: on ? 'var(--accent)' : 'transparent',
+        color: on ? 'var(--accent-ink)' : idle,
+        transition: 'background .18s, color .18s'
+      },
+      onMouseEnter: e => {
+        if (!on) e.currentTarget.style.color = hover;
+      },
+      onMouseLeave: e => {
+        if (!on) e.currentTarget.style.color = idle;
+      }
+    }, l.label);
+  }));
+}
 const GLOBAL_CSS = `
 :root{
   --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
@@ -720,8 +841,30 @@ const Icons = {
     d: "M9 22V12h6v10"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M3 9h18"
+  })),
+  Download: p => /*#__PURE__*/React.createElement("svg", {
+    width: p && p.s || 16,
+    height: p && p.s || 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "7 10 12 15 17 10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "15",
+    x2: "12",
+    y2: "3"
   }))
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 function Tag({
   children
 }) {
@@ -793,49 +936,124 @@ function OntecLogo({
   }, "Ontec"));
 }
 const NAV_ITEMS = [{
-  label: 'Empresa',
+  id: 'Empresa',
+  label: {
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  },
   href: 'empresa.html',
   children: [{
-    label: 'Partners',
+    label: {
+      ca: 'Partners',
+      es: 'Partners',
+      fr: 'Partenaires',
+      en: 'Partners'
+    },
     href: 'empresa.html#partners'
   }]
 }, {
-  label: 'Solucions',
+  id: 'Solucions',
+  label: {
+    ca: 'Solucions',
+    es: 'Soluciones',
+    fr: 'Solutions',
+    en: 'Solutions'
+  },
   href: 'solucions.html',
   children: [{
-    label: 'IT Security',
+    label: {
+      ca: 'IT Security',
+      es: 'IT Security',
+      fr: 'IT Security',
+      en: 'IT Security'
+    },
     href: 'solucions.html#it-security'
   }, {
-    label: 'Comunicacions',
+    label: {
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    },
     href: 'solucions.html#comunicacions'
   }, {
-    label: 'Automatització',
+    label: {
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    },
     href: 'solucions.html#automatitzacio'
   }, {
-    label: 'Audiovisuals',
+    label: {
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    },
     href: 'solucions.html#audiovisuals'
   }]
 }, {
-  label: 'Serveis',
+  id: 'Serveis',
+  label: {
+    ca: 'Serveis',
+    es: 'Servicios',
+    fr: 'Services',
+    en: 'Services'
+  },
   href: 'serveis.html',
   children: [{
-    label: 'Ingenierías',
+    label: {
+      ca: 'Enginyeries',
+      es: 'Ingenierías',
+      fr: 'Ingénieries',
+      en: 'Engineering'
+    },
     href: 'serveis.html#ingenieries'
   }, {
-    label: 'Arquitectures',
+    label: {
+      ca: 'Arquitectures',
+      es: 'Arquitecturas',
+      fr: 'Architectures',
+      en: 'Architecture'
+    },
     href: 'serveis.html#arquitectures'
   }, {
-    label: 'Instal·ladors',
+    label: {
+      ca: 'Instal·ladors',
+      es: 'Instaladores',
+      fr: 'Installateurs',
+      en: 'Installers'
+    },
     href: 'serveis.html#installadors'
   }, {
-    label: "Disseny d'Interiors",
+    label: {
+      ca: "Disseny d'Interiors",
+      es: 'Diseño de Interiores',
+      fr: "Design d'Intérieur",
+      en: 'Interior Design'
+    },
     href: 'serveis.html#disseny'
   }]
 }, {
-  label: 'Blog',
+  id: 'Blog',
+  label: {
+    ca: 'Blog',
+    es: 'Blog',
+    fr: 'Blog',
+    en: 'Blog'
+  },
   href: 'blog.html'
 }, {
-  label: 'Contacta',
+  id: 'Contacta',
+  label: {
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  },
   href: 'contacta.html'
 }];
 function Nav({
@@ -844,6 +1062,7 @@ function Nav({
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
   const [drop, setDrop] = useState(null);
+  useLang();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn);
@@ -906,25 +1125,25 @@ function Nav({
     },
     className: "nav-desk"
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("div", {
-    key: item.label,
+    key: item.id,
     style: {
       position: 'relative'
     },
-    onMouseEnter: () => item.children && setDrop(item.label),
+    onMouseEnter: () => item.children && setDrop(item.id),
     onMouseLeave: () => setDrop(null)
   }, /*#__PURE__*/React.createElement("a", {
     href: item.href,
     style: {
       ...linkBase,
-      color: activePage === item.label ? activeCol : textMut
+      color: activePage === item.id ? activeCol : textMut
     },
     onMouseEnter: e => {
-      if (activePage !== item.label) e.currentTarget.style.color = textInk;
+      if (activePage !== item.id) e.currentTarget.style.color = textInk;
     },
     onMouseLeave: e => {
-      e.currentTarget.style.color = activePage === item.label ? activeCol : textMut;
+      e.currentTarget.style.color = activePage === item.id ? activeCol : textMut;
     }
-  }, item.label), item.children && drop === item.label && /*#__PURE__*/React.createElement("div", {
+  }, tt(item.label)), item.children && drop === item.id && /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: '100%',
@@ -937,7 +1156,7 @@ function Nav({
       boxShadow: '0 24px 60px rgba(19,33,27,.16)'
     }
   }, item.children.map(ch => /*#__PURE__*/React.createElement("a", {
-    key: ch.label,
+    key: ch.href,
     href: ch.href,
     style: {
       display: 'block',
@@ -956,15 +1175,17 @@ function Nav({
       e.currentTarget.style.color = 'var(--mut)';
       e.currentTarget.style.background = 'transparent';
     }
-  }, ch.label)))))), /*#__PURE__*/React.createElement("div", {
+  }, tt(ch.label))))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
-      gap: 16,
+      gap: 14,
       alignItems: 'center',
       flexShrink: 0
     },
     className: "nav-desk"
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    light: lightText
+  }), /*#__PURE__*/React.createElement("a", {
     href: "tel:+37688559",
     style: {
       fontFamily: 'var(--mono)',
@@ -974,12 +1195,48 @@ function Nav({
       letterSpacing: '.04em'
     }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    title: tt({
+      ca: 'Descarrega l\'eina de suport remot (Windows)',
+      es: 'Descarga la herramienta de soporte remoto (Windows)',
+      fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)',
+      en: 'Download the remote support tool (Windows)'
+    }),
+    style: {
+      padding: '10px 16px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`,
+      borderRadius: 10,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      textTransform: 'uppercase',
+      color: textInk,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 15
+  }), " ", tt({
+    ca: 'Suport remot',
+    es: 'Soporte remoto',
+    fr: 'Assistance',
+    en: 'Remote support'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
       padding: '11px 20px'
     }
-  }, "Contacta")), /*#__PURE__*/React.createElement("button", {
+  }, tt({
+    ca: 'Contacta',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  }))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setMob(!mob),
     className: "nav-mob",
     style: {
@@ -999,7 +1256,7 @@ function Nav({
       padding: '14px 40px 28px'
     }
   }, NAV_ITEMS.map(item => /*#__PURE__*/React.createElement("a", {
-    key: item.label,
+    key: item.id,
     href: item.href,
     className: "disp",
     style: {
@@ -1010,17 +1267,48 @@ function Nav({
       textDecoration: 'none',
       borderBottom: '1px solid var(--line-soft)'
     }
-  }, item.label)), /*#__PURE__*/React.createElement("a", {
+  }, tt(item.label))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 22,
+      display: 'flex',
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement(LangSwitcher, {
+    compact: true
+  })), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    style: {
+      marginTop: 18,
+      width: '100%',
+      justifyContent: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 17
+  }), " ", tt({
+    ca: 'Suport remot (Windows)',
+    es: 'Soporte remoto (Windows)',
+    fr: 'Assistance (Windows)',
+    en: 'Remote support (Windows)'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 20,
+      marginTop: 12,
       width: '100%',
       justifyContent: 'center'
     }
-  }, "Contacta ara")), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
+  }, tt({
+    ca: 'Contacta ara',
+    es: 'Contacta ahora',
+    fr: 'Contactez-nous',
+    en: 'Get in touch'
+  }))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`));
 }
 function Footer() {
+  useLang();
   return /*#__PURE__*/React.createElement("footer", {
     style: {
       position: 'relative',
@@ -1036,7 +1324,27 @@ function Footer() {
     }
   }, /*#__PURE__*/React.createElement(Marquee, {
     big: true,
-    items: ['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']
+    items: [tt({
+      ca: 'Sistemes tecnològics',
+      es: 'Sistemas tecnológicos',
+      fr: 'Systèmes technologiques',
+      en: 'Technology systems'
+    }), 'IT Security', tt({
+      ca: 'Comunicacions',
+      es: 'Comunicaciones',
+      fr: 'Communications',
+      en: 'Communications'
+    }), tt({
+      ca: 'Automatització',
+      es: 'Automatización',
+      fr: 'Automatisation',
+      en: 'Automation'
+    }), tt({
+      ca: 'Audiovisuals',
+      es: 'Audiovisuales',
+      fr: 'Audiovisuel',
+      en: 'Audiovisual'
+    }), 'Andorra']
   })), /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
@@ -1065,7 +1373,12 @@ function Footer() {
       lineHeight: 1.7,
       maxWidth: 320
     }
-  }, "Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016."), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.',
+    es: 'Distribución e integración de sistemas tecnológicos avanzados. Andorra, desde 2016.',
+    fr: 'Distribution et intégration de systèmes technologiques avancés. Andorre, depuis 2016.',
+    en: 'Distribution and integration of advanced technology systems. Andorra, since 2016.'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 26,
       display: 'flex',
@@ -1077,7 +1390,12 @@ function Footer() {
     style: {
       padding: '12px 22px'
     }
-  }, "Comença un projecte ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Comença un projecte',
+    es: 'Empieza un proyecto',
+    fr: 'Démarrer un projet',
+    en: 'Start a project'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 14
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
@@ -1085,27 +1403,37 @@ function Footer() {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Navegació"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Navegació',
+    es: 'Navegación',
+    fr: 'Navigation',
+    en: 'Navigation'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
       gap: 12
     }
   }, NAV_ITEMS.map(l => /*#__PURE__*/React.createElement("a", {
-    key: l.label,
+    key: l.id,
     href: l.href,
     style: {
       fontSize: 15,
       color: 'rgba(238,241,234,.7)',
       textDecoration: 'none'
     }
-  }, l.label)))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, tt(l.label))))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "kicker",
     style: {
       color: 'var(--accent-2)',
       marginBottom: 18
     }
-  }, "Contacte"), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Contacte',
+    es: 'Contacto',
+    fr: 'Contact',
+    en: 'Contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -1139,7 +1467,12 @@ function Footer() {
       color: 'rgba(238,241,234,.45)',
       letterSpacing: '.05em'
     }
-  }, /*#__PURE__*/React.createElement("span", null, "© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats"), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
+  }, /*#__PURE__*/React.createElement("span", null, tt({
+    ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats',
+    es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados',
+    fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés',
+    en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved'
+  })), /*#__PURE__*/React.createElement("span", null, "ANDORRA · 42.5°N 1.5°E"))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`));
 }
 function Cine({
   src,
@@ -1365,7 +1698,13 @@ Object.assign(window, {
   Scramble,
   CountUp,
   Magnetic,
-  Tilt
+  Tilt,
+  LANGS,
+  tt,
+  useLang,
+  setLang,
+  getLang,
+  LangSwitcher
 });
 
 // tweaks-panel.jsx
@@ -1505,6 +1844,24 @@ const __TWEAKS_STYLE = `
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+// Hardened host bridge: the tweak panel only talks to a *preview host* that
+// embeds this page in an iframe. In a normal production deploy the page is not
+// framed, so the bridge stays inert (no outbound messages, no toggles).
+// Inbound messages are only trusted from our direct parent, and replies target
+// the host's exact origin (learned from the first trusted message) instead of '*'.
+let __ontecHostOrigin = null;
+function __ontecFramed() {
+  return typeof window !== 'undefined' && window.parent && window.parent !== window;
+}
+function __ontecPost(message) {
+  if (!__ontecFramed()) return;
+  try {
+    window.parent.postMessage(message, __ontecHostOrigin || '*');
+  } catch (e) {}
+}
+function __ontecTrusted(e) {
+  return __ontecFramed() && e.source === window.parent && typeof e.origin === 'string' && e.origin !== 'null';
+}
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
   // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
@@ -1518,10 +1875,10 @@ function useTweaks(defaults) {
       ...prev,
       ...edits
     }));
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_set_keys',
       edits
-    }, '*');
+    });
   }, []);
   return [values, setTweak];
 }
@@ -1571,20 +1928,22 @@ function TweaksPanel({
   }, [open, clampToViewport]);
   React.useEffect(() => {
     const onMsg = e => {
+      if (!__ontecTrusted(e)) return;
+      __ontecHostOrigin = e.origin;
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_available'
-    }, '*');
+    });
     return () => window.removeEventListener('message', onMsg);
   }, []);
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({
+    __ontecPost({
       type: '__edit_mode_dismissed'
-    }, '*');
+    });
   };
   const onDragStart = e => {
     const panel = dragRef.current;
@@ -1946,7 +2305,12 @@ function ContactForm() {
   const submit = e => {
     e.preventDefault();
     if (!form.nom || !form.email || !form.missatge) {
-      setErr('Si us plau, omple els camps obligatoris.');
+      setErr(tt({
+        ca: 'Si us plau, omple els camps obligatoris.',
+        es: 'Por favor, rellena los campos obligatorios.',
+        fr: 'Veuillez remplir les champs obligatoires.',
+        en: 'Please fill in the required fields.'
+      }));
       return;
     }
     setSent(true);
@@ -2014,13 +2378,23 @@ function ContactForm() {
       fontSize: 36,
       marginBottom: 16
     }
-  }, "Gracies, ", form.nom, "!"), /*#__PURE__*/React.createElement("p", {
+  }, tt({
+    ca: 'Gracies',
+    es: 'Gracias',
+    fr: 'Merci',
+    en: 'Thank you'
+  }), ", ", form.nom, "!"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 17,
       color: 'var(--mut)',
       lineHeight: 1.7
     }
-  }, "Hem rebut la teva consulta i ens posarem en contacte en menys de 4 hores."));
+  }, tt({
+    ca: 'Hem rebut la teva consulta i ens posarem en contacte en menys de 4 hores.',
+    es: 'Hemos recibido tu consulta y nos pondremos en contacto en menos de 4 horas.',
+    fr: 'Nous avons bien reçu votre demande et vous recontacterons sous moins de 4 heures.',
+    en: 'We have received your enquiry and will get in touch within 4 hours.'
+  })));
   return /*#__PURE__*/React.createElement("form", {
     onSubmit: submit,
     style: {
@@ -2035,7 +2409,27 @@ function ContactForm() {
       gap: 16
     },
     className: "form-row"
-  }, field('Nom i cognoms', 'nom', 'text', true, 'Joan Garcia'), field('Empresa', 'empresa', 'text', false, 'Empresa S.L.'), field('Correu electronic', 'email', 'email', true, 'joan@empresa.com'), field('Telefon', 'tel', 'tel', false, '+376 XXX XXX')), /*#__PURE__*/React.createElement("div", {
+  }, field(tt({
+    ca: 'Nom i cognoms',
+    es: 'Nombre y apellidos',
+    fr: 'Nom et prénom',
+    en: 'Full name'
+  }), 'nom', 'text', true, 'Joan Garcia'), field(tt({
+    ca: 'Empresa',
+    es: 'Empresa',
+    fr: 'Entreprise',
+    en: 'Company'
+  }), 'empresa', 'text', false, 'Empresa S.L.'), field(tt({
+    ca: 'Correu electronic',
+    es: 'Correo electrónico',
+    fr: 'Adresse e-mail',
+    en: 'Email'
+  }), 'email', 'email', true, 'joan@empresa.com'), field(tt({
+    ca: 'Telefon',
+    es: 'Teléfono',
+    fr: 'Téléphone',
+    en: 'Phone'
+  }), 'tel', 'tel', false, '+376 XXX XXX')), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2049,7 +2443,12 @@ function ContactForm() {
       textTransform: 'uppercase',
       color: 'var(--mut)'
     }
-  }, "Servei d'interes"), /*#__PURE__*/React.createElement("select", {
+  }, tt({
+    ca: 'Area d\'interes',
+    es: 'Área de interés',
+    fr: 'Domaine d\'intérêt',
+    en: 'Area of interest'
+  })), /*#__PURE__*/React.createElement("select", {
     value: form.servei,
     onChange: e => handle('servei', e.target.value),
     style: {
@@ -2065,7 +2464,40 @@ function ContactForm() {
     }
   }, /*#__PURE__*/React.createElement("option", {
     value: ""
-  }, "Selecciona una opcio..."), /*#__PURE__*/React.createElement("option", null, "IT Security / Ciberseguretat"), /*#__PURE__*/React.createElement("option", null, "Comunicacions i xarxes"), /*#__PURE__*/React.createElement("option", null, "Automatitzacio KNX"), /*#__PURE__*/React.createElement("option", null, "Audiovisuals i videoconferencia"), /*#__PURE__*/React.createElement("option", null, "Altres / Consulta general"))), /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Selecciona una opcio...',
+    es: 'Selecciona una opción...',
+    fr: 'Sélectionnez une option...',
+    en: 'Select an option...'
+  })), [{
+    ca: 'IT Security / Ciberseguretat',
+    es: 'IT Security / Ciberseguridad',
+    fr: 'IT Security / Cybersécurité',
+    en: 'IT Security / Cybersecurity'
+  }, {
+    ca: 'Comunicacions i xarxes',
+    es: 'Comunicaciones y redes',
+    fr: 'Communications et réseaux',
+    en: 'Communications and networks'
+  }, {
+    ca: 'Automatitzacio KNX',
+    es: 'Automatización KNX',
+    fr: 'Automatisation KNX',
+    en: 'KNX automation'
+  }, {
+    ca: 'Audiovisuals i videoconferencia',
+    es: 'Audiovisuales y videoconferencia',
+    fr: 'Audiovisuel et visioconférence',
+    en: 'Audiovisual and video conferencing'
+  }, {
+    ca: 'Altres / Consulta general',
+    es: 'Otros / Consulta general',
+    fr: 'Autres / Demande générale',
+    en: 'Other / General enquiry'
+  }].map(o => /*#__PURE__*/React.createElement("option", {
+    key: o.ca,
+    value: o.ca
+  }, tt(o))))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2079,7 +2511,12 @@ function ContactForm() {
       textTransform: 'uppercase',
       color: 'var(--mut)'
     }
-  }, "Missatge", /*#__PURE__*/React.createElement("span", {
+  }, tt({
+    ca: 'Missatge',
+    es: 'Mensaje',
+    fr: 'Message',
+    en: 'Message'
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       color: 'var(--accent)',
       marginLeft: 4
@@ -2088,7 +2525,12 @@ function ContactForm() {
     value: form.missatge,
     onChange: e => handle('missatge', e.target.value),
     rows: 5,
-    placeholder: "Descriu el teu projecte o consulta...",
+    placeholder: tt({
+      ca: 'Descriu el teu projecte o consulta...',
+      es: 'Describe tu proyecto o consulta...',
+      fr: 'Décrivez votre projet ou votre demande...',
+      en: 'Describe your project or enquiry...'
+    }),
     style: {
       background: 'var(--panel)',
       border: '1px solid var(--line)',
@@ -2117,11 +2559,17 @@ function ContactForm() {
       alignSelf: 'flex-start',
       padding: '16px 32px'
     }
-  }, "Enviar consulta ", /*#__PURE__*/React.createElement(Icons.UpRight, {
+  }, tt({
+    ca: 'Enviar consulta',
+    es: 'Enviar consulta',
+    fr: 'Envoyer la demande',
+    en: 'Send enquiry'
+  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })), /*#__PURE__*/React.createElement("style", null, `.form-row{@media(max-width:640px){grid-template-columns:1fr!important;}}`));
 }
 function App() {
+  useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   useEffect(() => {
     const r = document.documentElement;
@@ -2132,9 +2580,24 @@ function App() {
   return /*#__PURE__*/React.createElement(PageShell, {
     activePage: "Contacta"
   }, /*#__PURE__*/React.createElement(PageHero, {
-    kicker: "Contacta · Resposta en 4h",
-    title: "Parla amb l'equip",
-    sub: "Tens un projecte en ment? Explica'ns-ho i prepararem una proposta tecnica a mida sense compromis.",
+    kicker: tt({
+      ca: 'Contacta · Resposta en 4h',
+      es: 'Contacto · Respuesta en 4h',
+      fr: 'Contact · Réponse sous 4h',
+      en: 'Contact · Reply within 4h'
+    }),
+    title: tt({
+      ca: "Parla amb l'equip",
+      es: 'Habla con el equipo',
+      fr: "Parlez avec l'équipe",
+      en: 'Talk to the team'
+    }),
+    sub: tt({
+      ca: "Tens un projecte en ment? Explica'ns-ho i prepararem una proposta tecnica a mida sense compromis.",
+      es: '¿Tienes un proyecto en mente? Cuéntanoslo y prepararemos una propuesta técnica a medida sin compromiso.',
+      fr: "Vous avez un projet en tête ? Parlez-nous-en et nous préparerons une proposition technique sur mesure, sans engagement.",
+      en: 'Have a project in mind? Tell us about it and we will prepare a tailored technical proposal at no commitment.'
+    }),
     img: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1800&q=80&auto=format&fit=crop"
   }), /*#__PURE__*/React.createElement("section", {
     style: {
@@ -2150,13 +2613,23 @@ function App() {
       alignItems: 'start'
     },
     className: "contact-grid"
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, "Formulari de contacte"), /*#__PURE__*/React.createElement("h2", {
+  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Formulari de contacte',
+    es: 'Formulario de contacto',
+    fr: 'Formulaire de contact',
+    en: 'Contact form'
+  })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(36px,4vw,64px)',
       marginBottom: 40
     }
-  }, "Envia'ns una consulta"), /*#__PURE__*/React.createElement(ContactForm, null)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
+  }, tt({
+    ca: "Envia'ns una consulta",
+    es: 'Envíanos una consulta',
+    fr: 'Envoyez-nous une demande',
+    en: 'Send us an enquiry'
+  })), /*#__PURE__*/React.createElement(ContactForm, null)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
     delay: 120
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -2166,7 +2639,12 @@ function App() {
       padding: '36px',
       marginBottom: 20
     }
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, "Contacte directe"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Contacte directe',
+    es: 'Contacto directo',
+    fr: 'Contact direct',
+    en: 'Direct contact'
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -2175,17 +2653,32 @@ function App() {
     }
   }, [{
     icon: /*#__PURE__*/React.createElement(Icons.Phone, null),
-    label: 'Telefon',
+    label: tt({
+      ca: 'Telefon',
+      es: 'Teléfono',
+      fr: 'Téléphone',
+      en: 'Phone'
+    }),
     val: '+376 88 55 99',
     href: 'tel:+37688559'
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Mail, null),
-    label: 'Email',
+    label: tt({
+      ca: 'Email',
+      es: 'Email',
+      fr: 'E-mail',
+      en: 'Email'
+    }),
     val: 'info@ontecandorra.com',
     href: 'mailto:info@ontecandorra.com'
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Pin, null),
-    label: 'Oficina',
+    label: tt({
+      ca: 'Oficina',
+      es: 'Oficina',
+      fr: 'Bureau',
+      en: 'Office'
+    }),
     val: 'C/ de la Vena 3, Baixos\nEncamp, Andorra',
     href: null
   }].map((item, i) => /*#__PURE__*/React.createElement("div", {
@@ -2244,7 +2737,37 @@ function App() {
     style: {
       marginBottom: 14
     }
-  }, "Horari d'atencio"), [['Dilluns — Divendres', '9:00 — 18:00'], ['Dissabte', 'Tancat'], ['Urgencies tecni.', '24/7 amb contracte']].map(([d, h]) => /*#__PURE__*/React.createElement("div", {
+  }, tt({
+    ca: 'Horari d\'atencio',
+    es: 'Horario de atención',
+    fr: 'Horaires d\'ouverture',
+    en: 'Opening hours'
+  })), [[tt({
+    ca: 'Dilluns — Divendres',
+    es: 'Lunes — Viernes',
+    fr: 'Lundi — Vendredi',
+    en: 'Monday — Friday'
+  }), '9:00 — 18:00'], [tt({
+    ca: 'Dissabte',
+    es: 'Sábado',
+    fr: 'Samedi',
+    en: 'Saturday'
+  }), tt({
+    ca: 'Tancat',
+    es: 'Cerrado',
+    fr: 'Fermé',
+    en: 'Closed'
+  })], [tt({
+    ca: 'Urgencies tecni.',
+    es: 'Urgencias técni.',
+    fr: 'Urgences tech.',
+    en: 'Tech emergencies'
+  }), tt({
+    ca: '24/7 amb contracte',
+    es: '24/7 con contrato',
+    fr: '24/7 avec contrat',
+    en: '24/7 with contract'
+  })]].map(([d, h]) => /*#__PURE__*/React.createElement("div", {
     key: d,
     style: {
       display: 'flex',
