@@ -1,0 +1,62 @@
+[
+  {
+    "id": "seu-justicia-videoconferencia",
+    "tag": "Videoconferència",
+    "date": "2025",
+    "readtime": "5 min",
+    "title": "Sistema de videoconferència per a la seu de justícia d'Andorra",
+    "excerpt": "Ontec ha instal·lat el sistema de videoconferència professional per als espais de l'edifici emblemàtic de la seu de justícia, permetent connexions d'alt nivell amb organismes internacionals.",
+    "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png",
+    "featured": true
+  },
+  {
+    "id": "zero-trust-pimes",
+    "tag": "IT Security",
+    "date": "2024",
+    "readtime": "7 min",
+    "title": "Zero Trust: el nou paradigma de seguretat per a pimes andorranes",
+    "excerpt": "L'arquitectura Zero Trust ja no és exclusiva de grans corporacions. Expliquem com implementar-la en empreses petites i mitjanes a Andorra amb pressupost controlat.",
+    "img": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&q=80&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": "incibe-ciberseguretat",
+    "tag": "Ciberseguretat",
+    "date": "2024",
+    "readtime": "4 min",
+    "title": "INCIBE: per què tenir un equip certificat marca la diferència",
+    "excerpt": "La col·laboració amb l'INCIBE (Instituto Nacional de Ciberseguridad) aporta un segell de qualitat i coneixement de primer nivell per als nostres serveis de ciberseguretat.",
+    "img": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&q=80&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": "knx-domotica",
+    "tag": "Domòtica",
+    "date": "2023",
+    "readtime": "6 min",
+    "title": "La domòtica KNX arriba als edificis premium d'Andorra",
+    "excerpt": "Com l'estàndard internacional KNX està transformant la gestió dels edificis d'alta gamma a Andorra, integrant llum, clima, seguretat i AV en un sol sistema.",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": "wifi6-empreses",
+    "tag": "Comunicacions",
+    "date": "2023",
+    "readtime": "5 min",
+    "title": "WiFi 6: la revolució de la connectivitat empresarial",
+    "excerpt": "El WiFi 6 multiplica la capacitat i redueix la latència en entorns d'alta densitat. Anàlisi de les solucions Ubiquiti i Aruba per a empreses a Andorra.",
+    "img": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&q=80&auto=format&fit=crop",
+    "featured": false
+  },
+  {
+    "id": "av-sales-reunions",
+    "tag": "Audiovisuals",
+    "date": "2022",
+    "readtime": "4 min",
+    "title": "Disseny de sales de reunions per a l'era híbrida",
+    "excerpt": "Com crear espais de col·laboració híbrids eficients amb tecnologia Sony, QSC i Shure. Guia pràctica per a arquitectes i empreses.",
+    "img": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&q=80&auto=format&fit=crop",
+    "featured": false
+  }
+]
