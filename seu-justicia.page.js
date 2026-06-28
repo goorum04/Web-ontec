@@ -3156,6 +3156,209 @@ function InfoPanel({
     en: 'Request a similar project'
   })));
 }
+
+/* ── 3D card (mobile) — perspective, depth, tap-tilt & expand ── */
+function Card3D({
+  spot,
+  index
+}) {
+  const wrapRef = useRef(null);
+  const cardRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [shown, setShown] = useState(false);
+  const Ico = spot.Ico;
+  useLang();
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          setShown(true);
+          io.unobserve(el);
+        }
+      });
+    }, {
+      threshold: 0.25
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const tilt = e => {
+    const el = cardRef.current;
+    if (!el) return;
+    const t = e.touches ? e.touches[0] : e;
+    const r = el.getBoundingClientRect();
+    const px = (t.clientX - r.left) / r.width - 0.5;
+    const py = (t.clientY - r.top) / r.height - 0.5;
+    el.style.transition = 'transform .08s linear';
+    el.style.transform = `rotateY(${px * 14}deg) rotateX(${-py * 14}deg) translateZ(16px)`;
+  };
+  const reset = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = 'transform .6s cubic-bezier(.2,.7,.3,1)';
+    el.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0)';
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    ref: wrapRef,
+    className: "c3d-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: cardRef,
+    className: `c3d ${shown ? 'c3d-in' : ''}`,
+    onTouchMove: tilt,
+    onTouchEnd: reset,
+    onTouchCancel: reset,
+    onMouseMove: tilt,
+    onMouseLeave: reset,
+    style: {
+      position: 'relative',
+      animationDelay: `${index * 90}ms`,
+      background: 'linear-gradient(160deg, rgba(20,34,26,.96), rgba(9,17,12,.98))',
+      border: `1px solid ${spot.color}55`,
+      borderRadius: 22,
+      padding: '30px 24px',
+      boxShadow: `0 26px 60px -20px ${spot.color}66, 0 10px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06)`,
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: -60,
+      right: -60,
+      width: 190,
+      height: 190,
+      borderRadius: '50%',
+      background: `radial-gradient(circle, ${spot.color}40, transparent 70%)`,
+      pointerEvents: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 6,
+      right: 16,
+      fontFamily: 'var(--disp)',
+      fontWeight: 800,
+      fontSize: 92,
+      lineHeight: 1,
+      color: '#fff',
+      opacity: 0.05,
+      pointerEvents: 'none'
+    }
+  }, spot.n), /*#__PURE__*/React.createElement("div", {
+    className: "c3d-badge",
+    style: {
+      width: 66,
+      height: 66,
+      borderRadius: 18,
+      marginBottom: 22,
+      background: `linear-gradient(145deg, ${spot.color}, ${spot.color}aa)`,
+      color: '#fff',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxShadow: `0 16px 34px -8px ${spot.color}cc`
+    }
+  }, /*#__PURE__*/React.createElement(Ico, {
+    s: 30
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 10.5,
+      color: spot.color,
+      textTransform: 'uppercase',
+      letterSpacing: '.16em',
+      marginBottom: 8
+    }
+  }, spot.n, " · ", tt(spot.label)), /*#__PURE__*/React.createElement("h3", {
+    style: {
+      fontFamily: 'var(--disp)',
+      fontWeight: 800,
+      fontSize: 21,
+      color: '#fff',
+      lineHeight: 1.2,
+      marginBottom: 12
+    }
+  }, tt(spot.title)), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 13.5,
+      color: 'rgba(255,255,255,.66)',
+      lineHeight: 1.7
+    }
+  }, tt(spot.desc)), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setOpen(o => !o),
+    style: {
+      marginTop: 20,
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      background: 'rgba(255,255,255,.06)',
+      border: `1px solid ${spot.color}44`,
+      borderRadius: 12,
+      padding: '13px 16px',
+      cursor: 'pointer',
+      color: '#fff',
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.1em',
+      textTransform: 'uppercase'
+    }
+  }, open ? tt({
+    ca: 'Amaga equipament',
+    es: 'Ocultar equipo',
+    fr: 'Masquer',
+    en: 'Hide equipment'
+  }) : tt({
+    ca: 'Veure equipament',
+    es: 'Ver equipamiento',
+    fr: 'Voir équipement',
+    en: 'View equipment'
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      transition: 'transform .3s',
+      transform: open ? 'rotate(45deg)' : 'none',
+      display: 'inline-flex'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Plus, null))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxHeight: open ? 800 : 0,
+      overflow: 'hidden',
+      transition: 'max-height .55s cubic-bezier(.2,.7,.3,1)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 9,
+      paddingTop: 16
+    }
+  }, spot.specs.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      display: 'flex',
+      gap: 10,
+      alignItems: 'flex-start'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: spot.color,
+      marginTop: 1,
+      flexShrink: 0,
+      display: 'inline-flex'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Check, null)), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12.5,
+      color: 'rgba(255,255,255,.78)',
+      lineHeight: 1.5
+    }
+  }, tt(s))))))));
+}
 function SeuJusticiaPage() {
   useLang();
   const [activeId, setActiveId] = useState(null);
@@ -3168,6 +3371,29 @@ function SeuJusticiaPage() {
           100% { transform: scale(2.2); opacity: 0; }
         }
         .hotspot-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* 3D mobile cards */
+        .explore-mobile { display: none; }
+        .c3d-wrap { perspective: 1000px; }
+        .c3d { transform-style: preserve-3d; opacity: 0; will-change: transform; }
+        .c3d-in { animation: c3d-enter .85s cubic-bezier(.2,.7,.3,1) both; }
+        @keyframes c3d-enter {
+          0% { opacity: 0; transform: rotateX(26deg) translateY(46px) scale(.92); }
+          100% { opacity: 1; transform: rotateX(0) translateY(0) scale(1); }
+        }
+        .c3d-badge { transform: translateZ(42px); animation: c3d-float 4s ease-in-out infinite; }
+        @keyframes c3d-float {
+          0%,100% { transform: translateZ(42px) translateY(0); }
+          50% { transform: translateZ(42px) translateY(-6px); }
+        }
+        @media (max-width: 720px) {
+          .explore-desktop { display: none !important; }
+          .explore-mobile { display: grid !important; gap: 20px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .c3d, .c3d-in { animation: none !important; opacity: 1 !important; }
+          .c3d-badge { animation: none !important; transform: translateZ(42px); }
+        }
       `), /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
@@ -3428,6 +3654,8 @@ function SeuJusticiaPage() {
     fr: 'Explorez les quatre sous-systèmes déployés dans la salle d\'audiences. Chaque point révèle la technologie installée et l\'équipement professionnel utilisé.',
     en: 'Explore the four subsystems we deployed in the hearing room. Each point reveals the installed technology and the professional equipment used.'
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "explore-desktop"
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       flexWrap: 'wrap',
@@ -3546,96 +3774,13 @@ function SeuJusticiaPage() {
   }))), /*#__PURE__*/React.createElement(InfoPanel, {
     spot: activeSpot,
     onClose: () => setActiveId(null)
-  }))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'none',
-      marginTop: 40,
-      flexDirection: 'column',
-      gap: 16
-    },
-    className: "mobile-cards"
-  }, HOTSPOTS.map(h => {
-    const Ico = h.Ico;
-    return /*#__PURE__*/React.createElement("div", {
-      key: h.id,
-      style: {
-        background: 'rgba(255,255,255,.05)',
-        border: `1px solid ${h.color}44`,
-        borderRadius: 16,
-        padding: '20px 20px'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        marginBottom: 12
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        width: 44,
-        height: 44,
-        borderRadius: 12,
-        flexShrink: 0,
-        background: `${h.color}22`,
-        border: `1px solid ${h.color}55`,
-        color: '#fff',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }
-    }, /*#__PURE__*/React.createElement(Ico, {
-      s: 22
-    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: 'var(--mono)',
-        fontSize: 10,
-        color: h.color,
-        textTransform: 'uppercase',
-        letterSpacing: '.14em'
-      }
-    }, h.n, " · ", tt(h.label)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontFamily: 'var(--disp)',
-        fontWeight: 800,
-        fontSize: 17,
-        color: '#fff'
-      }
-    }, tt(h.title)))), /*#__PURE__*/React.createElement("p", {
-      style: {
-        fontSize: 13,
-        color: 'rgba(255,255,255,.65)',
-        lineHeight: 1.7,
-        marginBottom: 14
-      }
-    }, tt(h.desc)), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 8
-      }
-    }, h.specs.map((s, i) => /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        gap: 10,
-        alignItems: 'flex-start'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: h.color,
-        marginTop: 1,
-        flexShrink: 0,
-        display: 'inline-flex'
-      }
-    }, /*#__PURE__*/React.createElement(Icons.Check, null)), /*#__PURE__*/React.createElement("span", {
-      style: {
-        fontSize: 12.5,
-        color: 'rgba(255,255,255,.75)',
-        lineHeight: 1.5
-      }
-    }, tt(s))))));
-  })), /*#__PURE__*/React.createElement("style", null, `@media(max-width:640px){ .mobile-cards{display:flex!important;} }`))), /*#__PURE__*/React.createElement("section", {
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "explore-mobile"
+  }, HOTSPOTS.map((h, i) => /*#__PURE__*/React.createElement(Card3D, {
+    key: h.id,
+    spot: h,
+    index: i
+  }))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       borderBottom: '1px solid var(--line)',
