@@ -7,7 +7,8 @@
     "title": "Sistema de videoconferència per a la seu de justícia d'Andorra",
     "excerpt": "Ontec ha instal·lat el sistema de videoconferència professional per als espais de l'edifici emblemàtic de la seu de justícia, permetent connexions d'alt nivell amb organismes internacionals.",
     "img": "https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png",
-    "featured": true
+    "featured": true,
+    "directHref": "seu-justicia.html"
   },
   {
     "id": "zero-trust-pimes",

@@ -2,11 +2,14 @@ const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic
 
 /* Els articles es carreguen en temps d'execució des de /articulos/index.json.
    Per publicar un article nou NO cal compilar res: només editar fitxers de text
-   a Hostinger. Vegeu articulos/COM-PUBLICAR.md */
+   a Hostinger. Vegeu articulos/COM-PUBLICAR.md
+   Un article pot tenir "directHref" a index.json per enllaçar a una pàgina
+   pròpia (p. ex. seu-justicia.html) en lloc del lector genèric d'articles. */
 
 function BlogCard({a, big=false}) {
+  const href = a.directHref || `article.html?art=${a.id}`;
   return (
-    <a href={`article.html?art=${a.id}`} className="mcard" style={{display:'block'}}>
+    <a href={href} className="mcard" style={{display:'block'}}>
       <Cine src={a.img} alt={a.title} style={{height:big?380:220}}/>
       <div style={{padding:'24px 26px'}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:14}}>

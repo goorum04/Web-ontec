@@ -841,8 +841,30 @@ const Icons = {
     d: "M9 22V12h6v10"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M3 9h18"
+  })),
+  Download: p => /*#__PURE__*/React.createElement("svg", {
+    width: p && p.s || 16,
+    height: p && p.s || 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "7 10 12 15 17 10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "15",
+    x2: "12",
+    y2: "3"
   }))
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 function Tag({
   children
 }) {
@@ -1173,6 +1195,37 @@ function Nav({
       letterSpacing: '.04em'
     }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    title: tt({
+      ca: 'Descarrega l\'eina de suport remot (Windows)',
+      es: 'Descarga la herramienta de soporte remoto (Windows)',
+      fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)',
+      en: 'Download the remote support tool (Windows)'
+    }),
+    style: {
+      padding: '10px 16px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`,
+      borderRadius: 10,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      textTransform: 'uppercase',
+      color: textInk,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 15
+  }), " ", tt({
+    ca: 'Suport remot',
+    es: 'Soporte remoto',
+    fr: 'Assistance',
+    en: 'Remote support'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -1223,10 +1276,27 @@ function Nav({
   }, /*#__PURE__*/React.createElement(LangSwitcher, {
     compact: true
   })), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    style: {
+      marginTop: 18,
+      width: '100%',
+      justifyContent: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 17
+  }), " ", tt({
+    ca: 'Suport remot (Windows)',
+    es: 'Soporte remoto (Windows)',
+    fr: 'Assistance (Windows)',
+    en: 'Remote support (Windows)'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 18,
+      marginTop: 12,
       width: '100%',
       justifyContent: 'center'
     }
@@ -2236,18 +2306,18 @@ const SOLS_FULL = [{
     en: 'Comprehensive protection of digital infrastructure'
   },
   desc: {
-    ca: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Fortinet i Palo Alto Networks, amb un equip certificat per l'INCIBE.",
-    es: "La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Fortinet y Palo Alto Networks, con un equipo certificado por el INCIBE.",
-    fr: "La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Fortinet et Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
-    en: "Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Fortinet and Palo Alto Networks technology, with an INCIBE-certified team."
+    ca: "La ciberseguretat es la base de qualsevol infraestructura tecnologica moderna. Ontec ofereix solucions completes de seguretat IT amb tecnologia Zyxel i Palo Alto Networks, amb un equip certificat per l'INCIBE.",
+    es: "La ciberseguridad es la base de cualquier infraestructura tecnológica moderna. Ontec ofrece soluciones completas de seguridad IT con tecnología Zyxel y Palo Alto Networks, con un equipo certificado por el INCIBE.",
+    fr: "La cybersécurité est la base de toute infrastructure technologique moderne. Ontec propose des solutions complètes de sécurité IT avec les technologies Zyxel et Palo Alto Networks, avec une équipe certifiée par l'INCIBE.",
+    en: "Cybersecurity is the foundation of any modern technology infrastructure. Ontec provides complete IT security solutions with Zyxel and Palo Alto Networks technology, with an INCIBE-certified team."
   },
   features: {
-    ca: ['Firewall NGFW Fortinet & Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
-    es: ['Firewall NGFW Fortinet & Palo Alto', 'VPN y acceso remoto seguro', 'Zero Trust Network Access', 'Monitorización SOC 24/7', 'Auditorías de seguridad', 'Detección y respuesta (EDR/XDR)'],
-    fr: ['Firewall NGFW Fortinet & Palo Alto', 'VPN et accès distant sécurisé', 'Zero Trust Network Access', 'Supervision SOC 24/7', 'Audits de sécurité', 'Détection et réponse (EDR/XDR)'],
-    en: ['Firewall NGFW Fortinet & Palo Alto', 'VPN and secure remote access', 'Zero Trust Network Access', '24/7 SOC monitoring', 'Security audits', 'Detection and response (EDR/XDR)']
+    ca: ['Firewall NGFW Zyxel & Palo Alto', 'VPN i acces remot segur', 'Zero Trust Network Access', 'Monitorat SOC 24/7', 'Auditories de seguretat', 'Deteccio i resposta (EDR/XDR)'],
+    es: ['Firewall NGFW Zyxel & Palo Alto', 'VPN y acceso remoto seguro', 'Zero Trust Network Access', 'Monitorización SOC 24/7', 'Auditorías de seguridad', 'Detección y respuesta (EDR/XDR)'],
+    fr: ['Firewall NGFW Zyxel & Palo Alto', 'VPN et accès distant sécurisé', 'Zero Trust Network Access', 'Supervision SOC 24/7', 'Audits de sécurité', 'Détection et réponse (EDR/XDR)'],
+    en: ['Firewall NGFW Zyxel & Palo Alto', 'VPN and secure remote access', 'Zero Trust Network Access', '24/7 SOC monitoring', 'Security audits', 'Detection and response (EDR/XDR)']
   },
-  partners: ['Fortinet', 'Palo Alto Networks', 'Cisco']
+  partners: ['Zyxel', 'Palo Alto Networks', 'Cisco']
 }, {
   id: 'comunicacions',
   n: '02',

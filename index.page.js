@@ -841,8 +841,30 @@ const Icons = {
     d: "M9 22V12h6v10"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M3 9h18"
+  })),
+  Download: p => /*#__PURE__*/React.createElement("svg", {
+    width: p && p.s || 16,
+    height: p && p.s || 16,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+  }), /*#__PURE__*/React.createElement("polyline", {
+    points: "7 10 12 15 17 10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "15",
+    x2: "12",
+    y2: "3"
   }))
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 function Tag({
   children
 }) {
@@ -1173,6 +1195,37 @@ function Nav({
       letterSpacing: '.04em'
     }
   }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    title: tt({
+      ca: 'Descarrega l\'eina de suport remot (Windows)',
+      es: 'Descarga la herramienta de soporte remoto (Windows)',
+      fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)',
+      en: 'Download the remote support tool (Windows)'
+    }),
+    style: {
+      padding: '10px 16px',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 7,
+      border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`,
+      borderRadius: 10,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      textTransform: 'uppercase',
+      color: textInk,
+      textDecoration: 'none'
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 15
+  }), " ", tt({
+    ca: 'Suport remot',
+    es: 'Soporte remoto',
+    fr: 'Assistance',
+    en: 'Remote support'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
@@ -1223,10 +1276,27 @@ function Nav({
   }, /*#__PURE__*/React.createElement(LangSwitcher, {
     compact: true
   })), /*#__PURE__*/React.createElement("a", {
+    href: SUPORT_REMOT_EXE,
+    download: true,
+    className: "btn btn-ghost",
+    style: {
+      marginTop: 18,
+      width: '100%',
+      justifyContent: 'center',
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement(Icons.Download, {
+    s: 17
+  }), " ", tt({
+    ca: 'Suport remot (Windows)',
+    es: 'Soporte remoto (Windows)',
+    fr: 'Assistance (Windows)',
+    en: 'Remote support (Windows)'
+  })), /*#__PURE__*/React.createElement("a", {
     href: "contacta.html",
     className: "btn btn-primary",
     style: {
-      marginTop: 18,
+      marginTop: 12,
       width: '100%',
       justifyContent: 'center'
     }
@@ -2958,13 +3028,13 @@ function CaseBatllia() {
     fr: "Le système permet la connexion simultanée avec des organismes internationaux, des tribunaux et des institutions européennes, avec une qualité audiovisuelle de premier ordre et une latence minimale.",
     en: "The system enables simultaneous connections with international bodies, courts and European institutions, with top-tier audiovisual quality and minimal latency."
   })), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
-    href: "solucions.html#audiovisuals",
+    href: "seu-justicia.html",
     className: "btn btn-primary"
   }, tt({
-    ca: 'Veure solució',
-    es: 'Ver solución',
-    fr: 'Voir la solution',
-    en: 'View solution'
+    ca: 'Explorar el cas',
+    es: 'Explorar el caso',
+    fr: 'Explorer le cas',
+    en: 'Explore the case'
   }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {
@@ -3083,10 +3153,10 @@ function CiberseguretatIncibe() {
       en: 'Advanced firewall'
     },
     d: {
-      ca: 'Fortinet & Palo Alto Networks de nova generació.',
-      es: 'Fortinet & Palo Alto Networks de nueva generación.',
-      fr: 'Fortinet & Palo Alto Networks nouvelle génération.',
-      en: 'Next-generation Fortinet & Palo Alto Networks.'
+      ca: 'Zyxel & Palo Alto Networks de nova generació.',
+      es: 'Zyxel & Palo Alto Networks de nueva generación.',
+      fr: 'Zyxel & Palo Alto Networks nouvelle génération.',
+      en: 'Next-generation Zyxel & Palo Alto Networks.'
     }
   }, {
     icon: /*#__PURE__*/React.createElement(Icons.Lock, null),
@@ -3375,7 +3445,7 @@ function CiberseguretatIncibe() {
   })))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:860px){.incibe-grid{grid-template-columns:1fr!important;gap:48px!important;}}`));
 }
 function PartnersMarquee() {
-  const partners = ['Fortinet', 'Cisco', 'Ubiquiti', 'KNX', 'Crestron', 'HPE Aruba', 'Palo Alto', 'Lutron', 'Samsung', 'Sony', 'QSC', 'Shure'];
+  const partners = ['Zyxel', 'Cisco', 'Ubiquiti', 'KNX', 'Crestron', 'HPE Aruba', 'Palo Alto', 'Lutron', 'Samsung', 'Sony', 'QSC', 'Shure'];
   return /*#__PURE__*/React.createElement("section", {
     style: {
       borderTop: '1px solid var(--line)',
