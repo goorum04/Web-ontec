@@ -14,7 +14,7 @@ const shared = fs.readFileSync(path.join(SRC, 'shared.jsx'), 'utf-8');
 const tweaks = fs.readFileSync(path.join(SRC, 'tweaks.jsx'), 'utf-8');
 const prefix = shared + '\n\n' + tweaks + '\n\n';
 
-const pages = ['index', 'empresa', 'solucions', 'serveis', 'blog', 'contacta', 'article', 'seu-justicia'];
+const pages = ['index', 'empresa', 'solucions', 'serveis', 'blog', 'contacta', 'article', 'seu-justicia', 'legal', 'privacitat', 'cookies'];
 
 for (const p of pages) {
   let page = fs.readFileSync(path.join(SRC, p + '.jsx'), 'utf-8');

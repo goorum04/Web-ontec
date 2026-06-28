@@ -3,11 +3,13 @@ const TWEAK_DEFAULTS = {"mood":"acid","voice":"editorial","intensity":"cinematic
 function ContactForm() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({nom:'',empresa:'',email:'',tel:'',servei:'',missatge:''});
+  const [consent, setConsent] = useState(false);
   const [err, setErr] = useState('');
   const handle = (k,v) => setForm(f=>({...f,[k]:v}));
   const submit = (e) => {
     e.preventDefault();
     if(!form.nom||!form.email||!form.missatge){setErr(tt({ca:'Si us plau, omple els camps obligatoris.',es:'Por favor, rellena los campos obligatorios.',fr:'Veuillez remplir les champs obligatoires.',en:'Please fill in the required fields.'}));return;}
+    if(!consent){setErr(tt({ca:"Has d'acceptar la política de privacitat per continuar.",es:'Debes aceptar la política de privacidad para continuar.',fr:'Vous devez accepter la politique de confidentialité pour continuer.',en:'You must accept the privacy policy to continue.'}));return;}
     setSent(true); setErr('');
   };
   const field = (label, key, type='text', req=false, placeholder='') => (
@@ -56,6 +58,18 @@ function ContactForm() {
           style={{background:'var(--panel)',border:'1px solid var(--line)',borderRadius:12,padding:'14px 18px',fontSize:15,color:'var(--ink)',outline:'none',resize:'vertical',fontFamily:'var(--body)',lineHeight:1.6,transition:'border-color .2s'}}
           onFocus={e=>e.target.style.borderColor=A(50)} onBlur={e=>e.target.style.borderColor='var(--line)'}/>
       </div>
+      <label style={{display:'flex',alignItems:'flex-start',gap:12,cursor:'pointer',fontSize:13.5,color:'var(--mut)',lineHeight:1.6}}>
+        <input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)}
+          style={{marginTop:3,width:17,height:17,accentColor:'var(--accent)',flexShrink:0,cursor:'pointer'}}/>
+        <span>
+          {tt({
+            ca:<>He llegit i accepto la <a href="privacitat.html" target="_blank" rel="noopener" style={{color:'var(--accent-deep)',textDecoration:'underline'}}>política de privacitat</a> i el tractament de les meves dades per respondre la consulta.</>,
+            es:<>He leído y acepto la <a href="privacitat.html" target="_blank" rel="noopener" style={{color:'var(--accent-deep)',textDecoration:'underline'}}>política de privacidad</a> y el tratamiento de mis datos para responder a la consulta.</>,
+            fr:<>J'ai lu et j'accepte la <a href="privacitat.html" target="_blank" rel="noopener" style={{color:'var(--accent-deep)',textDecoration:'underline'}}>politique de confidentialité</a> et le traitement de mes données pour répondre à la demande.</>,
+            en:<>I have read and accept the <a href="privacitat.html" target="_blank" rel="noopener" style={{color:'var(--accent-deep)',textDecoration:'underline'}}>privacy policy</a> and the processing of my data to respond to this enquiry.</>
+          })}
+        </span>
+      </label>
       {err && <p style={{fontFamily:'var(--mono)',fontSize:12.5,color:'#ff5f57'}}>{err}</p>}
       <button type="submit" className="btn btn-primary" style={{alignSelf:'flex-start',padding:'16px 32px'}}>
         {tt({ca:'Enviar consulta',es:'Enviar consulta',fr:'Envoyer la demande',en:'Send enquiry'})} <Icons.UpRight s={15}/>

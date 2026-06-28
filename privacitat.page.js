@@ -2389,207 +2389,6 @@ const TWEAK_DEFAULTS = {
   "voice": "editorial",
   "intensity": "cinematic"
 };
-const SVCS = [{
-  id: 'ingenieries',
-  n: '01',
-  title: 'Ingenieries',
-  icon: /*#__PURE__*/React.createElement(Icons.Cpu, null),
-  titleI18n: {
-    ca: 'Ingenieries',
-    es: 'Ingenierías',
-    fr: 'Ingénieries',
-    en: 'Engineering'
-  },
-  img: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80&auto=format&fit=crop',
-  sub: {
-    ca: 'Prescripcio, especificacio i assistencia tecnica',
-    es: 'Prescripción, especificación y asistencia técnica',
-    fr: 'Prescription, spécification et assistance technique',
-    en: 'Specification, prescription and technical assistance'
-  },
-  desc: {
-    ca: "Col laborem amb ingenieries en la definicio tecnica dels sistemes, l'especificacio d'equips i l'assistencia durant totes les fases del projecte.",
-    es: "Colaboramos con ingenierías en la definición técnica de los sistemas, la especificación de equipos y la asistencia durante todas las fases del proyecto.",
-    fr: "Nous collaborons avec les bureaux d'ingénierie sur la définition technique des systèmes, la spécification des équipements et l'assistance tout au long des phases du projet.",
-    en: "We work with engineering firms on the technical definition of systems, equipment specification and assistance throughout every phase of the project."
-  },
-  points: [{
-    ca: "Prescripcio de sistemes IT i AV",
-    es: "Prescripción de sistemas IT y AV",
-    fr: "Prescription de systèmes IT et AV",
-    en: "IT and AV system specification"
-  }, {
-    ca: "Especificacio d'equips i materials",
-    es: "Especificación de equipos y materiales",
-    fr: "Spécification d'équipements et de matériaux",
-    en: "Equipment and materials specification"
-  }, {
-    ca: "Assistencia tecnica en obra",
-    es: "Asistencia técnica en obra",
-    fr: "Assistance technique sur chantier",
-    en: "On-site technical assistance"
-  }, {
-    ca: "Dossiers tecnics i documentacio",
-    es: "Dossieres técnicos y documentación",
-    fr: "Dossiers techniques et documentation",
-    en: "Technical dossiers and documentation"
-  }, {
-    ca: "Formacio per a l'equip tecnic",
-    es: "Formación para el equipo técnico",
-    fr: "Formation pour l'équipe technique",
-    en: "Training for the technical team"
-  }]
-}, {
-  id: 'arquitectures',
-  n: '02',
-  title: 'Arquitectures',
-  icon: /*#__PURE__*/React.createElement(Icons.Building, null),
-  titleI18n: {
-    ca: 'Arquitectures',
-    es: 'Arquitecturas',
-    fr: 'Architectures',
-    en: 'Architecture'
-  },
-  img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80&auto=format&fit=crop',
-  sub: {
-    ca: 'Tecnologia integrada des de la fase de projecte',
-    es: 'Tecnología integrada desde la fase de proyecto',
-    fr: 'Technologie intégrée dès la phase de projet',
-    en: 'Technology integrated from the design phase'
-  },
-  desc: {
-    ca: "Treballem amb equips d'arquitectura per integrar la tecnologia des del disseny inicial, assegurant que els sistemes s'integrin de forma optima en l'espai.",
-    es: "Trabajamos con equipos de arquitectura para integrar la tecnología desde el diseño inicial, asegurando que los sistemas se integren de forma óptima en el espacio.",
-    fr: "Nous travaillons avec les équipes d'architecture pour intégrer la technologie dès la conception initiale, en garantissant que les systèmes s'intègrent de manière optimale dans l'espace.",
-    en: "We work with architecture teams to integrate technology from the initial design, ensuring systems blend optimally into the space."
-  },
-  points: [{
-    ca: "Consulta en fase de projecte",
-    es: "Consultoría en fase de proyecto",
-    fr: "Conseil en phase de projet",
-    en: "Consulting during the design phase"
-  }, {
-    ca: "Disseny de passadissos i infraestructura",
-    es: "Diseño de pasillos e infraestructura",
-    fr: "Conception des passages et de l'infrastructure",
-    en: "Design of routing and infrastructure"
-  }, {
-    ca: "Integracio estetica de dispositius",
-    es: "Integración estética de dispositivos",
-    fr: "Intégration esthétique des dispositifs",
-    en: "Aesthetic integration of devices"
-  }, {
-    ca: "Coordinacio amb altres industrials",
-    es: "Coordinación con otros industriales",
-    fr: "Coordination avec les autres corps de métier",
-    en: "Coordination with other trades"
-  }, {
-    ca: "Pressupost de tecnologia per al projecte",
-    es: "Presupuesto de tecnología para el proyecto",
-    fr: "Budget technologique pour le projet",
-    en: "Technology budget for the project"
-  }]
-}, {
-  id: 'installadors',
-  n: '03',
-  title: 'Installadors',
-  icon: /*#__PURE__*/React.createElement(Icons.Shield, null),
-  titleI18n: {
-    ca: 'Installadors',
-    es: 'Instaladores',
-    fr: 'Installateurs',
-    en: 'Installers'
-  },
-  img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=900&q=80&auto=format&fit=crop',
-  sub: {
-    ca: 'Subministre, preconfiguracio i suport en obra',
-    es: 'Suministro, preconfiguración y soporte en obra',
-    fr: 'Fourniture, préconfiguration et support sur chantier',
-    en: 'Supply, preconfiguration and on-site support'
-  },
-  desc: {
-    ca: "Subministrem i preconfigurem equips per a installadors, oferint suport tecnic durant la installacio i la posada en marxa dels sistemes.",
-    es: "Suministramos y preconfiguramos equipos para instaladores, ofreciendo soporte técnico durante la instalación y la puesta en marcha de los sistemas.",
-    fr: "Nous fournissons et préconfigurons les équipements pour les installateurs, en offrant un support technique pendant l'installation et la mise en service des systèmes.",
-    en: "We supply and preconfigure equipment for installers, providing technical support during installation and system commissioning."
-  },
-  points: [{
-    ca: "Subministre d'equips certificats",
-    es: "Suministro de equipos certificados",
-    fr: "Fourniture d'équipements certifiés",
-    en: "Supply of certified equipment"
-  }, {
-    ca: "Preconfiguracio de dispositius",
-    es: "Preconfiguración de dispositivos",
-    fr: "Préconfiguration des dispositifs",
-    en: "Device preconfiguration"
-  }, {
-    ca: "Suport tecnic en obra",
-    es: "Soporte técnico en obra",
-    fr: "Support technique sur chantier",
-    en: "On-site technical support"
-  }, {
-    ca: "Posada en marxa i configuracio",
-    es: "Puesta en marcha y configuración",
-    fr: "Mise en service et configuration",
-    en: "Commissioning and configuration"
-  }, {
-    ca: "Formacio i certificacio",
-    es: "Formación y certificación",
-    fr: "Formation et certification",
-    en: "Training and certification"
-  }]
-}, {
-  id: 'disseny',
-  n: '04',
-  title: "Disseny d'Interiors",
-  icon: /*#__PURE__*/React.createElement(Icons.Screen, null),
-  titleI18n: {
-    ca: "Disseny d'Interiors",
-    es: "Diseño de Interiores",
-    fr: "Design d'Intérieur",
-    en: "Interior Design"
-  },
-  img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80&auto=format&fit=crop',
-  sub: {
-    ca: "Tecnologia invisible, part del disseny",
-    es: "Tecnología invisible, parte del diseño",
-    fr: "Technologie invisible, partie du design",
-    en: "Invisible technology, part of the design"
-  },
-  desc: {
-    ca: "Assessorem dissenyadors d'interiors en la seleccio i integracio de tecnologia que es fongui amb l'estetica del projecte sense comprometre les prestacions.",
-    es: "Asesoramos a diseñadores de interiores en la selección e integración de tecnología que se fusione con la estética del proyecto sin comprometer las prestaciones.",
-    fr: "Nous conseillons les designers d'intérieur dans la sélection et l'intégration de technologies qui se fondent dans l'esthétique du projet sans compromettre les performances.",
-    en: "We advise interior designers on selecting and integrating technology that blends with the project's aesthetic without compromising performance."
-  },
-  points: [{
-    ca: "Seleccio de dispositius discrets",
-    es: "Selección de dispositivos discretos",
-    fr: "Sélection de dispositifs discrets",
-    en: "Selection of discreet devices"
-  }, {
-    ca: "Pantalles i panells integrats",
-    es: "Pantallas y paneles integrados",
-    fr: "Écrans et panneaux intégrés",
-    en: "Integrated screens and panels"
-  }, {
-    ca: "Il luminacio i control ambiental",
-    es: "Iluminación y control ambiental",
-    fr: "Éclairage et contrôle d'ambiance",
-    en: "Lighting and ambient control"
-  }, {
-    ca: "Cable management estetic",
-    es: "Cable management estético",
-    fr: "Gestion esthétique des câbles",
-    en: "Aesthetic cable management"
-  }, {
-    ca: "Solucions sense fils quan es possible",
-    es: "Soluciones inalámbricas cuando es posible",
-    fr: "Solutions sans fil lorsque c'est possible",
-    en: "Wireless solutions where possible"
-  }]
-}];
 function App() {
   useLang();
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
@@ -2599,183 +2398,39 @@ function App() {
     r.setAttribute('data-voice', t.voice);
     r.setAttribute('data-intensity', t.intensity);
   }, [t.mood, t.voice, t.intensity]);
-  return /*#__PURE__*/React.createElement(PageShell, {
-    activePage: "Serveis"
-  }, /*#__PURE__*/React.createElement(PageHero, {
+  return /*#__PURE__*/React.createElement(LegalLayout, {
+    activePage: "",
     kicker: tt({
-      ca: "Serveis · Adaptat a cada sector",
-      es: "Servicios · Adaptado a cada sector",
-      fr: "Services · Adapté à chaque secteur",
-      en: "Services · Tailored to each sector"
+      ca: 'Protecció de dades',
+      es: 'Protección de datos',
+      fr: 'Protection des données',
+      en: 'Data protection'
     }),
     title: tt({
-      ca: "Per al teu sector",
-      es: "Para tu sector",
-      fr: "Pour votre secteur",
-      en: "For your sector"
+      ca: 'Política de privacitat',
+      es: 'Política de privacidad',
+      fr: 'Politique de confidentialité',
+      en: 'Privacy policy'
     }),
-    sub: tt({
-      ca: "Solucions tecnologiques adaptades a cada tipus de client: ingenieries, arquitectures, installadors i dissenyadors d'interiors.",
-      es: "Soluciones tecnológicas adaptadas a cada tipo de cliente: ingenierías, arquitecturas, instaladores y diseñadores de interiores.",
-      fr: "Des solutions technologiques adaptées à chaque type de client : ingénieries, architectures, installateurs et designers d'intérieur.",
-      en: "Technology solutions tailored to each type of client: engineering firms, architects, installers and interior designers."
-    }),
-    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1800&q=80&auto=format&fit=crop"
-  }), SVCS.map((s, i) => /*#__PURE__*/React.createElement("section", {
-    key: s.id,
-    id: s.id,
-    style: {
-      padding: '100px 0',
-      borderBottom: '1px solid var(--line)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "wrap-wide"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: i % 2 === 0 ? '1fr 1fr' : '1fr 1fr',
-      gap: 80,
-      alignItems: 'center'
-    },
-    className: "srv-grid"
-  }, i % 2 === 0 ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", tt({
-    ca: "Serveis",
-    es: "Servicios",
-    fr: "Services",
-    en: "Services"
-  })), /*#__PURE__*/React.createElement("h2", {
-    className: "disp",
-    style: {
-      fontSize: 'clamp(36px,5vw,72px)',
-      marginBottom: 12
-    }
-  }, tt(s.titleI18n)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 14,
-      color: 'var(--accent)',
-      fontFamily: 'var(--mono)',
-      letterSpacing: '.04em',
-      marginBottom: 20
-    }
-  }, tt(s.sub)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 16,
-      color: 'var(--mut)',
-      lineHeight: 1.8,
-      marginBottom: 28
-    }
-  }, tt(s.desc)), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      listStyle: 'none',
-      marginBottom: 36
-    }
-  }, s.points.map((p, j) => /*#__PURE__*/React.createElement("li", {
-    key: j,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      padding: '8px 0',
-      borderBottom: '1px solid var(--line-soft)',
-      fontSize: 15
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement(Icons.Check, null)), tt(p)))), /*#__PURE__*/React.createElement("a", {
-    href: "contacta.html",
-    className: "btn btn-primary"
+    updated: tt({
+      ca: 'Última actualització: juny 2026',
+      es: 'Última actualización: junio 2026',
+      fr: 'Dernière mise à jour : juin 2026',
+      en: 'Last updated: June 2026'
+    })
   }, tt({
-    ca: "Parla amb nosaltres",
-    es: "Habla con nosotros",
-    fr: "Parlez avec nous",
-    en: "Talk to us"
-  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
-    s: 15
-  }))), /*#__PURE__*/React.createElement(Reveal, {
-    delay: 120
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderRadius: 20,
-      overflow: 'hidden',
-      border: '1px solid var(--line)'
-    }
-  }, /*#__PURE__*/React.createElement(Cine, {
-    src: s.img,
-    alt: s.title,
-    style: {
-      height: 460
-    }
-  })))) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Reveal, {
-    delay: 120
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      borderRadius: 20,
-      overflow: 'hidden',
-      border: '1px solid var(--line)'
-    }
-  }, /*#__PURE__*/React.createElement(Cine, {
-    src: s.img,
-    alt: s.title,
-    style: {
-      height: 460
-    }
-  }))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement(SectionLabel, null, s.n, " — ", tt({
-    ca: "Serveis",
-    es: "Servicios",
-    fr: "Services",
-    en: "Services"
-  })), /*#__PURE__*/React.createElement("h2", {
-    className: "disp",
-    style: {
-      fontSize: 'clamp(36px,5vw,72px)',
-      marginBottom: 12
-    }
-  }, tt(s.titleI18n)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 14,
-      color: 'var(--accent)',
-      fontFamily: 'var(--mono)',
-      letterSpacing: '.04em',
-      marginBottom: 20
-    }
-  }, tt(s.sub)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 16,
-      color: 'var(--mut)',
-      lineHeight: 1.8,
-      marginBottom: 28
-    }
-  }, tt(s.desc)), /*#__PURE__*/React.createElement("ul", {
-    style: {
-      listStyle: 'none',
-      marginBottom: 36
-    }
-  }, s.points.map((p, j) => /*#__PURE__*/React.createElement("li", {
-    key: j,
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      padding: '8px 0',
-      borderBottom: '1px solid var(--line-soft)',
-      fontSize: 15
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement(Icons.Check, null)), tt(p)))), /*#__PURE__*/React.createElement("a", {
-    href: "contacta.html",
-    className: "btn btn-primary"
-  }, tt({
-    ca: "Parla amb nosaltres",
-    es: "Habla con nosotros",
-    fr: "Parlez avec nous",
-    en: "Talk to us"
-  }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
-    s: 15
-  })))))), /*#__PURE__*/React.createElement("style", null, `.srv-grid{@media(max-width:860px){grid-template-columns:1fr!important;}}`))));
+    ca: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Ontec respecta la teva privacitat i tracta les teves dades personals d'acord amb la ", /*#__PURE__*/React.createElement("strong", null, "Llei 29/2021, qualificada de protecció de dades personals d'Andorra (LQPD)"), "."), /*#__PURE__*/React.createElement("h2", null, "1. Responsable del tractament"), /*#__PURE__*/React.createElement("p", null, "ON TECNOLOGIES S.L. — C/ de la Vena 3, Baixos, Encamp, Andorra — info@ontecandorra.com — +376 88 55 99."), /*#__PURE__*/React.createElement("h2", null, "2. Quines dades recollim"), /*#__PURE__*/React.createElement("p", null, "Únicament les dades que ens facilites voluntàriament a través del formulari de contacte: ", /*#__PURE__*/React.createElement("strong", null, "nom i cognoms, correu electrònic, telèfon, empresa i el contingut del missatge"), ". No recollim dades de navegació amb finalitats de seguiment."), /*#__PURE__*/React.createElement("h2", null, "3. Amb quina finalitat"), /*#__PURE__*/React.createElement("p", null, "Per atendre i respondre les teves consultes, preparar pressupostos i mantenir el contacte comercial que sol·licitis. No fem servir les teves dades per a publicitat no sol·licitada."), /*#__PURE__*/React.createElement("h2", null, "4. Base jurídica"), /*#__PURE__*/React.createElement("p", null, "El tractament es basa en el teu ", /*#__PURE__*/React.createElement("strong", null, "consentiment"), ", que atorgues en marcar la casella del formulari, i en l'interès legítim de respondre la teva sol·licitud."), /*#__PURE__*/React.createElement("h2", null, "5. Conservació"), /*#__PURE__*/React.createElement("p", null, "Conservem les dades durant el temps necessari per atendre la teva consulta i, si escau, durant la relació comercial. Després se suprimeixen, llevat d'obligacions legals de conservació."), /*#__PURE__*/React.createElement("h2", null, "6. Destinataris"), /*#__PURE__*/React.createElement("p", null, "No cedim les teves dades a tercers. Les dades es poden allotjar als servidors del nostre proveïdor d'allotjament web, que actua com a encarregat del tractament amb les garanties exigides."), /*#__PURE__*/React.createElement("h2", null, "7. Els teus drets"), /*#__PURE__*/React.createElement("p", null, "Pots exercir els drets d'", /*#__PURE__*/React.createElement("strong", null, "accés, rectificació, supressió, oposició, limitació i portabilitat"), " escrivint a info@ontecandorra.com. També tens dret a presentar una reclamació davant l'", /*#__PURE__*/React.createElement("strong", null, "Agència Andorrana de Protecció de Dades (APDA)"), " — apda.ad."), /*#__PURE__*/React.createElement("h2", null, "8. Emmagatzematge local"), /*#__PURE__*/React.createElement("p", null, "Aquest lloc desa una preferència tècnica al teu navegador (l'idioma escollit). No és una cookie de seguiment i no s'utilitza per identificar-te. Consulta més detalls a la ", /*#__PURE__*/React.createElement("a", {
+      href: "cookies.html"
+    }, "política de cookies"), ".")),
+    es: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Ontec respeta tu privacidad y trata tus datos personales de acuerdo con la ", /*#__PURE__*/React.createElement("strong", null, "Ley 29/2021, calificada de protección de datos personales de Andorra (LQPD)"), "."), /*#__PURE__*/React.createElement("h2", null, "1. Responsable del tratamiento"), /*#__PURE__*/React.createElement("p", null, "ON TECNOLOGIES S.L. — C/ de la Vena 3, Bajos, Encamp, Andorra — info@ontecandorra.com — +376 88 55 99."), /*#__PURE__*/React.createElement("h2", null, "2. Qué datos recogemos"), /*#__PURE__*/React.createElement("p", null, "Únicamente los datos que nos facilitas voluntariamente a través del formulario de contacto: ", /*#__PURE__*/React.createElement("strong", null, "nombre y apellidos, correo electrónico, teléfono, empresa y el contenido del mensaje"), ". No recogemos datos de navegación con fines de seguimiento."), /*#__PURE__*/React.createElement("h2", null, "3. Con qué finalidad"), /*#__PURE__*/React.createElement("p", null, "Para atender y responder a tus consultas, preparar presupuestos y mantener el contacto comercial que solicites. No usamos tus datos para publicidad no solicitada."), /*#__PURE__*/React.createElement("h2", null, "4. Base jurídica"), /*#__PURE__*/React.createElement("p", null, "El tratamiento se basa en tu ", /*#__PURE__*/React.createElement("strong", null, "consentimiento"), ", que otorgas al marcar la casilla del formulario, y en el interés legítimo de responder a tu solicitud."), /*#__PURE__*/React.createElement("h2", null, "5. Conservación"), /*#__PURE__*/React.createElement("p", null, "Conservamos los datos durante el tiempo necesario para atender tu consulta y, en su caso, durante la relación comercial. Después se suprimen, salvo obligaciones legales de conservación."), /*#__PURE__*/React.createElement("h2", null, "6. Destinatarios"), /*#__PURE__*/React.createElement("p", null, "No cedemos tus datos a terceros. Los datos pueden alojarse en los servidores de nuestro proveedor de alojamiento web, que actúa como encargado del tratamiento con las garantías exigidas."), /*#__PURE__*/React.createElement("h2", null, "7. Tus derechos"), /*#__PURE__*/React.createElement("p", null, "Puedes ejercer los derechos de ", /*#__PURE__*/React.createElement("strong", null, "acceso, rectificación, supresión, oposición, limitación y portabilidad"), " escribiendo a info@ontecandorra.com. También tienes derecho a presentar una reclamación ante la ", /*#__PURE__*/React.createElement("strong", null, "Agencia Andorrana de Protección de Datos (APDA)"), " — apda.ad."), /*#__PURE__*/React.createElement("h2", null, "8. Almacenamiento local"), /*#__PURE__*/React.createElement("p", null, "Este sitio guarda una preferencia técnica en tu navegador (el idioma elegido). No es una cookie de seguimiento y no se utiliza para identificarte. Consulta más detalles en la ", /*#__PURE__*/React.createElement("a", {
+      href: "cookies.html"
+    }, "política de cookies"), ".")),
+    fr: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Ontec respecte votre vie privée et traite vos données personnelles conformément à la ", /*#__PURE__*/React.createElement("strong", null, "loi 29/2021 relative à la protection des données personnelles d'Andorre (LQPD)"), "."), /*#__PURE__*/React.createElement("h2", null, "1. Responsable du traitement"), /*#__PURE__*/React.createElement("p", null, "ON TECNOLOGIES S.L. — C/ de la Vena 3, Baixos, Encamp, Andorre — info@ontecandorra.com — +376 88 55 99."), /*#__PURE__*/React.createElement("h2", null, "2. Quelles données nous collectons"), /*#__PURE__*/React.createElement("p", null, "Uniquement les données que vous nous fournissez volontairement via le formulaire de contact : ", /*#__PURE__*/React.createElement("strong", null, "nom et prénom, e-mail, téléphone, entreprise et le contenu du message"), ". Nous ne collectons pas de données de navigation à des fins de suivi."), /*#__PURE__*/React.createElement("h2", null, "3. Dans quel but"), /*#__PURE__*/React.createElement("p", null, "Pour traiter et répondre à vos demandes, préparer des devis et maintenir le contact commercial que vous sollicitez. Nous n'utilisons pas vos données à des fins de publicité non sollicitée."), /*#__PURE__*/React.createElement("h2", null, "4. Base juridique"), /*#__PURE__*/React.createElement("p", null, "Le traitement repose sur votre ", /*#__PURE__*/React.createElement("strong", null, "consentement"), ", donné en cochant la case du formulaire, et sur l'intérêt légitime de répondre à votre demande."), /*#__PURE__*/React.createElement("h2", null, "5. Conservation"), /*#__PURE__*/React.createElement("p", null, "Nous conservons les données le temps nécessaire au traitement de votre demande et, le cas échéant, pendant la relation commerciale. Elles sont ensuite supprimées, sauf obligations légales de conservation."), /*#__PURE__*/React.createElement("h2", null, "6. Destinataires"), /*#__PURE__*/React.createElement("p", null, "Nous ne cédons pas vos données à des tiers. Les données peuvent être hébergées sur les serveurs de notre prestataire d'hébergement web, qui agit en tant que sous-traitant avec les garanties requises."), /*#__PURE__*/React.createElement("h2", null, "7. Vos droits"), /*#__PURE__*/React.createElement("p", null, "Vous pouvez exercer vos droits d'", /*#__PURE__*/React.createElement("strong", null, "accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité"), " en écrivant à info@ontecandorra.com. Vous avez également le droit d'introduire une réclamation auprès de l'", /*#__PURE__*/React.createElement("strong", null, "Agence andorrane de protection des données (APDA)"), " — apda.ad."), /*#__PURE__*/React.createElement("h2", null, "8. Stockage local"), /*#__PURE__*/React.createElement("p", null, "Ce site enregistre une préférence technique dans votre navigateur (la langue choisie). Il ne s'agit pas d'un cookie de suivi et il n'est pas utilisé pour vous identifier. Plus de détails dans la ", /*#__PURE__*/React.createElement("a", {
+      href: "cookies.html"
+    }, "politique de cookies"), ".")),
+    en: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Ontec respects your privacy and processes your personal data in accordance with ", /*#__PURE__*/React.createElement("strong", null, "Andorra's Law 29/2021 on personal data protection (LQPD)"), "."), /*#__PURE__*/React.createElement("h2", null, "1. Data controller"), /*#__PURE__*/React.createElement("p", null, "ON TECNOLOGIES S.L. — C/ de la Vena 3, Baixos, Encamp, Andorra — info@ontecandorra.com — +376 88 55 99."), /*#__PURE__*/React.createElement("h2", null, "2. What data we collect"), /*#__PURE__*/React.createElement("p", null, "Only the data you voluntarily provide through the contact form: ", /*#__PURE__*/React.createElement("strong", null, "full name, email, phone, company and the message content"), ". We do not collect browsing data for tracking purposes."), /*#__PURE__*/React.createElement("h2", null, "3. Purpose"), /*#__PURE__*/React.createElement("p", null, "To handle and respond to your enquiries, prepare quotes and maintain the commercial contact you request. We do not use your data for unsolicited advertising."), /*#__PURE__*/React.createElement("h2", null, "4. Legal basis"), /*#__PURE__*/React.createElement("p", null, "Processing is based on your ", /*#__PURE__*/React.createElement("strong", null, "consent"), ", given when you tick the form checkbox, and on the legitimate interest of responding to your request."), /*#__PURE__*/React.createElement("h2", null, "5. Retention"), /*#__PURE__*/React.createElement("p", null, "We keep the data for as long as necessary to handle your enquiry and, where applicable, for the duration of the commercial relationship. It is then deleted, except for legal retention obligations."), /*#__PURE__*/React.createElement("h2", null, "6. Recipients"), /*#__PURE__*/React.createElement("p", null, "We do not share your data with third parties. Data may be hosted on the servers of our web hosting provider, which acts as a data processor with the required guarantees."), /*#__PURE__*/React.createElement("h2", null, "7. Your rights"), /*#__PURE__*/React.createElement("p", null, "You can exercise your rights of ", /*#__PURE__*/React.createElement("strong", null, "access, rectification, erasure, objection, restriction and portability"), " by writing to info@ontecandorra.com. You also have the right to lodge a complaint with the ", /*#__PURE__*/React.createElement("strong", null, "Andorran Data Protection Agency (APDA)"), " — apda.ad."), /*#__PURE__*/React.createElement("h2", null, "8. Local storage"), /*#__PURE__*/React.createElement("p", null, "This site stores a technical preference in your browser (your chosen language). It is not a tracking cookie and is not used to identify you. See more details in the ", /*#__PURE__*/React.createElement("a", {
+      href: "cookies.html"
+    }, "cookie policy"), "."))
+  }));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));

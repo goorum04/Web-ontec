@@ -503,9 +503,13 @@ function Footer() {
           </div>
         </div>
         <div style={{ marginTop: 56, paddingTop: 26, borderTop: '1px solid rgba(255,255,255,.08)', display: 'flex',
-          justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(238,241,234,.45)', letterSpacing: '.05em' }}>
+          justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, alignItems: 'center', fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(238,241,234,.45)', letterSpacing: '.05em' }}>
           <span>{tt({ ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats', es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados', fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés', en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved' })}</span>
-          <span>ANDORRA · 42.5°N 1.5°E</span>
+          <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
+            <a href="legal.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Avís legal', es: 'Aviso legal', fr: 'Mentions légales', en: 'Legal notice' })}</a>
+            <a href="privacitat.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Privacitat', es: 'Privacidad', fr: 'Confidentialité', en: 'Privacy' })}</a>
+            <a href="cookies.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Cookies', es: 'Cookies', fr: 'Cookies', en: 'Cookies' })}</a>
+          </div>
         </div>
       </div>
       <style>{`@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`}</style>
@@ -585,9 +589,38 @@ function PageShell({ activePage, children }) {
   );
 }
 
+const LEGAL_CSS = `
+.legal-body h2{font-family:var(--disp);font-weight:800;font-size:clamp(22px,2.6vw,28px);color:var(--ink);margin:40px 0 14px;letter-spacing:var(--dtrack);}
+.legal-body h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:26px 0 10px;}
+.legal-body p{font-size:16px;line-height:1.8;color:var(--mut);margin-bottom:14px;}
+.legal-body ul{margin:10px 0 18px;padding-left:24px;}
+.legal-body li{font-size:16px;line-height:1.8;color:var(--mut);margin-bottom:8px;}
+.legal-body a{color:var(--accent-deep);text-decoration:underline;}
+.legal-body strong{color:var(--ink);}
+`;
+
+/* Layout per a pàgines legals (avís legal, privacitat, cookies) */
+function LegalLayout({ activePage = '', kicker, title, updated, children }) {
+  return (
+    <PageShell activePage={activePage}>
+      <section style={{ paddingTop: 132, paddingBottom: 44, background: 'var(--panel)', borderBottom: '1px solid var(--line)' }}>
+        <div className="wrap" style={{ maxWidth: 820 }}>
+          {kicker && <div className="kicker" style={{ marginBottom: 14 }}>{kicker}</div>}
+          <h1 className="disp" style={{ fontSize: 'clamp(34px,5vw,58px)' }}>{title}</h1>
+          {updated && <p style={{ marginTop: 16, fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--mut)', letterSpacing: '.04em' }}>{updated}</p>}
+        </div>
+      </section>
+      <section style={{ padding: '52px 0 96px' }}>
+        <div className="wrap legal-body" style={{ maxWidth: 820 }}>{children}</div>
+      </section>
+      <style>{LEGAL_CSS}</style>
+    </PageShell>
+  );
+}
+
 Object.assign(window, {
   A, GLOBAL_CSS, Reveal, Marquee, Icons, Tag, SectionLabel, OntecLogo,
-  Cine, PageHero, Nav, Footer, PageShell, NAV_ITEMS,
+  Cine, PageHero, Nav, Footer, PageShell, LegalLayout, NAV_ITEMS,
   ScrollProgress, CursorFX, ParticleField, Scramble, CountUp, Magnetic, Tilt,
   LANGS, tt, useLang, setLang, getLang, LangSwitcher,
 });
