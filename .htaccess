@@ -1,0 +1,65 @@
+# ════════════════════════════════════════════════════════════════════════════
+# Ontec — configuración para hosting Apache (Hostinger)
+# Equivalente a vercel.json / _headers. Sube este archivo a public_html.
+# ════════════════════════════════════════════════════════════════════════════
+
+# ── Cabeceras de seguridad ───────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://d8j0ntlcm91z4.cloudfront.net; connect-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+
+# ── Tipos MIME y codificación (blog: index.json + .md) ────────────────────────
+<IfModule mod_mime.c>
+  AddType application/json .json
+  AddType text/markdown .md
+  AddDefaultCharset utf-8
+  AddCharset utf-8 .html .css .js .json .md .webmanifest
+</IfModule>
+
+# ── Forzar HTTPS ─────────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── Compresión (gzip) ────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/markdown
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ── Caché del navegador ──────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Imágenes y fuentes: caché larga
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  # CSS y JS compilados
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  # Contenido del blog: caché corta para que las ediciones se vean pronto
+  ExpiresByType application/json "access plus 5 minutes"
+  ExpiresByType text/markdown "access plus 5 minutes"
+  # HTML: sin caché agresiva
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ── Página de inicio ─────────────────────────────────────────────────────────
+DirectoryIndex index.html
+
+# ── No listar el contenido de las carpetas ───────────────────────────────────
+Options -Indexes
+
+# ── Página de error 404 → vuelve al inicio ──────────────────────────────────
+ErrorDocument 404 /index.html
