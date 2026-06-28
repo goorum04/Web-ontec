@@ -2285,12 +2285,261 @@ Object.assign(window, {
 
 // ═══════════════════════════════════════════════════════
 // Seu de la Justicia — Interactive Case Study Page
-// Hotspot image: click microphone / screen / speaker
+// Professional, institutional case study with an interactive
+// hotspot floor-plan and detailed equipment breakdown.
 // ═══════════════════════════════════════════════════════
 
+/* ── Local line-icons (SVG, no emoji) ── */
+const LIcons = {
+  Mic: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "9",
+    y: "2",
+    width: "6",
+    height: "12",
+    rx: "3"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M5 10v2a7 7 0 0 0 14 0v-2"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "19",
+    x2: "12",
+    y2: "22"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "22",
+    x2: "16",
+    y2: "22"
+  })),
+  Screen: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "2",
+    y: "3",
+    width: "20",
+    height: "14",
+    rx: "2"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "21",
+    x2: "16",
+    y2: "21"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "17",
+    x2: "12",
+    y2: "21"
+  })),
+  Speaker: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("rect", {
+    x: "5",
+    y: "2",
+    width: "14",
+    height: "20",
+    rx: "2"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "14",
+    r: "4"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "6",
+    x2: "12.01",
+    y2: "6"
+  })),
+  Sliders: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("line", {
+    x1: "4",
+    y1: "21",
+    x2: "4",
+    y2: "14"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "4",
+    y1: "10",
+    x2: "4",
+    y2: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "21",
+    x2: "12",
+    y2: "12"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "8",
+    x2: "12",
+    y2: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "20",
+    y1: "21",
+    x2: "20",
+    y2: "16"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "20",
+    y1: "12",
+    x2: "20",
+    y2: "3"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "1",
+    y1: "14",
+    x2: "7",
+    y2: "14"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "9",
+    y1: "8",
+    x2: "15",
+    y2: "8"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "17",
+    y1: "16",
+    x2: "23",
+    y2: "16"
+  })),
+  Scales: ({
+    s = 40
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.4",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("line", {
+    x1: "12",
+    y1: "3",
+    x2: "12",
+    y2: "21"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "8",
+    y1: "21",
+    x2: "16",
+    y2: "21"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "4",
+    y1: "6.5",
+    x2: "20",
+    y2: "6.5"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "12",
+    cy: "4",
+    r: "1.4"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M6 6.5 2.5 13.5a3.5 3.5 0 0 0 7 0z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M18 6.5 14.5 13.5a3.5 3.5 0 0 0 7 0z"
+  })),
+  Search: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "11",
+    cy: "11",
+    r: "7"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "21",
+    y1: "21",
+    x2: "16.5",
+    y2: "16.5"
+  })),
+  Pencil: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M12 20h9"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"
+  })),
+  Tools: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"
+  })),
+  Grad: ({
+    s = 22
+  }) => /*#__PURE__*/React.createElement("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M22 10 12 5 2 10l10 5 10-5z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"
+  }))
+};
 const HOTSPOTS = [{
   id: 'micros',
-  icon: '🎙',
+  n: '01',
+  Ico: LIcons.Mic,
   x: '59%',
   y: '58%',
   label: {
@@ -2340,7 +2589,8 @@ const HOTSPOTS = [{
   color: '#4f9e2f'
 }, {
   id: 'pantalles',
-  icon: '🖥',
+  n: '02',
+  Ico: LIcons.Screen,
   x: '89%',
   y: '34%',
   label: {
@@ -2387,10 +2637,11 @@ const HOTSPOTS = [{
     fr: 'Signal antireflet et calibrage couleur pour salle judiciaire',
     en: 'Anti-glare signal and color calibration for judicial room'
   }],
-  color: '#2e7cbe'
+  color: '#2563a0'
 }, {
   id: 'altaveus',
-  icon: '🔊',
+  n: '03',
+  Ico: LIcons.Speaker,
   x: '47%',
   y: '18%',
   label: {
@@ -2427,7 +2678,7 @@ const HOTSPOTS = [{
     fr: 'Traitement acoustique par panneaux absorbants sur les murs latéraux',
     en: 'Acoustic treatment with absorbing panels on lateral walls'
   }, {
-    ca: 'Sistema de delay calibrat per zones — llatència < 5 ms',
+    ca: 'Sistema de delay calibrat per zones — latència < 5 ms',
     es: 'Sistema de delay calibrado por zonas — latencia < 5 ms',
     fr: 'Système de delay calibré par zones — latence < 5 ms',
     en: 'Zone-calibrated delay system — latency < 5 ms'
@@ -2437,10 +2688,11 @@ const HOTSPOTS = [{
     fr: 'Égalisation automatique de la salle pour les fréquences vocales',
     en: 'Automatic room equalization for voice frequencies'
   }],
-  color: '#9b5fc0'
+  color: '#7c5cbf'
 }, {
   id: 'control',
-  icon: '⚙️',
+  n: '04',
+  Ico: LIcons.Sliders,
   x: '28%',
   y: '52%',
   label: {
@@ -2467,7 +2719,7 @@ const HOTSPOTS = [{
     fr: 'Processeur de contrôle Crestron CP4N comme noyau du système',
     en: 'Crestron CP4N control processor as system core'
   }, {
-    ca: 'Panell tàctil Crestron TSW-1070 de 10" muntada en taula',
+    ca: 'Panell tàctil Crestron TSW-1070 de 10" muntat en taula',
     es: 'Panel táctil Crestron TSW-1070 de 10" montado en mesa',
     fr: 'Panneau tactile Crestron TSW-1070 de 10" monté en table',
     en: '10" Crestron TSW-1070 touch panel mounted on table'
@@ -2487,7 +2739,7 @@ const HOTSPOTS = [{
     fr: 'Surveillance à distance et maintenance préventive via VPN sécurisé',
     en: 'Remote monitoring and preventive maintenance via secure VPN'
   }],
-  color: '#d4820a'
+  color: '#c87f1a'
 }];
 const STATS = [{
   num: 4,
@@ -2517,59 +2769,221 @@ const STATS = [{
     en: '4K screens'
   }
 }, {
-  num: 3,
-  suf: '',
+  num: 100,
+  suf: '%',
   label: {
-    ca: 'Mesos d\'instal·lació',
-    es: 'Meses de instalación',
-    fr: 'Mois d\'installation',
-    en: 'Months of installation'
+    ca: 'Integració centralitzada',
+    es: 'Integración centralizada',
+    fr: 'Intégration centralisée',
+    en: 'Centralized integration'
   }
 }];
 
-/* ── Pulsing hotspot dot ── */
+/* Project fact-sheet (institutional case-study meta) */
+const META = [{
+  k: {
+    ca: 'Client',
+    es: 'Cliente',
+    fr: 'Client',
+    en: 'Client'
+  },
+  v: {
+    ca: 'Seu de la Justícia · Principat d\'Andorra',
+    es: 'Sede de la Justicia · Principado de Andorra',
+    fr: 'Siège de la Justice · Principauté d\'Andorre',
+    en: 'Seat of Justice · Principality of Andorra'
+  }
+}, {
+  k: {
+    ca: 'Sector',
+    es: 'Sector',
+    fr: 'Secteur',
+    en: 'Sector'
+  },
+  v: {
+    ca: 'Institucional · Judicial',
+    es: 'Institucional · Judicial',
+    fr: 'Institutionnel · Judiciaire',
+    en: 'Institutional · Judicial'
+  }
+}, {
+  k: {
+    ca: 'Àmbit',
+    es: 'Ámbito',
+    fr: 'Périmètre',
+    en: 'Scope'
+  },
+  v: {
+    ca: 'Microfonia · AV · Control',
+    es: 'Microfonía · AV · Control',
+    fr: 'Micros · AV · Contrôle',
+    en: 'Microphones · AV · Control'
+  }
+}, {
+  k: {
+    ca: 'Any',
+    es: 'Año',
+    fr: 'Année',
+    en: 'Year'
+  },
+  v: {
+    ca: '2024',
+    es: '2024',
+    fr: '2024',
+    en: '2024'
+  }
+}];
+
+/* Real equipment brands deployed (marquee) */
+const BRANDS = ['Shure', 'Biamp', 'Bose', 'Crown', 'Crestron', 'Samsung', 'Dante', 'Cisco Webex'];
+
+/* Methodology / process steps */
+const PROCESS = [{
+  Ico: LIcons.Search,
+  n: '01',
+  t: {
+    ca: 'Anàlisi i consultoria',
+    es: 'Análisis y consultoría',
+    fr: 'Analyse et conseil',
+    en: 'Analysis & consulting'
+  },
+  d: {
+    ca: 'Estudi acústic de la sala, anàlisi de requeriments judicials i protocols de seguretat institucionals.',
+    es: 'Estudio acústico de la sala, análisis de requisitos judiciales y protocolos de seguridad institucionales.',
+    fr: 'Étude acoustique de la salle, analyse des exigences judiciaires et des protocoles de sécurité.',
+    en: 'Room acoustic study, analysis of judicial requirements and institutional security protocols.'
+  }
+}, {
+  Ico: LIcons.Pencil,
+  n: '02',
+  t: {
+    ca: 'Disseny i enginyeria',
+    es: 'Diseño e ingeniería',
+    fr: 'Conception et ingénierie',
+    en: 'Design & engineering'
+  },
+  d: {
+    ca: 'Projecte tècnic detallat, selecció d\'equipament homologat i disseny de la integració centralitzada.',
+    es: 'Proyecto técnico detallado, selección de equipamiento homologado y diseño de la integración centralizada.',
+    fr: 'Projet technique détaillé, sélection d\'équipement homologué et conception de l\'intégration centralisée.',
+    en: 'Detailed technical project, selection of certified equipment and design of the centralized integration.'
+  }
+}, {
+  Ico: LIcons.Tools,
+  n: '03',
+  t: {
+    ca: 'Instal·lació i posada en marxa',
+    es: 'Instalación y puesta en marcha',
+    fr: 'Installation et mise en service',
+    en: 'Installation & commissioning'
+  },
+  d: {
+    ca: 'Desplegament, cablejat estructurat, calibratge acústic i configuració de tots els subsistemes.',
+    es: 'Despliegue, cableado estructurado, calibrado acústico y configuración de todos los subsistemas.',
+    fr: 'Déploiement, câblage structuré, calibrage acoustique et configuration de tous les sous-systèmes.',
+    en: 'Deployment, structured cabling, acoustic calibration and configuration of all subsystems.'
+  }
+}, {
+  Ico: LIcons.Grad,
+  n: '04',
+  t: {
+    ca: 'Formació i suport',
+    es: 'Formación y soporte',
+    fr: 'Formation et support',
+    en: 'Training & support'
+  },
+  d: {
+    ca: 'Formació del personal, documentació tècnica i manteniment preventiu amb monitoratge remot.',
+    es: 'Formación del personal, documentación técnica y mantenimiento preventivo con monitoreo remoto.',
+    fr: 'Formation du personnel, documentation technique et maintenance préventive avec surveillance à distance.',
+    en: 'Staff training, technical documentation and preventive maintenance with remote monitoring.'
+  }
+}];
+
+/* ── Pulsing hotspot marker (SVG icon, numbered) ── */
 function HotspotDot({
   spot,
   active,
   onClick
 }) {
   const col = spot.color;
+  const Ico = spot.Ico;
+  const [hover, setHover] = useState(false);
   return /*#__PURE__*/React.createElement("button", {
     onClick: () => onClick(active ? null : spot.id),
+    onMouseEnter: () => setHover(true),
+    onMouseLeave: () => setHover(false),
     title: tt(spot.label),
     style: {
       position: 'absolute',
       left: spot.x,
       top: spot.y,
-      transform: 'translate(-50%,-50%)',
-      width: 44,
-      height: 44,
+      transform: `translate(-50%,-50%) scale(${active || hover ? 1.08 : 1})`,
+      width: 46,
+      height: 46,
       borderRadius: '50%',
-      border: `2.5px solid ${active ? col : 'rgba(255,255,255,.9)'}`,
-      background: active ? col : 'rgba(255,255,255,.18)',
+      border: `2px solid ${active ? '#fff' : 'rgba(255,255,255,.92)'}`,
+      background: active ? col : 'rgba(12,22,16,.55)',
       backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
       cursor: 'pointer',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 18,
-      zIndex: 10,
-      boxShadow: active ? `0 0 0 8px ${col}40, 0 4px 20px rgba(0,0,0,.4)` : '0 4px 16px rgba(0,0,0,.3)',
-      transition: 'all .25s'
+      color: '#fff',
+      zIndex: active || hover ? 16 : 10,
+      boxShadow: active ? `0 0 0 6px ${col}33, 0 8px 24px rgba(0,0,0,.45)` : '0 4px 16px rgba(0,0,0,.4)',
+      transition: 'transform .25s cubic-bezier(.2,.7,.3,1), background .25s, box-shadow .25s'
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    role: "img",
-    "aria-label": tt(spot.label)
-  }, spot.icon), !active && /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Ico, {
+    s: 20
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       position: 'absolute',
-      inset: -6,
-      borderRadius: '50%',
-      border: `2px solid ${col}`,
-      animation: 'pulse-ring 2s ease-out infinite',
+      top: -7,
+      right: -7,
+      minWidth: 19,
+      height: 19,
+      padding: '0 4px',
+      borderRadius: 10,
+      background: active ? '#fff' : col,
+      color: active ? col : '#fff',
+      fontFamily: 'var(--mono)',
+      fontSize: 9.5,
+      fontWeight: 700,
+      lineHeight: '19px',
+      textAlign: 'center',
+      border: '1.5px solid rgba(255,255,255,.85)',
       pointerEvents: 'none'
     }
-  }));
+  }, spot.n), !active && /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      inset: -4,
+      borderRadius: '50%',
+      border: `2px solid ${col}`,
+      animation: 'pulse-ring 2.2s ease-out infinite',
+      pointerEvents: 'none'
+    }
+  }), hover && !active && /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      bottom: 'calc(100% + 10px)',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      whiteSpace: 'nowrap',
+      background: 'rgba(10,20,14,.92)',
+      color: '#fff',
+      fontFamily: 'var(--mono)',
+      fontSize: 10.5,
+      letterSpacing: '.1em',
+      textTransform: 'uppercase',
+      padding: '6px 11px',
+      borderRadius: 7,
+      border: `1px solid ${col}`,
+      pointerEvents: 'none'
+    }
+  }, tt(spot.label)));
 }
 
 /* ── Info panel that slides in from right ── */
@@ -2584,76 +2998,98 @@ function InfoPanel({
     return () => clearTimeout(t);
   }, [spot]);
   if (!spot) return null;
+  const Ico = spot.Ico;
   return /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'absolute',
       top: 0,
       right: 0,
       bottom: 0,
-      width: 'min(400px, 100%)',
-      background: 'rgba(10,20,14,.94)',
+      width: 'min(420px, 100%)',
+      background: 'rgba(10,20,14,.95)',
       backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)',
       borderLeft: `3px solid ${spot.color}`,
-      padding: '32px 28px',
+      padding: '34px 30px',
       overflowY: 'auto',
       zIndex: 20,
       transform: visible ? 'translateX(0)' : 'translateX(100%)',
       transition: 'transform .35s cubic-bezier(.2,.7,.3,1)',
       display: 'flex',
       flexDirection: 'column',
-      gap: 20
+      gap: 22
     }
   }, /*#__PURE__*/React.createElement("button", {
     onClick: onClose,
     style: {
       position: 'absolute',
-      top: 16,
-      right: 16,
-      background: 'rgba(255,255,255,.1)',
-      border: '1px solid rgba(255,255,255,.2)',
+      top: 18,
+      right: 18,
+      background: 'rgba(255,255,255,.08)',
+      border: '1px solid rgba(255,255,255,.18)',
       borderRadius: '50%',
       width: 34,
       height: 34,
       cursor: 'pointer',
       color: '#fff',
-      fontSize: 16,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       transition: 'background .15s'
     },
     onMouseEnter: e => e.currentTarget.style.background = 'rgba(255,255,255,.2)',
-    onMouseLeave: e => e.currentTarget.style.background = 'rgba(255,255,255,.1)',
+    onMouseLeave: e => e.currentTarget.style.background = 'rgba(255,255,255,.08)',
     "aria-label": "Tancar"
-  }, "✕"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Icons.X, null)), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     style: {
-      width: 48,
-      height: 48,
+      width: 50,
+      height: 50,
       borderRadius: 14,
-      background: `${spot.color}22`,
-      border: `1.5px solid ${spot.color}55`,
+      background: `${spot.color}26`,
+      border: `1.5px solid ${spot.color}66`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: 24,
-      marginBottom: 14
+      color: '#fff',
+      marginBottom: 16
     }
-  }, spot.icon), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Ico, {
+    s: 24
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 10
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      fontWeight: 700,
+      color: spot.color
+    }
+  }, spot.n), /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 16,
+      height: 1,
+      background: `${spot.color}88`
+    }
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 10,
       letterSpacing: '.18em',
       textTransform: 'uppercase',
-      color: spot.color,
-      marginBottom: 8
+      color: spot.color
     }
-  }, tt(spot.label)), /*#__PURE__*/React.createElement("h3", {
+  }, tt(spot.label))), /*#__PURE__*/React.createElement("h3", {
     style: {
       fontFamily: 'var(--disp)',
       fontWeight: 800,
-      fontSize: 22,
+      fontSize: 23,
       color: '#fff',
-      lineHeight: 1.2,
+      lineHeight: 1.18,
       marginBottom: 14
     }
   }, tt(spot.title)), /*#__PURE__*/React.createElement("p", {
@@ -2688,19 +3124,19 @@ function InfoPanel({
       display: 'flex',
       gap: 12,
       alignItems: 'flex-start',
-      padding: '10px 14px',
-      background: 'rgba(255,255,255,.06)',
+      padding: '11px 14px',
+      background: 'rgba(255,255,255,.05)',
       borderRadius: 10,
       border: '1px solid rgba(255,255,255,.08)'
     }
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       color: spot.color,
-      fontSize: 12,
       marginTop: 1,
-      flexShrink: 0
+      flexShrink: 0,
+      display: 'inline-flex'
     }
-  }, "✓"), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Icons.Check, null)), /*#__PURE__*/React.createElement("span", {
     style: {
       fontSize: 13,
       color: 'rgba(255,255,255,.82)',
@@ -2728,14 +3164,14 @@ function SeuJusticiaPage() {
     activePage: "Blog"
   }, /*#__PURE__*/React.createElement("style", null, `
         @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: .8; }
-          100% { transform: scale(2.1); opacity: 0; }
+          0% { transform: scale(1); opacity: .75; }
+          100% { transform: scale(2.2); opacity: 0; }
         }
         .hotspot-img { width: 100%; height: 100%; object-fit: cover; display: block; }
       `), /*#__PURE__*/React.createElement("section", {
     style: {
       position: 'relative',
-      minHeight: '56vh',
+      minHeight: '62vh',
       display: 'flex',
       alignItems: 'flex-end',
       overflow: 'hidden',
@@ -2751,7 +3187,7 @@ function SeuJusticiaPage() {
     style: {
       position: 'absolute',
       inset: 0,
-      background: 'radial-gradient(ellipse at 70% 50%, rgba(79,158,47,.12) 0%, transparent 60%)'
+      background: 'radial-gradient(ellipse at 72% 45%, rgba(79,158,47,.14) 0%, transparent 62%)'
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide",
@@ -2759,10 +3195,60 @@ function SeuJusticiaPage() {
       position: 'relative',
       zIndex: 2,
       paddingTop: 140,
-      paddingBottom: 70,
-      maxWidth: 900
+      paddingBottom: 64,
+      maxWidth: 980
     }
   }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 9,
+      marginBottom: 26,
+      fontFamily: 'var(--mono)',
+      fontSize: 11,
+      letterSpacing: '.08em',
+      color: 'rgba(255,255,255,.5)'
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "index.html",
+    style: {
+      color: 'inherit',
+      textDecoration: 'none'
+    }
+  }, tt({
+    ca: 'Inici',
+    es: 'Inicio',
+    fr: 'Accueil',
+    en: 'Home'
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: .5
+    }
+  }, "/"), /*#__PURE__*/React.createElement("a", {
+    href: "blog.html",
+    style: {
+      color: 'inherit',
+      textDecoration: 'none'
+    }
+  }, tt({
+    ca: 'Casos d\'èxit',
+    es: 'Casos de éxito',
+    fr: 'Études de cas',
+    en: 'Case studies'
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: .5
+    }
+  }, "/"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'rgba(255,255,255,.85)'
+    }
+  }, tt({
+    ca: 'Seu de la Justícia',
+    es: 'Sede de la Justicia',
+    fr: 'Siège de la Justice',
+    en: 'Seat of Justice'
+  }))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       alignItems: 'center',
@@ -2781,13 +3267,18 @@ function SeuJusticiaPage() {
       color: 'rgba(255,255,255,.5)',
       letterSpacing: '.06em'
     }
-  }, "2024")), /*#__PURE__*/React.createElement("h1", {
+  }, tt({
+    ca: 'Sector Institucional',
+    es: 'Sector Institucional',
+    fr: 'Secteur Institutionnel',
+    en: 'Institutional Sector'
+  }))), /*#__PURE__*/React.createElement("h1", {
     className: "disp",
     style: {
       color: '#fff',
       fontSize: 'clamp(36px,5.5vw,76px)',
-      lineHeight: 1.08,
-      marginBottom: 22
+      lineHeight: 1.06,
+      marginBottom: 24
     }
   }, tt({
     ca: 'Seu de la Justícia d\'Andorra',
@@ -2797,9 +3288,9 @@ function SeuJusticiaPage() {
   })), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: 18,
-      color: 'rgba(255,255,255,.72)',
+      color: 'rgba(255,255,255,.74)',
       lineHeight: 1.7,
-      maxWidth: 640
+      maxWidth: 660
     }
   }, tt({
     ca: "Instal·lació integral de sistemes de microfonia, audiovisual i control centralitzat per a les sales d'audiències de la Seu de la Justícia del Principat d'Andorra.",
@@ -2808,11 +3299,43 @@ function SeuJusticiaPage() {
     en: "Complete installation of microphone, audiovisual and centralized control systems for the hearing rooms of the Seat of Justice of the Principality of Andorra."
   })))), /*#__PURE__*/React.createElement("section", {
     style: {
+      background: 'var(--panel-dark)',
+      borderTop: '1px solid rgba(255,255,255,.08)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide meta-grid",
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4,1fr)'
+    }
+  }, META.map((m, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      padding: '26px 28px',
+      borderRight: i < META.length - 1 ? '1px solid rgba(255,255,255,.08)' : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'var(--mono)',
+      fontSize: 10,
+      letterSpacing: '.16em',
+      textTransform: 'uppercase',
+      color: 'var(--accent-2)',
+      marginBottom: 9
+    }
+  }, tt(m.k)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 14.5,
+      color: 'rgba(255,255,255,.86)',
+      lineHeight: 1.4
+    }
+  }, tt(m.v))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:760px){.meta-grid{grid-template-columns:repeat(2,1fr)!important;} .meta-grid > div:nth-child(2n){border-right:none!important;} .meta-grid > div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.08);}}`)), /*#__PURE__*/React.createElement("section", {
+    style: {
       background: 'var(--accent)',
       padding: '0'
     }
   }, /*#__PURE__*/React.createElement("div", {
-    className: "wrap-wide",
+    className: "wrap-wide stat-grid",
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(4,1fr)',
@@ -2821,7 +3344,7 @@ function SeuJusticiaPage() {
   }, STATS.map((s, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
     style: {
-      padding: '28px 24px',
+      padding: '30px 24px',
       borderRight: i < 3 ? '1px solid rgba(255,255,255,.2)' : 'none',
       textAlign: 'center'
     }
@@ -2843,26 +3366,44 @@ function SeuJusticiaPage() {
       fontSize: 11,
       letterSpacing: '.1em',
       textTransform: 'uppercase',
-      color: 'rgba(255,255,255,.8)',
-      marginTop: 6
+      color: 'rgba(255,255,255,.82)',
+      marginTop: 8
     }
-  }, tt(s.label))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:640px){.wrap-wide > div[style*="grid-template-columns"]{grid-template-columns:repeat(2,1fr)!important;}}`)), /*#__PURE__*/React.createElement("section", {
+  }, tt(s.label))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:640px){.stat-grid{grid-template-columns:repeat(2,1fr)!important;}}`)), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--panel-dark)',
-      padding: '80px 0'
+      padding: '90px 0'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap-wide"
   }, /*#__PURE__*/React.createElement(Reveal, {
     style: {
-      marginBottom: 48
+      marginBottom: 44
     }
-  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 12,
+      marginBottom: 22
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 22,
+      height: 2,
+      background: 'var(--accent-2)'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "kicker",
+    style: {
+      color: 'var(--accent-2)'
+    }
+  }, tt({
     ca: 'Explora la instal·lació',
     es: 'Explora la instalación',
     fr: 'Explorez l\'installation',
     en: 'Explore the installation'
-  })), /*#__PURE__*/React.createElement("h2", {
+  }))), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
       fontSize: 'clamp(28px,3.5vw,48px)',
@@ -2878,13 +3419,14 @@ function SeuJusticiaPage() {
     style: {
       color: 'rgba(255,255,255,.6)',
       fontSize: 16,
-      maxWidth: 580
+      maxWidth: 600,
+      lineHeight: 1.7
     }
   }, tt({
-    ca: 'Toca els punts de la imatge per descobrir la tecnologia instal·lada en cada punt de la sala.',
-    es: 'Toca los puntos de la imagen para descubrir la tecnología instalada en cada punto de la sala.',
-    fr: 'Touchez les points de l\'image pour découvrir la technologie installée en chaque point de la salle.',
-    en: 'Touch the points on the image to discover the technology installed at each point of the room.'
+    ca: 'Explora els quatre subsistemes que hem desplegat a la sala d\'audiències. Cada punt revela la tecnologia instal·lada i l\'equipament professional emprat.',
+    es: 'Explora los cuatro subsistemas que hemos desplegado en la sala de audiencias. Cada punto revela la tecnología instalada y el equipamiento profesional empleado.',
+    fr: 'Explorez les quatre sous-systèmes déployés dans la salle d\'audiences. Chaque point révèle la technologie installée et l\'équipement professionnel utilisé.',
+    en: 'Explore the four subsystems we deployed in the hearing room. Each point reveals the installed technology and the professional equipment used.'
   }))), /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
@@ -2892,30 +3434,41 @@ function SeuJusticiaPage() {
       gap: 12,
       marginBottom: 28
     }
-  }, HOTSPOTS.map(h => /*#__PURE__*/React.createElement("button", {
-    key: h.id,
-    onClick: () => setActiveId(activeId === h.id ? null : h.id),
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      padding: '9px 16px',
-      borderRadius: 999,
-      border: `1.5px solid ${activeId === h.id ? h.color : 'rgba(255,255,255,.18)'}`,
-      background: activeId === h.id ? `${h.color}22` : 'transparent',
-      color: activeId === h.id ? h.color : 'rgba(255,255,255,.7)',
-      fontFamily: 'var(--mono)',
-      fontSize: 11.5,
-      letterSpacing: '.08em',
-      cursor: 'pointer',
-      transition: 'all .2s'
-    }
-  }, /*#__PURE__*/React.createElement("span", null, h.icon), /*#__PURE__*/React.createElement("span", {
-    style: {
-      textTransform: 'uppercase',
-      letterSpacing: '.1em'
-    }
-  }, tt(h.label))))), /*#__PURE__*/React.createElement("div", {
+  }, HOTSPOTS.map(h => {
+    const on = activeId === h.id;
+    const Ico = h.Ico;
+    return /*#__PURE__*/React.createElement("button", {
+      key: h.id,
+      onClick: () => setActiveId(on ? null : h.id),
+      style: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 9,
+        padding: '9px 16px 9px 12px',
+        borderRadius: 999,
+        border: `1.5px solid ${on ? h.color : 'rgba(255,255,255,.18)'}`,
+        background: on ? `${h.color}22` : 'transparent',
+        color: on ? '#fff' : 'rgba(255,255,255,.7)',
+        fontFamily: 'var(--mono)',
+        fontSize: 11.5,
+        letterSpacing: '.08em',
+        cursor: 'pointer',
+        transition: 'all .2s'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'inline-flex',
+        color: h.color
+      }
+    }, /*#__PURE__*/React.createElement(Ico, {
+      s: 16
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        textTransform: 'uppercase',
+        letterSpacing: '.1em'
+      }
+    }, tt(h.label)));
+  })), /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       borderRadius: 20,
@@ -2958,7 +3511,7 @@ function SeuJusticiaPage() {
       bottom: 20,
       left: '50%',
       transform: 'translateX(-50%)',
-      background: 'rgba(10,20,14,.8)',
+      background: 'rgba(10,20,14,.82)',
       backdropFilter: 'blur(12px)',
       border: '1px solid rgba(255,255,255,.15)',
       borderRadius: 999,
@@ -2973,7 +3526,7 @@ function SeuJusticiaPage() {
       width: 8,
       height: 8,
       borderRadius: '50%',
-      background: 'var(--accent)',
+      background: 'var(--accent-2)',
       animation: 'pulse-ring 1.8s ease-out infinite',
       display: 'inline-block'
     }
@@ -2981,7 +3534,7 @@ function SeuJusticiaPage() {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 11,
-      color: 'rgba(255,255,255,.8)',
+      color: 'rgba(255,255,255,.82)',
       letterSpacing: '.1em',
       textTransform: 'uppercase'
     }
@@ -3001,47 +3554,115 @@ function SeuJusticiaPage() {
       gap: 16
     },
     className: "mobile-cards"
-  }, HOTSPOTS.map(h => /*#__PURE__*/React.createElement("div", {
-    key: h.id,
+  }, HOTSPOTS.map(h => {
+    const Ico = h.Ico;
+    return /*#__PURE__*/React.createElement("div", {
+      key: h.id,
+      style: {
+        background: 'rgba(255,255,255,.05)',
+        border: `1px solid ${h.color}44`,
+        borderRadius: 16,
+        padding: '20px 20px'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 14,
+        marginBottom: 12
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 44,
+        height: 44,
+        borderRadius: 12,
+        flexShrink: 0,
+        background: `${h.color}22`,
+        border: `1px solid ${h.color}55`,
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Ico, {
+      s: 22
+    })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'var(--mono)',
+        fontSize: 10,
+        color: h.color,
+        textTransform: 'uppercase',
+        letterSpacing: '.14em'
+      }
+    }, h.n, " · ", tt(h.label)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontFamily: 'var(--disp)',
+        fontWeight: 800,
+        fontSize: 17,
+        color: '#fff'
+      }
+    }, tt(h.title)))), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 13,
+        color: 'rgba(255,255,255,.65)',
+        lineHeight: 1.7,
+        marginBottom: 14
+      }
+    }, tt(h.desc)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8
+      }
+    }, h.specs.map((s, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        gap: 10,
+        alignItems: 'flex-start'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: h.color,
+        marginTop: 1,
+        flexShrink: 0,
+        display: 'inline-flex'
+      }
+    }, /*#__PURE__*/React.createElement(Icons.Check, null)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 12.5,
+        color: 'rgba(255,255,255,.75)',
+        lineHeight: 1.5
+      }
+    }, tt(s))))));
+  })), /*#__PURE__*/React.createElement("style", null, `@media(max-width:640px){ .mobile-cards{display:flex!important;} }`))), /*#__PURE__*/React.createElement("section", {
     style: {
-      background: 'rgba(255,255,255,.05)',
-      border: `1px solid ${h.color}44`,
-      borderRadius: 16,
-      padding: '20px 20px'
+      background: 'var(--bg)',
+      borderBottom: '1px solid var(--line)',
+      padding: '34px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide",
+    style: {
+      marginBottom: 22
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      marginBottom: 12
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 24
-    }
-  }, h.icon), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
       fontFamily: 'var(--mono)',
-      fontSize: 10,
-      color: h.color,
+      fontSize: 11,
+      letterSpacing: '.16em',
       textTransform: 'uppercase',
-      letterSpacing: '.14em'
+      color: 'var(--faint)',
+      textAlign: 'center'
     }
-  }, tt(h.label)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontFamily: 'var(--disp)',
-      fontWeight: 800,
-      fontSize: 17,
-      color: '#fff'
-    }
-  }, tt(h.title)))), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 13,
-      color: 'rgba(255,255,255,.65)',
-      lineHeight: 1.7
-    }
-  }, tt(h.desc))))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:640px){ .mobile-cards{display:flex!important;} }`))), /*#__PURE__*/React.createElement("section", {
+  }, tt({
+    ca: 'Equipament professional desplegat',
+    es: 'Equipamiento profesional desplegado',
+    fr: 'Équipement professionnel déployé',
+    en: 'Professional equipment deployed'
+  }))), /*#__PURE__*/React.createElement(Marquee, {
+    items: BRANDS
+  })), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--bg)',
       padding: '100px 0'
@@ -3049,7 +3670,7 @@ function SeuJusticiaPage() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
-      maxWidth: 860
+      maxWidth: 980
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -3066,7 +3687,7 @@ function SeuJusticiaPage() {
   })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
-      fontSize: 32,
+      fontSize: 30,
       marginBottom: 20
     }
   }, tt({
@@ -3095,7 +3716,7 @@ function SeuJusticiaPage() {
   })), /*#__PURE__*/React.createElement("h2", {
     className: "disp",
     style: {
-      fontSize: 32,
+      fontSize: 30,
       marginBottom: 20
     }
   }, tt({
@@ -3117,38 +3738,152 @@ function SeuJusticiaPage() {
   })))), /*#__PURE__*/React.createElement("style", null, `@media(max-width:720px){.proj-grid{grid-template-columns:1fr!important;gap:48px!important;}}`))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--panel)',
-      padding: '80px 0'
+      padding: '100px 0',
+      borderTop: '1px solid var(--line)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrap-wide"
+  }, /*#__PURE__*/React.createElement(Reveal, {
+    style: {
+      marginBottom: 56,
+      maxWidth: 680
+    }
+  }, /*#__PURE__*/React.createElement(SectionLabel, null, tt({
+    ca: 'Metodologia',
+    es: 'Metodología',
+    fr: 'Méthodologie',
+    en: 'Methodology'
+  })), /*#__PURE__*/React.createElement("h2", {
+    className: "disp",
+    style: {
+      fontSize: 'clamp(28px,3.4vw,46px)',
+      marginBottom: 16
+    }
+  }, tt({
+    ca: 'Com hem executat el projecte',
+    es: 'Cómo hemos ejecutado el proyecto',
+    fr: 'Comment nous avons exécuté le projet',
+    en: 'How we executed the project'
+  })), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: 'var(--mut)',
+      fontSize: 16,
+      lineHeight: 1.7
+    }
+  }, tt({
+    ca: 'Un procés de quatre fases que garanteix una instal·lació sense incidències i una transició operativa fluida.',
+    es: 'Un proceso de cuatro fases que garantiza una instalación sin incidencias y una transición operativa fluida.',
+    fr: 'Un processus en quatre phases garantissant une installation sans incident et une transition opérationnelle fluide.',
+    en: 'A four-phase process ensuring an incident-free installation and a smooth operational handover.'
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4,1fr)',
+      gap: 18
+    },
+    className: "proc-grid"
+  }, PROCESS.map((p, i) => {
+    const Ico = p.Ico;
+    return /*#__PURE__*/React.createElement(Reveal, {
+      key: i,
+      delay: i * 90
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: 'var(--bg)',
+        border: '1px solid var(--line)',
+        borderRadius: 16,
+        padding: '28px 24px',
+        height: '100%'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        width: 46,
+        height: 46,
+        borderRadius: 12,
+        background: A(10),
+        border: `1px solid ${A(24)}`,
+        color: 'var(--accent-deep)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }, /*#__PURE__*/React.createElement(Ico, {
+      s: 22
+    })), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--disp)',
+        fontWeight: 800,
+        fontSize: 28,
+        color: 'var(--line)'
+      }
+    }, p.n)), /*#__PURE__*/React.createElement("h3", {
+      style: {
+        fontFamily: 'var(--disp)',
+        fontWeight: 800,
+        fontSize: 17,
+        marginBottom: 10,
+        lineHeight: 1.25
+      }
+    }, tt(p.t)), /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: 'var(--mut)',
+        fontSize: 13.5,
+        lineHeight: 1.65
+      }
+    }, tt(p.d))));
+  })), /*#__PURE__*/React.createElement("style", null, `@media(max-width:980px){.proc-grid{grid-template-columns:repeat(2,1fr)!important;}}@media(max-width:560px){.proc-grid{grid-template-columns:1fr!important;}}`))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      background: 'var(--panel-dark)',
+      padding: '100px 0'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "wrap",
     style: {
-      maxWidth: 760,
+      maxWidth: 820,
       textAlign: 'center'
     }
   }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 48,
-      marginBottom: 24
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 72,
+      height: 72,
+      borderRadius: 18,
+      background: 'rgba(142,198,63,.12)',
+      border: '1px solid rgba(142,198,63,.3)',
+      color: 'var(--accent-2)',
+      marginBottom: 30
     }
-  }, "⚖️"), /*#__PURE__*/React.createElement("blockquote", {
+  }, /*#__PURE__*/React.createElement(LIcons.Scales, {
+    s: 36
+  })), /*#__PURE__*/React.createElement("blockquote", {
     style: {
       fontFamily: 'var(--disp)',
       fontWeight: 800,
       fontSize: 'clamp(22px,3vw,36px)',
-      color: 'var(--ink)',
-      lineHeight: 1.25,
-      marginBottom: 24
+      color: '#fff',
+      lineHeight: 1.3,
+      marginBottom: 26,
+      letterSpacing: '-0.01em'
     }
   }, tt({
     ca: '"La instal·lació d\'Ontec ha transformat completament la nostra capacitat per realitzar audiències telemàtiques i garantir l\'enregistrament judicial de qualitat."',
     es: '"La instalación de Ontec ha transformado completamente nuestra capacidad para realizar audiencias telemáticas y garantizar la grabación judicial de calidad."',
-    fr: '"L\'installation d\'Ontec a complètement transformé notre capacité à tenir des audiences téléphoniques et à garantir un enregistrement judiciaire de qualité."',
+    fr: '"L\'installation d\'Ontec a complètement transformé notre capacité à tenir des audiences à distance et à garantir un enregistrement judiciaire de qualité."',
     en: '"Ontec\'s installation has completely transformed our capacity to conduct remote hearings and guarantee quality judicial recording."'
   })), /*#__PURE__*/React.createElement("div", {
     style: {
       fontFamily: 'var(--mono)',
       fontSize: 12,
-      color: 'var(--mut)',
+      color: 'var(--accent-2)',
       letterSpacing: '.12em',
       textTransform: 'uppercase'
     }
@@ -3160,7 +3895,7 @@ function SeuJusticiaPage() {
   }))))), /*#__PURE__*/React.createElement("section", {
     style: {
       background: 'var(--accent)',
-      padding: '80px 0',
+      padding: '90px 0',
       textAlign: 'center'
     }
   }, /*#__PURE__*/React.createElement("div", {
