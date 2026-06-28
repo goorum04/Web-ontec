@@ -184,7 +184,7 @@ function CaseBatllia() {
                 en:"The system enables simultaneous connections with international bodies, courts and European institutions, with top-tier audiovisual quality and minimal latency."
               })}
             </p>
-            <Magnetic><a href="solucions.html#audiovisuals" className="btn btn-primary">{tt({ca:'Veure solució',es:'Ver solución',fr:'Voir la solution',en:'View solution'})} <Icons.UpRight s={15}/></a></Magnetic>
+            <Magnetic><a href="seu-justicia.html" className="btn btn-primary">{tt({ca:'Explorar el cas',es:'Explorar el caso',fr:'Explorer le cas',en:'Explore the case'})} <Icons.UpRight s={15}/></a></Magnetic>
           </Reveal>
           <div>
             <Reveal delay={120}>

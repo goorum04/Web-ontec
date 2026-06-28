@@ -3028,13 +3028,13 @@ function CaseBatllia() {
     fr: "Le système permet la connexion simultanée avec des organismes internationaux, des tribunaux et des institutions européennes, avec une qualité audiovisuelle de premier ordre et une latence minimale.",
     en: "The system enables simultaneous connections with international bodies, courts and European institutions, with top-tier audiovisual quality and minimal latency."
   })), /*#__PURE__*/React.createElement(Magnetic, null, /*#__PURE__*/React.createElement("a", {
-    href: "solucions.html#audiovisuals",
+    href: "seu-justicia.html",
     className: "btn btn-primary"
   }, tt({
-    ca: 'Veure solució',
-    es: 'Ver solución',
-    fr: 'Voir la solution',
-    en: 'View solution'
+    ca: 'Explorar el cas',
+    es: 'Explorar el caso',
+    fr: 'Explorer le cas',
+    en: 'Explore the case'
   }), " ", /*#__PURE__*/React.createElement(Icons.UpRight, {
     s: 15
   })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Reveal, {

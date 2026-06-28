@@ -2311,7 +2311,8 @@ const ARTICLES = [{
     en: "Ontec has installed the professional video conferencing system for the spaces of the emblematic judicial building, enabling high-level connections with international organizations."
   },
   img: 'https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260625_113547_7dc81eb6-4452-4f0e-b974-47df8ed10343.png',
-  featured: true
+  featured: true,
+  directHref: 'seu-justicia.html'
 }, {
   id: 'zero-trust-pimes',
   tagId: 'itsec',
@@ -2443,8 +2444,9 @@ function BlogCard({
   big = false,
   idx = 0
 }) {
+  const href = a.directHref || `blog-${idx + 1}.html`;
   return /*#__PURE__*/React.createElement("a", {
-    href: `blog-${idx + 1}.html`,
+    href: href,
     className: "mcard",
     style: {
       display: 'block'
