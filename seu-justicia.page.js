@@ -2642,8 +2642,8 @@ const HOTSPOTS = [{
   id: 'micros',
   n: '01',
   Ico: LIcons.Mic,
-  x: '59%',
-  y: '58%',
+  x: '75%',
+  y: '34%',
   label: {
     ca: 'Micròfons',
     es: 'Micrófonos',
@@ -2693,8 +2693,8 @@ const HOTSPOTS = [{
   id: 'pantalles',
   n: '02',
   Ico: LIcons.Screen,
-  x: '89%',
-  y: '34%',
+  x: '37%',
+  y: '16%',
   label: {
     ca: 'Pantalles',
     es: 'Pantallas',
@@ -2744,8 +2744,8 @@ const HOTSPOTS = [{
   id: 'altaveus',
   n: '03',
   Ico: LIcons.Speaker,
-  x: '47%',
-  y: '18%',
+  x: '64%',
+  y: '8%',
   label: {
     ca: 'Altaveus',
     es: 'Altavoces',
@@ -2795,8 +2795,8 @@ const HOTSPOTS = [{
   id: 'control',
   n: '04',
   Ico: LIcons.Sliders,
-  x: '28%',
-  y: '52%',
+  x: '59%',
+  y: '49%',
   label: {
     ca: 'Control Central',
     es: 'Control Central',
@@ -3809,12 +3809,12 @@ function SeuJusticiaPage() {
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
-      paddingBottom: '56.25%'
+      paddingBottom: '39.1%'
     }
   }, /*#__PURE__*/React.createElement("img", {
     className: "hotspot-img",
-    src: "https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260628_115309_5a9afcae-ec14-4774-bc37-194992c82f74.png",
-    alt: "Sala d'audiències — Seu de la Justícia d'Andorra",
+    src: "https://d8j0ntlcm91z4.cloudfront.net/user_3CrRWyLJlKarEWqwmRMbcLE2UCZ/hf_20260629_061548_e1229967-32c7-468f-b0cd-5d1a12da7334.png",
+    alt: "Sala de vistes — Seu de la Justícia d'Andorra",
     style: {
       position: 'absolute',
       inset: 0,
