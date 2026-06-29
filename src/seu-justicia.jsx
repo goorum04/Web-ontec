@@ -17,33 +17,87 @@ const LIcons = {
   Grad: ({ s = 22 }) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg>,
 };
 
+/* Shared microphone-system equipment (reused across the bench hotspots) */
+const MIC_SPECS = [
+  { ca: 'Micròfons de coll de cigne Shure professionals per posició', es: 'Micrófonos de cuello de cisne Shure profesionales por posición', fr: 'Microphones col-de-cygne Shure professionnels par position', en: 'Professional Shure gooseneck microphones per position' },
+  { ca: 'Cancel·lació d\'eco automàtica (AEC) integrada', es: 'Cancelación de eco automática (AEC) integrada', fr: 'Annulation d\'écho automatique (AEC) intégrée', en: 'Integrated automatic echo cancellation (AEC)' },
+  { ca: 'Distribució d\'àudio en xarxa via protocol Dante', es: 'Distribución de audio en red vía protocolo Dante', fr: 'Distribution audio réseau via protocole Dante', en: 'Network audio distribution via Dante protocol' },
+  { ca: 'Processador DSP Biamp Tesira per a gestió de sala', es: 'Procesador DSP Biamp Tesira para gestión de sala', fr: 'Processeur DSP Biamp Tesira pour gestion de salle', en: 'Biamp Tesira DSP processor for room management' },
+  { ca: 'Activació automàtica i muting individual per posició', es: 'Activación automática y muting individual por posición', fr: 'Activation automatique et muting individuel par position', en: 'Automatic activation and individual muting per position' },
+];
+
 const HOTSPOTS = [
   {
-    id: 'micros',
+    id: 'estrat',
     n: '01',
+    Ico: LIcons.Mic,
+    x: '63%',
+    y: '27%',
+    label: { ca: 'Estrat del Jutge', es: 'Estrado del Juez', fr: 'Estrade du Juge', en: "Judge's Bench" },
+    title: { ca: 'Microfonia de l\'Estrat', es: 'Microfonía del Estrado', fr: 'Microphones de l\'Estrade', en: 'Bench Microphone System' },
+    desc: {
+      ca: "L'estrat del jutge i el tribunal disposa de micròfons de coll de cigne amb prioritat de paraula, que capten amb total claredat la direcció de la vista i garanteixen un enregistrament judicial fidel.",
+      es: "El estrado del juez y el tribunal dispone de micrófonos de cuello de cisne con prioridad de palabra, que captan con total claridad la dirección de la vista y garantizan una grabación judicial fiel.",
+      fr: "L'estrade du juge dispose de microphones col-de-cygne avec priorité de parole, captant avec une clarté totale la conduite de l'audience et garantissant un enregistrement judiciaire fidèle.",
+      en: "The judge's bench features gooseneck microphones with speech priority, capturing the conduct of the hearing with total clarity and ensuring faithful judicial recording."
+    },
+    specs: MIC_SPECS,
+    color: '#4f9e2f',
+  },
+  {
+    id: 'fiscalia',
+    n: '02',
+    Ico: LIcons.Mic,
+    x: '50%',
+    y: '27%',
+    label: { ca: 'Bancada Fiscalia', es: 'Bancada Fiscalía', fr: 'Banc du Parquet', en: 'Prosecution Bench' },
+    title: { ca: 'Microfonia de la Fiscalia', es: 'Microfonía de la Fiscalía', fr: 'Microphones du Parquet', en: 'Prosecution Microphones' },
+    desc: {
+      ca: "La bancada de la Fiscalia incorpora micròfons individuals per a cada posició, assegurant una captació nítida de les intervencions del ministeri fiscal, integrats en el mateix sistema digital de sala.",
+      es: "La bancada de la Fiscalía incorpora micrófonos individuales para cada posición, asegurando una captación nítida de las intervenciones del ministerio fiscal, integrados en el mismo sistema digital de sala.",
+      fr: "Le banc du parquet intègre des microphones individuels pour chaque position, assurant une captation nette des interventions, intégrés au même système numérique de salle.",
+      en: "The prosecution bench incorporates individual microphones for each position, ensuring clear capture of the prosecution's interventions, integrated into the same digital room system."
+    },
+    specs: MIC_SPECS,
+    color: '#4f9e2f',
+  },
+  {
+    id: 'advocats',
+    n: '03',
+    Ico: LIcons.Mic,
+    x: '56%',
+    y: '29%',
+    label: { ca: 'Bancada Advocats', es: 'Bancada Abogados', fr: 'Banc des Avocats', en: 'Lawyers Bench' },
+    title: { ca: 'Microfonia dels Advocats', es: 'Microfonía de los Abogados', fr: 'Microphones des Avocats', en: 'Lawyers Microphones' },
+    desc: {
+      ca: "La bancada dels advocats compta amb micròfons propis per a cada lletrat, permetent que les intervencions de la defensa quedin recollides amb la mateixa qualitat i sense interferències que la resta de la sala.",
+      es: "La bancada de los abogados cuenta con micrófonos propios para cada letrado, permitiendo que las intervenciones de la defensa queden recogidas con la misma calidad y sin interferencias que el resto de la sala.",
+      fr: "Le banc des avocats dispose de microphones propres pour chaque avocat, permettant de recueillir les interventions de la défense avec la même qualité et sans interférences que le reste de la salle.",
+      en: "The lawyers bench has dedicated microphones for each counsel, so the defense's interventions are captured with the same quality and interference-free clarity as the rest of the room."
+    },
+    specs: MIC_SPECS,
+    color: '#4f9e2f',
+  },
+  {
+    id: 'testimoni',
+    n: '04',
     Ico: LIcons.Mic,
     x: '75%',
     y: '34%',
-    label: { ca: 'Micròfons', es: 'Micrófonos', fr: 'Microphones', en: 'Microphones' },
-    title: { ca: 'Sistema de Microfonia Professional', es: 'Sistema de Microfonía Profesional', fr: 'Système de Microphones Professionnel', en: 'Professional Microphone System' },
+    label: { ca: 'Estrat de Testimoni', es: 'Estrado de Testigos', fr: 'Barre des Témoins', en: 'Witness Stand' },
+    title: { ca: 'Microfonia de Testimoni i Secretaria', es: 'Microfonía de Testigos y Secretaría', fr: 'Microphones Témoins et Greffe', en: 'Witness & Clerk Microphones' },
     desc: {
-      ca: "Hem instal·lat un sistema de microfonia digital de conferència que garanteix una captura d'àudio nítida i sense interferències en totes les posicions de la sala, tant per al jutge com per als advocats i les parts.",
-      es: "Hemos instalado un sistema de microfonía digital de conferencia que garantiza una captura de audio nítida y sin interferencias en todas las posiciones de la sala, tanto para el juez como para los abogados y las partes.",
-      fr: "Nous avons installé un système de microphones de conférence numérique garantissant une capture audio nette et sans interférences à toutes les positions de la salle.",
-      en: "We installed a digital conference microphone system ensuring clear, interference-free audio capture at all positions in the room."
+      ca: "L'estrat de testimonis i la taula de secretaria incorporen micròfons dedicats per copsar declaracions i intervencions amb total intel·ligibilitat, fins i tot quan es retransmeten per videoconferència.",
+      es: "El estrado de testigos y la mesa de secretaría incorporan micrófonos dedicados para captar declaraciones e intervenciones con total inteligibilidad, incluso cuando se retransmiten por videoconferencia.",
+      fr: "La barre des témoins et la table du greffe intègrent des microphones dédiés pour capter déclarations et interventions avec une intelligibilité totale, même retransmises en visioconférence.",
+      en: "The witness stand and clerk's desk include dedicated microphones to capture testimony and interventions with full intelligibility, even when streamed over video conference."
     },
-    specs: [
-      { ca: 'Micròfons Shure MXA310 de taula — àrea de captació 360°', es: 'Micrófonos Shure MXA310 de mesa — área de captación 360°', fr: 'Microphones de table Shure MXA310 — zone de captation 360°', en: 'Shure MXA310 table microphones — 360° pick-up area' },
-      { ca: 'Cancel·lació d\'eco automàtica (AEC) integrada', es: 'Cancelación de eco automática (AEC) integrada', fr: 'Annulation d\'écho automatique (AEC) intégrée', en: 'Integrated automatic echo cancellation (AEC)' },
-      { ca: 'Distribució d\'àudio en xarxa via protocol Dante', es: 'Distribución de audio en red vía protocolo Dante', fr: 'Distribution audio réseau via protocole Dante', en: 'Network audio distribution via Dante protocol' },
-      { ca: 'Processador DSP Biamp Tesira per a gestió de sala', es: 'Procesador DSP Biamp Tesira para gestión de sala', fr: 'Processeur DSP Biamp Tesira pour gestion de salle', en: 'Biamp Tesira DSP processor for room management' },
-      { ca: 'Control de volum i muting individual des del panell tàctil', es: 'Control de volumen y muting individual desde el panel táctil', fr: 'Contrôle du volume et muting individuel depuis le panneau tactile', en: 'Individual volume and muting control from touch panel' },
-    ],
+    specs: MIC_SPECS,
     color: '#4f9e2f',
   },
   {
     id: 'pantalles',
-    n: '02',
+    n: '05',
     Ico: LIcons.Screen,
     x: '37%',
     y: '16%',
@@ -66,7 +120,7 @@ const HOTSPOTS = [
   },
   {
     id: 'altaveus',
-    n: '03',
+    n: '06',
     Ico: LIcons.Speaker,
     x: '64%',
     y: '8%',
@@ -89,11 +143,11 @@ const HOTSPOTS = [
   },
   {
     id: 'control',
-    n: '04',
+    n: '07',
     Ico: LIcons.Sliders,
-    x: '59%',
-    y: '49%',
-    label: { ca: 'Control Central', es: 'Control Central', fr: 'Contrôle Central', en: 'Central Control' },
+    x: '60%',
+    y: '41%',
+    label: { ca: 'Control i Operació', es: 'Control y Operación', fr: 'Contrôle et Opération', en: 'Control & Operation' },
     title: { ca: 'Sistema de Control Centralitzat', es: 'Sistema de Control Centralizado', fr: 'Système de Contrôle Centralisé', en: 'Centralized Control System' },
     desc: {
       ca: "Un únic punt de control permet al personal de la sala gestionar tots els sistemes audiovisuals, d'il·luminació i comunicació des d'una pantalla tàctil intuïtiva, amb escenes preconfigurades per a cada tipus de sessió.",
