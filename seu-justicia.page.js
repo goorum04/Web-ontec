@@ -2745,28 +2745,28 @@ const HOTSPOTS = [{
   specs: MIC_SPECS,
   color: '#4f9e2f'
 }, {
-  id: 'testimoni',
+  id: 'secretaria',
   n: '04',
   Ico: LIcons.Mic,
   x: '75%',
   y: '34%',
   label: {
-    ca: 'Estrat de Testimoni',
-    es: 'Estrado de Testigos',
-    fr: 'Barre des Témoins',
-    en: 'Witness Stand'
+    ca: 'Secretaria Judicial',
+    es: 'Secretaría Judicial',
+    fr: 'Greffe',
+    en: 'Court Clerk'
   },
   title: {
-    ca: 'Microfonia de Testimoni i Secretaria',
-    es: 'Microfonía de Testigos y Secretaría',
-    fr: 'Microphones Témoins et Greffe',
-    en: 'Witness & Clerk Microphones'
+    ca: 'Microfonia de Secretaria',
+    es: 'Microfonía de Secretaría',
+    fr: 'Microphones du Greffe',
+    en: 'Court Clerk Microphones'
   },
   desc: {
-    ca: "L'estrat de testimonis i la taula de secretaria incorporen micròfons dedicats per copsar declaracions i intervencions amb total intel·ligibilitat, fins i tot quan es retransmeten per videoconferència.",
-    es: "El estrado de testigos y la mesa de secretaría incorporan micrófonos dedicados para captar declaraciones e intervenciones con total inteligibilidad, incluso cuando se retransmiten por videoconferencia.",
-    fr: "La barre des témoins et la table du greffe intègrent des microphones dédiés pour capter déclarations et interventions avec une intelligibilité totale, même retransmises en visioconférence.",
-    en: "The witness stand and clerk's desk include dedicated microphones to capture testimony and interventions with full intelligibility, even when streamed over video conference."
+    ca: "La taula de la secretaria judicial incorpora micròfons de coll de cigne dedicats per documentar la sessió i gestionar les actes, garantint una captació clara de totes les intervencions del procediment.",
+    es: "La mesa de la secretaría judicial incorpora micrófonos de cuello de cisne dedicados para documentar la sesión y gestionar las actas, garantizando una captación clara de todas las intervenciones del procedimiento.",
+    fr: "La table du greffe intègre des microphones col-de-cygne dédiés pour documenter la séance et gérer les procès-verbaux, garantissant une captation claire de toutes les interventions.",
+    en: "The court clerk's desk includes dedicated gooseneck microphones to document the session and manage the records, ensuring clear capture of all interventions in the proceedings."
   },
   specs: MIC_SPECS,
   color: '#4f9e2f'
@@ -2873,56 +2873,31 @@ const HOTSPOTS = [{
   }],
   color: '#7c5cbf'
 }, {
-  id: 'control',
+  id: 'declaracio',
   n: '07',
-  Ico: LIcons.Sliders,
+  Ico: LIcons.Mic,
   x: '60%',
   y: '41%',
   label: {
-    ca: 'Control i Operació',
-    es: 'Control y Operación',
-    fr: 'Contrôle et Opération',
-    en: 'Control & Operation'
+    ca: 'Estrat de Declaració',
+    es: 'Estrado de Declaración',
+    fr: 'Barre de Déclaration',
+    en: 'Witness Stand'
   },
   title: {
-    ca: 'Sistema de Control Centralitzat',
-    es: 'Sistema de Control Centralizado',
-    fr: 'Système de Contrôle Centralisé',
-    en: 'Centralized Control System'
+    ca: 'Microfonia del Declarant',
+    es: 'Microfonía del Declarante',
+    fr: 'Microphone du Déclarant',
+    en: 'Witness Microphone'
   },
   desc: {
-    ca: "Un únic punt de control permet al personal de la sala gestionar tots els sistemes audiovisuals, d'il·luminació i comunicació des d'una pantalla tàctil intuïtiva, amb escenes preconfigurades per a cada tipus de sessió.",
-    es: "Un único punto de control permite al personal de la sala gestionar todos los sistemas audiovisuales, de iluminación y comunicación desde una pantalla táctil intuitiva, con escenas preconfiguradas para cada tipo de sesión.",
-    fr: "Un point de contrôle unique permet au personnel de gérer tous les systèmes audiovisuels, d'éclairage et de communication depuis un écran tactile intuitif.",
-    en: "A single control point allows room staff to manage all audiovisual, lighting and communication systems from an intuitive touch screen, with pre-configured scenes for each session type."
+    ca: "La taula on declaren testimonis, pèrits i les parts disposa d'un micròfon dedicat que garanteix una captació clara de cada declaració, essencial per a l'enregistrament judicial i la retransmissió per videoconferència.",
+    es: "La mesa donde declaran testigos, peritos y las partes dispone de un micrófono dedicado que garantiza una captación clara de cada declaración, esencial para la grabación judicial y la retransmisión por videoconferencia.",
+    fr: "La table où témoignent témoins, experts et parties dispose d'un microphone dédié garantissant une captation claire de chaque déclaration, essentielle à l'enregistrement judiciaire et à la visioconférence.",
+    en: "The table where witnesses, experts and parties give testimony has a dedicated microphone ensuring clear capture of every statement, essential for judicial recording and video-conference streaming."
   },
-  specs: [{
-    ca: 'Processador de control Crestron CP4N com a nucli del sistema',
-    es: 'Procesador de control Crestron CP4N como núcleo del sistema',
-    fr: 'Processeur de contrôle Crestron CP4N comme noyau du système',
-    en: 'Crestron CP4N control processor as system core'
-  }, {
-    ca: 'Panell tàctil Crestron TSW-1070 de 10" muntat en taula',
-    es: 'Panel táctil Crestron TSW-1070 de 10" montado en mesa',
-    fr: 'Panneau tactile Crestron TSW-1070 de 10" monté en table',
-    en: '10" Crestron TSW-1070 touch panel mounted on table'
-  }, {
-    ca: 'Escenes preconfigurades: Audiència · Presentació · Reunió · Descans',
-    es: 'Escenas preconfiguradas: Audiencia · Presentación · Reunión · Descanso',
-    fr: 'Scènes préconfigurées : Audience · Présentation · Réunion · Pause',
-    en: 'Pre-configured scenes: Hearing · Presentation · Meeting · Break'
-  }, {
-    ca: 'Control integrat d\'il·luminació, persianes i climatització',
-    es: 'Control integrado de iluminación, persianas y climatización',
-    fr: 'Contrôle intégré de l\'éclairage, des stores et de la climatisation',
-    en: 'Integrated control of lighting, blinds and air conditioning'
-  }, {
-    ca: 'Monitoratge remot i manteniment preventiu via VPN segura',
-    es: 'Monitoreo remoto y mantenimiento preventivo vía VPN segura',
-    fr: 'Surveillance à distance et maintenance préventive via VPN sécurisé',
-    en: 'Remote monitoring and preventive maintenance via secure VPN'
-  }],
-  color: '#c87f1a'
+  specs: MIC_SPECS,
+  color: '#4f9e2f'
 }];
 const STATS = [{
   num: 4,
