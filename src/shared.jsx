@@ -13,6 +13,87 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 
 const A = (p) => `color-mix(in srgb, var(--accent) ${p}%, transparent)`;
 
+/* ════════════════════════════════════════════════════════════════════════════
+   i18n — multilanguage (Català · Español · Français · English)
+   Lightweight pub/sub store + useLang() hook + tt({ca,es,fr,en}) helper.
+   Persisted in localStorage; syncs <html lang>. Page roots call useLang() so
+   tt(...) calls re-evaluate on language change.
+   ════════════════════════════════════════════════════════════════════════════ */
+const LANGS = [
+  { code: 'ca', label: 'CA', name: 'Català' },
+  { code: 'es', label: 'ES', name: 'Español' },
+  { code: 'fr', label: 'FR', name: 'Français' },
+  { code: 'en', label: 'EN', name: 'English' },
+];
+const LANG_CODES = LANGS.map((l) => l.code);
+
+let CURRENT_LANG = (() => {
+  try {
+    const saved = localStorage.getItem('ontec_lang');
+    if (saved && LANG_CODES.includes(saved)) return saved;
+    const nav = (navigator.language || 'ca').slice(0, 2).toLowerCase();
+    if (LANG_CODES.includes(nav)) return nav;
+  } catch (e) {}
+  return 'ca';
+})();
+
+const LANG_LISTENERS = new Set();
+function setLang(code) {
+  if (!LANG_CODES.includes(code) || code === CURRENT_LANG) return;
+  CURRENT_LANG = code;
+  try { localStorage.setItem('ontec_lang', code); } catch (e) {}
+  try { document.documentElement.setAttribute('lang', code); } catch (e) {}
+  LANG_LISTENERS.forEach((fn) => fn(code));
+}
+function getLang() { return CURRENT_LANG; }
+
+/* translate: tt({ca, es, fr, en}) → value for active language (ca fallback).
+   value may be a string or a JSX node. Plain strings pass through unchanged. */
+function tt(obj) {
+  if (obj == null) return '';
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'object' && !obj.ca && !obj.es && !obj.fr && !obj.en) return obj; // JSX/element
+  return obj[CURRENT_LANG] != null ? obj[CURRENT_LANG] : (obj.ca != null ? obj.ca : '');
+}
+
+/* hook: subscribe a component to language changes */
+function useLang() {
+  const [lang, setL] = useState(CURRENT_LANG);
+  useEffect(() => {
+    const fn = (code) => setL(code);
+    LANG_LISTENERS.add(fn);
+    try { document.documentElement.setAttribute('lang', CURRENT_LANG); } catch (e) {}
+    return () => LANG_LISTENERS.delete(fn);
+  }, []);
+  return [lang, setLang];
+}
+
+/* ── Language switcher (segmented CA · ES · FR · EN) ── */
+function LangSwitcher({ light = false, compact = false }) {
+  const [lang] = useLang();
+  const idle = light ? 'rgba(255,255,255,.82)' : 'var(--mut)';
+  const hover = light ? '#ffffff' : 'var(--ink)';
+  return (
+    <div role="group" aria-label="Idioma" style={{ display: 'inline-flex', alignItems: 'center', gap: 2,
+      border: `1px solid ${light ? 'rgba(255,255,255,.28)' : 'var(--line)'}`, borderRadius: 999, padding: 3 }}>
+      {LANGS.map((l) => {
+        const on = lang === l.code;
+        return (
+          <button key={l.code} onClick={() => setLang(l.code)} aria-pressed={on} title={l.name}
+            style={{ fontFamily: 'var(--mono)', fontSize: 10.5, letterSpacing: '.04em', fontWeight: 700,
+              padding: compact ? '7px 10px' : '6px 9px', borderRadius: 999, border: 'none', cursor: 'pointer',
+              background: on ? 'var(--accent)' : 'transparent', color: on ? 'var(--accent-ink)' : idle,
+              transition: 'background .18s, color .18s' }}
+            onMouseEnter={(e) => { if (!on) e.currentTarget.style.color = hover; }}
+            onMouseLeave={(e) => { if (!on) e.currentTarget.style.color = idle; }}>
+            {l.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 const GLOBAL_CSS = `
 :root{
   --bg:#ffffff; --panel:#f5f7f2; --panel-2:#eef1ea; --panel-dark:#10211a;
@@ -237,7 +318,11 @@ const Icons = {
   Lock:   () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>,
   Star:   () => <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
   Building:()=><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 22V12h6v10"/><path d="M3 9h18"/></svg>,
+  Download:(p)=><svg width={(p&&p.s)||16} height={(p&&p.s)||16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
 };
+
+// Descàrrega de l'eina de suport remot (col·loca el .exe a downloads/)
+const SUPORT_REMOT_EXE = 'downloads/OntecQS.exe';
 
 function Tag({ children }) {
   return (
@@ -270,27 +355,44 @@ function OntecLogo({ height = 30, color = 'currentColor' }) {
 }
 
 const NAV_ITEMS = [
-  { label: 'Empresa',   href: 'empresa.html',   children: [{ label: 'Partners', href: 'empresa.html#partners' }] },
-  { label: 'Solucions', href: 'solucions.html', children: [
-    { label: 'IT Security', href: 'solucions.html#it-security' },
-    { label: 'Comunicacions', href: 'solucions.html#comunicacions' },
-    { label: 'Automatització', href: 'solucions.html#automatitzacio' },
-    { label: 'Audiovisuals', href: 'solucions.html#audiovisuals' },
+  { id: 'Empresa', label: { ca: 'Empresa', es: 'Empresa', fr: 'Entreprise', en: 'Company' }, href: 'empresa.html',
+    children: [{ label: { ca: 'Partners', es: 'Partners', fr: 'Partenaires', en: 'Partners' }, href: 'empresa.html#partners' }] },
+  { id: 'Solucions', label: { ca: 'Solucions', es: 'Soluciones', fr: 'Solutions', en: 'Solutions' }, href: 'solucions.html', children: [
+    { label: { ca: 'IT Security', es: 'IT Security', fr: 'IT Security', en: 'IT Security' }, href: 'solucions.html#it-security' },
+    { label: { ca: 'Comunicacions', es: 'Comunicaciones', fr: 'Communications', en: 'Communications' }, href: 'solucions.html#comunicacions' },
+    { label: { ca: 'Automatització', es: 'Automatización', fr: 'Automatisation', en: 'Automation' }, href: 'solucions.html#automatitzacio' },
+    { label: { ca: 'Audiovisuals', es: 'Audiovisuales', fr: 'Audiovisuel', en: 'Audiovisual' }, href: 'solucions.html#audiovisuals' },
   ]},
-  { label: 'Serveis', href: 'serveis.html', children: [
-    { label: 'Ingenierías', href: 'serveis.html#ingenieries' },
-    { label: 'Arquitectures', href: 'serveis.html#arquitectures' },
-    { label: 'Instal·ladors', href: 'serveis.html#installadors' },
-    { label: "Disseny d'Interiors", href: 'serveis.html#disseny' },
+  { id: 'Serveis', label: { ca: 'Serveis', es: 'Servicios', fr: 'Services', en: 'Services' }, href: 'serveis.html', children: [
+    { label: { ca: 'Enginyeries', es: 'Ingenierías', fr: 'Ingénieries', en: 'Engineering' }, href: 'serveis.html#ingenieries' },
+    { label: { ca: 'Arquitectures', es: 'Arquitecturas', fr: 'Architectures', en: 'Architecture' }, href: 'serveis.html#arquitectures' },
+    { label: { ca: 'Instal·ladors', es: 'Instaladores', fr: 'Installateurs', en: 'Installers' }, href: 'serveis.html#installadors' },
+    { label: { ca: "Disseny d'Interiors", es: 'Diseño de Interiores', fr: "Design d'Intérieur", en: 'Interior Design' }, href: 'serveis.html#disseny' },
   ]},
-  { label: 'Blog', href: 'blog.html' },
-  { label: 'Contacta', href: 'contacta.html' },
+  { id: 'Blog', label: { ca: 'Blog', es: 'Blog', fr: 'Blog', en: 'Blog' }, href: 'blog.html' },
+  { id: 'Contacta', label: { ca: 'Contacta', es: 'Contacto', fr: 'Contact', en: 'Contact' }, href: 'contacta.html' },
 ];
+
+// ── Anti-spam email ──────────────────────────────────────────────────────────
+// L'adreça es guarda trossejada i només es recompon al navegador en temps
+// d'execució, de manera que la cadena literal "usuari@domini" mai apareix
+// sencera a l'HTML/JS servit que rastregen els bots recol·lectors d'adreces.
+// Per a les persones es comporta com un enllaç mailto normal.
+const MAIL_PARTS = ['info', 'ontecandorra', 'com'];
+const mailAddr = () => MAIL_PARTS[0] + '@' + MAIL_PARTS[1] + '.' + MAIL_PARTS[2];
+function MailLink({ style = {}, className = '', children }) {
+  return (
+    <a href={'mailto:' + mailAddr()} className={className} style={style}>
+      {children || mailAddr()}
+    </a>
+  );
+}
 
 function Nav({ activePage = '' }) {
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
   const [drop, setDrop] = useState(null);
+  useLang();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', fn); fn();
@@ -315,24 +417,24 @@ function Nav({ activePage = '' }) {
         </a>
         <div style={{ display: 'flex', gap: 2, flex: 1 }} className="nav-desk">
           {NAV_ITEMS.map((item) => (
-            <div key={item.label} style={{ position: 'relative' }}
-              onMouseEnter={() => item.children && setDrop(item.label)}
+            <div key={item.id} style={{ position: 'relative' }}
+              onMouseEnter={() => item.children && setDrop(item.id)}
               onMouseLeave={() => setDrop(null)}>
-              <a href={item.href} style={{ ...linkBase, color: activePage === item.label ? activeCol : textMut }}
-                onMouseEnter={(e) => { if (activePage !== item.label) e.currentTarget.style.color = textInk; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = activePage === item.label ? activeCol : textMut; }}>
-                {item.label}
+              <a href={item.href} style={{ ...linkBase, color: activePage === item.id ? activeCol : textMut }}
+                onMouseEnter={(e) => { if (activePage !== item.id) e.currentTarget.style.color = textInk; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = activePage === item.id ? activeCol : textMut; }}>
+                {tt(item.label)}
               </a>
-              {item.children && drop === item.label && (
+              {item.children && drop === item.id && (
                 <div style={{ position: 'absolute', top: '100%', left: 0, minWidth: 220, background: '#ffffff',
                   border: '1px solid var(--line)', borderRadius: 12, padding: '8px',
                   boxShadow: '0 24px 60px rgba(19,33,27,.16)' }}>
                   {item.children.map((ch) => (
-                    <a key={ch.label} href={ch.href} style={{ display: 'block', padding: '10px 14px', color: 'var(--mut)',
+                    <a key={ch.href} href={ch.href} style={{ display: 'block', padding: '10px 14px', color: 'var(--mut)',
                       fontSize: 13, textDecoration: 'none', borderRadius: 8, transition: 'color .12s, background .12s' }}
                       onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-deep)'; e.currentTarget.style.background = A(8); }}
                       onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--mut)'; e.currentTarget.style.background = 'transparent'; }}>
-                      {ch.label}
+                      {tt(ch.label)}
                     </a>
                   ))}
                 </div>
@@ -340,9 +442,18 @@ function Nav({ activePage = '' }) {
             </div>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexShrink: 0 }} className="nav-desk">
+        <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexShrink: 0 }} className="nav-desk">
+          <LangSwitcher light={lightText} />
           <a href="tel:+37688559" style={{ fontFamily: 'var(--mono)', fontSize: 11.5, color: textMut, textDecoration: 'none', letterSpacing: '.04em' }}>+376 88 55 99</a>
-          <a href="contacta.html" className="btn btn-primary" style={{ padding: '11px 20px' }}>Contacta</a>
+          <a href={SUPORT_REMOT_EXE} download className="btn btn-ghost"
+            title={tt({ ca: 'Descarrega l\'eina de suport remot (Windows)', es: 'Descarga la herramienta de soporte remoto (Windows)', fr: 'Téléchargez l\'outil d\'assistance à distance (Windows)', en: 'Download the remote support tool (Windows)' })}
+            style={{ padding: '10px 16px', display: 'inline-flex', alignItems: 'center', gap: 7,
+              border: `1px solid ${solid ? 'var(--line)' : 'rgba(255,255,255,.4)'}`, borderRadius: 10,
+              fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase',
+              color: textInk, textDecoration: 'none' }}>
+            <Icons.Download s={15} /> {tt({ ca: 'Suport remot', es: 'Soporte remoto', fr: 'Assistance', en: 'Remote support' })}
+          </a>
+          <a href="contacta.html" className="btn btn-primary" style={{ padding: '11px 20px' }}>{tt({ ca: 'Contacta', es: 'Contacto', fr: 'Contact', en: 'Contact' })}</a>
         </div>
         <button onClick={() => setMob(!mob)} className="nav-mob"
           style={{ display: 'none', marginLeft: 'auto', background: 'transparent', border: 'none', color: textInk, cursor: 'pointer' }}
@@ -353,10 +464,14 @@ function Nav({ activePage = '' }) {
       {mob && (
         <div style={{ background: '#ffffff', borderTop: '1px solid var(--line)', padding: '14px 40px 28px' }}>
           {NAV_ITEMS.map((item) => (
-            <a key={item.label} href={item.href} className="disp" style={{ display: 'block', padding: '14px 0', fontSize: 24,
-              color: 'var(--ink)', textDecoration: 'none', borderBottom: '1px solid var(--line-soft)' }}>{item.label}</a>
+            <a key={item.id} href={item.href} className="disp" style={{ display: 'block', padding: '14px 0', fontSize: 24,
+              color: 'var(--ink)', textDecoration: 'none', borderBottom: '1px solid var(--line-soft)' }}>{tt(item.label)}</a>
           ))}
-          <a href="contacta.html" className="btn btn-primary" style={{ marginTop: 20, width: '100%', justifyContent: 'center' }}>Contacta ara</a>
+          <div style={{ marginTop: 22, display: 'flex', justifyContent: 'center' }}><LangSwitcher compact /></div>
+          <a href={SUPORT_REMOT_EXE} download className="btn btn-ghost" style={{ marginTop: 18, width: '100%', justifyContent: 'center', gap: 8 }}>
+            <Icons.Download s={17} /> {tt({ ca: 'Suport remot (Windows)', es: 'Soporte remoto (Windows)', fr: 'Assistance (Windows)', en: 'Remote support (Windows)' })}
+          </a>
+          <a href="contacta.html" className="btn btn-primary" style={{ marginTop: 12, width: '100%', justifyContent: 'center' }}>{tt({ ca: 'Contacta ara', es: 'Contacta ahora', fr: 'Contactez-nous', en: 'Get in touch' })}</a>
         </div>
       )}
       <style>{`@media(max-width:920px){.nav-desk{display:none!important;}.nav-mob{display:block!important;}}`}</style>
@@ -365,41 +480,51 @@ function Nav({ activePage = '' }) {
 }
 
 function Footer() {
+  useLang();
   return (
     <footer style={{ position: 'relative', zIndex: 2, background: 'var(--panel-dark)', color: '#eef1ea', overflow: 'hidden' }}>
       <div style={{ borderBottom: '1px solid rgba(255,255,255,.08)', padding: '26px 0' }}>
-        <Marquee big items={['Sistemes tecnològics', 'IT Security', 'Comunicacions', 'Automatització', 'Audiovisuals', 'Andorra']} />
+        <Marquee big items={[tt({ ca: 'Sistemes tecnològics', es: 'Sistemas tecnológicos', fr: 'Systèmes technologiques', en: 'Technology systems' }), 'IT Security', tt({ ca: 'Comunicacions', es: 'Comunicaciones', fr: 'Communications', en: 'Communications' }), tt({ ca: 'Automatització', es: 'Automatización', fr: 'Automatisation', en: 'Automation' }), tt({ ca: 'Audiovisuals', es: 'Audiovisuales', fr: 'Audiovisuel', en: 'Audiovisual' }), 'Andorra']} />
       </div>
       <div className="wrap" style={{ padding: '64px 40px 40px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 48, alignItems: 'start' }} className="ft-grid">
           <div>
             <div style={{ color: '#ffffff' }}><OntecLogo height={34} color="#ffffff" /></div>
             <p style={{ marginTop: 22, fontSize: 15, color: 'rgba(238,241,234,.66)', lineHeight: 1.7, maxWidth: 320 }}>
-              Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.
+              {tt({
+                ca: 'Distribució i integració de sistemes tecnològics avançats. Andorra, des de 2016.',
+                es: 'Distribución e integración de sistemas tecnológicos avanzados. Andorra, desde 2016.',
+                fr: 'Distribution et intégration de systèmes technologiques avancés. Andorre, depuis 2016.',
+                en: 'Distribution and integration of advanced technology systems. Andorra, since 2016.',
+              })}
             </p>
             <div style={{ marginTop: 26, display: 'flex', gap: 10 }}>
-              <a href="contacta.html" className="btn btn-primary" style={{ padding: '12px 22px' }}>Comença un projecte <Icons.UpRight s={14} /></a>
+              <a href="contacta.html" className="btn btn-primary" style={{ padding: '12px 22px' }}>{tt({ ca: 'Comença un projecte', es: 'Empieza un proyecto', fr: 'Démarrer un projet', en: 'Start a project' })} <Icons.UpRight s={14} /></a>
             </div>
           </div>
           <div>
-            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>Navegació</div>
+            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>{tt({ ca: 'Navegació', es: 'Navegación', fr: 'Navigation', en: 'Navigation' })}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {NAV_ITEMS.map((l) => <a key={l.label} href={l.href} style={{ fontSize: 15, color: 'rgba(238,241,234,.7)', textDecoration: 'none' }}>{l.label}</a>)}
+              {NAV_ITEMS.map((l) => <a key={l.id} href={l.href} style={{ fontSize: 15, color: 'rgba(238,241,234,.7)', textDecoration: 'none' }}>{tt(l.label)}</a>)}
             </div>
           </div>
           <div>
-            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>Contacte</div>
+            <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>{tt({ ca: 'Contacte', es: 'Contacto', fr: 'Contact', en: 'Contact' })}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 15, color: 'rgba(238,241,234,.7)' }}>
               <a href="tel:+37688559" style={{ color: 'inherit', textDecoration: 'none' }}>+376 88 55 99</a>
-              <a href="mailto:info@ontecandorra.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@ontecandorra.com</a>
+              <MailLink style={{ color: 'inherit', textDecoration: 'none' }} />
               <span>C/ de la Vena 3, Baixos<br/>Encamp, Andorra</span>
             </div>
           </div>
         </div>
         <div style={{ marginTop: 56, paddingTop: 26, borderTop: '1px solid rgba(255,255,255,.08)', display: 'flex',
-          justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(238,241,234,.45)', letterSpacing: '.05em' }}>
-          <span>© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats</span>
-          <span>ANDORRA · 42.5°N 1.5°E</span>
+          justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, alignItems: 'center', fontFamily: 'var(--mono)', fontSize: 11, color: 'rgba(238,241,234,.45)', letterSpacing: '.05em' }}>
+          <span>{tt({ ca: '© 2026 ON TECNOLOGIES S.L. — Tots els drets reservats', es: '© 2026 ON TECNOLOGIES S.L. — Todos los derechos reservados', fr: '© 2026 ON TECNOLOGIES S.L. — Tous droits réservés', en: '© 2026 ON TECNOLOGIES S.L. — All rights reserved' })}</span>
+          <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
+            <a href="legal.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Avís legal', es: 'Aviso legal', fr: 'Mentions légales', en: 'Legal notice' })}</a>
+            <a href="privacitat.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Privacitat', es: 'Privacidad', fr: 'Confidentialité', en: 'Privacy' })}</a>
+            <a href="cookies.html" style={{ color: 'rgba(238,241,234,.6)', textDecoration: 'none' }}>{tt({ ca: 'Cookies', es: 'Cookies', fr: 'Cookies', en: 'Cookies' })}</a>
+          </div>
         </div>
       </div>
       <style>{`@media(max-width:820px){.ft-grid{grid-template-columns:1fr!important;gap:36px!important;}}`}</style>
@@ -479,8 +604,38 @@ function PageShell({ activePage, children }) {
   );
 }
 
+const LEGAL_CSS = `
+.legal-body h2{font-family:var(--disp);font-weight:800;font-size:clamp(22px,2.6vw,28px);color:var(--ink);margin:40px 0 14px;letter-spacing:var(--dtrack);}
+.legal-body h3{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--ink);margin:26px 0 10px;}
+.legal-body p{font-size:16px;line-height:1.8;color:var(--mut);margin-bottom:14px;}
+.legal-body ul{margin:10px 0 18px;padding-left:24px;}
+.legal-body li{font-size:16px;line-height:1.8;color:var(--mut);margin-bottom:8px;}
+.legal-body a{color:var(--accent-deep);text-decoration:underline;}
+.legal-body strong{color:var(--ink);}
+`;
+
+/* Layout per a pàgines legals (avís legal, privacitat, cookies) */
+function LegalLayout({ activePage = '', kicker, title, updated, children }) {
+  return (
+    <PageShell activePage={activePage}>
+      <section style={{ paddingTop: 132, paddingBottom: 44, background: 'var(--panel)', borderBottom: '1px solid var(--line)' }}>
+        <div className="wrap" style={{ maxWidth: 820 }}>
+          {kicker && <div className="kicker" style={{ marginBottom: 14 }}>{kicker}</div>}
+          <h1 className="disp" style={{ fontSize: 'clamp(34px,5vw,58px)' }}>{title}</h1>
+          {updated && <p style={{ marginTop: 16, fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--mut)', letterSpacing: '.04em' }}>{updated}</p>}
+        </div>
+      </section>
+      <section style={{ padding: '52px 0 96px' }}>
+        <div className="wrap legal-body" style={{ maxWidth: 820 }}>{children}</div>
+      </section>
+      <style>{LEGAL_CSS}</style>
+    </PageShell>
+  );
+}
+
 Object.assign(window, {
   A, GLOBAL_CSS, Reveal, Marquee, Icons, Tag, SectionLabel, OntecLogo,
-  Cine, PageHero, Nav, Footer, PageShell, NAV_ITEMS,
+  Cine, PageHero, Nav, Footer, PageShell, LegalLayout, NAV_ITEMS,
   ScrollProgress, CursorFX, ParticleField, Scramble, CountUp, Magnetic, Tilt,
+  LANGS, tt, useLang, setLang, getLang, LangSwitcher,
 });
