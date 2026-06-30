@@ -21,7 +21,7 @@ function App() {
             <li><strong>Denominació:</strong> ON TECNOLOGIES S.L. (Ontec)</li>
             <li><strong>NRT:</strong> [número de registre tributari]</li>
             <li><strong>Domicili:</strong> C/ de la Vena 3, Baixos, Encamp, Andorra</li>
-            <li><strong>Correu electrònic:</strong> info@ontecandorra.com</li>
+            <li><strong>Correu electrònic:</strong> <MailLink/></li>
             <li><strong>Telèfon:</strong> +376 88 55 99</li>
             <li><strong>Lloc web:</strong> ontecandorra.com</li>
           </ul>
@@ -45,7 +45,7 @@ function App() {
             <li><strong>Denominación:</strong> ON TECNOLOGIES S.L. (Ontec)</li>
             <li><strong>NRT:</strong> [número de registro tributario]</li>
             <li><strong>Domicilio:</strong> C/ de la Vena 3, Bajos, Encamp, Andorra</li>
-            <li><strong>Correo electrónico:</strong> info@ontecandorra.com</li>
+            <li><strong>Correo electrónico:</strong> <MailLink/></li>
             <li><strong>Teléfono:</strong> +376 88 55 99</li>
             <li><strong>Sitio web:</strong> ontecandorra.com</li>
           </ul>
@@ -69,7 +69,7 @@ function App() {
             <li><strong>Dénomination :</strong> ON TECNOLOGIES S.L. (Ontec)</li>
             <li><strong>NRT :</strong> [numéro d'enregistrement fiscal]</li>
             <li><strong>Adresse :</strong> C/ de la Vena 3, Baixos, Encamp, Andorre</li>
-            <li><strong>E-mail :</strong> info@ontecandorra.com</li>
+            <li><strong>E-mail :</strong> <MailLink/></li>
             <li><strong>Téléphone :</strong> +376 88 55 99</li>
             <li><strong>Site web :</strong> ontecandorra.com</li>
           </ul>
@@ -93,7 +93,7 @@ function App() {
             <li><strong>Name:</strong> ON TECNOLOGIES S.L. (Ontec)</li>
             <li><strong>Tax ID (NRT):</strong> [tax registration number]</li>
             <li><strong>Address:</strong> C/ de la Vena 3, Baixos, Encamp, Andorra</li>
-            <li><strong>Email:</strong> info@ontecandorra.com</li>
+            <li><strong>Email:</strong> <MailLink/></li>
             <li><strong>Phone:</strong> +376 88 55 99</li>
             <li><strong>Website:</strong> ontecandorra.com</li>
           </ul>

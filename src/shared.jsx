@@ -373,6 +373,21 @@ const NAV_ITEMS = [
   { id: 'Contacta', label: { ca: 'Contacta', es: 'Contacto', fr: 'Contact', en: 'Contact' }, href: 'contacta.html' },
 ];
 
+// ── Anti-spam email ──────────────────────────────────────────────────────────
+// L'adreça es guarda trossejada i només es recompon al navegador en temps
+// d'execució, de manera que la cadena literal "usuari@domini" mai apareix
+// sencera a l'HTML/JS servit que rastregen els bots recol·lectors d'adreces.
+// Per a les persones es comporta com un enllaç mailto normal.
+const MAIL_PARTS = ['info', 'ontecandorra', 'com'];
+const mailAddr = () => MAIL_PARTS[0] + '@' + MAIL_PARTS[1] + '.' + MAIL_PARTS[2];
+function MailLink({ style = {}, className = '', children }) {
+  return (
+    <a href={'mailto:' + mailAddr()} className={className} style={style}>
+      {children || mailAddr()}
+    </a>
+  );
+}
+
 function Nav({ activePage = '' }) {
   const [scrolled, setScrolled] = useState(false);
   const [mob, setMob] = useState(false);
@@ -497,7 +512,7 @@ function Footer() {
             <div className="kicker" style={{ color: 'var(--accent-2)', marginBottom: 18 }}>{tt({ ca: 'Contacte', es: 'Contacto', fr: 'Contact', en: 'Contact' })}</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 15, color: 'rgba(238,241,234,.7)' }}>
               <a href="tel:+37688559" style={{ color: 'inherit', textDecoration: 'none' }}>+376 88 55 99</a>
-              <a href="mailto:info@ontecandorra.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@ontecandorra.com</a>
+              <MailLink style={{ color: 'inherit', textDecoration: 'none' }} />
               <span>C/ de la Vena 3, Baixos<br/>Encamp, Andorra</span>
             </div>
           </div>
