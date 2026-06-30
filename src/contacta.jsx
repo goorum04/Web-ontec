@@ -86,14 +86,16 @@ function App() {
                   <div style={{display:'flex',flexDirection:'column',gap:20,marginTop:8}}>
                     {[
                       {icon:<Icons.Phone/>,label:'Telefon',val:'+376 88 55 99',href:'tel:+37688559'},
-                      {icon:<Icons.Mail/>,label:'Email',val:'info@ontecandorra.com',href:'mailto:info@ontecandorra.com'},
+                      {icon:<Icons.Mail/>,label:'Email',mail:true},
                       {icon:<Icons.Pin/>,label:'Oficina',val:'C/ de la Vena 3, Baixos\nEncamp, Andorra',href:null},
                     ].map((item,i)=>(
                       <div key={i} style={{display:'flex',alignItems:'flex-start',gap:16}}>
                         <div style={{width:44,height:44,borderRadius:12,background:A(12),border:`1px solid ${A(25)}`,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',flexShrink:0}}>{item.icon}</div>
                         <div>
                           <div style={{fontFamily:'var(--mono)',fontSize:10.5,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--faint)',marginBottom:4}}>{item.label}</div>
-                          {item.href ? <a href={item.href} style={{fontSize:16,color:'var(--ink)',textDecoration:'none'}}>{item.val}</a> : <span style={{fontSize:15,color:'var(--ink)',whiteSpace:'pre-line'}}>{item.val}</span>}
+                          {item.mail
+                            ? <MailLink style={{fontSize:16,color:'var(--ink)',textDecoration:'none'}} />
+                            : item.href ? <a href={item.href} style={{fontSize:16,color:'var(--ink)',textDecoration:'none'}}>{item.val}</a> : <span style={{fontSize:15,color:'var(--ink)',whiteSpace:'pre-line'}}>{item.val}</span>}
                         </div>
                       </div>
                     ))}

@@ -838,6 +838,25 @@ const NAV_ITEMS = [{
   label: 'Contacta',
   href: 'contacta.html'
 }];
+
+// ── Anti-spam email ──────────────────────────────────────────────────────────
+// L'adreça es guarda trossejada i només es recompon al navegador en temps
+// d'execució, de manera que la cadena literal "usuari@domini" mai apareix
+// sencera a l'HTML/JS servit que rastregen els bots recol·lectors d'adreces.
+// Per a les persones es comporta com un enllaç mailto normal.
+const MAIL_PARTS = ['info', 'ontecandorra', 'com'];
+const mailAddr = () => MAIL_PARTS[0] + '@' + MAIL_PARTS[1] + '.' + MAIL_PARTS[2];
+function MailLink({
+  style = {},
+  className = '',
+  children
+}) {
+  return /*#__PURE__*/React.createElement("a", {
+    href: 'mailto:' + mailAddr(),
+    className: className,
+    style: style
+  }, children || mailAddr());
+}
 function Nav({
   activePage = ''
 }) {
@@ -1119,13 +1138,12 @@ function Footer() {
       color: 'inherit',
       textDecoration: 'none'
     }
-  }, "+376 88 55 99"), /*#__PURE__*/React.createElement("a", {
-    href: "mailto:info@ontecandorra.com",
+  }, "+376 88 55 99"), /*#__PURE__*/React.createElement(MailLink, {
     style: {
       color: 'inherit',
       textDecoration: 'none'
     }
-  }, "info@ontecandorra.com"), /*#__PURE__*/React.createElement("span", null, "C/ de la Vena 3, Baixos", /*#__PURE__*/React.createElement("br", null), "Encamp, Andorra")))), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "C/ de la Vena 3, Baixos", /*#__PURE__*/React.createElement("br", null), "Encamp, Andorra")))), /*#__PURE__*/React.createElement("div", {
     style: {
       marginTop: 56,
       paddingTop: 26,
