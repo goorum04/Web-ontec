@@ -19,10 +19,10 @@ const LIcons = {
 
 /* Shared microphone-system equipment (reused across the bench hotspots) */
 const MIC_SPECS = [
-  { ca: 'Micròfons de coll de cigne Shure professionals per posició', es: 'Micrófonos de cuello de cisne Shure profesionales por posición', fr: 'Microphones col-de-cygne Shure professionnels par position', en: 'Professional Shure gooseneck microphones per position' },
-  { ca: 'Cancel·lació d\'eco automàtica (AEC) integrada', es: 'Cancelación de eco automática (AEC) integrada', fr: 'Annulation d\'écho automatique (AEC) intégrée', en: 'Integrated automatic echo cancellation (AEC)' },
+  { ca: 'Micròfons de coll de cigne professionals integrats a l\'ecosistema Bose Professional', es: 'Micrófonos de cuello de cisne profesionales integrados en el ecosistema Bose Professional', fr: 'Microphones col-de-cygne professionnels intégrés à l\'écosystème Bose Professional', en: 'Professional gooseneck microphones integrated into the Bose Professional ecosystem' },
+  { ca: 'Cancel·lació d\'eco automàtica (AEC) integrada al processador', es: 'Cancelación de eco automática (AEC) integrada en el procesador', fr: 'Annulation d\'écho automatique (AEC) intégrée au processeur', en: 'Automatic echo cancellation (AEC) integrated in the processor' },
   { ca: 'Distribució d\'àudio en xarxa via protocol Dante', es: 'Distribución de audio en red vía protocolo Dante', fr: 'Distribution audio réseau via protocole Dante', en: 'Network audio distribution via Dante protocol' },
-  { ca: 'Processador DSP Biamp Tesira per a gestió de sala', es: 'Procesador DSP Biamp Tesira para gestión de sala', fr: 'Processeur DSP Biamp Tesira pour gestion de salle', en: 'Biamp Tesira DSP processor for room management' },
+  { ca: 'Processador DSP Bose ControlSpace per a gestió de sala', es: 'Procesador DSP Bose ControlSpace para gestión de sala', fr: 'Processeur DSP Bose ControlSpace pour gestion de salle', en: 'Bose ControlSpace DSP processor for room management' },
   { ca: 'Activació automàtica i muting individual per posició', es: 'Activación automática y muting individual por posición', fr: 'Activation automatique et muting individuel par position', en: 'Automatic activation and individual muting per position' },
 ];
 
@@ -133,10 +133,10 @@ const HOTSPOTS = [
       en: "Ceiling-embedded speakers ensure uniform sound distribution throughout the room, so everyone can hear clearly in both live sessions and video conference playback."
     },
     specs: [
-      { ca: 'Altaveus de sostre Bose DS16F d\'alta intel·ligibilitat', es: 'Altavoces de techo Bose DS16F de alta inteligibilidad', fr: 'Haut-parleurs de plafond Bose DS16F à haute intelligibilité', en: 'Bose DS16F high-intelligibility ceiling speakers' },
-      { ca: 'Amplificadors de classe D Crown CDi 4|300 — 300 W per canal', es: 'Amplificadores de clase D Crown CDi 4|300 — 300 W por canal', fr: 'Amplificateurs classe D Crown CDi 4|300 — 300 W par canal', en: 'Crown CDi 4|300 class D amplifiers — 300 W per channel' },
-      { ca: 'Tractament acústic de panells absorbents en parets laterals', es: 'Tratamiento acústico de paneles absorbentes en paredes laterales', fr: 'Traitement acoustique par panneaux absorbants sur les murs latéraux', en: 'Acoustic treatment with absorbing panels on lateral walls' },
-      { ca: 'Sistema de delay calibrat per zones — latència < 5 ms', es: 'Sistema de delay calibrado por zonas — latencia < 5 ms', fr: 'Système de delay calibré par zones — latence < 5 ms', en: 'Zone-calibrated delay system — latency < 5 ms' },
+      { ca: 'Altaveus de sostre Bose Professional d\'alta intel·ligibilitat', es: 'Altavoces de techo Bose Professional de alta inteligibilidad', fr: 'Haut-parleurs de plafond Bose Professional à haute intelligibilité', en: 'Bose Professional high-intelligibility ceiling speakers' },
+      { ca: 'Amplificadors Bose PowerSpace amb processament integrat', es: 'Amplificadores Bose PowerSpace con procesamiento integrado', fr: 'Amplificateurs Bose PowerSpace avec traitement intégré', en: 'Bose PowerSpace amplifiers with integrated processing' },
+      { ca: 'Processament i gestió d\'àudio Bose ControlSpace', es: 'Procesamiento y gestión de audio Bose ControlSpace', fr: 'Traitement et gestion audio Bose ControlSpace', en: 'Bose ControlSpace audio processing and management' },
+      { ca: 'Tractament acústic per a una distribució uniforme del so', es: 'Tratamiento acústico para una distribución uniforme del sonido', fr: 'Traitement acoustique pour une distribution uniforme du son', en: 'Acoustic treatment for uniform sound distribution' },
       { ca: 'Equalització automàtica de la sala per freqüències de veu', es: 'Ecualización automática de la sala para frecuencias de voz', fr: 'Égalisation automatique de la salle pour les fréquences vocales', en: 'Automatic room equalization for voice frequencies' },
     ],
     color: '#7c5cbf',
@@ -180,7 +180,7 @@ const META = [
 ];
 
 /* Real equipment brands deployed (marquee) */
-const BRANDS = ['Shure', 'Biamp', 'Bose', 'Crown', 'Crestron', 'Samsung', 'Dante', 'Cisco Webex'];
+const BRANDS = ['Bose Professional', 'Bose ControlSpace', 'Bose PowerSpace', 'Dante', 'Crestron', 'Samsung', 'Cisco Webex'];
 
 /* Methodology / process steps */
 const PROCESS = [
